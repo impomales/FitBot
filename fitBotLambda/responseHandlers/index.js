@@ -20,6 +20,20 @@ function elicitSlot(
   }
 }
 
+function elicitIntent(sessionAttributes, message) {
+  return {
+    sessionAttributes,
+    dialogAction: {
+      type: ELICIT_INTENT,
+      message: {
+        contentType: 'PlainText',
+        content: message
+      }
+    }
+  }
+}
+
 module.exports = {
-  elicitSlot
+  elicitSlot,
+  elicitIntent
 }

@@ -1,4 +1,6 @@
 {
     "name": "fit-bot-lambda",
-    "dependencies": {}
+    "dependencies": {
+        "axios": "^0.18.0"
+    }
 }

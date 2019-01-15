@@ -38,7 +38,7 @@ function elicitIntent(sessionAttributes, message) {
   return {
     sessionAttributes,
     dialogAction: {
-      type: ELICIT_INTENT,
+      type: 'ElicitItent',
       message: {
         contentType: 'PlainText',
         content: message
@@ -48,6 +48,7 @@ function elicitIntent(sessionAttributes, message) {
 }
 
 module.exports = {
+  close,
   elicitSlot,
   elicitIntent
 }

@@ -1,3 +1,17 @@
+function close(sessionAttributes, fulfillmentState, message) {
+  return {
+    sessionAttributes,
+    dialogAction: {
+      type: 'Close',
+      fulfillmentState,
+      message: {
+        contentType: 'PlainText',
+        content: message
+      }
+    }
+  }
+}
+
 function elicitSlot(
   sessionAttributes,
   intentName,

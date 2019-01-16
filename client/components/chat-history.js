@@ -1,5 +1,5 @@
 import React from 'react'
 
-export const ChatHistory = () => <div>Chat History will be displayed here.</div>
+export const ChatHistory = ({received}) => <div>{received}</div>
 
 export default ChatHistory

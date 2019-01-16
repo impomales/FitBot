@@ -8,7 +8,7 @@ export class Chat extends Component {
 
     this.state = {
       text: '',
-      received: '',
+      messages: [],
       busy: false
     }
   }
@@ -30,31 +30,37 @@ export class Chat extends Component {
   handleSubmit(evt) {
     evt.preventDefault()
 
-    const {text} = this.state
+    const {text, messages} = this.state
 
-    this.setState({busy: true})
+    this.setState({busy: true, messages: [...messages, text]})
 
     axios
       .post('/api/bot/message', {text})
       .then(res => res.data)
       .then(data => {
-        this.setState({received: data.message, busy: false, text: ''})
+        this.setState({
+          busy: false,
+          text: '',
+          messages: [...messages, text, data.message]
+        })
       })
       .catch(err => console.error(err))
   }
 
   render() {
-    const {text, received, busy} = this.state
+    const {text, messages, busy} = this.state
     return (
-      <div>
+      <div id="chat-main">
         {/* can add a switch setting later to change bot through UI */}
-        <ChatHistory received={received} />
+        <ChatHistory messages={messages} />
         <form onSubmit={this.handleSubmit.bind(this)}>
           <input
             name="text"
             type="text"
             value={text}
             onChange={this.handleChange.bind(this)}
+            placeholder="Send message to bot here..."
+            className="inputField"
           />
           <input disabled={busy} type="submit" style={{display: 'none'}} />
         </form>

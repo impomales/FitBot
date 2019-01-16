@@ -19,3 +19,20 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+#chat-main {
+  width: 500px;
+  margin: auto;
+}
+
+#chat-main .inputField {
+  width: 97.5%;
+  height: 20px;
+  padding: 2px 4px;
+}
+
+#chat-history {
+  height: 350px;
+  overflow-y: auto;
+  border: 1px solid #333;
+}

@@ -1,10 +1,34 @@
 const axios = require('axios')
+const pluralize = require('pluralize')
 const {close} = require('../responseHandlers')
 
 // helper functions
 function buildFoodQuery(food, quantity, unit) {
-  if (unit) return `${quantity} ${unit}s of ${food}`
-  else return `${quantity} ${food}s`
+  if (unit) return `${quantity} ${pluralize(unit, quantity)} of ${food}`
+  else return `${quantity} ${pluralize(food, quantity)}`
+}
+
+function buildFoodQueryResult(nutritionInfo, unit) {
+  const {
+    serving_qty,
+    serving_unit,
+    nf_calories,
+    food_name
+  } = nutritionInfo.foods[0]
+  let possessVerb = 'has'
+
+  if (unit) {
+    return `${serving_qty} ${pluralize(
+      serving_unit,
+      serving_qty
+    )} of ${food_name} ${possessVerb} ${nf_calories} calories.`
+  }
+
+  if (Number(serving_qty) > 1) possessVerb = 'have'
+  return `${serving_qty} ${pluralize(
+    food_name,
+    serving_qty
+  )} ${possessVerb} ${nf_calories} calories.`
 }
 
 module.exports.handleQueryFood = function(request) {
@@ -33,11 +57,10 @@ module.exports.handleQueryFood = function(request) {
       )
       .then(res => res.data)
       .then(nutritionInfo => {
-        const {food_name, nf_calories} = nutritionInfo.foods[0]
         return close(
           sessionAttributes,
           'Fulfilled',
-          `${food_name} has ${Math.round(nf_calories)} calories.`
+          buildFoodQueryResult(nutritionInfo, slots.FoodQueryUnit)
         )
       })
       .catch(err => {

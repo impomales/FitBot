@@ -1,6 +1,6 @@
 const axios = require('axios')
 const pluralize = require('pluralize')
-const {close} = require('../responseHandlers')
+const {close, delegate} = require('../responseHandlers')
 
 // helper functions
 function buildFoodQuery(food, quantity, unit) {
@@ -32,20 +32,33 @@ function buildFoodQueryResult(nutritionInfo, unit) {
 }
 
 module.exports.handleQueryFood = function(request) {
-  const slots = request.currentIntent.slots
-  const source = request.invocationSource
-  const sessionAttributes = request.sessionAttributes
+  const {
+    invocationSource,
+    sessionAttributes,
+    inputTranscript,
+    currentIntent
+  } = request
+  const slots = currentIntent.slots
+  let {FoodQueryName, FoodQueryQuantity, FoodQueryUnit} = slots
 
-  if (source === 'FulfillmentCodeHook') {
+  if (invocationSource === 'DialogCodeHook') {
+    // if user types 'a {food} or an {food}, set quantity to 1.
+    if (
+      !FoodQueryQuantity &&
+      FoodQueryName &&
+      (inputTranscript.includes(' a ') || inputTranscript.includes(' an '))
+    ) {
+      FoodQueryQuantity = '1'
+    }
+    return delegate(sessionAttributes, {...slots, FoodQueryQuantity})
+  }
+
+  if (invocationSource === 'FulfillmentCodeHook') {
     return axios
       .post(
         'https://trackapi.nutritionix.com/v2/natural/nutrients',
         {
-          query: buildFoodQuery(
-            slots.FoodQueryName,
-            slots.FoodQueryQuantity,
-            slots.FoodQueryUnit
-          )
+          query: buildFoodQuery(FoodQueryName, FoodQueryQuantity, FoodQueryUnit)
         },
         {
           headers: {
@@ -60,7 +73,7 @@ module.exports.handleQueryFood = function(request) {
         return close(
           sessionAttributes,
           'Fulfilled',
-          buildFoodQueryResult(nutritionInfo, slots.FoodQueryUnit)
+          buildFoodQueryResult(nutritionInfo, FoodQueryUnit)
         )
       })
       .catch(err => {

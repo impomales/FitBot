@@ -47,8 +47,19 @@ function elicitIntent(sessionAttributes, message) {
   }
 }
 
+function delegate(sessionAttributes, slots) {
+  return {
+    sessionAttributes,
+    dialogAction: {
+      type: 'Delegate',
+      slots
+    }
+  }
+}
+
 module.exports = {
   close,
   elicitSlot,
-  elicitIntent
+  elicitIntent,
+  delegate
 }

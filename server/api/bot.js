@@ -1,6 +1,7 @@
 const router = require('express').Router()
 
 const aws = require('aws-sdk')
+const randomstring = require('randomstring')
 
 // bot options
 const LEX = 'LEX'
@@ -12,9 +13,15 @@ let bot, botOption, sessionUserId
 router.post('/initiate', async (req, res, next) => {
   const {option} = req.body
 
+  if (!req.user) {
+    res.status(401).send('Please log in.')
+    return
+  }
+
   if (option === LEX) {
     botOption = option
     bot = new aws.LexRuntime({region: 'us-east-1'})
+    sessionUserId = `${req.user.id}-${randomstring.generate()}`
     res.json(bot)
   } else {
     const err = new Error('Invalid bot option')
@@ -37,10 +44,11 @@ router.post('/message', (req, res, next) => {
       {
         botAlias: process.env.BOT_ALIAS,
         botName: process.env.BOT_NAME,
-        userId: '2-isaias',
+        userId: sessionUserId,
         inputText: text,
         sessionAttributes: {
-          userGoals: '1200'
+          sessionUserId
+          // enter user data here, calorie goals, currentCalories, weight, etc.
         }
       },
       (err, response) => {

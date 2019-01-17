@@ -31,6 +31,7 @@ export class Chat extends Component {
     evt.preventDefault()
 
     const {text, messages} = this.state
+    if (!text) return
 
     this.setState({busy: true, messages: [...messages, text]})
 

@@ -1,6 +1,6 @@
 const axios = require('axios')
 const pluralize = require('pluralize')
-const {close, delegate} = require('../responseHandlers')
+const {confirmIntent, delegate} = require('../responseHandlers')
 
 // helper functions
 function buildFoodQuery(food, quantity, unit) {
@@ -70,10 +70,21 @@ module.exports.handleQueryFood = function(request) {
       )
       .then(res => res.data)
       .then(nutritionInfo => {
-        return close(
+        return confirmIntent(
           sessionAttributes,
-          'Fulfilled',
-          buildFoodQueryResult(nutritionInfo, FoodQueryUnit)
+          'LogFood',
+          {
+            FoodLogName: FoodQueryName,
+            FoodLogQuantity: FoodQueryQuantity,
+            FoodLogUnit: FoodQueryUnit,
+            MealTime: null,
+            Calories: nutritionInfo.foods[0].nf_calories,
+            WeightInGrams: nutritionInfo.foods[0].serving_weight_grams
+          },
+          `${buildFoodQueryResult(
+            nutritionInfo,
+            FoodQueryUnit
+          )} Would you like to log this item?`
         )
       })
       .catch(err => {

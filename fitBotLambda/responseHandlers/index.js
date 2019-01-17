@@ -47,6 +47,21 @@ function elicitIntent(sessionAttributes, message) {
   }
 }
 
+function confirmIntent(sessaionAttributes, intentName, slots, message) {
+  return {
+    sessaionAttributes,
+    dialogAction: {
+      type: 'ConfirmIntent',
+      message: {
+        contentType: 'PlainText',
+        content: message
+      },
+      intentName,
+      slots
+    }
+  }
+}
+
 function delegate(sessionAttributes, slots) {
   return {
     sessionAttributes,
@@ -61,5 +76,6 @@ module.exports = {
   close,
   elicitSlot,
   elicitIntent,
+  confirmIntent,
   delegate
 }

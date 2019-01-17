@@ -11,7 +11,8 @@
     "default": {
       "desiredCapabilities": {
         "browserName": "chrome"
-      }
+      },
+      "launch_url": "http://localhost:8080"
     }
   }
 }

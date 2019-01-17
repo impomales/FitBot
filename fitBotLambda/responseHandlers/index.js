@@ -47,9 +47,9 @@ function elicitIntent(sessionAttributes, message) {
   }
 }
 
-function confirmIntent(sessaionAttributes, intentName, slots, message) {
+function confirmIntent(sessionAttributes, intentName, slots, message) {
   return {
-    sessaionAttributes,
+    sessionAttributes,
     dialogAction: {
       type: 'ConfirmIntent',
       message: {

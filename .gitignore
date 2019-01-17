@@ -8,3 +8,4 @@ yarn-error.log
 
 fitBotLambda/node_modules
 fitBotLambda/*.zip
+bin

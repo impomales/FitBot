@@ -2,15 +2,23 @@
 
 ## Build
 
-_instructions for running build here_
+* createdb fitbot
+* npm install
+* npm start // production
+* npm run start-dev // development
 
 ## Running unit tests
 
-_instructions for running unit test here_
+* createdb fitbot-test
+* npm install
+* npm test
 
 ## Running end-to-end tests
 
-_instructions for running e2e tests here_
+* create a folder 'bin' in root directory
+* download [selenium-server-standalone-VERSION.jar](http://selenium-release.storage.googleapis.com/index.html) and place in bin
+* npm install
+* npm run end2end
 
 # Introduction
 

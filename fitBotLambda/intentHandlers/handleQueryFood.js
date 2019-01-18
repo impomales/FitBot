@@ -1,6 +1,6 @@
 const axios = require('axios')
 const pluralize = require('pluralize')
-const {confirmIntent, delegate} = require('../responseHandlers')
+const {confirmIntent, delegate, close} = require('../responseHandlers')
 
 // helper functions
 function buildFoodQuery(food, quantity, unit) {
@@ -31,7 +31,7 @@ function buildFoodQueryResult(nutritionInfo, unit) {
   )} ${possessVerb} ${nf_calories} calories.`
 }
 
-module.exports.handleQueryFood = function(request) {
+function handleQueryFood(request) {
   const {
     invocationSource,
     sessionAttributes,
@@ -50,7 +50,10 @@ module.exports.handleQueryFood = function(request) {
     ) {
       FoodQueryQuantity = '1'
     }
-    return delegate(sessionAttributes, {...slots, FoodQueryQuantity})
+    return delegate(
+      sessionAttributes,
+      Object.assign(slots, {FoodQueryQuantity})
+    )
   }
 
   if (invocationSource === 'FulfillmentCodeHook') {
@@ -58,7 +61,11 @@ module.exports.handleQueryFood = function(request) {
       .post(
         'https://trackapi.nutritionix.com/v2/natural/nutrients',
         {
-          query: buildFoodQuery(FoodQueryName, FoodQueryQuantity, FoodQueryUnit)
+          query: buildFoodQuery(
+            FoodQueryName,
+            Number(FoodQueryQuantity),
+            FoodQueryUnit
+          )
         },
         {
           headers: {
@@ -88,7 +95,9 @@ module.exports.handleQueryFood = function(request) {
         )
       })
       .catch(err => {
-        return close(sessionAttributes, 'Failed', err.message)
+        return close(sessionAttributes, 'Failed', err.response.data.message)
       })
   }
 }
+
+module.exports = {handleQueryFood, buildFoodQuery, buildFoodQueryResult}

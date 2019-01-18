@@ -31,7 +31,7 @@ function buildFoodQueryResult(nutritionInfo, unit) {
   )} ${possessVerb} ${nf_calories} calories.`
 }
 
-module.exports.handleQueryFood = function(request) {
+function handleQueryFood(request) {
   const {
     invocationSource,
     sessionAttributes,
@@ -50,7 +50,10 @@ module.exports.handleQueryFood = function(request) {
     ) {
       FoodQueryQuantity = '1'
     }
-    return delegate(sessionAttributes, {...slots, FoodQueryQuantity})
+    return delegate(
+      sessionAttributes,
+      Object.assign({FoodQueryQuantity}, slots)
+    )
   }
 
   if (invocationSource === 'FulfillmentCodeHook') {
@@ -58,7 +61,11 @@ module.exports.handleQueryFood = function(request) {
       .post(
         'https://trackapi.nutritionix.com/v2/natural/nutrients',
         {
-          query: buildFoodQuery(FoodQueryName, FoodQueryQuantity, FoodQueryUnit)
+          query: buildFoodQuery(
+            FoodQueryName,
+            Number(FoodQueryQuantity),
+            FoodQueryUnit
+          )
         },
         {
           headers: {
@@ -92,3 +99,5 @@ module.exports.handleQueryFood = function(request) {
       })
   }
 }
+
+module.exports = {handleQueryFood, buildFoodQuery, buildFoodQueryResult}

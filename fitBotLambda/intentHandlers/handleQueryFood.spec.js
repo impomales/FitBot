@@ -93,5 +93,15 @@ describe('Handle Query Food', () => {
         '1 apple has 94.64 calories. Would you like to log this item?'
       )
     })
+    // test fulfillment failure
+    it('can handle a fulfillment failure', async () => {
+      request.currentIntent.slots.FoodQueryName = 'pony'
+      const result = await handleQueryFood(request)
+      expect(result.dialogAction.type).to.equal('Close')
+      expect(result.dialogAction.fulfillmentState).to.equal('Failed')
+      expect(result.dialogAction.message.content).to.equal(
+        "We couldn't match any of your foods"
+      )
+    })
   })
 })

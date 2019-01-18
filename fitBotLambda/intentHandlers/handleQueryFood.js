@@ -1,6 +1,6 @@
 const axios = require('axios')
 const pluralize = require('pluralize')
-const {confirmIntent, delegate} = require('../responseHandlers')
+const {confirmIntent, delegate, close} = require('../responseHandlers')
 
 // helper functions
 function buildFoodQuery(food, quantity, unit) {
@@ -95,7 +95,7 @@ function handleQueryFood(request) {
         )
       })
       .catch(err => {
-        return close(sessionAttributes, 'Failed', err.message)
+        return close(sessionAttributes, 'Failed', err.response.data.message)
       })
   }
 }

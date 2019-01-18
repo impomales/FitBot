@@ -52,7 +52,7 @@ function handleQueryFood(request) {
     }
     return delegate(
       sessionAttributes,
-      Object.assign({FoodQueryQuantity}, slots)
+      Object.assign(slots, {FoodQueryQuantity})
     )
   }
 

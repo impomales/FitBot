@@ -1,36 +1,24 @@
 const router = require('express').Router()
 
-const aws = require('aws-sdk')
-const randomstring = require('randomstring')
-
-// bot options
-const LEX = 'LEX'
-// const WATSON = 'WATSON';
-
-let bot, botOption
+const bot = require('../bot')
 
 // expects option in req that sets which bot to use.
-router.post('/initiate', async (req, res, next) => {
-  const {option} = req.body
-
+router.post('/initiate', (req, res, next) => {
   if (!req.user) {
     res.status(401).send('Please log in.')
     return
   }
 
-  if (option === LEX) {
-    botOption = option
-    bot = new aws.LexRuntime({region: 'us-east-1'})
-    let sessionUserId = `${req.user.id}-${randomstring.generate()}`
-    res.json({bot, sessionUserId})
-  } else {
-    const err = new Error('Invalid bot option')
-    next(err)
-  }
+  if (!bot.initiate) next(new Error('Invalid bot option'))
+
+  let sessionUserId = bot.initiate(req.user)
+
+  res.json({bot, sessionUserId})
 })
 
 router.post('/message', (req, res, next) => {
   const {text, sessionUserId} = req.body
+  console.log(bot.message)
 
   if (!req.user) {
     res.status(401).send('Please log in.')
@@ -42,29 +30,12 @@ router.post('/message', (req, res, next) => {
     return
   }
 
-  if (botOption === LEX) {
-    // user data is currently hard coded.
-    // TODO link currently logged in user's data to session attributes.
-    bot.postText(
-      {
-        botAlias: process.env.BOT_ALIAS,
-        botName: process.env.BOT_NAME,
-        userId: sessionUserId,
-        inputText: text,
-        sessionAttributes: {
-          sessionUserId
-          // enter user data here, calorie goals, currentCalories, weight, etc.
-        }
-      },
-      (err, response) => {
-        if (err) next(err)
-        else res.json(response)
-      }
-    )
-  } else {
-    const err = new Error('Invalid bot option')
-    next(err)
-  }
+  if (!bot.message) next(new Error('Invalid bot option'))
+
+  bot.message(sessionUserId, text, (err, response) => {
+    if (err) next(err)
+    else res.json(response)
+  })
 })
 
 module.exports = router

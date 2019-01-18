@@ -21,7 +21,7 @@
     "start": "node server",
     "start-dev": "NODE_ENV='development' npm run build-client-watch & NODE_ENV='development' npm run start-server",
     "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
-    "unit": "NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" --require @babel/polyfill --require @babel/register",
+    "unit": "NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" \"./fitbotLambda/**/*.spec.js\" --require @babel/polyfill --require @babel/register",
     "end2end": "NODE_ENV='test' nightwatch",
     "test": "npm run unit & npm run end2end"
   },
@@ -71,6 +71,7 @@
     "@babel/plugin-proposal-function-sent": "7.0.0-beta.54",
     "@babel/plugin-proposal-json-strings": "7.0.0-beta.54",
     "@babel/plugin-proposal-numeric-separator": "7.0.0-beta.54",
+    "@babel/plugin-proposal-object-rest-spread": "^7.2.0",
     "@babel/plugin-proposal-throw-expressions": "7.0.0-beta.54",
     "@babel/plugin-syntax-dynamic-import": "7.0.0-beta.54",
     "@babel/plugin-syntax-import-meta": "7.0.0-beta.54",

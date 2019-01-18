@@ -16,7 +16,6 @@ module.exports = {
       .submitForm('#chat-main form')
       .pause(1000)
       .getText('#chat-history li:last-child', function(element) {
-        console.log(element.value)
         browser
           .expect(element.value)
           .to.equal('Hello, I am your assistant Fitbot. How can I help you?')

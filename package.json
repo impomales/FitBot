@@ -18,11 +18,11 @@
     "prettify": "prettier --write \"**/*.{js,jsx,json,css,scss,md}\"",
     "postinstall": "touch secrets.js",
     "seed": "node script/seed.js",
-    "start": "node server",
-    "start-dev": "NODE_ENV='development' npm run build-client-watch & NODE_ENV='development' npm run start-server",
-    "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
-    "unit": "NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" \"./fitbotLambda/**/*.spec.js\" --require @babel/polyfill --require @babel/register",
-    "end2end": "NODE_ENV='test' nightwatch",
+    "start": "BOT='LEX' node server",
+    "start-dev": "BOT='LEX' NODE_ENV='development' npm run build-client-watch & NODE_ENV='development' npm run start-server",
+    "start-server": "BOT='LEX' nodemon server -e html,js,scss --ignore public --ignore client",
+    "unit": "BOT='LEX' NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" \"./fitbotLambda/**/*.spec.js\" --require @babel/polyfill --require @babel/register",
+    "end2end": "BOT='LEX' NODE_ENV='test' nightwatch",
     "test": "npm run unit & npm run end2end"
   },
   "lint-staged": {

@@ -20,12 +20,9 @@ describe('Bot API routes', () => {
   })
 
   it('/api/bot/initiate', async () => {
-    const result = await authUser
-      .post('/api/bot/initiate')
-      .send({option: 'LEX'})
-      .expect(200)
+    const result = await authUser.post('/api/bot/initiate').expect(200)
 
-    expect(result.body.bot.endpoint.host).to.equal(
+    expect(result.body.bot.service.endpoint.host).to.equal(
       'runtime.lex.us-east-1.amazonaws.com'
     )
     sessionUserId = result.body.sessionUserId
@@ -33,7 +30,6 @@ describe('Bot API routes', () => {
     // test unauth request
     await request(app)
       .post('/api/bot/initiate')
-      .send({option: 'LEX'})
       .expect(401)
   })
 

@@ -89,6 +89,9 @@ describe('Handle Query Food', () => {
       expect(result.dialogAction.type).to.equal('ConfirmIntent')
       expect(result.dialogAction.intentName).to.equal('LogFood')
       expect(result.dialogAction.slots.Calories).to.not.be.null
+      expect(result.dialogAction.message.content).to.equal(
+        '1 apple has 94.64 calories. Would you like to log this item?'
+      )
     })
   })
 })

@@ -9,7 +9,8 @@ export class Chat extends Component {
     this.state = {
       text: '',
       messages: [],
-      busy: false
+      busy: false,
+      sessionUserId: ''
     }
   }
   componentDidMount() {
@@ -19,7 +20,11 @@ export class Chat extends Component {
   initializeBot() {
     axios
       .post('/api/bot/initiate', {option: 'LEX'})
-      .then(() => console.log('Bot has been successfully initiated.'))
+      .then(res => res.data)
+      .then(({sessionUserId}) => {
+        console.log('Bot has been successfully initiated.')
+        this.setState({sessionUserId})
+      })
       .catch(err => console.error(err))
   }
 
@@ -30,13 +35,13 @@ export class Chat extends Component {
   handleSubmit(evt) {
     evt.preventDefault()
 
-    const {text, messages} = this.state
+    const {text, messages, sessionUserId} = this.state
     if (!text) return
 
     this.setState({busy: true, messages: [...messages, text]})
 
     axios
-      .post('/api/bot/message', {text})
+      .post('/api/bot/message', {text, sessionUserId})
       .then(res => res.data)
       .then(data => {
         this.setState({

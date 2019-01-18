@@ -7,7 +7,7 @@ const randomstring = require('randomstring')
 const LEX = 'LEX'
 // const WATSON = 'WATSON';
 
-let bot, botOption, sessionUserId
+let bot, botOption
 
 // expects option in req that sets which bot to use.
 router.post('/initiate', async (req, res, next) => {
@@ -21,8 +21,8 @@ router.post('/initiate', async (req, res, next) => {
   if (option === LEX) {
     botOption = option
     bot = new aws.LexRuntime({region: 'us-east-1'})
-    sessionUserId = `${req.user.id}-${randomstring.generate()}`
-    res.json(bot)
+    let sessionUserId = `${req.user.id}-${randomstring.generate()}`
+    res.json({bot, sessionUserId})
   } else {
     const err = new Error('Invalid bot option')
     next(err)
@@ -30,11 +30,16 @@ router.post('/initiate', async (req, res, next) => {
 })
 
 router.post('/message', (req, res, next) => {
-  const {text} = req.body
+  const {text, sessionUserId} = req.body
 
-  if (!bot) {
-    const err = new Error('Bot has not been initialized.')
-    next(err)
+  if (!req.user) {
+    res.status(401).send('Please log in.')
+    return
+  }
+
+  if (!sessionUserId) {
+    res.status(401).send('Bot has not been initialized.')
+    return
   }
 
   if (botOption === LEX) {

@@ -1,5 +1,5 @@
 module.exports = {
-  'Demo test': browser => {
+  loginStep: function(browser) {
     browser
       .url(browser.launchUrl)
       .waitForElementVisible('body', 1000)
@@ -10,16 +10,15 @@ module.exports = {
       .setValue('input[name=email]', 'imp@email.com')
       .setValue('input[name=password]', '12345')
       .click('button')
-      // test chat ui.
+  },
+  sendMessage: function(browser, message, response) {
+    browser
       .waitForElementVisible('#chat-main', 1000)
-      .setValue('.inputField', 'hi')
+      .setValue('.inputField', message)
       .submitForm('#chat-main form')
       .pause(1000)
-      .getText('#chat-history li:last-child', function(element) {
-        browser
-          .expect(element.value)
-          .to.equal('Hello, I am your assistant Fitbot. How can I help you?')
+      .getText('#chat-history li:last-child', element => {
+        browser.expect(element.value).to.equal(response)
       })
-      .end()
   }
 }

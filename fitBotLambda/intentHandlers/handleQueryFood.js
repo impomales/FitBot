@@ -1,6 +1,11 @@
 const axios = require('axios')
 const pluralize = require('pluralize')
-const {confirmIntent, delegate, close} = require('../responseHandlers')
+const {
+  confirmIntent,
+  elicitSlot,
+  delegate,
+  close
+} = require('../responseHandlers')
 
 // helper functions
 function buildFoodQuery(food, quantity, unit) {
@@ -16,6 +21,8 @@ function buildFoodQueryResult(nutritionInfo, unit) {
     food_name
   } = nutritionInfo.foods[0]
   let possessVerb = 'has'
+
+  if (pluralize.isPlural(food_name)) possessVerb = 'have'
 
   if (unit) {
     return `${serving_qty} ${pluralize(
@@ -50,6 +57,18 @@ function handleQueryFood(request) {
     ) {
       FoodQueryQuantity = '1'
     }
+
+    // if user only enters a food name
+    if (FoodQueryName && !FoodQueryUnit && !FoodQueryQuantity) {
+      return elicitSlot(
+        sessionAttributes,
+        'QueryFood',
+        slots,
+        'FoodQueryUnit',
+        'Please enter a unit of measure.'
+      )
+    }
+
     return delegate(
       sessionAttributes,
       Object.assign(slots, {FoodQueryQuantity})

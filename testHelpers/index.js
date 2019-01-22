@@ -7,8 +7,8 @@ module.exports = {
         browser.expect(title).to.equal('Fitbot')
       })
       // test user log in.
-      .setValue('input[name=email]', 'imp@email.com')
-      .setValue('input[name=password]', '12345')
+      .setValue('input[name=email]', 'cody@email.com')
+      .setValue('input[name=password]', '123')
       .click('button')
   },
   sendMessage: function(browser, message, response) {
@@ -16,7 +16,7 @@ module.exports = {
       .waitForElementVisible('#chat-main', 1000)
       .setValue('.inputField', message)
       .submitForm('#chat-main form')
-      .pause(1000)
+      .pause(1500)
       .getText('#chat-history li:last-child', element => {
         browser.expect(element.value).to.equal(response)
       })

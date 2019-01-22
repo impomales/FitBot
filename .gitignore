@@ -6,6 +6,7 @@ secrets.js
 npm-debug.log
 yarn-error.log
 
+.bashrc
 fitBotLambda/node_modules
 fitBotLambda/*.zip
 bin

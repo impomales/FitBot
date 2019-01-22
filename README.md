@@ -4,6 +4,7 @@
 
 * createdb fitbot
 * npm install
+* npm run seed
 * npm start // production
 * npm run start-dev // development
 
@@ -18,6 +19,7 @@
 * create a folder 'bin' in root directory
 * download [selenium-server-standalone-VERSION.jar](http://selenium-release.storage.googleapis.com/index.html) and place in bin
 * npm install
+* npm run start-dev
 * npm run end2end
 
 # Introduction

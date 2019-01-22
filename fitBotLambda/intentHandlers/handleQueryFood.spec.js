@@ -77,11 +77,13 @@ describe('Handle Query Food', () => {
       sessionAttributes: {},
       inputTranscript: 'How many calories are in an apple?'
     }
-    it("can handle when user specifies a quantity using 'a' or 'an'", () => {
-      const result = handleQueryFood(request)
+
+    it("can handle when user specifies a quantity using 'a' or 'an'", async () => {
+      const result = await handleQueryFood(request)
       expect(result.dialogAction.type).to.equal('Delegate')
       expect(result.dialogAction.slots.FoodQueryQuantity).to.equal('1')
     })
+
     // test fulfillment hook
     it('can process a fulfillment hook', async () => {
       request.invocationSource = 'FulfillmentCodeHook'
@@ -93,6 +95,7 @@ describe('Handle Query Food', () => {
         '1 apple has 94.64 calories. Would you like to log this item?'
       )
     })
+
     // test fulfillment failure
     it('can handle a fulfillment failure', async () => {
       request.currentIntent.slots.FoodQueryName = 'pony'
@@ -102,6 +105,19 @@ describe('Handle Query Food', () => {
       expect(result.dialogAction.message.content).to.equal(
         "We couldn't match any of your foods"
       )
+    })
+
+    it('can handle when a user only enters a food name', async () => {
+      request.invocationSource = 'DialogCodeHook'
+      request.currentIntent.slots.FoodQueryName = 'bananas'
+      request.currentIntent.slots.FoodQueryQuantity = null
+      request.currentIntent.slots.FoodQueryUnit = null
+      request.inputTranscript = 'How many calories are in bananas'
+
+      const result = await handleQueryFood(request)
+
+      expect(result.dialogAction.type).to.equal('ElicitSlot')
+      expect(result.dialogAction.slotToElicit).to.equal('FoodQueryUnit')
     })
   })
 })

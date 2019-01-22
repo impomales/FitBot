@@ -16,6 +16,10 @@ const User = db.define('user', {
       return () => this.getDataValue('password')
     }
   },
+  username: {
+    type: Sequelize.STRING,
+    unique: true
+  },
   salt: {
     type: Sequelize.STRING,
     // Making `.salt` act like a function hides it when serializing to JSON.
@@ -23,6 +27,21 @@ const User = db.define('user', {
     get() {
       return () => this.getDataValue('salt')
     }
+  },
+  weight: {
+    // weight is in lbs.
+    type: Sequelize.INTEGER
+  },
+  height: {
+    // height is in inches.
+    type: Sequelize.INTEGER
+  },
+  dateOfBirth: {
+    type: Sequelize.DATE
+  },
+  dailyGoals: {
+    // daily caloric goal
+    type: Sequelize.INTEGER
   },
   googleId: {
     type: Sequelize.STRING

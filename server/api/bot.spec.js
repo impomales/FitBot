@@ -2,12 +2,32 @@ const {expect} = require('chai')
 const request = require('supertest')
 const app = require('../index')
 const app2 = require('../index')
+const db = require('../db')
+const User = db.model('user')
 
 describe('Bot API routes', () => {
   let authUser = request.agent(app)
   let authUser2 = request.agent(app2)
   let sessionUserId
   before(async () => {
+    await db.sync({force: true})
+
+    await User.create({
+      email: 'cody@email.com',
+      username: 'cody',
+      password: '123',
+      dailyGoals: 2500,
+      weight: 150
+    })
+
+    await User.create({
+      email: 'murphy@email.com',
+      username: 'murph',
+      password: '123',
+      dailyGoals: 1500,
+      weight: 120
+    })
+
     await authUser
       .post('/auth/login')
       .send({email: 'cody@email.com', password: '123'})

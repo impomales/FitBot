@@ -18,11 +18,11 @@
     "prettify": "prettier --write \"**/*.{js,jsx,json,css,scss,md}\"",
     "postinstall": "touch secrets.js",
     "seed": "node script/seed.js",
-    "start": "BOT='LEX' node server",
-    "start-dev": "BOT='LEX' NODE_ENV='development' npm run build-client-watch & NODE_ENV='development' npm run start-server",
-    "start-server": "BOT='LEX' nodemon server -e html,js,scss --ignore public --ignore client",
-    "unit": "BOT='LEX' NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" \"./fitbotLambda/**/*.spec.js\" --require @babel/polyfill --require @babel/register",
-    "end2end": "BOT='LEX' NODE_ENV='test' nightwatch",
+    "start": "BOT='DIALOG_FLOW' node server",
+    "start-dev": "BOT='DIALOG_FLOW' NODE_ENV='development' npm run build-client-watch & NODE_ENV='development' npm run start-server",
+    "start-server": "BOT='DIALOG_FLOW' nodemon server -e html,js,scss --ignore public --ignore client",
+    "unit": "BOT='DIALOG_FLOW' NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" \"./fitbotLambda/**/*.spec.js\" --require @babel/polyfill --require @babel/register",
+    "end2end": "BOT='DIALOG_FLOW' NODE_ENV='test' nightwatch",
     "test": "npm run unit & npm run end2end"
   },
   "lint-staged": {
@@ -36,13 +36,14 @@
       "git add"
     ]
   },
-  "author": "Fullstack Academy of Code",
+  "author": "Isaias Pomales",
   "license": "MIT",
   "dependencies": {
     "aws-sdk": "^2.388.0",
     "axios": "^0.15.3",
     "compression": "^1.7.3",
     "connect-session-sequelize": "^4.1.0",
+    "dialogflow": "^0.7.0",
     "express": "^4.16.3",
     "express-session": "^1.15.1",
     "history": "^4.6.3",

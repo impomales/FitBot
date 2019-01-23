@@ -18,7 +18,6 @@ router.post('/initiate', (req, res, next) => {
 
 router.post('/message', (req, res, next) => {
   const {text, sessionUserId} = req.body
-  console.log(bot.message)
 
   if (!req.user) {
     res.status(401).send('Please log in.')

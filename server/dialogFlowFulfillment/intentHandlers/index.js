@@ -1,3 +1,3 @@
-const queryFood = require('./queryFood')
+const {queryFood, queryFoodServingSize} = require('./queryFood')
 
-module.exports = {queryFood}
+module.exports = {queryFood, queryFoodServingSize}

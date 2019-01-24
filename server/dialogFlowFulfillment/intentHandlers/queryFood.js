@@ -1,52 +1,80 @@
-const axios = require('axios')
 const {
-  buildFoodQuery,
-  buildFoodQueryResult
-} = require('../../../fitBotLambda/intentHandlers/handleQueryFood')
+  getServingQuantity,
+  getServingUnit,
+  getNutritionInfo
+} = require('../helpers')
 
-module.exports = function(agent) {
+function queryFood(agent) {
   let {
     food,
     servingType,
     servingWeight,
     servingVolume,
+    servingWeightName,
+    servingVolumeName,
     quantity,
     indefiniteArticle
   } = agent.parameters
 
-  let servingUnit = servingType || servingWeight.unit || servingVolume.unit
-  let servingQuantity =
-    indefiniteArticle ||
-    servingWeight.amount ||
-    servingVolume.amount ||
+  let servingUnit = getServingUnit([
+    servingType,
+    servingWeight.unit,
+    servingVolume.unit,
+    servingVolumeName,
+    servingWeightName
+  ])
+
+  let servingQuantity = getServingQuantity([
+    indefiniteArticle,
+    servingWeight.amount,
+    servingVolume.amount,
     quantity
+  ])
+
+  if (!food) agent.add('Please enter a food item.')
+  else if (!servingQuantity) agent.add('Please enter a serving size.')
+
   // if all required slots are fulfilled
   if (food && servingQuantity) {
-    return axios
-      .post(
-        'https://trackapi.nutritionix.com/v2/natural/nutrients',
-        {
-          query: buildFoodQuery(food, Number(servingQuantity), servingUnit)
-        },
-        {
-          headers: {
-            'x-app-id': process.env.NUTRITION_API_ID,
-            'x-app-key': process.env.NUTRITION_API_KEY,
-            'x-remote-user-id': 0
-          }
-        }
-      )
-      .then(res => res.data)
-      .then(nutritionInfo => {
-        const message = `${buildFoodQueryResult(
-          nutritionInfo,
-          servingUnit
-        )} Would you like to log this item?`
-        agent.add(message)
-      })
-      .catch(err => {
-        const message = `${err.response.data.message} Please try again.`
-        agent.add(message)
-      })
+    return getNutritionInfo(food, servingQuantity, servingUnit, agent)
   }
 }
+
+function queryFoodServingSize(agent) {
+  let {
+    food,
+    servingType,
+    servingWeight,
+    servingVolume,
+    servingWeightName,
+    servingVolumeName,
+    quantity,
+    indefiniteArticle
+  } = agent.context.get('queryfood-followup').parameters
+
+  let servingUnit = getServingUnit([
+    servingType,
+    servingWeight.unit,
+    servingVolume.unit,
+    servingVolumeName,
+    servingWeightName
+  ])
+
+  let servingQuantity = getServingQuantity([
+    indefiniteArticle,
+    servingWeight.amount,
+    servingVolume.amount,
+    quantity
+  ])
+
+  // if all required slots are fulfilled
+  if (food && servingQuantity) {
+    return getNutritionInfo(food, servingQuantity, servingUnit, agent)
+  } else {
+    agent.add(
+      `I'm sorry I don't understand. please enter a serving size again.`
+    )
+  }
+}
+
+module.exports = {queryFood, queryFoodServingSize}

@@ -5,14 +5,13 @@ const app = require('../index')
 const User = db.model('user')
 const FoodLog = db.model('foodLog')
 
-describe.only('Food Log routes', () => {
+describe('Food Log routes', () => {
   beforeEach(() => {
     return db.sync({force: true})
   })
 
   describe('/api/foodLogs', () => {
-    let user,
-      auth = request.agent(app)
+    let auth = request.agent(app)
     const food = {
       name: 'apple',
       unit: 'oz',

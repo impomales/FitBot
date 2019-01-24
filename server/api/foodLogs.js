@@ -3,8 +3,16 @@ const {FoodLog} = require('../db/models')
 module.exports = router
 
 router.post('/', async (req, res, next) => {
+  const {name, unit, quantity, weightInGrams, calories, mealTime} = req.body
   try {
-    const foodLog = await FoodLog.create(req.body)
+    const foodLog = await FoodLog.create({
+      name,
+      unit,
+      quantity,
+      weightInGrams,
+      calories,
+      mealTime
+    })
     res.status(201).json(foodLog)
   } catch (err) {
     next(err)

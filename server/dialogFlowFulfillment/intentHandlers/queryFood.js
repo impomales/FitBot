@@ -77,4 +77,10 @@ function queryFoodServingSize(agent) {
   }
 }
 
-module.exports = {queryFood, queryFoodServingSize}
+function queryFoodLogYes(agent) {
+  console.log(agent.context.get('queryfood-followup'))
+  // save food item to database here.
+  agent.add(`Your entry has been logged. You now have 500 calories left today.`)
+}
+
+module.exports = {queryFood, queryFoodServingSize, queryFoodLogYes}

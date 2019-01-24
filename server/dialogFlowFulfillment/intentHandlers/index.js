@@ -1,3 +1,7 @@
-const {queryFood, queryFoodServingSize} = require('./queryFood')
+const {
+  queryFood,
+  queryFoodServingSize,
+  queryFoodLogYes
+} = require('./queryFood')
 
-module.exports = {queryFood, queryFoodServingSize}
+module.exports = {queryFood, queryFoodServingSize, queryFoodLogYes}

@@ -4,6 +4,7 @@ module.exports = router
 
 router.post('/', async (req, res, next) => {
   const {name, unit, quantity, weightInGrams, calories, mealTime} = req.body
+
   try {
     const foodLog = await FoodLog.create({
       name,
@@ -13,6 +14,9 @@ router.post('/', async (req, res, next) => {
       calories,
       mealTime
     })
+
+    // await foodLog.setUser(req.user.id)
+
     res.status(201).json(foodLog)
   } catch (err) {
     next(err)

@@ -1,12 +1,13 @@
 const {
   getServingQuantity,
   getServingUnit,
-  getNutritionInfo
+  getNutritionInfo,
+  saveFoodLog
 } = require('../helpers')
 
 function queryFood(agent) {
   let {
-    food,
+    name,
     servingType,
     servingWeight,
     servingVolume,
@@ -31,18 +32,18 @@ function queryFood(agent) {
     quantity
   ])
 
-  if (!food) agent.add('Please enter a food item.')
+  if (!name) agent.add('Please enter a food item.')
   else if (!servingQuantity) agent.add('Please enter a serving size.')
 
   // if all required slots are fulfilled
-  if (food && servingQuantity) {
-    return getNutritionInfo(food, servingQuantity, servingUnit, agent)
+  if (name && servingQuantity) {
+    return getNutritionInfo(name, servingQuantity, servingUnit, agent)
   }
 }
 
 function queryFoodServingSize(agent) {
   let {
-    food,
+    name,
     servingType,
     servingWeight,
     servingVolume,
@@ -68,8 +69,8 @@ function queryFoodServingSize(agent) {
   ])
 
   // if all required slots are fulfilled
-  if (food && servingQuantity) {
-    return getNutritionInfo(food, servingQuantity, servingUnit, agent)
+  if (name && servingQuantity) {
+    return getNutritionInfo(name, servingQuantity, servingUnit, agent)
   } else {
     agent.add(
       `I'm sorry I don't understand. please enter a serving size again.`
@@ -78,9 +79,18 @@ function queryFoodServingSize(agent) {
 }
 
 function queryFoodLogYes(agent) {
-  console.log(agent.context.get('queryfood-followup'))
-  // save food item to database here.
-  agent.add(`Your entry has been logged. You now have 500 calories left today.`)
+  let {
+    name,
+    unit,
+    quantity,
+    weightInGrams,
+    calories,
+    mealTime
+  } = agent.context.get('queryfood-followup').parameters
+  return saveFoodLog(
+    {name, unit, quantity, weightInGrams, calories, mealTime},
+    agent
+  )
 }
 
 module.exports = {queryFood, queryFoodServingSize, queryFoodLogYes}

@@ -39,11 +39,13 @@
   "author": "Isaias Pomales",
   "license": "MIT",
   "dependencies": {
+    "actions-on-google": "^2.5.0",
     "aws-sdk": "^2.388.0",
     "axios": "^0.15.3",
     "compression": "^1.7.3",
     "connect-session-sequelize": "^4.1.0",
     "dialogflow": "^0.7.0",
+    "dialogflow-fulfillment": "^0.6.1",
     "express": "^4.16.3",
     "express-session": "^1.15.1",
     "history": "^4.6.3",

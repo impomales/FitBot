@@ -62,7 +62,7 @@ function messageDialogFlow(sessionUserId, text, callback) {
       }
     })
     .then(responses => {
-      callback(null, responses)
+      callback(null, {message: responses[0].queryResult.fulfillmentText})
     })
     .catch(err => callback(err))
 }

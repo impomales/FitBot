@@ -10,15 +10,15 @@ const FoodLog = db.define('foodLog', {
     type: Sequelize.STRING
   },
   quantity: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.DOUBLE,
     allowNull: false
   },
   weightInGrams: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.DOUBLE,
     allowNull: false
   },
   calories: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.DOUBLE,
     allowNull: false
   },
   mealTime: {

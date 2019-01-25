@@ -12,6 +12,10 @@ function getServingQuantity(params) {
   return params.reduce((curr, next) => curr || next, false)
 }
 
+function getUserId(session) {
+  return session.split('/')[4].split('-')[0]
+}
+
 // nutritionix api call using dialog flow
 function getNutritionInfo(name, quantity, unit, agent) {
   return axios
@@ -50,7 +54,10 @@ function getNutritionInfo(name, quantity, unit, agent) {
 
 function saveFoodLog(foodLog, agent) {
   return axios
-    .post('http://127.0.0.1:8080/api/foodLogs', foodLog)
+    .post('http://127.0.0.1:8080/api/foodLogs', {
+      foodLog,
+      id: getUserId(agent.session)
+    })
     .then(res => res.data)
     .then(log => {
       agent.add(

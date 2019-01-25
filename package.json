@@ -54,6 +54,7 @@
     "passport-google-oauth": "^1.0.0",
     "pg": "^6.1.2",
     "pg-hstore": "^2.3.2",
+    "pluralize": "^7.0.0",
     "prop-types": "^15.6.2",
     "randomstring": "^1.1.5",
     "react": "^16.4.2",

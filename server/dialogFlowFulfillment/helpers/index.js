@@ -12,6 +12,10 @@ function getServingQuantity(params) {
   return params.reduce((curr, next) => curr || next, false)
 }
 
+function getUserId(session) {
+  return session.split('/')[4].split('-')[0]
+}
+
 // nutritionix api call using dialog flow
 function getNutritionInfo(name, quantity, unit, agent) {
   return axios
@@ -37,7 +41,9 @@ function getNutritionInfo(name, quantity, unit, agent) {
       agent.add(message)
       agent.context.set('queryfood-followup', 1, {
         calories: nutritionInfo.foods[0].nf_calories,
-        weightInGrams: nutritionInfo.foods[0].serving_weight_grams
+        weightInGrams: nutritionInfo.foods[0].serving_weight_grams,
+        quantity,
+        unit
       })
     })
     .catch(err => {
@@ -46,4 +52,28 @@ function getNutritionInfo(name, quantity, unit, agent) {
     })
 }
 
-module.exports = {getServingQuantity, getServingUnit, getNutritionInfo}
+function saveFoodLog(foodLog, agent) {
+  return axios
+    .post('http://127.0.0.1:8080/api/foodLogs', {
+      foodLog,
+      id: getUserId(agent.session)
+    })
+    .then(res => res.data)
+    .then(log => {
+      agent.add(
+        `Your ${
+          log.name
+        } has been logged. You now have 500 calories left today.`
+      )
+    })
+    .catch(err => {
+      agent.add(`Something went wrong. ${err}`)
+    })
+}
+
+module.exports = {
+  getServingQuantity,
+  getServingUnit,
+  getNutritionInfo,
+  saveFoodLog
+}

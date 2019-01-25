@@ -42,12 +42,10 @@ function messageLex(sessionUserId, text, callback) {
 
 function initiateDialogFlow(user) {
   const dialogflow = require('dialogflow')
+  const sessionId = `${user.id}-${randomstring.generate()}`
 
   this.service = new dialogflow.SessionsClient()
-  return this.service.sessionPath(
-    process.env.PROJECT_ID,
-    `${user.id}-${randomstring.generate()}`
-  )
+  return this.service.sessionPath(process.env.PROJECT_ID, sessionId)
 }
 
 function messageDialogFlow(sessionUserId, text, callback) {

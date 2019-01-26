@@ -66,7 +66,7 @@ export class Chat extends Component {
             value={text}
             onChange={this.handleChange.bind(this)}
             placeholder="Send message to bot here..."
-            className="inputField"
+            className="input-field"
           />
           <input disabled={busy} type="submit" style={{display: 'none'}} />
         </form>

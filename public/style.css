@@ -23,6 +23,20 @@ form div {
   display: inline-block;
 }
 
+#main {
+  background-color: #f3f3f3;
+  margin: 2em 4em;
+  border-radius: 10px;
+  padding-top: 0.5em;
+  padding-bottom: 2em;
+  box-shadow: 0px 3px 10px #999;
+}
+
+#main h3 {
+  text-align: center;
+  font-size: 1.5em;
+}
+
 #navbar {
   /* border-bottom: 2px solid #32ab42; */
   display: flex;
@@ -49,20 +63,27 @@ form div {
 }
 
 #chat-main {
-  width: 500px;
-  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-#chat-main .inputField {
-  width: 97.5%;
-  height: 20px;
-  padding: 2px 4px;
+#chat-main form {
+  width: 75%;
+}
+
+#chat-main .input-field {
+  margin-top: 1em;
+  outline: none;
+  width: 100%;
 }
 
 #chat-history {
+  background-color: white;
   height: 350px;
+  width: 100%;
   overflow-y: auto;
-  border: 1px solid #333;
 }
 
 .navlink {
@@ -117,13 +138,20 @@ form div {
   padding: 2em;
 }
 
+.error {
+  font-weight: bolder;
+  font-size: 1.5em;
+  color: red;
+  height: 1em;
+}
+
 .section .login-form label {
   color: #0070bc;
   font-weight: bold;
   text-align: center;
 }
 
-.section .login-form input {
+.input-field {
   background-color: white;
   color: #0070bc;
   font-size: 1.2em;

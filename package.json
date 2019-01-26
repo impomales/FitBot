@@ -19,11 +19,16 @@
     "postinstall": "touch secrets.js",
     "seed": "node script/seed.js",
     "start": "BOT='DIALOG_FLOW' node server",
-    "start-dev": "BOT='DIALOG_FLOW' NODE_ENV='development' npm run build-client-watch & NODE_ENV='development' npm run start-server",
-    "start-server": "BOT='DIALOG_FLOW' nodemon server -e html,js,scss --ignore public --ignore client",
+    "start-dev-dialog-flow": "BOT='DIALOG_FLOW' NODE_ENV='development' npm run build-client-watch & NODE_ENV='development' npm run start-server-dialog-flow",
+    "start-server-dialog-flow": "BOT='DIALOG_FLOW' nodemon server -e html,js,scss --ignore public --ignore client",
+    "start-dev-lex": "BOT='LEX' NODE_ENV='development' npm run build-client-watch & BOT='LEX' NODE_ENV='development' npm run start-server-lex",
+    "start-server-lex": "BOT='LEX' nodemon server -e html,js,scss --ignore public --ignore client",
     "unit": "BOT='DIALOG_FLOW' NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" \"./fitbotLambda/**/*.spec.js\" --require @babel/polyfill --require @babel/register",
+    "unit-lex": "BOT='LEX' NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" \"./fitbotLambda/**/*.spec.js\" --require @babel/polyfill --require @babel/register",
     "end2end": "BOT='DIALOG_FLOW' NODE_ENV='test' nightwatch",
-    "test": "npm run unit & npm run end2end"
+    "end2end-lex": "BOT='LEX' NODE_ENV='test' nightwatch",
+    "test": "npm run unit & npm run end2end",
+    "test-lex": "npm run unit-lex & npm run end2end-lex"
   },
   "lint-staged": {
     "*.{js,jsx}": [

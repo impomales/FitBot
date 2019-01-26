@@ -3,7 +3,6 @@ const request = require('supertest')
 const db = require('../db')
 const app = require('../index')
 const User = db.model('user')
-const FoodLog = db.model('foodLog')
 
 describe('Food Log routes', () => {
   beforeEach(() => {
@@ -11,7 +10,8 @@ describe('Food Log routes', () => {
   })
 
   describe('/api/foodLogs', () => {
-    let auth = request.agent(app)
+    let user,
+      auth = request.agent(app)
     const food = {
       name: 'apple',
       unit: 'oz',
@@ -21,7 +21,7 @@ describe('Food Log routes', () => {
       mealTime: 'Breakfast'
     }
     beforeEach(async () => {
-      await User.create({
+      user = await User.create({
         email: 'imp@email.com',
         username: 'Isaias',
         password: '123',
@@ -38,10 +38,14 @@ describe('Food Log routes', () => {
     it('POST /api/foodLogs', async () => {
       let res = await auth
         .post('/api/foodLogs')
-        .send(food)
+        .send({foodLog: food, id: user.id})
         .expect(201)
 
-      res = await auth.get('/api/foodLogs').expect(200)
+      try {
+        res = await auth.get('/api/foodLogs').expect(200)
+      } catch (err) {
+        res = err
+      }
 
       expect(res.body).to.be.an('array')
       expect(res.body[0].name).to.equal(food.name)

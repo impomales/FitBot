@@ -5,22 +5,44 @@
 * createdb fitbot
 * npm install
 * npm run seed
-* npm start // production
-* npm run start-dev // development
+* add secret files to root project directory
+
+## production
+
+* npm start
+
+## development
+
+* npm run start-dev-dialog-flow
+* npm run start-dev-lex
 
 ## Running unit tests
 
 * createdb fitbot-test
-* npm install
-* npm test
+
+## test dialog flow
+
+* npm run unit
+
+## test lex
+
+* npm run unit-lex
 
 ## Running end-to-end tests
 
 * create a folder 'bin' in root directory
 * download [selenium-server-standalone-VERSION.jar](http://selenium-release.storage.googleapis.com/index.html) and place in bin
-* npm install
-* npm run start-dev
+
+## test dialog-flow
+
+* npm run start-dev-dialog-flow
 * npm run end2end
+
+## test lex
+
+\*npm run start-dev-lex
+
+* npm run end2end-lex
 
 # Introduction
 

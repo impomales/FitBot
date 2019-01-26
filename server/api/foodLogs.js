@@ -22,7 +22,8 @@ router.post('/', async (req, res, next) => {
       mealTime
     })
 
-    await foodLog.setUser(req.body.id)
+    let userId = Number(req.body.id)
+    if (userId) await foodLog.setUser(Number(req.body.id))
 
     res.status(201).json(foodLog)
   } catch (err) {

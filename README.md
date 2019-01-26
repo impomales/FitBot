@@ -40,8 +40,7 @@
 
 ## test lex
 
-\*npm run start-dev-lex
-
+* npm run start-dev-lex
 * npm run end2end-lex
 
 # Introduction

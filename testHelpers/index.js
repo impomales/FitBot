@@ -22,7 +22,7 @@ module.exports = {
   sendMessage: function(browser, message, responses) {
     browser
       .waitForElementVisible('#chat-main', 1000)
-      .setValue('.inputField', message)
+      .setValue('.input-field', message)
       .submitForm('#chat-main form')
       .pause(1500)
       .getText('#chat-history li:last-child', element => {

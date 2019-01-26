@@ -28,6 +28,12 @@
 
 * npm run unit-lex
 
+## Bot Design
+
+[planning intents and entities](https://console.bluemix.net/docs/services/conversation/intents-entities.html)
+
+[agent design checklist](https://dialogflow.com/docs/agents/AgentDesignChecklist.pdf)
+
 ## Running end-to-end tests
 
 * create a folder 'bin' in root directory
@@ -40,8 +46,7 @@
 
 ## test lex
 
-\*npm run start-dev-lex
-
+* npm run start-dev-lex
 * npm run end2end-lex
 
 # Introduction

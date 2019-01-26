@@ -27,8 +27,7 @@
     "unit-lex": "BOT='LEX' NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" \"./fitbotLambda/**/*.spec.js\" --require @babel/polyfill --require @babel/register",
     "end2end": "BOT='DIALOG_FLOW' NODE_ENV='test' nightwatch",
     "end2end-lex": "BOT='LEX' NODE_ENV='test' nightwatch",
-    "test": "npm run unit & npm run end2end",
-    "test-lex": "npm run unit-lex & npm run end2end-lex"
+    "test": "npm run unit"
   },
   "lint-staged": {
     "*.{js,jsx}": [

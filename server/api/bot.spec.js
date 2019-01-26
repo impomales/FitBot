@@ -4,6 +4,7 @@ const app = require('../index')
 const app2 = require('../index')
 const db = require('../db')
 const User = db.model('user')
+const {responsesToHi} = require('../../testHelpers')
 
 describe('Bot API routes', () => {
   let authUser = request.agent(app)
@@ -42,9 +43,17 @@ describe('Bot API routes', () => {
   it('/api/bot/initiate', async () => {
     const result = await authUser.post('/api/bot/initiate').expect(200)
 
-    expect(result.body.bot.service.endpoint.host).to.equal(
-      'runtime.lex.us-east-1.amazonaws.com'
-    )
+    if (result.body.bot.type === 'LEX') {
+      expect(result.body.bot.service.endpoint.host).to.equal(
+        'runtime.lex.us-east-1.amazonaws.com'
+      )
+    }
+
+    if (result.body.bot.type === 'DIALOG_FLOW') {
+      expect(result.body.bot.service.auth.scopes[0]).to.equal(
+        'https://www.googleapis.com/auth/cloud-platform'
+      )
+    }
     sessionUserId = result.body.sessionUserId
 
     // test unauth request
@@ -60,9 +69,7 @@ describe('Bot API routes', () => {
       .send({text: 'hi', sessionUserId})
       .expect(200)
 
-    expect(result.body.message).to.equal(
-      'Hello, I am your assistant Fitbot. How can I help you?'
-    )
+    expect(responsesToHi.indexOf(result.body.message) !== -1).to.equal(true)
 
     // send message w/o init
     result = await authUser2

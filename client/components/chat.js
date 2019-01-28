@@ -10,7 +10,8 @@ export class Chat extends Component {
       text: '',
       messages: [],
       busy: false,
-      sessionUserId: '',
+      sessionUserIdLex: '',
+      sessionUserIdFlow: '',
       option: ''
     }
   }
@@ -19,13 +20,16 @@ export class Chat extends Component {
   }
 
   initializeBot() {
-    const {option} = this.state
+    let {option, sessionUserIdFlow, sessionUserIdLex} = this.state
     axios
       .post('/api/bot/initiate', {option})
       .then(res => res.data)
       .then(({sessionUserId, bot}) => {
         console.log('Bot has been successfully initiated.')
-        this.setState({sessionUserId, option: bot.type})
+        sessionUserIdLex = bot.type === 'LEX' ? sessionUserId : sessionUserIdLex
+        sessionUserIdFlow =
+          bot.type === 'DIALOG_FLOW' ? sessionUserId : sessionUserIdFlow
+        this.setState({option: bot.type, sessionUserIdLex, sessionUserIdFlow})
       })
       .catch(err => console.error(err))
   }
@@ -36,20 +40,32 @@ export class Chat extends Component {
 
   handleChangeSelect(evt) {
     this.setState({[evt.target.name]: evt.target.value}, () => {
-      this.initializeBot()
+      const {option, sessionUserIdLex, sessionUserIdFlow} = this.state
+      // only initialize bot first time.
+      const bot = option === 'LEX' ? sessionUserIdLex : sessionUserIdFlow
+      if (!bot) this.initializeBot()
     })
   }
 
   handleSubmit(evt) {
     evt.preventDefault()
 
-    const {text, messages, sessionUserId} = this.state
+    const {
+      text,
+      messages,
+      sessionUserIdLex,
+      sessionUserIdFlow,
+      option
+    } = this.state
     if (!text) return
 
     this.setState({busy: true, messages: [...messages, text]})
 
+    const sessionUserId =
+      option === 'LEX' ? sessionUserIdLex : sessionUserIdFlow
+
     axios
-      .post('/api/bot/message', {text, sessionUserId})
+      .post('/api/bot/message', {text, sessionUserId, option})
       .then(res => res.data)
       .then(data => {
         this.setState({

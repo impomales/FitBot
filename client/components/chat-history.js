@@ -3,9 +3,6 @@ import React, {Component} from 'react'
 class ChatHistory extends Component {
   componentDidUpdate() {
     const messages = document.querySelector('#chat-history ul')
-    console.log(messages.scrollTop)
-    console.log(messages.scrollHeight)
-    console.log(messages.clientHeight)
     if (messages.scrollTop + messages.clientHeight !== messages.scrollHeight) {
       messages.scrollTop = messages.scrollHeight
     }

@@ -10,7 +10,8 @@ export class Chat extends Component {
       text: '',
       messages: [],
       busy: false,
-      sessionUserId: ''
+      sessionUserId: '',
+      option: ''
     }
   }
   componentDidMount() {
@@ -18,18 +19,25 @@ export class Chat extends Component {
   }
 
   initializeBot() {
+    const {option} = this.state
     axios
-      .post('/api/bot/initiate', {option: 'LEX'})
+      .post('/api/bot/initiate', {option})
       .then(res => res.data)
-      .then(({sessionUserId}) => {
+      .then(({sessionUserId, bot}) => {
         console.log('Bot has been successfully initiated.')
-        this.setState({sessionUserId})
+        this.setState({sessionUserId, option: bot.type})
       })
       .catch(err => console.error(err))
   }
 
   handleChange(evt) {
     this.setState({[evt.target.name]: evt.target.value})
+  }
+
+  handleChangeSelect(evt) {
+    this.setState({[evt.target.name]: evt.target.value}, () => {
+      this.initializeBot()
+    })
   }
 
   handleSubmit(evt) {
@@ -70,6 +78,14 @@ export class Chat extends Component {
           />
           <input disabled={busy} type="submit" style={{display: 'none'}} />
         </form>
+        <select
+          name="option"
+          value={this.state.option}
+          onChange={this.handleChangeSelect.bind(this)}
+        >
+          <option value="LEX">Amazon Lex</option>
+          <option value="DIALOG_FLOW">Google Dialog Flow</option>
+        </select>
       </div>
     )
   }

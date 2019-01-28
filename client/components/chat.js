@@ -10,7 +10,9 @@ export class Chat extends Component {
       text: '',
       messages: [],
       busy: false,
-      sessionUserId: ''
+      sessionUserIdLex: '',
+      sessionUserIdFlow: '',
+      option: ''
     }
   }
   componentDidMount() {
@@ -18,12 +20,16 @@ export class Chat extends Component {
   }
 
   initializeBot() {
+    let {option, sessionUserIdFlow, sessionUserIdLex} = this.state
     axios
-      .post('/api/bot/initiate', {option: 'LEX'})
+      .post('/api/bot/initiate', {option})
       .then(res => res.data)
-      .then(({sessionUserId}) => {
+      .then(({sessionUserId, bot}) => {
         console.log('Bot has been successfully initiated.')
-        this.setState({sessionUserId})
+        sessionUserIdLex = bot.type === 'LEX' ? sessionUserId : sessionUserIdLex
+        sessionUserIdFlow =
+          bot.type === 'DIALOG_FLOW' ? sessionUserId : sessionUserIdFlow
+        this.setState({option: bot.type, sessionUserIdLex, sessionUserIdFlow})
       })
       .catch(err => console.error(err))
   }
@@ -32,16 +38,34 @@ export class Chat extends Component {
     this.setState({[evt.target.name]: evt.target.value})
   }
 
+  handleChangeSelect(evt) {
+    this.setState({[evt.target.name]: evt.target.value}, () => {
+      const {option, sessionUserIdLex, sessionUserIdFlow} = this.state
+      // only initialize bot first time.
+      const bot = option === 'LEX' ? sessionUserIdLex : sessionUserIdFlow
+      if (!bot) this.initializeBot()
+    })
+  }
+
   handleSubmit(evt) {
     evt.preventDefault()
 
-    const {text, messages, sessionUserId} = this.state
+    const {
+      text,
+      messages,
+      sessionUserIdLex,
+      sessionUserIdFlow,
+      option
+    } = this.state
     if (!text) return
 
     this.setState({busy: true, messages: [...messages, text]})
 
+    const sessionUserId =
+      option === 'LEX' ? sessionUserIdLex : sessionUserIdFlow
+
     axios
-      .post('/api/bot/message', {text, sessionUserId})
+      .post('/api/bot/message', {text, sessionUserId, option})
       .then(res => res.data)
       .then(data => {
         this.setState({
@@ -70,6 +94,14 @@ export class Chat extends Component {
           />
           <input disabled={busy} type="submit" style={{display: 'none'}} />
         </form>
+        <select
+          name="option"
+          value={this.state.option}
+          onChange={this.handleChangeSelect.bind(this)}
+        >
+          <option value="LEX">Amazon Lex</option>
+          <option value="DIALOG_FLOW">Google Dialog Flow</option>
+        </select>
       </div>
     )
   }

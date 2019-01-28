@@ -23,6 +23,14 @@ form div {
   display: inline-block;
 }
 
+select {
+  font-size: 1.2em;
+  border: none;
+  outline: none;
+  background-color: #e88b3d;
+  color: white;
+}
+
 #main {
   background-color: #f3f3f3;
   margin: 2em 4em;

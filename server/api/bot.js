@@ -1,6 +1,8 @@
 const router = require('express').Router()
 
-const bot = require('../bot')
+const Bot = require('../bot')
+
+let bot
 
 // expects option in req that sets which bot to use.
 router.post('/initiate', (req, res, next) => {
@@ -8,6 +10,8 @@ router.post('/initiate', (req, res, next) => {
     res.status(401).send('Please log in.')
     return
   }
+
+  bot = new Bot(req.body.option || process.env.BOT)
 
   if (!bot.initiate) next(new Error('Invalid bot option'))
 

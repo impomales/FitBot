@@ -65,4 +65,4 @@ function messageDialogFlow(sessionUserId, text, callback) {
     .catch(err => callback(err))
 }
 
-module.exports = new Bot(process.env.BOT)
+module.exports = Bot

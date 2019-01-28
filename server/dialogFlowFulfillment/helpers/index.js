@@ -71,9 +71,31 @@ function saveFoodLog(foodLog, agent) {
     })
 }
 
+function getFoodLogs(date, agent) {
+  return axios
+    .get(
+      `http://127.0.0.1:8080/api/foodLogs?dateStr=${date}&userId=${getUserId(
+        agent.session
+      )}`
+    )
+    .then(res => res.data)
+    .then(foodLogs => {
+      let calories = 0
+      foodLogs.forEach(food => {
+        calories += food.calories
+      })
+
+      agent.add(`You had ${calories} calories today.`)
+    })
+    .catch(err => {
+      agent.add(`Error in getting status. ${err}`)
+    })
+}
+
 module.exports = {
   getServingQuantity,
   getServingUnit,
   getNutritionInfo,
-  saveFoodLog
+  saveFoodLog,
+  getFoodLogs
 }

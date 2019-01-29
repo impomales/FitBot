@@ -6,7 +6,7 @@ const rootUrl = 'https://d729ac96.ngrok.io'
 // const rootUrl = 'https://fitbot-cedrus.herokuapp.com'
 
 function buildCaloriesStatus(dailyGoals, calories) {
-  const net = dailyGoals - calories
+  const net = Math.round((dailyGoals - calories) * 100) / 100
 
   return net > 0
     ? ` You still are ${net} calories away from your daily goal!`

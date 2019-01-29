@@ -1,9 +1,9 @@
-const {getFoodLogs} = require('../helpers')
+const {getCaloriesRemaining} = require('../helpers')
 
 function status(agent) {
   let date = new Date()
   date = new Date(date.getFullYear(), date.getMonth(), date.getDate())
-  return getFoodLogs(date, agent)
+  return getCaloriesRemaining(date, agent)
 }
 
 module.exports = {status}

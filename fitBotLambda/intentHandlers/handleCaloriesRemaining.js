@@ -47,4 +47,4 @@ function handleCaloriesRemaining(request) {
     })
 }
 
-module.exports = {handleCaloriesRemaining}
+module.exports = {handleCaloriesRemaining, buildCaloriesStatus}

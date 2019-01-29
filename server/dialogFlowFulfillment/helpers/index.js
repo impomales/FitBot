@@ -60,11 +60,17 @@ function saveFoodLog(foodLog, agent) {
     })
     .then(res => res.data)
     .then(log => {
-      agent.add(
-        `Your ${
-          log.name
-        } has been logged. You now have 500 calories left today.`
-      )
+      const event = {
+        name: 'GetStatus',
+        languageCode: 'en-US',
+        parameters: {
+          foodName: log.name
+        }
+      }
+
+      agent.add(`Your ${log.name} has been logged.`)
+
+      agent.setFollowupEvent(event)
     })
     .catch(err => {
       agent.add(`Something went wrong. ${err}`)
@@ -72,6 +78,10 @@ function saveFoodLog(foodLog, agent) {
 }
 
 function getFoodLogs(date, agent) {
+  const {foodName} = agent.parameters
+  let message = ''
+
+  if (foodName) message += `Your ${foodName} has been logged. `
   return axios
     .get(
       `http://127.0.0.1:8080/api/foodLogs?dateStr=${date}&userId=${getUserId(
@@ -85,7 +95,9 @@ function getFoodLogs(date, agent) {
         calories += food.calories
       })
 
-      agent.add(`You had ${calories} calories today.`)
+      agent.add(
+        message + `You had ${Math.round(calories * 100) / 100} calories today.`
+      )
     })
     .catch(err => {
       agent.add(`Error in getting status. ${err}`)

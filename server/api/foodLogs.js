@@ -43,7 +43,7 @@ router.get('/', async (req, res, next) => {
     [Op.gte]: date,
     [Op.lt]: nextDay
   }
-  console.log(createdAt)
+
   try {
     const foodLogs = await FoodLog.findAll({
       where: {userId, createdAt}

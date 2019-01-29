@@ -18,7 +18,6 @@ router.post('/initiate', (req, res, next) => {
   if (!bot.initiate) next(new Error('Invalid bot option'))
 
   let sessionUserId = bot.initiate(req.user)
-  console.log(bot.message)
   res.json({bot, sessionUserId})
 })
 

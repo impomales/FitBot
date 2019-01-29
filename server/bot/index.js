@@ -35,7 +35,7 @@ function messageLex(sessionUserId, text, callback) {
       userId: sessionUserId,
       inputText: text,
       sessionAttributes: {
-        sessionUserId
+        userId: sessionUserId.split('-')[0]
         // enter user data here, calorie goals, currentCalories, weight, etc.
       }
     },

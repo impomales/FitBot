@@ -4,6 +4,13 @@ const {
   buildFoodQueryResult
 } = require('../../../fitBotLambda/intentHandlers/handleQueryFood')
 
+console.log(process.env.NODE_ENV)
+
+const rootUrl =
+  process.env.NODE_ENV === 'development'
+    ? 'https://d729ac96.ngrok.io'
+    : 'https://fitbot-cedrus.herokuapp.com'
+
 function getServingUnit(params) {
   return params.reduce((curr, next) => curr || next, false)
 }
@@ -54,7 +61,7 @@ function getNutritionInfo(name, quantity, unit, agent) {
 
 function saveFoodLog(foodLog, agent) {
   return axios
-    .post('http://127.0.0.1:8080/api/foodLogs', {
+    .post(`${rootUrl}/api/foodLogs`, {
       foodLog,
       id: getUserId(agent.session)
     })
@@ -84,7 +91,7 @@ function getFoodLogs(date, agent) {
   if (foodName) message += `Your ${foodName} has been logged. `
   return axios
     .get(
-      `http://127.0.0.1:8080/api/foodLogs?dateStr=${date}&userId=${getUserId(
+      `${rootUrl}/api/foodLogs?dateStr=${date}&userId=${getUserId(
         agent.session
       )}`
     )

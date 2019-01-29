@@ -10,7 +10,7 @@ function buildCaloriesStatus(dailyGoals, calories) {
 
   return net > 0
     ? ` You still are ${net} calories away from your daily goal!`
-    : ` Uh oh! You went over your daily goals by ${net} calories today!`
+    : ` Uh oh! You went over your daily goals by ${net} calories today! You might want to go to the gym.`
 }
 
 function handleCaloriesRemaining(request) {

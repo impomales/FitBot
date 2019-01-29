@@ -59,7 +59,7 @@ export class Chat extends Component {
     } = this.state
     if (!text) return
 
-    this.setState({busy: true, messages: [...messages, text]})
+    this.setState({busy: true, text: '', messages: [...messages, text]})
 
     const sessionUserId =
       option === 'LEX' ? sessionUserIdLex : sessionUserIdFlow
@@ -70,7 +70,6 @@ export class Chat extends Component {
       .then(data => {
         this.setState({
           busy: false,
-          text: '',
           messages: [...messages, text, data.message]
         })
       })

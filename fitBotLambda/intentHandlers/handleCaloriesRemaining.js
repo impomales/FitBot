@@ -5,31 +5,45 @@ const {close} = require('../responseHandlers')
 const rootUrl = 'https://d729ac96.ngrok.io'
 // const rootUrl = 'https://fitbot-cedrus.herokuapp.com'
 
+function buildCaloriesStatus(dailyGoals, calories) {
+  const net = dailyGoals - calories
+
+  return net > 0
+    ? ` You still are ${net} calories away from your daily goal!`
+    : ` Uh oh! You went over your daily goals by ${net} calories today!`
+}
+
 function handleCaloriesRemaining(request) {
   const {sessionAttributes} = request
-  console.log(sessionAttributes)
+  const {userId} = sessionAttributes
+
+  // current current date. set sec, min, hr to zeroes.
   let date = new Date()
   date = new Date(date.getFullYear(), date.getMonth(), date.getDate())
   return axios
-    .get(
-      `${rootUrl}/api/foodLogs?dateStr=${date}&userId=${
-        sessionAttributes.userId
-      }`
-    )
+    .get(`${rootUrl}/api/users/${userId}`)
     .then(res => res.data)
-    .then(foodLogs => {
-      let calories = 0
-      foodLogs.forEach(food => {
-        calories += food.calories
-      })
-      return close(
-        sessionAttributes,
-        'Fulfilled',
-        `You had ${Math.round(calories * 100) / 100} calories today.`
-      )
-    })
-    .catch(err => {
-      close(sessionAttributes, 'Failed', `Error in getting status. ${err}`)
+    .then(user => {
+      return axios
+        .get(`${rootUrl}/api/foodLogs?dateStr=${date}&userId=${user.id}`)
+        .then(res => res.data)
+        .then(foodLogs => {
+          let calories = 0
+          foodLogs.forEach(food => {
+            calories += food.calories
+          })
+
+          calories = Math.round(calories * 100) / 100
+          return close(
+            sessionAttributes,
+            'Fulfilled',
+            `You had ${calories} calories today.` +
+              buildCaloriesStatus(user.dailyGoals, calories)
+          )
+        })
+        .catch(err => {
+          close(sessionAttributes, 'Failed', `Error in getting status. ${err}`)
+        })
     })
 }
 

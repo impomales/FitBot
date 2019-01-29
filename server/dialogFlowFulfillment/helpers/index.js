@@ -4,6 +4,17 @@ const {
   buildFoodQueryResult
 } = require('../../../fitBotLambda/intentHandlers/handleQueryFood')
 
+const {
+  buildCaloriesStatus
+} = require('../../../fitBotLambda/intentHandlers/handleCaloriesRemaining')
+
+console.log(process.env.NODE_ENV)
+
+const rootUrl =
+  process.env.NODE_ENV === 'development'
+    ? 'https://d729ac96.ngrok.io'
+    : 'https://fitbot-cedrus.herokuapp.com'
+
 function getServingUnit(params) {
   return params.reduce((curr, next) => curr || next, false)
 }
@@ -54,20 +65,58 @@ function getNutritionInfo(name, quantity, unit, agent) {
 
 function saveFoodLog(foodLog, agent) {
   return axios
-    .post('http://127.0.0.1:8080/api/foodLogs', {
+    .post(`${rootUrl}/api/foodLogs`, {
       foodLog,
       id: getUserId(agent.session)
     })
     .then(res => res.data)
     .then(log => {
-      agent.add(
-        `Your ${
-          log.name
-        } has been logged. You now have 500 calories left today.`
-      )
+      const event = {
+        name: 'GetStatus',
+        languageCode: 'en-US',
+        parameters: {
+          foodName: log.name
+        }
+      }
+
+      agent.add(`Your ${log.name} has been logged.`)
+
+      agent.setFollowupEvent(event)
     })
     .catch(err => {
       agent.add(`Something went wrong. ${err}`)
+    })
+}
+
+function getCaloriesRemaining(date, agent) {
+  const {foodName} = agent.parameters
+  let message = ''
+
+  if (foodName) message += `Your ${foodName} has been logged. `
+  const userId = getUserId(agent.session)
+  return axios
+    .get(`${rootUrl}/api/users/${userId}`)
+    .then(res => res.data)
+    .then(user => {
+      return axios
+        .get(`${rootUrl}/api/foodLogs?dateStr=${date}&userId=${userId}`)
+        .then(res => res.data)
+        .then(foodLogs => {
+          let calories = 0
+          foodLogs.forEach(food => {
+            calories += food.calories
+          })
+
+          calories = Math.round(calories * 100) / 100
+          agent.add(
+            message +
+              `You had ${calories} calories today.` +
+              buildCaloriesStatus(user.dailyGoals, calories)
+          )
+        })
+        .catch(err => {
+          agent.add(`Error in getting status. ${err}`)
+        })
     })
 }
 
@@ -75,5 +124,6 @@ module.exports = {
   getServingQuantity,
   getServingUnit,
   getNutritionInfo,
-  saveFoodLog
+  saveFoodLog,
+  getCaloriesRemaining
 }

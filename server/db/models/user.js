@@ -41,7 +41,8 @@ const User = db.define('user', {
   },
   dailyGoals: {
     // daily caloric goal
-    type: Sequelize.INTEGER
+    type: Sequelize.INTEGER,
+    defaultValue: 2000
   },
   googleId: {
     type: Sequelize.STRING

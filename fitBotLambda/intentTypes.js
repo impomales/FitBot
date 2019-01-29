@@ -1,3 +1,4 @@
 const QueryFood = 'QueryFood'
+const CaloriesRemaining = 'CaloriesRemaining'
 
-module.exports = {QueryFood}
+module.exports = {QueryFood, CaloriesRemaining}

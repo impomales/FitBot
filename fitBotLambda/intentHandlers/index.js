@@ -1,3 +1,4 @@
 const {handleQueryFood} = require('./handleQueryFood')
+const {handleCaloriesRemaining} = require('./handleCaloriesRemaining')
 
-module.exports = {handleQueryFood}
+module.exports = {handleQueryFood, handleCaloriesRemaining}

@@ -6,14 +6,8 @@ module.exports = {
     sendMessage(browser, 'how many calories are in a banana', [
       '1 banana has 105.02 calories. Would you like to log this item?'
     ])
-    sendMessage(browser, 'yes', [
-      'When did you have banana? e.g. Breakfast, Lunch, etc',
-      'When did you have banana?'
-    ])
-    sendMessage(browser, 'breakfast', [
-      'Your banana has been logged. You now have 500 calories left.',
-      'Your banana has been logged. You now have 500 calories left today.'
-    ])
+    sendMessage(browser, 'yes', ['When did you have banana?'])
+    sendMessage(browser, 'breakfast', ['Your banana has been logged.'])
   },
   'Querying food, and replying no to confirmation': function(browser) {
     // TODO implement later.

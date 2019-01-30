@@ -1,7 +1,7 @@
 const responsesToHi = [
   'Hello, I am your assistant Fitbot. How can I help you?',
-  'Greetings, I am Fibot! How can I assist?',
-  'Good day! What can I do for you today?',
+  'Greetings, I am Fitbot! How can I assist?',
+  'Good day! I am Fitbot. What can I do for you today?',
   'Hello! How can I help you?',
   'Hi! How are you doing?'
 ]
@@ -26,7 +26,13 @@ module.exports = {
       .submitForm('#chat-main form')
       .pause(1500)
       .getText('#chat-history li:last-child', element => {
-        browser.expect(responses.indexOf(element.value) !== -1).to.equal(true)
+        browser
+          .expect(
+            responses.some(response =>
+              element.value.toLowerCase().includes(response.toLowerCase())
+            )
+          )
+          .to.equal(true)
       })
   },
   responsesToHi

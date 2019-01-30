@@ -19,6 +19,7 @@
 ## Running unit tests
 
 * createdb fitbot-test
+* npm test
 
 ## test dialog flow
 
@@ -47,7 +48,7 @@
 ## test lex
 
 * npm run start-dev-lex
-* npm run end2end-lex
+* npm run end2end
 
 # Introduction
 

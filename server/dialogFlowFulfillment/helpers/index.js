@@ -8,8 +8,6 @@ const {
   buildCaloriesStatus
 } = require('../../../fitBotLambda/intentHandlers/handleCaloriesRemaining')
 
-console.log(process.env.NODE_ENV)
-
 const rootUrl =
   process.env.NODE_ENV === 'development'
     ? 'https://b1850def.ngrok.io'

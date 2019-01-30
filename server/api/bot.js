@@ -11,8 +11,9 @@ router.post('/initiate', (req, res, next) => {
     return
   }
   const {option} = req.body
-  const bot = new Bot(req.body.option || process.env.BOT)
-  if (option === 'LEX') lexBot = bot
+  const bot = new Bot(option || process.env.BOT)
+
+  if (bot.type === 'LEX') lexBot = bot
   else flowBot = bot
 
   if (!bot.initiate) next(new Error('Invalid bot option'))

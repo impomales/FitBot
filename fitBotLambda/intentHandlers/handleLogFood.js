@@ -7,7 +7,7 @@ const {
 } = require('../responseHandlers')
 const {buildFoodQuery, buildFoodQueryResult} = require('./handleQueryFood')
 
-const rootUrl = 'https://d729ac96.ngrok.io'
+const rootUrl = 'https://b1850def.ngrok.io'
 // const rootUrl = 'https://fitbot-cedrus.herokuapp.com'
 
 function handleDialogCodeHook(request) {

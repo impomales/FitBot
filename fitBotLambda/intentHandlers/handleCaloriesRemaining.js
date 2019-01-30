@@ -15,7 +15,10 @@ function buildCaloriesStatus(dailyGoals, calories) {
 
 function handleCaloriesRemaining(request) {
   const {sessionAttributes} = request
-  const {userId} = sessionAttributes
+  const {userId, foodName} = sessionAttributes
+
+  let message = ''
+  if (foodName) message += `Your ${foodName} has been logged. `
 
   // current current date. set sec, min, hr to zeroes.
   let date = new Date()
@@ -37,7 +40,8 @@ function handleCaloriesRemaining(request) {
           return close(
             sessionAttributes,
             'Fulfilled',
-            `You had ${calories} calories today.` +
+            message +
+              `You had ${calories} calories today.` +
               buildCaloriesStatus(user.dailyGoals, calories)
           )
         })

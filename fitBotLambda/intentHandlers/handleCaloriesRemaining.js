@@ -2,7 +2,7 @@ const axios = require('axios')
 
 const {close} = require('../responseHandlers')
 
-const rootUrl = 'https://d729ac96.ngrok.io'
+const rootUrl = 'https://b1850def.ngrok.io'
 // const rootUrl = 'https://fitbot-cedrus.herokuapp.com'
 
 function buildCaloriesStatus(dailyGoals, calories) {
@@ -15,7 +15,10 @@ function buildCaloriesStatus(dailyGoals, calories) {
 
 function handleCaloriesRemaining(request) {
   const {sessionAttributes} = request
-  const {userId} = sessionAttributes
+  const {userId, foodName} = sessionAttributes
+
+  let message = ''
+  if (foodName) message += `Your ${foodName} has been logged. `
 
   // current current date. set sec, min, hr to zeroes.
   let date = new Date()
@@ -37,13 +40,21 @@ function handleCaloriesRemaining(request) {
           return close(
             sessionAttributes,
             'Fulfilled',
-            `You had ${calories} calories today.` +
+            message +
+              `You had ${calories} calories today.` +
               buildCaloriesStatus(user.dailyGoals, calories)
           )
         })
         .catch(err => {
-          close(sessionAttributes, 'Failed', `Error in getting status. ${err}`)
+          return close(
+            sessionAttributes,
+            'Failed',
+            `Error in getting status. ${err}`
+          )
         })
+    })
+    .catch(err => {
+      return close(sessionAttributes, 'Failed', `Error in getting user. ${err}`)
     })
 }
 

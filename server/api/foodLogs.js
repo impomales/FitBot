@@ -35,18 +35,26 @@ router.post('/', async (req, res, next) => {
 // can get food logs by user, and date
 router.get('/', async (req, res, next) => {
   const {dateStr, userId} = req.query
+  let createdAt
+  const whereObj = {}
 
-  const date = new Date(dateStr)
-  let nextDay = new Date(dateStr)
-  nextDay.setDate(date.getDate() + 1)
-  const createdAt = {
-    [Op.gte]: date,
-    [Op.lt]: nextDay
+  if (userId) whereObj.userId = userId
+
+  if (dateStr) {
+    const date = new Date(dateStr)
+    let nextDay = new Date(dateStr)
+    nextDay.setDate(date.getDate() + 1)
+    createdAt = {
+      [Op.gte]: date,
+      [Op.lt]: nextDay
+    }
+
+    whereObj.createdAt = createdAt
   }
 
   try {
     const foodLogs = await FoodLog.findAll({
-      where: {userId, createdAt}
+      where: whereObj
     })
     res.status(200).json(foodLogs)
   } catch (err) {

@@ -42,7 +42,7 @@ describe('Food Log routes', () => {
         .expect(201)
 
       try {
-        res = await auth.get('/api/foodLogs').expect(200)
+        res = await auth.get(`/api/foodLogs`).expect(200)
       } catch (err) {
         res = err
       }

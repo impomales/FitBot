@@ -25,9 +25,8 @@
     "start-server-lex": "BOT='LEX' nodemon server -e html,js,scss --ignore public --ignore client",
     "unit": "BOT='DIALOG_FLOW' NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" \"./fitbotLambda/**/*.spec.js\" --require @babel/polyfill --require @babel/register",
     "unit-lex": "BOT='LEX' NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" \"./fitbotLambda/**/*.spec.js\" --require @babel/polyfill --require @babel/register",
-    "end2end": "BOT='DIALOG_FLOW' NODE_ENV='test' nightwatch",
-    "end2end-lex": "BOT='LEX' NODE_ENV='test' nightwatch",
-    "test": "npm run unit"
+    "end2end": "NODE_ENV='test' nightwatch",
+    "test": "npm run unit; npm run unit-lex"
   },
   "lint-staged": {
     "*.{js,jsx}": [

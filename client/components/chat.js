@@ -25,7 +25,7 @@ export class Chat extends Component {
       .post('/api/bot/initiate', {option})
       .then(res => res.data)
       .then(({sessionUserId, bot}) => {
-        console.log('Bot has been successfully initiated.')
+        console.log(`${bot.type} Bot has been successfully initiated.`)
         sessionUserIdLex = bot.type === 'LEX' ? sessionUserId : sessionUserIdLex
         sessionUserIdFlow =
           bot.type === 'DIALOG_FLOW' ? sessionUserId : sessionUserIdFlow

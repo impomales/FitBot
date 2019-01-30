@@ -8,11 +8,9 @@ const {
   buildCaloriesStatus
 } = require('../../../fitBotLambda/intentHandlers/handleCaloriesRemaining')
 
-console.log(process.env.NODE_ENV)
-
 const rootUrl =
   process.env.NODE_ENV === 'development'
-    ? 'https://d729ac96.ngrok.io'
+    ? 'https://b1850def.ngrok.io'
     : 'https://fitbot-cedrus.herokuapp.com'
 
 function getServingUnit(params) {

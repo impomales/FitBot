@@ -6,8 +6,9 @@ const {
   confirmIntent
 } = require('../responseHandlers')
 const {buildFoodQuery, buildFoodQueryResult} = require('./handleQueryFood')
+const {handleCaloriesRemaining} = require('./handleCaloriesRemaining')
 
-const rootUrl = 'https://d729ac96.ngrok.io'
+const rootUrl = 'https://b1850def.ngrok.io'
 // const rootUrl = 'https://fitbot-cedrus.herokuapp.com'
 
 function handleDialogCodeHook(request) {
@@ -113,11 +114,8 @@ function handleLogFood(request) {
       })
       .then(res => res.data)
       .then(log => {
-        return close(
-          sessionAttributes,
-          'Fulfilled',
-          `Your ${log.name} has been logged.`
-        )
+        sessionAttributes.foodName = log.name
+        return handleCaloriesRemaining(request)
       })
       .catch(err => {
         return close(

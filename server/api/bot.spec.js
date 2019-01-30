@@ -9,7 +9,7 @@ const {responsesToHi} = require('../../testHelpers')
 describe('Bot API routes', () => {
   let authUser = request.agent(app)
   let authUser2 = request.agent(app2)
-  let sessionUserId
+  let sessionUserId, bot
   before(async () => {
     await db.sync({force: true})
 
@@ -55,6 +55,7 @@ describe('Bot API routes', () => {
       )
     }
     sessionUserId = result.body.sessionUserId
+    bot = result.body.bot
 
     // test unauth request
     await request(app)
@@ -63,10 +64,9 @@ describe('Bot API routes', () => {
   })
 
   it('/api/bot/message', async () => {
-    let result
-    result = await authUser
+    let result = await authUser
       .post('/api/bot/message')
-      .send({text: 'hi', sessionUserId})
+      .send({text: 'hi', sessionUserId, option: bot.type})
       .expect(200)
 
     expect(responsesToHi.indexOf(result.body.message) !== -1).to.equal(true)
@@ -74,7 +74,7 @@ describe('Bot API routes', () => {
     // send message w/o init
     result = await authUser2
       .post('/api/bot/message')
-      .send({text: 'hi'})
+      .send({text: 'hi'}, sessionUserId, bot.type)
       .expect(401)
 
     expect(result.error.text).to.equal('Bot has not been initialized.')

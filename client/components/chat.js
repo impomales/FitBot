@@ -20,7 +20,7 @@ export class Chat extends Component {
   }
 
   initializeBot() {
-    let {option, sessionUserIdFlow, sessionUserIdLex} = this.state
+    let {option, sessionUserIdFlow, sessionUserIdLex, messages} = this.state
     axios
       .post('/api/bot/initiate', {option})
       .then(res => res.data)
@@ -29,7 +29,17 @@ export class Chat extends Component {
         sessionUserIdLex = bot.type === 'LEX' ? sessionUserId : sessionUserIdLex
         sessionUserIdFlow =
           bot.type === 'DIALOG_FLOW' ? sessionUserId : sessionUserIdFlow
-        this.setState({option: bot.type, sessionUserIdLex, sessionUserIdFlow})
+
+        const message = {
+          type: 'status',
+          content: `You are now chatting with ${bot.type}`
+        }
+        this.setState({
+          option: bot.type,
+          sessionUserIdLex,
+          sessionUserIdFlow,
+          messages: [...messages, message]
+        })
       })
       .catch(err => console.error(err))
   }
@@ -40,10 +50,19 @@ export class Chat extends Component {
 
   handleChangeSelect(evt) {
     this.setState({[evt.target.name]: evt.target.value}, () => {
-      const {option, sessionUserIdLex, sessionUserIdFlow} = this.state
+      const {option, sessionUserIdLex, sessionUserIdFlow, messages} = this.state
       // only initialize bot first time.
       const bot = option === 'LEX' ? sessionUserIdLex : sessionUserIdFlow
+      const message = {
+        type: 'status',
+        content: `You are now chatting with ${option}`
+      }
       if (!bot) this.initializeBot()
+      else
+        this.setState({
+          option,
+          messages: [...messages, message]
+        })
     })
   }
 
@@ -59,21 +78,30 @@ export class Chat extends Component {
     } = this.state
     if (!text) return
 
-    this.setState({busy: true, text: '', messages: [...messages, text]})
+    const sent = {
+      type: 'sent',
+      content: text
+    }
 
-    const sessionUserId =
-      option === 'LEX' ? sessionUserIdLex : sessionUserIdFlow
+    this.setState({busy: true, text: '', messages: [...messages, sent]}, () => {
+      const sessionUserId =
+        option === 'LEX' ? sessionUserIdLex : sessionUserIdFlow
 
-    axios
-      .post('/api/bot/message', {text, sessionUserId, option})
-      .then(res => res.data)
-      .then(data => {
-        this.setState({
-          busy: false,
-          messages: [...messages, text, data.message]
+      axios
+        .post('/api/bot/message', {text, sessionUserId, option})
+        .then(res => res.data)
+        .then(data => {
+          const received = {
+            type: 'received',
+            content: `${option.toLowerCase()}: ${data.message}`
+          }
+          this.setState({
+            busy: false,
+            messages: [...messages, sent, received]
+          })
         })
-      })
-      .catch(err => console.error(err))
+        .catch(err => console.error(err))
+    })
   }
 
   render() {

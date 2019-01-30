@@ -16,17 +16,18 @@ class ChatHistory extends Component {
       <div id="chat-history">
         <ul>
           {messages.map((message, idx) => {
-            messageFlag = messageFlag === 'sent' ? 'received' : 'sent'
             avatar =
-              messageFlag === 'sent' ? (
+              message.type === 'sent' ? (
                 <i className="fas fa-user" />
               ) : (
                 <i className="fas fa-robot" />
               )
+
+            if (message.type === 'status') avatar = ''
             return (
-              <li className={`${messageFlag} message`} key={idx}>
+              <li className={`${message.type} message`} key={idx}>
                 {avatar}
-                {message}
+                {message.content}
               </li>
             )
           })}

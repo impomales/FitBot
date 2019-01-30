@@ -1,5 +1,9 @@
-const {QueryFood, CaloriesRemaining} = require('./intentTypes')
-const {handleQueryFood, handleCaloriesRemaining} = require('./intentHandlers')
+const {QueryFood, CaloriesRemaining, LogFood} = require('./intentTypes')
+const {
+  handleQueryFood,
+  handleCaloriesRemaining,
+  handleLogFood
+} = require('./intentHandlers')
 
 function dispatch(request) {
   const intentName = request.currentIntent.name
@@ -9,6 +13,8 @@ function dispatch(request) {
       return handleQueryFood(request)
     case CaloriesRemaining:
       return handleCaloriesRemaining(request)
+    case LogFood:
+      return handleLogFood(request)
     default:
       throw Error(`Intent with name ${intentName} not supported.`)
   }

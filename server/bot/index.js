@@ -1,4 +1,10 @@
 const randomstring = require('randomstring')
+const {FoodLog} = require('../db/models')
+const {Op} = require('sequelize')
+
+const {
+  buildCaloriesStatus
+} = require('../../fitBotLambda/intentHandlers/handleCaloriesRemaining')
 
 class Bot {
   constructor(type) {
@@ -77,13 +83,50 @@ function messageDialogFlow(sessionUserId, text, callback) {
     .catch(err => callback(err))
 }
 
-function handleResponseDialogFlow(user, response) {
+async function handleResponseDialogFlow(user, response) {
   const {
     intent,
     parameters,
     allRequiredParamsPresent,
     fulfillmentText
   } = response
+
+  if (intent.displayName === 'Status' && allRequiredParamsPresent) {
+    const foodName = parameters.fields.foodName.stringValue
+    let message = ''
+    if (foodName) message += `Your ${foodName} has been logged. `
+
+    let today = new Date(),
+      tomorrow
+    today = new Date(today.getFullYear(), today.getMonth(), today.getDate())
+    tomorrow = new Date()
+    tomorrow.setDate(today.getDate() + 1)
+
+    const createdAt = {
+      [Op.gte]: today,
+      [Op.lt]: tomorrow
+    }
+
+    try {
+      const foodLogs = await FoodLog.findAll({
+        where: {createdAt, userId: user.id}
+      })
+
+      let calories = 0
+      foodLogs.forEach(food => {
+        calories += food.calories
+      })
+
+      calories = Math.round(calories * 100) / 100
+      return (
+        message +
+        `You had ${calories} calories today.` +
+        buildCaloriesStatus(user.dailyGoals, calories)
+      )
+    } catch (err) {
+      return `Error in getting status. ${err}`
+    }
+  }
   return fulfillmentText
 }
 

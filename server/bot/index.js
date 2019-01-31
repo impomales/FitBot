@@ -48,10 +48,12 @@ function messageLex(sessionUserId, text, callback) {
 
 function handleResponseLex(user, response) {
   const {intentName, slots, sessionAttributes, dialogState, message} = response
+  console.log(response)
   if (
     (intentName === 'CaloriesRemaining' || intentName === 'LogFood') &&
     (dialogState === 'ReadyForFulfillment' || dialogState === 'Fulfilled')
   ) {
+    if (message === 'Denied') return `OK. I won't log ${slots.FoodLogName}.`
     const foodName = sessionAttributes.foodName
     return caloriesRemaining(user, foodName)
   }

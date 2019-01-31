@@ -87,11 +87,7 @@ function handleLogFood(request) {
   const {userId} = sessionAttributes
 
   if (confirmationStatus === 'Denied') {
-    return close(
-      sessionAttributes,
-      'Fulfilled',
-      `OK. I won't log ${FoodLogName}.`
-    )
+    return close(sessionAttributes, 'Fulfilled', 'Denied')
   }
 
   if (invocationSource === 'DialogCodeHook') {

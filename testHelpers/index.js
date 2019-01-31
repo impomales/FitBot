@@ -35,5 +35,16 @@ module.exports = {
           .to.equal(true)
       })
   },
+  switchBot: function(browser) {
+    browser
+      .click('select[name=option]')
+      .click('option:not(:checked)')
+      .pause(1500)
+      .getText('#chat-history li:last-child', element => {
+        browser
+          .expect(element.value.includes('You are now chatting'))
+          .to.equal(true)
+      })
+  },
   responsesToHi
 }

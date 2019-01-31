@@ -10,7 +10,7 @@ const {
 
 const rootUrl =
   process.env.NODE_ENV === 'development'
-    ? 'https://b1850def.ngrok.io'
+    ? 'https://153818af.ngrok.io'
     : 'https://fitbot-cedrus.herokuapp.com'
 
 function getServingUnit(params) {

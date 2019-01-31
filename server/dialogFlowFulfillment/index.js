@@ -1,8 +1,7 @@
 const {
   queryFood,
   queryFoodServingSize,
-  queryFoodLogYes,
-  status
+  queryFoodLogYes
 } = require('./intentHandlers')
 
 let intentMap = new Map()

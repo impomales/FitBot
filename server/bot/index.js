@@ -47,7 +47,14 @@ function messageLex(sessionUserId, text, callback) {
 }
 
 function handleResponseLex(user, response) {
-  const {intentName, slots, dialogState, message} = response
+  const {intentName, slots, sessionAttributes, dialogState, message} = response
+  if (
+    (intentName === 'CaloriesRemaining' || intentName === 'LogFood') &&
+    (dialogState === 'ReadyForFulfillment' || dialogState === 'Fulfilled')
+  ) {
+    const foodName = sessionAttributes.foodName
+    return caloriesRemaining(user, foodName)
+  }
   return message
 }
 

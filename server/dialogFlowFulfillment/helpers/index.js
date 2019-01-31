@@ -4,10 +4,6 @@ const {
   buildFoodQueryResult
 } = require('../../../fitBotLambda/intentHandlers/handleQueryFood')
 
-const {
-  buildCaloriesStatus
-} = require('../../../fitBotLambda/intentHandlers/handleCaloriesRemaining')
-
 const rootUrl =
   process.env.NODE_ENV === 'development'
     ? 'https://153818af.ngrok.io'
@@ -86,42 +82,9 @@ function saveFoodLog(foodLog, agent) {
     })
 }
 
-function getCaloriesRemaining(date, agent) {
-  const {foodName} = agent.parameters
-  let message = ''
-
-  if (foodName) message += `Your ${foodName} has been logged. `
-  const userId = getUserId(agent.session)
-  return axios
-    .get(`${rootUrl}/api/users/${userId}`)
-    .then(res => res.data)
-    .then(user => {
-      return axios
-        .get(`${rootUrl}/api/foodLogs?dateStr=${date}&userId=${userId}`)
-        .then(res => res.data)
-        .then(foodLogs => {
-          let calories = 0
-          foodLogs.forEach(food => {
-            calories += food.calories
-          })
-
-          calories = Math.round(calories * 100) / 100
-          agent.add(
-            message +
-              `You had ${calories} calories today.` +
-              buildCaloriesStatus(user.dailyGoals, calories)
-          )
-        })
-        .catch(err => {
-          agent.add(`Error in getting status. ${err}`)
-        })
-    })
-}
-
 module.exports = {
   getServingQuantity,
   getServingUnit,
   getNutritionInfo,
-  saveFoodLog,
-  getCaloriesRemaining
+  saveFoodLog
 }

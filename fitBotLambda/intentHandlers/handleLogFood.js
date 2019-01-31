@@ -8,7 +8,7 @@ const {
 const {buildFoodQuery, buildFoodQueryResult} = require('./handleQueryFood')
 const {handleCaloriesRemaining} = require('./handleCaloriesRemaining')
 
-const rootUrl = 'https://b1850def.ngrok.io'
+const rootUrl = 'https://153818af.ngrok.io'
 // const rootUrl = 'https://fitbot-cedrus.herokuapp.com'
 
 function handleDialogCodeHook(request) {

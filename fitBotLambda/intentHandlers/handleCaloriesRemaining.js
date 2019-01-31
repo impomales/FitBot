@@ -2,7 +2,7 @@ const axios = require('axios')
 
 const {close} = require('../responseHandlers')
 
-const rootUrl = 'https://b1850def.ngrok.io'
+const rootUrl = 'https://153818af.ngrok.io'
 // const rootUrl = 'https://fitbot-cedrus.herokuapp.com'
 
 function buildCaloriesStatus(dailyGoals, calories) {

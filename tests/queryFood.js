@@ -1,4 +1,4 @@
-const {loginStep, sendMessage} = require('../testHelpers')
+const {loginStep, sendMessage, switchBot} = require('../testHelpers')
 
 module.exports = {
   'Log in': loginStep,
@@ -18,6 +18,26 @@ module.exports = {
       'Alright, I will not log it.',
       "OK. I won't log"
     ])
+  },
+  'Switching between bots': function(browser) {
+    sendMessage(browser, 'how many calories are in a banana', [
+      '1 banana has 105.02 calories. Would you like to log this item?'
+    ])
+
+    switchBot(browser)
+
+    sendMessage(browser, 'how many calories are in a banana', [
+      '1 banana has 105.02 calories. Would you like to log this item?'
+    ])
+
+    switchBot(browser)
+
+    sendMessage(browser, 'yes', ['when did you have'])
+
+    switchBot(browser)
+
+    sendMessage(browser, 'yes', ['when did you have'])
+
     browser.end()
   }
 }

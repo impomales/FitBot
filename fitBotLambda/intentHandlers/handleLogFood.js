@@ -7,9 +7,6 @@ const {
 } = require('../responseHandlers')
 const {buildFoodQuery, buildFoodQueryResult} = require('./handleQueryFood')
 
-const rootUrl = 'https://153818af.ngrok.io'
-// const rootUrl = 'https://fitbot-cedrus.herokuapp.com'
-
 function handleDialogCodeHook(request) {
   const {sessionAttributes, inputTranscript, currentIntent} = request
   const slots = currentIntent.slots
@@ -76,53 +73,17 @@ function handleDialogCodeHook(request) {
 function handleLogFood(request) {
   const {sessionAttributes, invocationSource, currentIntent} = request
   const {slots, confirmationStatus} = currentIntent
-  const {
-    FoodLogName,
-    FoodLogQuantity,
-    FoodLogUnit,
-    MealTime,
-    Calories,
-    WeightInGrams
-  } = slots
-  const {userId} = sessionAttributes
 
   if (confirmationStatus === 'Denied') {
-    return close(sessionAttributes, 'Fulfilled', 'Denied')
+    return close(
+      sessionAttributes,
+      'Fulfilled',
+      `OK. I won't log ${slots.FoodLogName}.`
+    )
   }
 
   if (invocationSource === 'DialogCodeHook') {
     return handleDialogCodeHook(request)
-  }
-
-  if (invocationSource === 'FulfillmentCodeHook') {
-    return axios
-      .post(`${rootUrl}/api/foodLogs`, {
-        foodLog: {
-          name: FoodLogName,
-          quantity: FoodLogQuantity,
-          unit: FoodLogUnit,
-          mealTime: MealTime,
-          calories: Calories,
-          weightInGrams: WeightInGrams
-        },
-        id: userId
-      })
-      .then(res => res.data)
-      .then(log => {
-        sessionAttributes.foodName = log.name
-        return close(
-          sessionAttributes,
-          'Fulfilled',
-          'Getting your status from server.'
-        )
-      })
-      .catch(err => {
-        return close(
-          sessionAttributes,
-          'Failed',
-          `Something went wrong. ${err}`
-        )
-      })
   }
 }
 

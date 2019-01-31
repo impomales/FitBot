@@ -1,5 +1,6 @@
 const randomstring = require('randomstring')
 const caloriesRemaining = require('./caloriesRemaining')
+const saveFoodLog = require('./saveFoodLog')
 
 class Bot {
   constructor(type) {
@@ -46,17 +47,31 @@ function messageLex(sessionUserId, text, callback) {
   )
 }
 
-function handleResponseLex(user, response) {
+async function handleResponseLex(user, response) {
   const {intentName, slots, sessionAttributes, dialogState, message} = response
-  console.log(response)
   if (
-    (intentName === 'CaloriesRemaining' || intentName === 'LogFood') &&
+    intentName === 'CaloriesRemaining' &&
     (dialogState === 'ReadyForFulfillment' || dialogState === 'Fulfilled')
   ) {
-    if (message === 'Denied') return `OK. I won't log ${slots.FoodLogName}.`
     const foodName = sessionAttributes.foodName
     return caloriesRemaining(user, foodName)
+  } else if (intentName === 'LogFood') {
+    if (dialogState === 'Fulfilled') return message
+    else if (dialogState === 'ReadyForFulfillment') {
+      const foodLog = {
+        name: slots.FoodLogName,
+        quantity: slots.FoodLogQuantity,
+        unit: slots.FoodLogUnit,
+        mealTime: slots.MealTime,
+        calories: slots.Calories,
+        weightInGrams: slots.WeightInGrams
+      }
+      const newLog = await saveFoodLog(user, foodLog)
+      if (newLog.name) return caloriesRemaining(user, newLog.name)
+      else return newLog
+    }
   }
+
   return message
 }
 

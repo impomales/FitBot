@@ -6,9 +6,11 @@ class Bot {
     if (type === 'LEX') {
       this.initiate = initiateLex
       this.message = messageLex
+      this.handleResponse = handleResponseLex
     } else if (type === 'DIALOG_FLOW') {
       this.initiate = initiateDialogFlow
       this.message = messageDialogFlow
+      this.handleResponse = handleResponseDialogFlow
     }
   }
 }
@@ -43,6 +45,11 @@ function messageLex(sessionUserId, text, callback) {
   )
 }
 
+function handleResponseLex(user, response) {
+  const {intentName, slots, dialogState, message} = response
+  return message
+}
+
 // Dialogflow methods
 
 function initiateDialogFlow(user) {
@@ -65,9 +72,19 @@ function messageDialogFlow(sessionUserId, text, callback) {
       }
     })
     .then(responses => {
-      callback(null, {message: responses[0].queryResult.fulfillmentText})
+      callback(null, responses[0].queryResult)
     })
     .catch(err => callback(err))
+}
+
+function handleResponseDialogFlow(user, response) {
+  const {
+    intent,
+    parameters,
+    allRequiredParamsPresent,
+    fulfillmentText
+  } = response
+  return fulfillmentText
 }
 
 module.exports = Bot

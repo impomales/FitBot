@@ -40,7 +40,9 @@ router.post('/message', (req, res, next) => {
 
   bot.message(sessionUserId, text, (err, response) => {
     if (err) next(err)
-    else res.json(response)
+    else {
+      res.json({message: bot.handleResponse(req.user, response)})
+    }
   })
 })
 

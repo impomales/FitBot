@@ -4,21 +4,12 @@ const {
   buildFoodQueryResult
 } = require('../../../fitBotLambda/intentHandlers/handleQueryFood')
 
-const rootUrl =
-  process.env.NODE_ENV === 'development'
-    ? 'https://153818af.ngrok.io'
-    : 'https://fitbot-cedrus.herokuapp.com'
-
 function getServingUnit(params) {
   return params.reduce((curr, next) => curr || next, false)
 }
 
 function getServingQuantity(params) {
-  return params.reduce((curr, next) => curr || next, false)
-}
-
-function getUserId(session) {
-  return session.split('/')[4].split('-')[0]
+  return Number(params.reduce((curr, next) => curr || next, false))
 }
 
 // nutritionix api call using dialog flow
@@ -57,34 +48,8 @@ function getNutritionInfo(name, quantity, unit, agent) {
     })
 }
 
-function saveFoodLog(foodLog, agent) {
-  return axios
-    .post(`${rootUrl}/api/foodLogs`, {
-      foodLog,
-      id: getUserId(agent.session)
-    })
-    .then(res => res.data)
-    .then(log => {
-      const event = {
-        name: 'GetStatus',
-        languageCode: 'en-US',
-        parameters: {
-          foodName: log.name
-        }
-      }
-
-      agent.add(`Your ${log.name} has been logged.`)
-
-      agent.setFollowupEvent(event)
-    })
-    .catch(err => {
-      agent.add(`Something went wrong. ${err}`)
-    })
-}
-
 module.exports = {
   getServingQuantity,
   getServingUnit,
-  getNutritionInfo,
-  saveFoodLog
+  getNutritionInfo
 }

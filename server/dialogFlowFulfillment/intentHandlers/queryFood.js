@@ -1,8 +1,7 @@
 const {
   getServingQuantity,
   getServingUnit,
-  getNutritionInfo,
-  saveFoodLog
+  getNutritionInfo
 } = require('../helpers')
 
 function queryFood(agent) {
@@ -78,19 +77,4 @@ function queryFoodServingSize(agent) {
   }
 }
 
-function queryFoodLogYes(agent) {
-  let {
-    name,
-    unit,
-    quantity,
-    weightInGrams,
-    calories,
-    mealTime
-  } = agent.context.get('queryfood-followup').parameters
-  return saveFoodLog(
-    {name, unit, quantity, weightInGrams, calories, mealTime},
-    agent
-  )
-}
-
-module.exports = {queryFood, queryFoodServingSize, queryFoodLogYes}
+module.exports = {queryFood, queryFoodServingSize}

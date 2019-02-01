@@ -4,7 +4,7 @@ const {
   buildFoodQuery,
   buildFoodQueryResult,
   getNutritionInfo
-} = require('../../../fitBotLambda/intentHandlers/handleQueryFood')
+} = require('../../fitBotLambda/intentHandlers/handleQueryFood')
 
 function queryFood(agent) {
   let {

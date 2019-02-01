@@ -41,8 +41,13 @@ router.post('/message', (req, res, next) => {
   bot.message(sessionUserId, text, async (err, response) => {
     if (err) next(err)
     else {
-      const message = await bot.handleResponse(req.user, response)
-      res.json({message})
+      try {
+        const message = await bot.handleResponse(req.user, response)
+        res.json({message})
+      } catch (error) {
+        err(error)
+        next(error)
+      }
     }
   })
 })

@@ -1,4 +1,6 @@
 const randomstring = require('randomstring')
+const caloriesRemaining = require('./caloriesRemaining')
+const saveFoodLog = require('./saveFoodLog')
 
 class Bot {
   constructor(type) {
@@ -6,9 +8,11 @@ class Bot {
     if (type === 'LEX') {
       this.initiate = initiateLex
       this.message = messageLex
+      this.handleResponse = handleResponseLex
     } else if (type === 'DIALOG_FLOW') {
       this.initiate = initiateDialogFlow
       this.message = messageDialogFlow
+      this.handleResponse = handleResponseDialogFlow
     }
   }
 }
@@ -43,6 +47,34 @@ function messageLex(sessionUserId, text, callback) {
   )
 }
 
+async function handleResponseLex(user, response) {
+  const {intentName, slots, sessionAttributes, dialogState, message} = response
+  if (
+    intentName === 'CaloriesRemaining' &&
+    (dialogState === 'ReadyForFulfillment' || dialogState === 'Fulfilled')
+  ) {
+    const foodName = sessionAttributes.foodName
+    return caloriesRemaining(user, foodName)
+  } else if (intentName === 'LogFood') {
+    if (dialogState === 'Fulfilled') return message
+    else if (dialogState === 'ReadyForFulfillment') {
+      const foodLog = {
+        name: slots.FoodLogName,
+        quantity: slots.FoodLogQuantity,
+        unit: slots.FoodLogUnit,
+        mealTime: slots.MealTime,
+        calories: slots.Calories,
+        weightInGrams: slots.WeightInGrams
+      }
+      const newLog = await saveFoodLog(user, foodLog)
+      if (newLog.name) return caloriesRemaining(user, newLog.name)
+      else return newLog
+    }
+  }
+
+  return message
+}
+
 // Dialogflow methods
 
 function initiateDialogFlow(user) {
@@ -65,9 +97,41 @@ function messageDialogFlow(sessionUserId, text, callback) {
       }
     })
     .then(responses => {
-      callback(null, {message: responses[0].queryResult.fulfillmentText})
+      callback(null, responses[0].queryResult)
     })
     .catch(err => callback(err))
+}
+
+async function handleResponseDialogFlow(user, response) {
+  const {
+    intent,
+    parameters,
+    allRequiredParamsPresent,
+    fulfillmentText,
+    outputContexts
+  } = response
+  if (intent.displayName === 'Status' && allRequiredParamsPresent) {
+    const foodName = parameters.fields.foodName.stringValue
+    return caloriesRemaining(user, foodName)
+  }
+
+  if (
+    intent.displayName === 'QueryFood - log-yes' &&
+    allRequiredParamsPresent
+  ) {
+    const foodLog = {}
+    const contextFields = outputContexts[0].parameters.fields
+    foodLog.name = contextFields.name.stringValue
+    foodLog.unit = contextFields.unit.stringValue
+    foodLog.quantity = contextFields.quantity.numberValue
+    foodLog.weightInGrams = contextFields.weightInGrams.numberValue
+    foodLog.calories = contextFields.calories.numberValue
+    foodLog.mealTime = parameters.fields.mealTime.stringValue
+    const newLog = await saveFoodLog(user, foodLog)
+    if (newLog.name) return caloriesRemaining(user, newLog.name)
+    else return newLog
+  }
+  return fulfillmentText
 }
 
 module.exports = Bot

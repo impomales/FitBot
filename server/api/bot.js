@@ -38,9 +38,12 @@ router.post('/message', (req, res, next) => {
 
   if (!bot.message) next(new Error('Invalid bot option'))
 
-  bot.message(sessionUserId, text, (err, response) => {
+  bot.message(sessionUserId, text, async (err, response) => {
     if (err) next(err)
-    else res.json(response)
+    else {
+      const message = await bot.handleResponse(req.user, response)
+      res.json({message})
+    }
   })
 })
 

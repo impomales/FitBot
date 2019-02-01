@@ -38,6 +38,26 @@ function buildFoodQueryResult(nutritionInfo, unit) {
   )} ${possessVerb} ${nf_calories} calories.`
 }
 
+function getNutritionInfo(query, success, failure) {
+  return axios
+    .post(
+      'https://trackapi.nutritionix.com/v2/natural/nutrients',
+      {
+        query
+      },
+      {
+        headers: {
+          'x-app-id': process.env.NUTRITION_API_ID,
+          'x-app-key': process.env.NUTRITION_API_KEY,
+          'x-remote-user-id': 0
+        }
+      }
+    )
+    .then(res => res.data)
+    .then(success)
+    .catch(failure)
+}
+
 function handleDialogCodeHook(request) {
   const {sessionAttributes, inputTranscript, currentIntent} = request
   const slots = currentIntent.slots
@@ -69,26 +89,9 @@ function handleFulfillmentCodeHook(request) {
   const {sessionAttributes, currentIntent} = request
   const slots = currentIntent.slots
   let {FoodQueryName, FoodQueryQuantity, FoodQueryUnit} = slots
-  return axios
-    .post(
-      'https://trackapi.nutritionix.com/v2/natural/nutrients',
-      {
-        query: buildFoodQuery(
-          FoodQueryName,
-          Number(FoodQueryQuantity),
-          FoodQueryUnit
-        )
-      },
-      {
-        headers: {
-          'x-app-id': process.env.NUTRITION_API_ID,
-          'x-app-key': process.env.NUTRITION_API_KEY,
-          'x-remote-user-id': 0
-        }
-      }
-    )
-    .then(res => res.data)
-    .then(nutritionInfo => {
+  return getNutritionInfo(
+    buildFoodQuery(FoodQueryName, Number(FoodQueryQuantity), FoodQueryUnit),
+    nutritionInfo => {
       return confirmIntent(
         sessionAttributes,
         'LogFood',
@@ -105,10 +108,11 @@ function handleFulfillmentCodeHook(request) {
           FoodQueryUnit
         )} Would you like to log this item?`
       )
-    })
-    .catch(err => {
+    },
+    err => {
       return close(sessionAttributes, 'Failed', err.response.data.message)
-    })
+    }
+  )
 }
 
 function handleQueryFood(request) {
@@ -119,4 +123,9 @@ function handleQueryFood(request) {
   }
 }
 
-module.exports = {handleQueryFood, buildFoodQuery, buildFoodQueryResult}
+module.exports = {
+  handleQueryFood,
+  buildFoodQuery,
+  buildFoodQueryResult,
+  getNutritionInfo
+}

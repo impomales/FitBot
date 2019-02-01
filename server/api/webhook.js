@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const intentMap = require('../dialogFlowFulfillment')
+const intentMap = require('../../dialogFlowFulfillment')
 const {WebhookClient} = require('dialogflow-fulfillment')
 
 // webhook request send from dialogflow for fulfillment and slot filling.

@@ -1,8 +1,10 @@
+const {getServingQuantity, getServingUnit} = require('../helpers')
+
 const {
-  getServingQuantity,
-  getServingUnit,
+  buildFoodQuery,
+  buildFoodQueryResult,
   getNutritionInfo
-} = require('../helpers')
+} = require('../../../fitBotLambda/intentHandlers/handleQueryFood')
 
 function queryFood(agent) {
   let {
@@ -36,7 +38,26 @@ function queryFood(agent) {
 
   // if all required slots are fulfilled
   if (name && servingQuantity) {
-    return getNutritionInfo(name, servingQuantity, servingUnit, agent)
+    return getNutritionInfo(
+      buildFoodQuery(name, Number(servingQuantity), servingUnit),
+      nutritionInfo => {
+        const message = `${buildFoodQueryResult(
+          nutritionInfo,
+          servingUnit
+        )} Would you like to log this item?`
+        agent.add(message)
+        agent.context.set('queryfood-followup', 1, {
+          calories: nutritionInfo.foods[0].nf_calories,
+          weightInGrams: nutritionInfo.foods[0].serving_weight_grams,
+          quantity: servingQuantity,
+          unit: servingUnit
+        })
+      },
+      err => {
+        const message = `${err.response.data.message} Please try again.`
+        agent.add(message)
+      }
+    )
   }
 }
 
@@ -69,7 +90,26 @@ function queryFoodServingSize(agent) {
 
   // if all required slots are fulfilled
   if (name && servingQuantity) {
-    return getNutritionInfo(name, servingQuantity, servingUnit, agent)
+    return getNutritionInfo(
+      buildFoodQuery(name, Number(servingQuantity), servingUnit),
+      nutritionInfo => {
+        const message = `${buildFoodQueryResult(
+          nutritionInfo,
+          servingUnit
+        )} Would you like to log this item?`
+        agent.add(message)
+        agent.context.set('queryfood-followup', 1, {
+          calories: nutritionInfo.foods[0].nf_calories,
+          weightInGrams: nutritionInfo.foods[0].serving_weight_grams,
+          quantity,
+          servingUnit
+        })
+      },
+      err => {
+        const message = `${err.response.data.message} Please try again.`
+        agent.add(message)
+      }
+    )
   } else {
     agent.add(
       `I'm sorry I don't understand. please enter a serving size again.`

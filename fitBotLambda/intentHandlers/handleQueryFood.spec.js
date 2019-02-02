@@ -6,7 +6,7 @@ const {
   buildFoodQueryResult
 } = require('./handleQueryFood')
 
-describe('Handle Query Food', () => {
+describe('Lex -- Handle Query Food', () => {
   describe('helper functions', () => {
     const milkInfo = {
       foods: [
@@ -103,7 +103,7 @@ describe('Handle Query Food', () => {
       expect(result.dialogAction.type).to.equal('Close')
       expect(result.dialogAction.fulfillmentState).to.equal('Failed')
       expect(result.dialogAction.message.content).to.equal(
-        "We couldn't match any of your foods"
+        "We couldn't match any of your foods. Please try again."
       )
     })
 

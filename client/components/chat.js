@@ -2,6 +2,8 @@ import axios from 'axios'
 import React, {Component} from 'react'
 import ChatHistory from './chat-history'
 
+const botOptions = ['LEX', 'DIALOG_FLOW', 'WATSON']
+
 export class Chat extends Component {
   constructor(props) {
     super(props)
@@ -128,6 +130,7 @@ export class Chat extends Component {
         >
           <option value="LEX">Amazon Lex</option>
           <option value="DIALOG_FLOW">Google Dialog Flow</option>
+          <option value="WATSON">IBM Watson Assistant</option>
         </select>
       </div>
     )

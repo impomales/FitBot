@@ -2,7 +2,7 @@ const router = require('express').Router()
 
 const Bot = require('../bot')
 
-let lexBot, flowBot
+let lexBot, flowBot, watsonBot
 
 // expects option in req that sets which bot to use.
 router.post('/initiate', (req, res, next) => {
@@ -14,17 +14,41 @@ router.post('/initiate', (req, res, next) => {
   const bot = new Bot(option || process.env.BOT)
 
   if (bot.type === 'LEX') lexBot = bot
-  else flowBot = bot
+  else if (bot.type === 'DIALOG_FLOW') flowBot = bot
+  else if (bot.type === 'WATSON') watsonBot = bot
 
   if (!bot.initiate) next(new Error('Invalid bot option'))
 
-  let sessionUserId = bot.initiate(req.user)
-  res.json({bot, sessionUserId})
+  let sessionUserId
+  if (bot.type === 'WATSON') {
+    sessionUserId = bot.initiate((err, result) => {
+      if (err) throw new Error(`Bot initialization failed ${err}`)
+      sessionUserId = result.session_id
+      const resBot = {
+        type: bot.type,
+        message_: bot.message_
+      }
+
+      res.json({bot: resBot, sessionUserId})
+    })
+  } else {
+    sessionUserId = bot.initiate(req.user)
+    // for security purposes only returns these params.
+    const resBot = {
+      type: bot.type,
+      message_: bot.message_
+    }
+
+    res.json({bot: resBot, sessionUserId})
+  }
 })
 
 router.post('/message', (req, res, next) => {
   const {text, sessionUserId, option} = req.body
-  const bot = option === 'LEX' ? lexBot : flowBot
+  let bot
+  if (option === 'LEX') bot = lexBot
+  else if (option === 'DIALOG_FLOW') bot = flowBot
+  else if (option === 'WATSON') bot = watsonBot
 
   if (!req.user) {
     res.status(401).send('Please log in.')

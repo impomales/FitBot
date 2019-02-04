@@ -21,12 +21,15 @@
     "start": "BOT='DIALOG_FLOW' node server",
     "start-dev-dialog-flow": "BOT='DIALOG_FLOW' NODE_ENV='development' npm run build-client-watch & NODE_ENV='development' npm run start-server-dialog-flow",
     "start-server-dialog-flow": "BOT='DIALOG_FLOW' nodemon server -e html,js,scss --ignore public --ignore client",
+    "start-dev-watson": "BOT='WATSON' NODE_ENV='development' npm run build-client-watch & NODE_ENV='development' npm run start-server-watson",
+    "start-server-watson": "BOT='WATSON' nodemon server -e html,js,scss --ignore public --ignore client",
     "start-dev-lex": "BOT='LEX' NODE_ENV='development' npm run build-client-watch & BOT='LEX' NODE_ENV='development' npm run start-server-lex",
     "start-server-lex": "BOT='LEX' nodemon server -e html,js,scss --ignore public --ignore client",
     "unit": "BOT='DIALOG_FLOW' NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" \"./fitbotLambda/**/*.spec.js\" \"./dialogFlowFulfillment/**/*.spec.js\" --require @babel/polyfill --require @babel/register",
     "unit-lex": "BOT='LEX' NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" \"./fitbotLambda/**/*.spec.js\" \"./dialogFlowFulfillment/**/*.spec.js\" --require @babel/polyfill --require @babel/register",
+    "unit-watson": "BOT='WATSON' NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" \"./fitbotLambda/**/*.spec.js\" \"./dialogFlowFulfillment/**/*.spec.js\" --require @babel/polyfill --require @babel/register",
     "end2end": "NODE_ENV='test' nightwatch",
-    "test": "npm run unit && npm run unit-lex"
+    "test": "npm run unit && npm run unit-lex && npm run unit-watson"
   },
   "lint-staged": {
     "*.{js,jsx}": [
@@ -68,7 +71,8 @@
     "redux-logger": "^2.8.1",
     "redux-thunk": "^2.3.0",
     "sequelize": "^4.38.0",
-    "socket.io": "^2.1.1"
+    "socket.io": "^2.1.1",
+    "watson-developer-cloud": "^3.17.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.55",

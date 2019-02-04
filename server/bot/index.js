@@ -15,6 +15,8 @@ class Bot {
       this.handleResponse = handleResponseDialogFlow
     } else if (type === 'WATSON') {
       this.initiate = initiateWatson
+      this.message = messageWatson
+      this.handleResponse = handleWatsonResponse
     }
   }
 }
@@ -147,6 +149,25 @@ function initiateWatson(callback) {
   })
 
   this.service.createSession({assistant_id: process.env.WATSON_ID}, callback)
+}
+
+function messageWatson(sessionUserId, text, callback) {
+  this.service.message(
+    {
+      assistant_id: process.env.WATSON_ID,
+      session_id: sessionUserId,
+      input: {
+        message_type: 'text',
+        text
+      }
+    },
+    callback
+  )
+}
+
+function handleWatsonResponse(user, response) {
+  // TODO
+  return response
 }
 
 module.exports = Bot

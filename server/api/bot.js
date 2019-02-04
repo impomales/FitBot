@@ -69,7 +69,6 @@ router.post('/message', (req, res, next) => {
         const message = await bot.handleResponse(req.user, response)
         res.json({message})
       } catch (error) {
-        err(error)
         next(error)
       }
     }

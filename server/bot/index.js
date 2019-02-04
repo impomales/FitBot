@@ -167,7 +167,7 @@ function messageWatson(sessionUserId, text, callback) {
 
 function handleWatsonResponse(user, response) {
   // TODO
-  return response
+  return response.output.generic[0].text
 }
 
 module.exports = Bot

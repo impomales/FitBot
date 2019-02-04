@@ -1,7 +1,7 @@
 const {expect} = require('chai')
 const {queryFood, queryFoodServingSize} = require('./queryFood')
 
-describe.only('Dialog Flow -- Handle Query Food', () => {
+describe('Dialog Flow -- Handle Query Food', () => {
   let agent
   beforeEach(() => {
     agent = {
@@ -20,14 +20,14 @@ describe.only('Dialog Flow -- Handle Query Food', () => {
         this.result = message
       },
       context: {
-        parameters: {
-          'queryfood-followup': {}
+        'queryfood-followup': {
+          parameters: {}
         },
         get: function(name) {
-          return this.parameters[name]
+          return this[name]
         },
         set: function(name, lifespan, parameters) {
-          this.parameters[name] = parameters
+          this[name].parameters = parameters
         }
       }
     }
@@ -53,7 +53,7 @@ describe.only('Dialog Flow -- Handle Query Food', () => {
       expect(agent.result).to.equal(
         '1 apple has 94.64 calories. Would you like to log this item?'
       )
-      expect(agent.context.parameters['queryfood-followup'].calories).to.equal(
+      expect(agent.context['queryfood-followup'].parameters.calories).to.equal(
         94.64
       )
 
@@ -64,7 +64,7 @@ describe.only('Dialog Flow -- Handle Query Food', () => {
       expect(agent.result).to.equal(
         '1 glass of wine has 122.01 calories. Would you like to log this item?'
       )
-      expect(agent.context.parameters['queryfood-followup'].calories).to.equal(
+      expect(agent.context['queryfood-followup'].parameters.calories).to.equal(
         122.01
       )
 
@@ -77,7 +77,7 @@ describe.only('Dialog Flow -- Handle Query Food', () => {
       expect(agent.result).to.equal(
         '3 cups of wine has 585.65 calories. Would you like to log this item?'
       )
-      expect(agent.context.parameters['queryfood-followup'].calories).to.equal(
+      expect(agent.context['queryfood-followup'].parameters.calories).to.equal(
         585.65
       )
     })
@@ -88,6 +88,22 @@ describe.only('Dialog Flow -- Handle Query Food', () => {
       await queryFood(agent)
       expect(agent.result).to.equal(
         "We couldn't match any of your foods. Please try again."
+      )
+    })
+  })
+
+  describe('queryFoodServingSize', () => {
+    it('can process a fulfillment', async () => {
+      agent.context.set('queryfood-followup', 1, agent.parameters)
+
+      agent.context['queryfood-followup'].parameters.name = 'apple'
+      agent.context['queryfood-followup'].parameters.servingWeight = {
+        amount: 2,
+        unit: 'oz'
+      }
+      await queryFoodServingSize(agent)
+      expect(agent.result).to.equal(
+        '2 ozs of apple has 29.48 calories. Would you like to log this item?'
       )
     })
   })

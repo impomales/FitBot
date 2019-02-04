@@ -54,7 +54,7 @@ function queryFood(agent) {
         })
       },
       err => {
-        const message = `${err.response.data.message} Please try again.`
+        const message = `${err.response.data.message}. Please try again.`
         agent.add(message)
       }
     )

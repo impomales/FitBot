@@ -110,7 +110,12 @@ function handleFulfillmentCodeHook(request) {
       )
     },
     err => {
-      return close(sessionAttributes, 'Failed', err.response.data.message)
+      console.error(err.response.data.message)
+      return close(
+        sessionAttributes,
+        'Failed',
+        `${err.response.data.message}. Please try again.`
+      )
     }
   )
 }

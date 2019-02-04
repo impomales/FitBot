@@ -14,6 +14,7 @@ export class Chat extends Component {
       busy: false,
       sessionUserIdLex: '',
       sessionUserIdFlow: '',
+      sessionUserIdWatson: '',
       option: ''
     }
   }
@@ -22,7 +23,13 @@ export class Chat extends Component {
   }
 
   initializeBot() {
-    let {option, sessionUserIdFlow, sessionUserIdLex, messages} = this.state
+    let {
+      option,
+      sessionUserIdFlow,
+      sessionUserIdLex,
+      sessionUserIdWatson,
+      messages
+    } = this.state
     axios
       .post('/api/bot/initiate', {option})
       .then(res => res.data)
@@ -31,6 +38,8 @@ export class Chat extends Component {
         sessionUserIdLex = bot.type === 'LEX' ? sessionUserId : sessionUserIdLex
         sessionUserIdFlow =
           bot.type === 'DIALOG_FLOW' ? sessionUserId : sessionUserIdFlow
+        sessionUserIdWatson =
+          bot.type === 'WATSON' ? sessionUserId : sessionUserIdWatson
 
         const message = {
           type: 'status',
@@ -40,6 +49,7 @@ export class Chat extends Component {
           option: bot.type,
           sessionUserIdLex,
           sessionUserIdFlow,
+          sessionUserIdWatson,
           messages: [...messages, message]
         })
       })
@@ -52,9 +62,19 @@ export class Chat extends Component {
 
   handleChangeSelect(evt) {
     this.setState({[evt.target.name]: evt.target.value}, () => {
-      const {option, sessionUserIdLex, sessionUserIdFlow, messages} = this.state
+      const {
+        option,
+        sessionUserIdLex,
+        sessionUserIdFlow,
+        sessionUserIdWatson,
+        messages
+      } = this.state
       // only initialize bot first time.
-      const bot = option === 'LEX' ? sessionUserIdLex : sessionUserIdFlow
+      let bot
+      if (option === 'LEX') bot = sessionUserIdLex
+      else if (option === 'DIALOG_FLOW') bot = sessionUserIdFlow
+      else if (option === 'WATSON') bot = sessionUserIdWatson
+
       const message = {
         type: 'status',
         content: `You are now chatting with ${option}`
@@ -76,6 +96,7 @@ export class Chat extends Component {
       messages,
       sessionUserIdLex,
       sessionUserIdFlow,
+      sessionUserIdWatson,
       option
     } = this.state
     if (!text) return
@@ -86,8 +107,10 @@ export class Chat extends Component {
     }
 
     this.setState({busy: true, text: '', messages: [...messages, sent]}, () => {
-      const sessionUserId =
-        option === 'LEX' ? sessionUserIdLex : sessionUserIdFlow
+      let sessionUserId
+      if (option === 'LEX') sessionUserId = sessionUserIdLex
+      else if (option === 'DIALOG_FLOW') sessionUserId = sessionUserIdFlow
+      else if (option === 'WATSON') sessionUserId = sessionUserIdWatson
 
       axios
         .post('/api/bot/message', {text, sessionUserId, option})

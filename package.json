@@ -29,7 +29,7 @@
     "unit-lex": "BOT='LEX' NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" \"./fitbotLambda/**/*.spec.js\" \"./dialogFlowFulfillment/**/*.spec.js\" --require @babel/polyfill --require @babel/register",
     "unit-watson": "BOT='WATSON' NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" \"./fitbotLambda/**/*.spec.js\" \"./dialogFlowFulfillment/**/*.spec.js\" --require @babel/polyfill --require @babel/register",
     "end2end": "NODE_ENV='test' nightwatch",
-    "test": "npm run unit && npm run unit-lex && npm run unit-watson"
+    "test": "npm run unit && npm run unit-lex"
   },
   "lint-staged": {
     "*.{js,jsx}": [

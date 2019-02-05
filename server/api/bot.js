@@ -25,8 +25,7 @@ router.post('/initiate', (req, res, next) => {
       if (err) throw new Error(`Bot initialization failed ${err}`)
       sessionUserId = result.session_id
       const resBot = {
-        type: bot.type,
-        message_: bot.message_
+        type: bot.type
       }
 
       res.json({bot: resBot, sessionUserId})
@@ -35,8 +34,7 @@ router.post('/initiate', (req, res, next) => {
     sessionUserId = bot.initiate(req.user)
     // for security purposes only returns these params.
     const resBot = {
-      type: bot.type,
-      message_: bot.message_
+      type: bot.type
     }
 
     res.json({bot: resBot, sessionUserId})

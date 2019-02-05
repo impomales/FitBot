@@ -1,6 +1,7 @@
 const randomstring = require('randomstring')
 const caloriesRemaining = require('./caloriesRemaining')
 const saveFoodLog = require('./saveFoodLog')
+const {queryFood} = require('../../fitbotWatsonCall')
 
 class Bot {
   constructor(type) {
@@ -158,15 +159,48 @@ function messageWatson(sessionUserId, text, callback) {
       session_id: sessionUserId,
       input: {
         message_type: 'text',
-        text
+        text,
+        options: {
+          return_context: true
+        }
+      },
+      context: {
+        skills: {
+          'main skill': {
+            user_defined: {
+              nutritionInfo: this.nutritionInfo
+            }
+          }
+        }
       }
     },
     callback
   )
 }
 
-function handleWatsonResponse(user, response) {
-  // TODO
+async function handleWatsonResponse(user, response) {
+  const actions =
+    response.output.actions ||
+    (response.output.user_defined && response.output.user_defined.actions)
+  if (actions) {
+    if (actions[0].name === 'queryFood') {
+      const {food, unit, quantity, indefiniteArticle} = actions[0].parameters
+      try {
+        const nutritionInfo = await queryFood(
+          food,
+          unit,
+          quantity,
+          indefiniteArticle
+        )
+        this.nutritionInfo = nutritionInfo.info
+        return nutritionInfo.message
+      } catch (err) {
+        return err
+      }
+    } else if (actions[0].name === 'saveFoodLog') {
+      console.log(actions[0].parameters)
+    }
+  }
   return response.output.generic[0].text
 }
 

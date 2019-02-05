@@ -13,6 +13,10 @@ class Bot {
       this.initiate = initiateDialogFlow
       this.message = messageDialogFlow
       this.handleResponse = handleResponseDialogFlow
+    } else if (type === 'WATSON') {
+      this.initiate = initiateWatson
+      this.message = messageWatson
+      this.handleResponse = handleWatsonResponse
     }
   }
 }
@@ -132,6 +136,38 @@ async function handleResponseDialogFlow(user, response) {
     else return newLog
   }
   return fulfillmentText
+}
+
+// Watson methods
+function initiateWatson(callback) {
+  const watson = require('watson-developer-cloud')
+  this.service = new watson.AssistantV2({
+    url: process.env.WATSON_URL,
+    username: process.env.WATSON_USERNAME,
+    password: process.env.WATSON_PASSWORD,
+    version: process.env.VERSION
+  })
+
+  this.service.createSession({assistant_id: process.env.WATSON_ID}, callback)
+}
+
+function messageWatson(sessionUserId, text, callback) {
+  this.service.message(
+    {
+      assistant_id: process.env.WATSON_ID,
+      session_id: sessionUserId,
+      input: {
+        message_type: 'text',
+        text
+      }
+    },
+    callback
+  )
+}
+
+function handleWatsonResponse(user, response) {
+  // TODO
+  return response.output.generic[0].text
 }
 
 module.exports = Bot

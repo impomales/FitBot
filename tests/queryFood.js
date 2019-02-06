@@ -15,7 +15,7 @@ module.exports = {
     ])
     sendMessage(browser, 'no', [
       'Ok. This item has not been logged.',
-      'Alright, I will not log it.',
+      'Alright, I will not log',
       "OK. I won't log"
     ])
   },
@@ -24,17 +24,24 @@ module.exports = {
       '1 banana has 105.02 calories. Would you like to log this item?'
     ])
 
-    switchBot(browser)
+    let bot = process.env.BOT,
+      other
+    console.log(bot)
+    if (bot === 'WATSON') other = 'LEX'
+    else if (bot === 'LEX') other = 'DIALOG_FLOW'
+    else if (bot === 'DIALOG_FLOW') other = 'WATSON'
+
+    switchBot(browser, other)
 
     sendMessage(browser, 'how many calories are in a banana', [
       '1 banana has 105.02 calories. Would you like to log this item?'
     ])
 
-    switchBot(browser)
+    switchBot(browser, bot)
 
     sendMessage(browser, 'yes', ['when did you have'])
 
-    switchBot(browser)
+    switchBot(browser, other)
 
     sendMessage(browser, 'yes', ['when did you have'])
 

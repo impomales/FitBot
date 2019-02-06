@@ -10,7 +10,6 @@ class ChatHistory extends Component {
 
   render() {
     const {messages} = this.props
-    let messageFlag = 'received'
     let avatar
     return (
       <div id="chat-history">

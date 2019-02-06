@@ -178,10 +178,16 @@ function messageWatson(sessionUserId, text, callback) {
   )
 }
 
-async function handleWatsonResponse(user, response) {
-  const actions =
+function getActions_(response) {
+  return (
     response.output.actions ||
     (response.output.user_defined && response.output.user_defined.actions)
+  )
+}
+
+async function handleWatsonResponse(user, response) {
+  const actions = getActions_(response)
+
   if (actions) {
     if (actions[0].name === 'queryFood') {
       const {food, unit, quantity, indefiniteArticle} = actions[0].parameters
@@ -198,7 +204,22 @@ async function handleWatsonResponse(user, response) {
         return err
       }
     } else if (actions[0].name === 'saveFoodLog') {
-      console.log(actions[0].parameters)
+      const {food, mealTime, unit, nutritionInfo} = actions[0].parameters
+      const {calories, weightInGrams, quantity} = nutritionInfo
+
+      const foodLog = {
+        name: food,
+        quantity,
+        weightInGrams,
+        calories,
+        mealTime,
+        unit
+      }
+
+      const newLog = await saveFoodLog(user, foodLog)
+      if (newLog.name) return caloriesRemaining(user, newLog.name)
+    } else if (actions[0].name === 'caloriesRemaining') {
+      return caloriesRemaining(user)
     }
   }
   return response.output.generic[0].text

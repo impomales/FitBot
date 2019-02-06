@@ -48,7 +48,9 @@ export class Chat extends Component {
           },
           {
             type: 'received',
-            content: `Hello, I am the ${bot.type} Fitbot. How can I help you?`
+            content: `${bot.type.toLowerCase()}: Hello, I am the ${
+              bot.type
+            } Fitbot. How can I help you?`
           }
         ]
         this.setState({

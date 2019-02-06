@@ -18,6 +18,10 @@ nav a {
   margin: 1em;
 }
 
+form {
+  -webkit-appearance: none;
+}
+
 form div {
   margin: 1em;
   display: inline-block;
@@ -161,6 +165,7 @@ select {
 }
 
 .input-field {
+  -webkit-appearance: none;
   background-color: white;
   color: #0070bc;
   font-size: 1.2em;
@@ -229,4 +234,47 @@ select {
 .message i {
   padding-right: 1em;
   font-size: 1.5em;
+}
+
+@media (max-width: 400px) {
+  #navbar {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  #navbar i {
+    display: none;
+  }
+
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .message i {
+    font-size: 0.75em;
+  }
+
+  .message {
+    font-size: 0.75em;
+  }
+
+  #chat-main form {
+    width: 100%;
+  }
+
+  #chat-main .input-field {
+    width: 90%;
+  }
+}
+
+@media (max-width: 700px) {
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 }

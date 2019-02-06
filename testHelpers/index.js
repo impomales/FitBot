@@ -3,7 +3,8 @@ const responsesToHi = [
   'Greetings, I am Fitbot! How can I assist?',
   'Good day! I am Fitbot. What can I do for you today?',
   'Hello! How can I help you?',
-  'Hi! How are you doing?'
+  'Hi! How are you doing?',
+  'Hello, I am your assistant Fitbot. How can I help you?'
 ]
 
 module.exports = {
@@ -24,7 +25,7 @@ module.exports = {
       .waitForElementVisible('#chat-main', 1000)
       .setValue('.input-field', message)
       .submitForm('#chat-main form')
-      .pause(1500)
+      .pause(2000)
       .getText('#chat-history li:last-child', element => {
         browser
           .expect(
@@ -35,16 +36,11 @@ module.exports = {
           .to.equal(true)
       })
   },
-  switchBot: function(browser) {
+  switchBot: function(browser, value) {
     browser
       .click('select[name=option]')
-      .click('option:not(:checked)')
-      .pause(1500)
-      .getText('#chat-history li:last-child', element => {
-        browser
-          .expect(element.value.includes('You are now chatting'))
-          .to.equal(true)
-      })
+      .click(`option[value=${value}]`)
+      .pause(2000)
   },
   responsesToHi
 }

@@ -28,7 +28,9 @@
     "unit": "BOT='DIALOG_FLOW' NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" \"./fitbotLambda/**/*.spec.js\" \"./dialogFlowFulfillment/**/*.spec.js\" --require @babel/polyfill --require @babel/register",
     "unit-lex": "BOT='LEX' NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" \"./fitbotLambda/**/*.spec.js\" \"./dialogFlowFulfillment/**/*.spec.js\" --require @babel/polyfill --require @babel/register",
     "unit-watson": "BOT='WATSON' NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" \"./fitbotLambda/**/*.spec.js\" \"./dialogFlowFulfillment/**/*.spec.js\" --require @babel/polyfill --require @babel/register",
-    "end2end": "NODE_ENV='test' nightwatch",
+    "end2end-watson": "NODE_ENV='test' BOT='WATSON' nightwatch",
+    "end2end-lex": "NODE_ENV='test' BOT='LEX' nightwatch",
+    "end2end-dialog-flow": "NODE_ENV='test' BOT='DIALOG_FLOW' nightwatch",
     "test": "npm run unit && npm run unit-lex"
   },
   "lint-staged": {

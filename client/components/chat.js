@@ -41,16 +41,22 @@ export class Chat extends Component {
         sessionUserIdWatson =
           bot.type === 'WATSON' ? sessionUserId : sessionUserIdWatson
 
-        const message = {
-          type: 'status',
-          content: `You are now chatting with ${bot.type}`
-        }
+        const initMessages = [
+          {
+            type: 'status',
+            content: `You are now chatting with ${bot.type}`
+          },
+          {
+            type: 'received',
+            content: `Hello, I am the ${bot.type} Fitbot. How can I help you?`
+          }
+        ]
         this.setState({
           option: bot.type,
           sessionUserIdLex,
           sessionUserIdFlow,
           sessionUserIdWatson,
-          messages: [...messages, message]
+          messages: [...messages, ...initMessages]
         })
       })
       .catch(err => console.error(err))

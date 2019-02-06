@@ -11,6 +11,9 @@ notifications:
   email:
     on_success: change
     on_failure: always
+branches:
+  only:
+    - master
 install:
 - npm ci
 before_script:

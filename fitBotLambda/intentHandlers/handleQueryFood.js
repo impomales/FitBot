@@ -7,12 +7,28 @@ const {
   close
 } = require('../responseHandlers')
 
-// helper functions
+/**
+ * builds a query string that will be sent to external api
+ * @function
+ * @private
+ * @param {String} food name of food item
+ * @param {Number} quantity food quantity
+ * @param {String} [unit] unit of measure
+ * @returns {String} query string
+ */
 function buildFoodQuery(food, quantity, unit) {
   if (unit) return `${quantity} ${pluralize(unit, quantity)} of ${food}`
   else return `${quantity} ${pluralize(food, quantity)}`
 }
 
+/**
+ * builds a result string to send back to user
+ * @function
+ * @private
+ * @param {Object} nutritionInfo object received from external api
+ * @param {String} unit handles string differently if unit exist
+ * @returns {String} result string
+ */
 function buildFoodQueryResult(nutritionInfo, unit) {
   const {
     serving_qty,
@@ -38,6 +54,14 @@ function buildFoodQueryResult(nutritionInfo, unit) {
   )} ${possessVerb} ${nf_calories} calories.`
 }
 
+/**
+ * calls external api to get nutrition info
+ * @function
+ * @param {String} query string created using buildFoodQuery
+ * @param {Function} success success handler
+ * @param {Function} failure failure handler
+ * @returns {Object} nutrition info object
+ */
 function getNutritionInfo(query, success, failure) {
   return axios
     .post(

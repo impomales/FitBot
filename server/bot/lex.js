@@ -3,6 +3,12 @@ const randomstring = require('randomstring')
 const caloriesRemaining = require('./caloriesRemaining')
 const saveFoodLog = require('./saveFoodLog')
 
+/**
+ * initiates the lex service
+ * @function
+ * @param {*} user currently logged in user
+ * @returns {string} session id
+ */
 function initiateLex(user) {
   this.service = new aws.LexRuntime({
     region: 'us-east-1',

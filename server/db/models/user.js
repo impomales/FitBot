@@ -54,16 +54,10 @@ const User = db.define('user', {
 
 module.exports = User
 
-/**
- * instanceMethods
- */
 User.prototype.correctPassword = function(candidatePwd) {
   return User.encryptPassword(candidatePwd, this.salt()) === this.password()
 }
 
-/**
- * classMethods
- */
 User.generateSalt = function() {
   return crypto.randomBytes(16).toString('base64')
 }
@@ -76,9 +70,6 @@ User.encryptPassword = function(plainText, salt) {
     .digest('hex')
 }
 
-/**
- * hooks
- */
 const setSaltAndPassword = user => {
   if (user.changed('password')) {
     user.salt = User.generateSalt()

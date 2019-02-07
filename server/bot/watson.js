@@ -3,6 +3,12 @@ const caloriesRemaining = require('./caloriesRemaining')
 const saveFoodLog = require('./saveFoodLog')
 const {queryFood} = require('../../fitbotWatsonCall')
 
+/**
+ * initiates the watson service
+ * @function
+ * @param {function} callback
+ * @returns {undefined} does not return, session id is handled within callback
+ */
 function initiateWatson(callback) {
   this.service = new watson.AssistantV2({
     url: process.env.WATSON_URL,

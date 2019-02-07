@@ -136,18 +136,21 @@ Use this file for the README.md in the project, placing whatever you think is im
   * [Parameters](#parameters-1)
 * [handleResponseDialogFlow](#handleresponsedialogflow)
   * [Parameters](#parameters-2)
-* [initiateLex](#initiatelex)
+* [Bot](#bot)
   * [Parameters](#parameters-3)
-* [messageLex](#messagelex)
+  * [Properties](#properties)
+* [initiateLex](#initiatelex)
   * [Parameters](#parameters-4)
-* [handleResponseLex](#handleresponselex)
+* [messageLex](#messagelex)
   * [Parameters](#parameters-5)
-* [initiateWatson](#initiatewatson)
+* [handleResponseLex](#handleresponselex)
   * [Parameters](#parameters-6)
-* [messageWatson](#messagewatson)
+* [initiateWatson](#initiatewatson)
   * [Parameters](#parameters-7)
-* [handleResponseWatson](#handleresponsewatson)
+* [messageWatson](#messagewatson)
   * [Parameters](#parameters-8)
+* [handleResponseWatson](#handleresponsewatson)
+  * [Parameters](#parameters-9)
 
 ### initiateDialogFlow
 
@@ -181,7 +184,24 @@ handles bot response depending on intent name and if all requeired params are pr
   * `response.fulfillmentText` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** default response sent from dialog flow
   * `response.allRequiredParamsPresent` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** true if all required params are present for fulfillment
   * `response.intent` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** contains info about current intent
-  * `response.parameters` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** contains parameters from obtained through slot filling
+  * `response.parameters` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** contains parameters obtained through slot filling
+  * `response.outputContexts` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** contains parameters within contexts persisted throughout the conversation
+
+Returns **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** response message to user
+
+### Bot
+
+bot object client interacts with.
+
+#### Parameters
+
+* `type` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** identifies the bot service (Lex, Watson, or DialogFlow)
+
+#### Properties
+
+* `initiate` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)** creates a new service instance, returns a session id
+* `message` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)** sends a user input, callback returns a response to user
+* `handleResponse` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)** handles intent fulfillment, this is called within the callback of this.message
 
 ### initiateLex
 

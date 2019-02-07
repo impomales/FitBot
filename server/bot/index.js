@@ -11,7 +11,18 @@ const {
   handleResponseWatson
 } = require('./watson')
 
+/**
+ * bot object client interacts with.
+ * @class
+ * @property {Function} initiate creates a new service instance, returns a session id
+ * @property {Function} message sends a user input, callback returns a response to user
+ * @property {Function} handleResponse handles intent fulfillment, this is called within the callback of this.message
+ */
 class Bot {
+  /**
+   * creates a bot based on type param
+   * @param {String} type identifies the bot service (Lex, Watson, or DialogFlow)
+   */
   constructor(type) {
     this.type = type
     if (type === 'LEX') {

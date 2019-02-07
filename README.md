@@ -145,12 +145,14 @@ Use this file for the README.md in the project, placing whatever you think is im
   * [Parameters](#parameters-5)
 * [handleResponseLex](#handleresponselex)
   * [Parameters](#parameters-6)
-* [initiateWatson](#initiatewatson)
+* [saveFoodLog](#savefoodlog)
   * [Parameters](#parameters-7)
-* [messageWatson](#messagewatson)
+* [initiateWatson](#initiatewatson)
   * [Parameters](#parameters-8)
-* [handleResponseWatson](#handleresponsewatson)
+* [messageWatson](#messagewatson)
   * [Parameters](#parameters-9)
+* [handleResponseWatson](#handleresponsewatson)
+  * [Parameters](#parameters-10)
 
 ### initiateDialogFlow
 
@@ -240,6 +242,17 @@ handles bot response depending on intent fulfillment
   * `response.slots` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** contains parameters needed to fulfill intent
 
 Returns **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** response message to user
+
+### saveFoodLog
+
+saves a food log to the database
+
+#### Parameters
+
+* `user` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** user associated with the food log
+* `foodLog` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** object with required properties
+
+Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** saved foodLog returned from database
 
 ### initiateWatson
 

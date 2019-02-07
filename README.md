@@ -130,29 +130,55 @@ Use this file for the README.md in the project, placing whatever you think is im
 
 #### Table of Contents
 
-* [initiateDialogFlow](#initiatedialogflow)
+* [buildCaloriesStatus](#buildcaloriesstatus)
   * [Parameters](#parameters)
-* [messageDialogFlow](#messagedialogflow)
+* [caloriesRemaining](#caloriesremaining)
   * [Parameters](#parameters-1)
-* [handleResponseDialogFlow](#handleresponsedialogflow)
+* [initiateDialogFlow](#initiatedialogflow)
   * [Parameters](#parameters-2)
-* [Bot](#bot)
+* [messageDialogFlow](#messagedialogflow)
   * [Parameters](#parameters-3)
+* [handleResponseDialogFlow](#handleresponsedialogflow)
+  * [Parameters](#parameters-4)
+* [Bot](#bot)
+  * [Parameters](#parameters-5)
   * [Properties](#properties)
 * [initiateLex](#initiatelex)
-  * [Parameters](#parameters-4)
-* [messageLex](#messagelex)
-  * [Parameters](#parameters-5)
-* [handleResponseLex](#handleresponselex)
   * [Parameters](#parameters-6)
-* [saveFoodLog](#savefoodlog)
+* [messageLex](#messagelex)
   * [Parameters](#parameters-7)
-* [initiateWatson](#initiatewatson)
+* [handleResponseLex](#handleresponselex)
   * [Parameters](#parameters-8)
-* [messageWatson](#messagewatson)
+* [saveFoodLog](#savefoodlog)
   * [Parameters](#parameters-9)
-* [handleResponseWatson](#handleresponsewatson)
+* [initiateWatson](#initiatewatson)
   * [Parameters](#parameters-10)
+* [messageWatson](#messagewatson)
+  * [Parameters](#parameters-11)
+* [handleResponseWatson](#handleresponsewatson)
+  * [Parameters](#parameters-12)
+
+### buildCaloriesStatus
+
+Creates a response depending on whether a user is over or under their caloric goal
+
+#### Parameters
+
+* `dailyGoals` **[Number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** number of calories allowed per day for user
+* `calories` **[Number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** number of user's actual calories
+
+Returns **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** conditional response string dependant on net calories
+
+### caloriesRemaining
+
+Gets user's foodlogs by today's date. Calculates net calories and returns a response message based on the result.
+
+#### Parameters
+
+* `user` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** current user
+* `foodName` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** food name is included when this function is called immediately after logging an item.
+
+Returns **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** resultant response to user
 
 ### initiateDialogFlow
 

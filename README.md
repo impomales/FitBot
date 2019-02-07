@@ -65,10 +65,10 @@ A more practical (preferred) example could be an internal app to help book a con
 
 * UI build in framework of your choosing
 * Chat input with scrollable chat history
-  * Dynamic response nodes that may include:
-    * Customs styles
-    * External links
-    * Link Previews
+* Dynamic response nodes that may include:
+* Customs styles
+* External links
+* Link Previews
 * Generated Documenation using library of your choice
 * Login with User Authentication
 * Build chatbot using minimally 2 AI platforms (Watson Assistant and Amazon Lex)
@@ -130,18 +130,58 @@ Use this file for the README.md in the project, placing whatever you think is im
 
 #### Table of Contents
 
-* [initiateLex](#initiatelex)
+* [initiateDialogFlow](#initiatedialogflow)
   * [Parameters](#parameters)
-* [messageLex](#messagelex)
+* [messageDialogFlow](#messagedialogflow)
   * [Parameters](#parameters-1)
-* [handleResponseLex](#handleresponselex)
+* [handleResponseDialogFlow](#handleresponsedialogflow)
   * [Parameters](#parameters-2)
-* [initiateWatson](#initiatewatson)
+* [initiateLex](#initiatelex)
   * [Parameters](#parameters-3)
-* [messageWatson](#messagewatson)
+* [messageLex](#messagelex)
   * [Parameters](#parameters-4)
-* [handleResponseWatson](#handleresponsewatson)
+* [handleResponseLex](#handleresponselex)
   * [Parameters](#parameters-5)
+* [initiateWatson](#initiatewatson)
+  * [Parameters](#parameters-6)
+* [messageWatson](#messagewatson)
+  * [Parameters](#parameters-7)
+* [handleResponseWatson](#handleresponsewatson)
+  * [Parameters](#parameters-8)
+
+### initiateDialogFlow
+
+initiates the dialog flow bot
+
+#### Parameters
+
+* `user` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** currently logged in user
+  * `user.id` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** user id
+
+Returns **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** session id
+
+### messageDialogFlow
+
+sends user input to Dialog Flow
+
+#### Parameters
+
+* `sessionUserId` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** id used to reference current session with user
+* `text` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** input text user is sending
+* `callback` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)** function that handles error, or sends response back to user
+
+### handleResponseDialogFlow
+
+handles bot response depending on intent name and if all requeired params are present
+
+#### Parameters
+
+* `user` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** currently logged in user
+* `response` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** object received from dialog flow
+  * `response.fulfillmentText` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** default response sent from dialog flow
+  * `response.allRequiredParamsPresent` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** true if all required params are present for fulfillment
+  * `response.intent` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** contains info about current intent
+  * `response.parameters` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** contains parameters from obtained through slot filling
 
 ### initiateLex
 

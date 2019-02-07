@@ -3,6 +3,13 @@ const randomstring = require('randomstring')
 const caloriesRemaining = require('./caloriesRemaining')
 const saveFoodLog = require('./saveFoodLog')
 
+/**
+ * initiates the dialog flow bot
+ * @function
+ * @param {Object}  user currently logged in user
+ * @param {String}  user.id user id
+ * @returns {String} session id
+ */
 function initiateDialogFlow(user) {
   const sessionId = `${user.id}-${randomstring.generate()}`
 
@@ -10,6 +17,13 @@ function initiateDialogFlow(user) {
   return this.service.sessionPath(process.env.PROJECT_ID, sessionId)
 }
 
+/**
+ * sends user input to Dialog Flow
+ * @function
+ * @param {String}      sessionUserId id used to reference current session with user
+ * @param {String}      text input text user is sending
+ * @param {Function}    callback function that handles error, or sends response back to user
+ */
 function messageDialogFlow(sessionUserId, text, callback) {
   this.service
     .detectIntent({
@@ -27,6 +41,19 @@ function messageDialogFlow(sessionUserId, text, callback) {
     .catch(err => callback(err))
 }
 
+/**
+ * handles bot response depending on intent name and if all requeired params are present
+ * @function
+ * @param {Object}  user currently logged in user
+ * @param {Object}  response object received from dialog flow
+ * @param {String}  response.fulfillmentText default response sent from dialog flow
+ * @param {Boolean} response.allRequiredParamsPresent true if all required params are present for fulfillment
+ * @param {Object}  response.intent contains info about current intent
+ * @param {String}  respons.intent.displayName name of current intent
+ * @param {Object}  response.parameters contains parameters obtained through slot filling
+ * @param {Object}  response.outputContexts contains parameters within contexts persisted throughout the conversation
+ * @returns {String} response message to user
+ */
 async function handleResponseDialogFlow(user, response) {
   const {
     intent,

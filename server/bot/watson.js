@@ -21,9 +21,10 @@ function initiateWatson(callback) {
 
 /**
  * sends user input to Watson
- * @param {String} sessionUserId id used to reference current session with user
- * @param {String} text input text user is sendng
- * @param {Function} callback function that handles error, or sends response back to user
+ * @function
+ * @param {String}      sessionUserId id used to reference current session with user
+ * @param {String}      text input text user is sendng
+ * @param {Function}    callback function that handles error, or sends response back to user
  */
 function messageWatson(sessionUserId, text, callback) {
   this.service.message(
@@ -56,6 +57,7 @@ function messageWatson(sessionUserId, text, callback) {
 /**
  * returns actions object, it can be either default of user defined
  * @private
+ * @function
  * @param {Object} response
  * @returns {Object[]} an actions array used to trigger a programmatic call
  */
@@ -68,6 +70,7 @@ function getActions_(response) {
 
 /**
  * handles bot response depending on action object
+ * @function
  * @param {Object} user currently logged in user
  * @param {String} user.id user id
  * @param {Object} response object received from watson, contains action parameters needed to handle action

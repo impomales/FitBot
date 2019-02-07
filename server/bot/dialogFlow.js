@@ -79,9 +79,13 @@ async function handleResponseDialogFlow(user, response) {
     foodLog.weightInGrams = contextFields.weightInGrams.numberValue
     foodLog.calories = contextFields.calories.numberValue
     foodLog.mealTime = parameters.fields.mealTime.stringValue
-    const newLog = await saveFoodLog(user, foodLog)
-    if (newLog.name) return caloriesRemaining(user, newLog.name)
-    else return newLog
+    try {
+      const newLog = await saveFoodLog(user, foodLog)
+      if (newLog.name) return caloriesRemaining(user, newLog.name)
+      else return newLog
+    } catch (err) {
+      return err
+    }
   }
   return fulfillmentText
 }

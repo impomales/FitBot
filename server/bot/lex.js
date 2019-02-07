@@ -43,6 +43,20 @@ function messageLex(sessionUserId, text, callback) {
 }
 
 /**
+ * evaluates condition to handle caloriesRemaining fulfillment
+ * @function
+ * @private
+ * @param {@function} intentName
+ * @param {*} dialogState
+ */
+function caloriesRemainingFulfilled(intentName, dialogState) {
+  return (
+    intentName === 'CaloriesRemaining' &&
+    (dialogState === 'ReadyForFulfillment' || dialogState === 'Fulfilled')
+  )
+}
+
+/**
  * handles bot response depending on intent fulfillment
  * @function
  * @param {Object} user currently logged in user
@@ -57,10 +71,7 @@ function messageLex(sessionUserId, text, callback) {
  */
 async function handleResponseLex(user, response) {
   const {intentName, slots, sessionAttributes, dialogState, message} = response
-  if (
-    intentName === 'CaloriesRemaining' &&
-    (dialogState === 'ReadyForFulfillment' || dialogState === 'Fulfilled')
-  ) {
+  if (caloriesRemainingFulfilled(intentName, dialogState)) {
     const foodName = sessionAttributes.foodName
     return caloriesRemaining(user, foodName)
   } else if (intentName === 'LogFood') {
@@ -74,9 +85,13 @@ async function handleResponseLex(user, response) {
         calories: slots.Calories,
         weightInGrams: slots.WeightInGrams
       }
-      const newLog = await saveFoodLog(user, foodLog)
-      if (newLog.name) return caloriesRemaining(user, newLog.name)
-      else return newLog
+      try {
+        const newLog = await saveFoodLog(user, foodLog)
+        if (newLog.name) return caloriesRemaining(user, newLog.name)
+        else return newLog
+      } catch (err) {
+        return err
+      }
     }
   }
 

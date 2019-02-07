@@ -6,8 +6,8 @@ const {queryFood} = require('../../fitbotWatsonCall')
 /**
  * initiates the watson service
  * @function
- * @param {function} callback
- * @returns {undefined} does not return, session id is handled within callback
+ * @param {Function} callback
+ * @returns {Undefined} does not return, session id is handled within callback
  */
 function initiateWatson(callback) {
   this.service = new watson.AssistantV2({

@@ -134,8 +134,10 @@ Use this file for the README.md in the project, placing whatever you think is im
   * [Parameters](#parameters)
 * [messageLex](#messagelex)
   * [Parameters](#parameters-1)
-* [initiateWatson](#initiatewatson)
+* [handleResponseLex](#handleresponselex)
   * [Parameters](#parameters-2)
+* [initiateWatson](#initiatewatson)
+  * [Parameters](#parameters-3)
 
 ### initiateLex
 
@@ -144,6 +146,7 @@ initiates the lex service
 #### Parameters
 
 * `user` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** currently logged in user
+  * `user.id` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** user id
 
 Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** session id
 
@@ -153,9 +156,28 @@ sends user input to Lex
 
 #### Parameters
 
-* `sessionUserId` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** id used to reference current session with user
-* `text` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** input text user is sending
-* `callback` **funtion** function that handles error, or sends response back to user
+* `sessionUserId` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** id used to reference current session with user
+* `text` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** input text user is sending
+* `callback` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)** function that handles error, or sends response back to user
+
+Returns **[Undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined)**
+
+### handleResponseLex
+
+handles bot response depending on intent fulfillment
+
+#### Parameters
+
+* `user` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** currently logged in user
+  * `user.id` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** user id
+* `response` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)**
+  * `response.intentName` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** identifies intent to be handled
+  * `response.dialogState` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** used to determine if intent is ready for fulfillment
+  * `response.sessionAttributes` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** attributes that can persist throughout a conversation
+    * `response.sessionAttributes.foodName` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** if defined, will be part of caloriesRemaining result string
+  * `response.slots` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** contains parameters needed to fulfill intent
+
+Returns **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** response message to user
 
 ### initiateWatson
 
@@ -163,9 +185,9 @@ initiates the watson service
 
 #### Parameters
 
-* `callback` **[function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)**
+* `callback` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)**
 
-Returns **[undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined)** does not return, session id is handled within callback
+Returns **[Undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined)** does not return, session id is handled within callback
 
 ## FULFILLMENT HANDLERS
 

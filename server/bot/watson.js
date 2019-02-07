@@ -6,8 +6,7 @@ const {queryFood} = require('../../fitbotWatsonCall')
 /**
  * initiates the watson service
  * @function
- * @param {Function} callback
- * @returns {Undefined} does not return, session id is handled within callback
+ * @param {Function} callback sends session id back to user
  */
 function initiateWatson(callback) {
   this.service = new watson.AssistantV2({
@@ -20,6 +19,12 @@ function initiateWatson(callback) {
   this.service.createSession({assistant_id: process.env.WATSON_ID}, callback)
 }
 
+/**
+ * sends user input to Watson
+ * @param {String} sessionUserId id used to reference current session with user
+ * @param {String} text input text user is sendng
+ * @param {Function} callback function that handles error, or sends response back to user
+ */
 function messageWatson(sessionUserId, text, callback) {
   this.service.message(
     {
@@ -32,6 +37,8 @@ function messageWatson(sessionUserId, text, callback) {
           return_context: true
         }
       },
+      // data that will persist throughout conversation.
+      // I store nutritionInfo to use later when user wants to log food item.
       context: {
         skills: {
           'main skill': {
@@ -46,6 +53,12 @@ function messageWatson(sessionUserId, text, callback) {
   )
 }
 
+/**
+ * returns actions object, it can be either default of user defined
+ * @private
+ * @param {Object} response
+ * @returns {Object[]} an actions array used to trigger a programmatic call
+ */
 function getActions_(response) {
   return (
     response.output.actions ||
@@ -53,6 +66,13 @@ function getActions_(response) {
   )
 }
 
+/**
+ * handles bot response depending on action object
+ * @param {Object} user currently logged in user
+ * @param {String} user.id user id
+ * @param {Object} response object received from watson, contains action parameters needed to handle action
+ * @returns {String} response message to user
+ */
 async function handleResponseWatson(user, response) {
   const actions = getActions_(response)
 

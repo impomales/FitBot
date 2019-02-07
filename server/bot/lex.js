@@ -26,7 +26,6 @@ function initiateLex(user) {
  * @param {String} sessionUserId id used to reference current session with user
  * @param {String} text input text user is sending
  * @param {Function} callback function that handles error, or sends response back to user
- * @returns {Undefined}
  */
 function messageLex(sessionUserId, text, callback) {
   this.service.postText(
@@ -48,7 +47,7 @@ function messageLex(sessionUserId, text, callback) {
  * @function
  * @param {Object} user currently logged in user
  * @param {String} user.id user id
- * @param {Object} response
+ * @param {Object} response object received from lex
  * @param {String} response.intentName identifies intent to be handled
  * @param {String} response.dialogState used to determine if intent is ready for fulfillment
  * @param {Object} response.sessionAttributes attributes that can persist throughout a conversation

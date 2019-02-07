@@ -138,6 +138,10 @@ Use this file for the README.md in the project, placing whatever you think is im
   * [Parameters](#parameters-2)
 * [initiateWatson](#initiatewatson)
   * [Parameters](#parameters-3)
+* [messageWatson](#messagewatson)
+  * [Parameters](#parameters-4)
+* [handleResponseWatson](#handleresponsewatson)
+  * [Parameters](#parameters-5)
 
 ### initiateLex
 
@@ -148,7 +152,7 @@ initiates the lex service
 * `user` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** currently logged in user
   * `user.id` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** user id
 
-Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** session id
+Returns **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** session id
 
 ### messageLex
 
@@ -160,8 +164,6 @@ sends user input to Lex
 * `text` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** input text user is sending
 * `callback` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)** function that handles error, or sends response back to user
 
-Returns **[Undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined)**
-
 ### handleResponseLex
 
 handles bot response depending on intent fulfillment
@@ -170,7 +172,7 @@ handles bot response depending on intent fulfillment
 
 * `user` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** currently logged in user
   * `user.id` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** user id
-* `response` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)**
+* `response` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** object received from lex
   * `response.intentName` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** identifies intent to be handled
   * `response.dialogState` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** used to determine if intent is ready for fulfillment
   * `response.sessionAttributes` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** attributes that can persist throughout a conversation
@@ -185,9 +187,29 @@ initiates the watson service
 
 #### Parameters
 
-* `callback` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)**
+* `callback` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)** sends session id back to user
 
-Returns **[Undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined)** does not return, session id is handled within callback
+### messageWatson
+
+sends user input to Watson
+
+#### Parameters
+
+* `sessionUserId` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** id used to reference current session with user
+* `text` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** input text user is sendng
+* `callback` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)** function that handles error, or sends response back to user
+
+### handleResponseWatson
+
+handles bot response depending on action object
+
+#### Parameters
+
+* `user` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** currently logged in user
+  * `user.id` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** user id
+* `response` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** object received from watson, contains action parameters needed to handle action
+
+Returns **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** response message to user
 
 ## FULFILLMENT HANDLERS
 

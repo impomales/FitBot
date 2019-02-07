@@ -6,7 +6,7 @@ const saveFoodLog = require('./saveFoodLog')
 /**
  * initiates the lex service
  * @function
- * @param {*} user currently logged in user
+ * @param {Object} user currently logged in user
  * @returns {string} session id
  */
 function initiateLex(user) {
@@ -19,6 +19,13 @@ function initiateLex(user) {
   return `${user.id}-${randomstring.generate()}`
 }
 
+/**
+ * sends user input to Lex
+ * @function
+ * @param {string} sessionUserId id used to reference current session with user
+ * @param {string} text input text user is sending
+ * @param {funtion} callback function that handles error, or sends response back to user
+ */
 function messageLex(sessionUserId, text, callback) {
   this.service.postText(
     {

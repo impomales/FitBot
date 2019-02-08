@@ -1,3 +1,4 @@
+// doesn't expect anything from user
 function close(sessionAttributes, fulfillmentState, message) {
   return {
     sessionAttributes,
@@ -12,6 +13,7 @@ function close(sessionAttributes, fulfillmentState, message) {
   }
 }
 
+// expects next input to contain a slot to fill
 function elicitSlot(
   sessionAttributes,
   intentName,
@@ -34,11 +36,12 @@ function elicitSlot(
   }
 }
 
+// expects next input to be an intent utterance
 function elicitIntent(sessionAttributes, message) {
   return {
     sessionAttributes,
     dialogAction: {
-      type: 'ElicitItent',
+      type: 'ElicitIntent',
       message: {
         contentType: 'PlainText',
         content: message
@@ -47,6 +50,7 @@ function elicitIntent(sessionAttributes, message) {
   }
 }
 
+// expects next input to be 'yes' or 'no', can be used to invoke another intent
 function confirmIntent(sessionAttributes, intentName, slots, message) {
   return {
     sessionAttributes,
@@ -62,6 +66,7 @@ function confirmIntent(sessionAttributes, intentName, slots, message) {
   }
 }
 
+// surrenders control back to original bot config defined in console
 function delegate(sessionAttributes, slots) {
   return {
     sessionAttributes,

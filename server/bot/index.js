@@ -1,9 +1,28 @@
-const randomstring = require('randomstring')
-const caloriesRemaining = require('./caloriesRemaining')
-const saveFoodLog = require('./saveFoodLog')
-const {queryFood} = require('../../fitbotWatsonCall')
+const {initiateLex, messageLex, handleResponseLex} = require('./lex')
+const {
+  initiateDialogFlow,
+  messageDialogFlow,
+  handleResponseDialogFlow
+} = require('./dialogFlow')
 
+const {
+  initiateWatson,
+  messageWatson,
+  handleResponseWatson
+} = require('./watson')
+
+/**
+ * bot object client interacts with.
+ * @class
+ * @property {Function} initiate creates a new service instance, returns a session id
+ * @property {Function} message sends a user input, callback returns a response to user
+ * @property {Function} handleResponse handles intent fulfillment, this is called within the callback of this.message
+ */
 class Bot {
+  /**
+   * creates a bot based on type param
+   * @param {String} type identifies the bot service (Lex, Watson, or DialogFlow)
+   */
   constructor(type) {
     this.type = type
     if (type === 'LEX') {
@@ -17,212 +36,9 @@ class Bot {
     } else if (type === 'WATSON') {
       this.initiate = initiateWatson
       this.message = messageWatson
-      this.handleResponse = handleWatsonResponse
+      this.handleResponse = handleResponseWatson
     }
   }
-}
-
-// Lex methods
-
-function initiateLex(user) {
-  const aws = require('aws-sdk')
-
-  this.service = new aws.LexRuntime({
-    region: 'us-east-1',
-    accessKeyId: process.env.AWS_ACCESS_KEY,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
-  })
-
-  return `${user.id}-${randomstring.generate()}`
-}
-
-function messageLex(sessionUserId, text, callback) {
-  this.service.postText(
-    {
-      botAlias: process.env.BOT_ALIAS,
-      botName: process.env.BOT_NAME,
-      userId: sessionUserId,
-      inputText: text,
-      sessionAttributes: {
-        userId: sessionUserId.split('-')[0]
-        // enter user data here, calorie goals, currentCalories, weight, etc.
-      }
-    },
-    callback
-  )
-}
-
-async function handleResponseLex(user, response) {
-  const {intentName, slots, sessionAttributes, dialogState, message} = response
-  if (
-    intentName === 'CaloriesRemaining' &&
-    (dialogState === 'ReadyForFulfillment' || dialogState === 'Fulfilled')
-  ) {
-    const foodName = sessionAttributes.foodName
-    return caloriesRemaining(user, foodName)
-  } else if (intentName === 'LogFood') {
-    if (dialogState === 'Fulfilled') return message
-    else if (dialogState === 'ReadyForFulfillment') {
-      const foodLog = {
-        name: slots.FoodLogName,
-        quantity: slots.FoodLogQuantity,
-        unit: slots.FoodLogUnit,
-        mealTime: slots.MealTime,
-        calories: slots.Calories,
-        weightInGrams: slots.WeightInGrams
-      }
-      const newLog = await saveFoodLog(user, foodLog)
-      if (newLog.name) return caloriesRemaining(user, newLog.name)
-      else return newLog
-    }
-  }
-
-  return message
-}
-
-// Dialogflow methods
-
-function initiateDialogFlow(user) {
-  const dialogflow = require('dialogflow')
-  const sessionId = `${user.id}-${randomstring.generate()}`
-
-  this.service = new dialogflow.SessionsClient()
-  return this.service.sessionPath(process.env.PROJECT_ID, sessionId)
-}
-
-function messageDialogFlow(sessionUserId, text, callback) {
-  this.service
-    .detectIntent({
-      session: sessionUserId,
-      queryInput: {
-        text: {
-          text,
-          languageCode: 'en-US'
-        }
-      }
-    })
-    .then(responses => {
-      callback(null, responses[0].queryResult)
-    })
-    .catch(err => callback(err))
-}
-
-async function handleResponseDialogFlow(user, response) {
-  const {
-    intent,
-    parameters,
-    allRequiredParamsPresent,
-    fulfillmentText,
-    outputContexts
-  } = response
-  if (intent.displayName === 'Status' && allRequiredParamsPresent) {
-    const foodName = parameters.fields.foodName.stringValue
-    return caloriesRemaining(user, foodName)
-  }
-
-  if (
-    intent.displayName === 'QueryFood - log-yes' &&
-    allRequiredParamsPresent
-  ) {
-    const foodLog = {}
-    const contextFields = outputContexts[0].parameters.fields
-    foodLog.name = contextFields.name.stringValue
-    foodLog.unit = contextFields.unit.stringValue
-    foodLog.quantity = contextFields.quantity.numberValue
-    foodLog.weightInGrams = contextFields.weightInGrams.numberValue
-    foodLog.calories = contextFields.calories.numberValue
-    foodLog.mealTime = parameters.fields.mealTime.stringValue
-    const newLog = await saveFoodLog(user, foodLog)
-    if (newLog.name) return caloriesRemaining(user, newLog.name)
-    else return newLog
-  }
-  return fulfillmentText
-}
-
-// Watson methods
-function initiateWatson(callback) {
-  const watson = require('watson-developer-cloud')
-  this.service = new watson.AssistantV2({
-    url: process.env.WATSON_URL,
-    username: process.env.WATSON_USERNAME,
-    password: process.env.WATSON_PASSWORD,
-    version: process.env.VERSION
-  })
-
-  this.service.createSession({assistant_id: process.env.WATSON_ID}, callback)
-}
-
-function messageWatson(sessionUserId, text, callback) {
-  this.service.message(
-    {
-      assistant_id: process.env.WATSON_ID,
-      session_id: sessionUserId,
-      input: {
-        message_type: 'text',
-        text,
-        options: {
-          return_context: true
-        }
-      },
-      context: {
-        skills: {
-          'main skill': {
-            user_defined: {
-              nutritionInfo: this.nutritionInfo
-            }
-          }
-        }
-      }
-    },
-    callback
-  )
-}
-
-function getActions_(response) {
-  return (
-    response.output.actions ||
-    (response.output.user_defined && response.output.user_defined.actions)
-  )
-}
-
-async function handleWatsonResponse(user, response) {
-  const actions = getActions_(response)
-
-  if (actions) {
-    if (actions[0].name === 'queryFood') {
-      const {food, unit, quantity, indefiniteArticle} = actions[0].parameters
-      try {
-        const nutritionInfo = await queryFood(
-          food,
-          unit,
-          quantity,
-          indefiniteArticle
-        )
-        this.nutritionInfo = nutritionInfo.info
-        return nutritionInfo.message
-      } catch (err) {
-        return err
-      }
-    } else if (actions[0].name === 'saveFoodLog') {
-      const {food, mealTime, unit, nutritionInfo} = actions[0].parameters
-      const {calories, weightInGrams, quantity} = nutritionInfo
-
-      const foodLog = {
-        name: food,
-        quantity,
-        weightInGrams,
-        calories,
-        mealTime,
-        unit
-      }
-
-      const newLog = await saveFoodLog(user, foodLog)
-      if (newLog.name) return caloriesRemaining(user, newLog.name)
-    } else if (actions[0].name === 'caloriesRemaining') {
-      return caloriesRemaining(user)
-    }
-  }
-  return response.output.generic[0].text
 }
 
 module.exports = Bot

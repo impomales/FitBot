@@ -7,12 +7,28 @@ const {
   close
 } = require('../responseHandlers')
 
-// helper functions
+/**
+ * builds a query string that will be sent to external api
+ * @function
+ * @private
+ * @param {String} food name of food item
+ * @param {Number} quantity food quantity
+ * @param {String} [unit] unit of measure
+ * @returns {String} query string
+ */
 function buildFoodQuery(food, quantity, unit) {
   if (unit) return `${quantity} ${pluralize(unit, quantity)} of ${food}`
   else return `${quantity} ${pluralize(food, quantity)}`
 }
 
+/**
+ * builds a result string to send back to user
+ * @function
+ * @private
+ * @param {Object} nutritionInfo object received from external api
+ * @param {String} unit handles string differently if unit exist
+ * @returns {String} result string
+ */
 function buildFoodQueryResult(nutritionInfo, unit) {
   const {
     serving_qty,
@@ -38,6 +54,14 @@ function buildFoodQueryResult(nutritionInfo, unit) {
   )} ${possessVerb} ${nf_calories} calories.`
 }
 
+/**
+ * calls external api to get nutrition info
+ * @function
+ * @param {String} query string created using buildFoodQuery
+ * @param {Function} success success handler
+ * @param {Function} failure failure handler
+ * @returns {Object} nutrition info object
+ */
 function getNutritionInfo(query, success, failure) {
   return axios
     .post(
@@ -58,6 +82,15 @@ function getNutritionInfo(query, success, failure) {
     .catch(failure)
 }
 
+/**
+ * handles slot filling and validations
+ * @param {Object} request lambda request object
+ * @param {Object} sessionAttributes attributes that persist throughout a session
+ * @param {Object} currentIntent
+ * @param {Ojbect} currentIntent.slots parameters used for fulfilling intent
+ * @param {String} inputTranscript user input string
+ * @returns {Object} lambda response object
+ */
 function handleDialogCodeHook(request) {
   const {sessionAttributes, inputTranscript, currentIntent} = request
   const slots = currentIntent.slots
@@ -85,6 +118,12 @@ function handleDialogCodeHook(request) {
   return delegate(sessionAttributes, Object.assign(slots, {FoodQueryQuantity}))
 }
 
+/**
+ * handles fulfillment by asking user to confirm log
+ * @function
+ * @param {Object} request lambda request object
+ * @returns {Object} lambda response object
+ */
 function handleFulfillmentCodeHook(request) {
   const {sessionAttributes, currentIntent} = request
   const slots = currentIntent.slots
@@ -120,6 +159,13 @@ function handleFulfillmentCodeHook(request) {
   )
 }
 
+/**
+ * main queryFood intent handler
+ * @function
+ * @param {Object} request
+ * @param {String} request.invocationSource determines whether intent ready for fulfillment or not.
+ * @returns {Object} lambda response object
+ */
 function handleQueryFood(request) {
   if (request.invocationSource === 'DialogCodeHook') {
     return handleDialogCodeHook(request)

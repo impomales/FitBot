@@ -38,7 +38,7 @@ function handleDialogCodeHook(request) {
     )
   }
 
-  if (!Calories) {
+  if (FoodLogName && FoodLogQuantity && !Calories) {
     return getNutritionInfo(
       buildFoodQuery(FoodLogName, Number(FoodLogQuantity), FoodLogUnit),
       nutritionInfo => {

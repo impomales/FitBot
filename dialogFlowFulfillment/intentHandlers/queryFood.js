@@ -6,6 +6,11 @@ const {
   getNutritionInfo
 } = require('../../fitBotLambda/intentHandlers/handleQueryFood')
 
+/**
+ * fulfillment handler for dialog flow
+ * @param {Object} agent dialog flow webhook client
+ * @param {Object} parameters parameters used to fulfill intent
+ */
 function queryFood(agent) {
   let {
     name,

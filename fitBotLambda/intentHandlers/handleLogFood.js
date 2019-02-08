@@ -68,6 +68,7 @@ function handleLogFood(request) {
   const {sessionAttributes, invocationSource, currentIntent} = request
   const {slots, confirmationStatus} = currentIntent
 
+  // does not log if user denies confirmation
   if (confirmationStatus === 'Denied') {
     return close(
       sessionAttributes,
@@ -79,6 +80,8 @@ function handleLogFood(request) {
   if (invocationSource === 'DialogCodeHook') {
     return handleDialogCodeHook(request)
   }
+
+  // fulfillment is handled in node server.
 }
 
 module.exports = {handleLogFood}

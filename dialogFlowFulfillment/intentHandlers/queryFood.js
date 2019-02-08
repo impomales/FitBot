@@ -106,8 +106,8 @@ function queryFoodServingSize(agent) {
         agent.context.set('queryfood-followup', 1, {
           calories: nutritionInfo.foods[0].nf_calories,
           weightInGrams: nutritionInfo.foods[0].serving_weight_grams,
-          quantity,
-          servingUnit
+          quantity: servingQuantity,
+          unit: servingUnit
         })
       },
       err => {

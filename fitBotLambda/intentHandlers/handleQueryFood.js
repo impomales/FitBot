@@ -82,6 +82,15 @@ function getNutritionInfo(query, success, failure) {
     .catch(failure)
 }
 
+/**
+ * handles slot filling and validations
+ * @param {Object} request lambda request object
+ * @param {Object} sessionAttributes attributes that persist throughout a session
+ * @param {Object} currentIntent
+ * @param {Ojbect} currentIntent.slots parameters used for fulfilling intent
+ * @param {String} inputTranscript user input string
+ * @returns {Object} lambda response object
+ */
 function handleDialogCodeHook(request) {
   const {sessionAttributes, inputTranscript, currentIntent} = request
   const slots = currentIntent.slots
@@ -109,6 +118,12 @@ function handleDialogCodeHook(request) {
   return delegate(sessionAttributes, Object.assign(slots, {FoodQueryQuantity}))
 }
 
+/**
+ * handles fulfillment by asking user to confirm log
+ * @function
+ * @param {Object} request lambda request object
+ * @returns {Object} lambda response object
+ */
 function handleFulfillmentCodeHook(request) {
   const {sessionAttributes, currentIntent} = request
   const slots = currentIntent.slots
@@ -144,6 +159,13 @@ function handleFulfillmentCodeHook(request) {
   )
 }
 
+/**
+ * main queryFood intent handler
+ * @function
+ * @param {Object} request
+ * @param {String} request.invocationSource determines whether intent ready for fulfillment or not.
+ * @returns {Object} lambda response object
+ */
 function handleQueryFood(request) {
   if (request.invocationSource === 'DialogCodeHook') {
     return handleDialogCodeHook(request)

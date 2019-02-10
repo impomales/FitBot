@@ -45,7 +45,8 @@ function handleDialogCodeHook(request) {
         return confirmIntent(
           sessionAttributes,
           'LogFood',
-          Object.assign(slots, {
+          Object.assign({}, slots, {
+            FoodLogQuantity: FoodLogQuantity,
             Calories: nutritionInfo.foods[0].nf_calories,
             WeightInGrams: nutritionInfo.foods[0].serving_weight_grams
           }),

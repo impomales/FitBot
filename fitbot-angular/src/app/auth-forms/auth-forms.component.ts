@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core'
+import {ActivatedRoute} from '@angular/router'
 
 @Component({
   selector: 'app-auth-forms',
@@ -6,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./auth-forms.component.css']
 })
 export class AuthFormsComponent implements OnInit {
+  title: string
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
+    this.title = this.route.snapshot.url[0].path
   }
-
 }

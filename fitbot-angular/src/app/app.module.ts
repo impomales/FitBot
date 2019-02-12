@@ -1,12 +1,13 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser'
+import {NgModule} from '@angular/core'
+import {FormsModule} from '@angular/forms'
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { ChatComponent } from './chat/chat.component';
-import { ChatHistoryComponent } from './chat-history/chat-history.component';
-import { AuthFormsComponent } from './auth-forms/auth-forms.component';
+import {AppRoutingModule} from './app-routing.module'
+import {AppComponent} from './app.component'
+import {NavbarComponent} from './navbar/navbar.component'
+import {ChatComponent} from './chat/chat.component'
+import {ChatHistoryComponent} from './chat-history/chat-history.component'
+import {AuthFormsComponent} from './auth-forms/auth-forms.component'
 
 @NgModule({
   declarations: [
@@ -16,11 +17,8 @@ import { AuthFormsComponent } from './auth-forms/auth-forms.component';
     ChatHistoryComponent,
     AuthFormsComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

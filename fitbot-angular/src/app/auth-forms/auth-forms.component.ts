@@ -8,6 +8,7 @@ import {ActivatedRoute} from '@angular/router'
 })
 export class AuthFormsComponent implements OnInit {
   title: string
+  error: string
 
   constructor(private route: ActivatedRoute) {}
 

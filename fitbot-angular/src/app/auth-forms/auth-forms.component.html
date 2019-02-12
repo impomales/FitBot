@@ -1,13 +1,13 @@
 <div class="section">
-  <div class="error"></div>
-  <form class="login-form">
+  <div *ngIf="error" class="error">{{error}}</div>
+  <form class="login-form" name="{{title}}">
     <div>
       <label><small>Email</small></label>
       <input class="input-field" type="text" />
     </div>
     <div>
       <label><small>Password</small></label>
-      <input class="input-field" type="text" />
+      <input class="input-field" type="password" />
     </div>
     <div>
         <button type="submit" className="button">

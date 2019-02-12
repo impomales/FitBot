@@ -1,6 +1,20 @@
 import {Injectable} from '@angular/core'
-import {Observable, of} from 'rxjs'
-import {delay, tap} from 'rxjs/operators'
+import {HttpClient} from '@angular/common/http'
+import {User} from '../user'
+import {Observable} from 'rxjs'
+import {tap} from 'rxjs/operators'
+import {HttpHeaders} from '@angular/common/http'
+import {Router} from '@angular/router'
+import {routerNgProbeToken} from '@angular/router/src/router_module'
+
+const serverUrl = 'https://fitbot-cedrus.herokuapp.com'
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    Authorization: 'my-auth-token'
+  })
+}
 
 @Injectable({
   providedIn: 'root'
@@ -8,14 +22,28 @@ import {delay, tap} from 'rxjs/operators'
 export class AuthService {
   isLoggedIn: boolean = false
   redirectUrl: string
+  user: User
 
-  constructor() {}
+  constructor(private http: HttpClient, private router: Router) {}
 
-  login(): Observable<boolean> {
-    return of(true).pipe(delay(100), tap(val => (this.isLoggedIn = true)))
+  auth(email, password, method): Observable<User> {
+    return this.http
+      .post<User>(`${serverUrl}/auth/${method}`, {email, password}, httpOptions)
+      .pipe(
+        tap(user => {
+          if (user) {
+            this.isLoggedIn = true
+            this.user = new User(user.id, user.email)
+            return user
+          }
+        })
+      )
   }
 
   logout(): void {
-    this.isLoggedIn = false;
+    this.isLoggedIn = false
+    this.user = null
+
+    this.http.post<any>(`${serverUrl}/auth/logout`, {}, httpOptions)
   }
 }

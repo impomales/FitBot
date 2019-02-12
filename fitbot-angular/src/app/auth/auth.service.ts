@@ -5,7 +5,6 @@ import {Observable} from 'rxjs'
 import {tap} from 'rxjs/operators'
 import {HttpHeaders} from '@angular/common/http'
 import {Router} from '@angular/router'
-import {routerNgProbeToken} from '@angular/router/src/router_module'
 
 const serverUrl = 'https://fitbot-cedrus.herokuapp.com'
 

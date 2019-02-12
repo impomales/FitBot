@@ -24,11 +24,11 @@ export class AuthFormsComponent implements OnInit {
   }
 
   handleSubmit() {
-    console.log(this.email, this.password)
     const { email, password } = this
     this.email = ''
     this.password = ''
-    return this.authService.auth(email, password, this.title).subscribe(() => {
+    return this.authService.auth(email, password, this.title).subscribe(user => {
+      console.log(user)
       if (this.authService.isLoggedIn) {
         let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/';
         this.router.navigate([redirect])

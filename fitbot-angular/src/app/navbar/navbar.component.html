@@ -3,11 +3,11 @@
     <i class="fas fa-carrot"></i>
     <a routerLink="/chat"><h1>Fitbot</h1></a>
   </div>
-  <nav *ngIf="!isLoggedIn">
+  <nav *ngIf="!authService.isLoggedIn">
     <a routerLink="/login">Login</a>
     <a routerLink="/signup">Sign Up</a>
   </nav>
-  <nav *ngIf="isLoggedIn">
+  <nav *ngIf="authService.isLoggedIn">
     <a (click)="logout()">Logout</a>
   </nav>
 </div>

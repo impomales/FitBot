@@ -108,7 +108,7 @@ async function handleResponseWatson(user, response) {
       }
       try {
         const newLog = await saveFoodLog(user, foodLog)
-        if (newLog.name) return caloriesRemaining(user, newLog.name)
+        if (newLog.name) return caloriesRemaining(user, newLog)
       } catch (err) {
         return err
       }

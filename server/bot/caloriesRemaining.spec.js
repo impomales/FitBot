@@ -9,7 +9,12 @@ describe('Bot method -- caloriesRemaining', () => {
   })
 
   describe('caloriesRemaining', () => {
-    let user
+    let user,
+      foodLog = {
+        name: 'banana',
+        quantity: 1,
+        unit: 'cup'
+      }
 
     before(async () => {
       user = await User.create({
@@ -17,7 +22,8 @@ describe('Bot method -- caloriesRemaining', () => {
         username: 'Isaias',
         password: '123',
         dailyGoals: 2000,
-        weight: 150
+        weight: 150,
+        mealTime: 'lunch'
       })
     })
 
@@ -31,7 +37,7 @@ describe('Bot method -- caloriesRemaining', () => {
     it('lets you know if a food item has been successfully logged', async () => {
       let res = await caloriesRemaining(user, 'banana')
       expect(res).equal(
-        'Your banana has been logged. You had 0 calories today. You still are 2000 calories away from your daily goal!'
+        'Your 1 cup of banana has been logged as a lunch. You had 0 calories today. You still are 2000 calories away from your daily goal!'
       )
     })
 

@@ -115,7 +115,10 @@ function handleDialogCodeHook(request) {
     )
   }
 
-  return delegate(sessionAttributes, Object.assign(slots, {FoodQueryQuantity}))
+  return delegate(
+    sessionAttributes,
+    Object.assign({}, slots, {FoodQueryQuantity})
+  )
 }
 
 /**

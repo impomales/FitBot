@@ -1,18 +1,30 @@
 <div class="section">
-  <div class="error"></div>
-  <form class="login-form">
+  <div *ngIf="authService.error" class="error">{{ authService.error }}</div>
+  <form #authForm="ngForm" class="login-form" name="{{ title }}" (ngSubmit)="handleSubmit()">
     <div>
       <label><small>Email</small></label>
-      <input class="input-field" type="text" />
+      <input
+        class="input-field"
+        type="text"
+        required
+        [(ngModel)]="email"
+        name="email"
+      />
     </div>
     <div>
       <label><small>Password</small></label>
-      <input class="input-field" type="text" />
+      <input
+        class="input-field"
+        type="password"
+        required
+        [(ngModel)]="password"
+        name="password"
+      />
     </div>
     <div>
-        <button type="submit" className="button">
-          {{title}}
-        </button>
-      </div>
+      <button type="submit" className="button" [disabled]="!authForm.form.valid">
+        {{ title }}
+      </button>
+    </div>
   </form>
 </div>

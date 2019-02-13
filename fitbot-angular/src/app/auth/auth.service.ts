@@ -22,6 +22,7 @@ export class AuthService {
   isLoggedIn: boolean = false
   redirectUrl: string
   user: User
+  error: string
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -29,13 +30,18 @@ export class AuthService {
     return this.http
       .post<User>(`${serverUrl}/auth/${method}`, {email, password}, httpOptions)
       .pipe(
-        tap(user => {
-          if (user) {
+        tap(
+          user => {
             this.isLoggedIn = true
-            this.user = new User(user.id, user.email)
-            return user
+            this.user = user
+            this.error = ''
+          },
+          err => {
+            if (err.status === 401) {
+              this.error = 'Wrong username and/or password'
+            }
           }
-        })
+        )
       )
   }
 

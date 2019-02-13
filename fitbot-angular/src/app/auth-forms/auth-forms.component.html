@@ -1,5 +1,5 @@
 <div class="section">
-  <div *ngIf="error" class="error">{{ error }}</div>
+  <div *ngIf="authService.error" class="error">{{ authService.error }}</div>
   <form #authForm="ngForm" class="login-form" name="{{ title }}" (ngSubmit)="handleSubmit()">
     <div>
       <label><small>Email</small></label>

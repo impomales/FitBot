@@ -9,13 +9,12 @@ import {AuthService} from '../auth/auth.service'
 })
 export class AuthFormsComponent implements OnInit {
   title: string
-  error: string
   email: string
   password: string
 
   constructor(
     private route: ActivatedRoute,
-    private authService: AuthService,
+    public authService: AuthService,
     private router: Router
   ) {}
 

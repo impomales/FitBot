@@ -8,6 +8,6 @@
     <a routerLink="/signup">Sign Up</a>
   </nav>
   <nav *ngIf="authService.isLoggedIn">
-    <a (click)="logout()">Logout</a>
+    <a (click)="logout()" style="cursor: pointer;">Logout</a>
   </nav>
 </div>

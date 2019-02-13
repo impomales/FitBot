@@ -13,7 +13,8 @@ describe('Bot method -- caloriesRemaining', () => {
       foodLog = {
         name: 'banana',
         quantity: 1,
-        unit: 'cup'
+        unit: 'cup',
+        mealTime: 'lunch'
       }
 
     before(async () => {
@@ -22,20 +23,19 @@ describe('Bot method -- caloriesRemaining', () => {
         username: 'Isaias',
         password: '123',
         dailyGoals: 2000,
-        weight: 150,
-        mealTime: 'lunch'
+        weight: 150
       })
     })
 
     it('can get the calories remaining from current user', async () => {
-      let res = await caloriesRemaining(user, '')
+      let res = await caloriesRemaining(user)
       expect(res).equal(
         'You had 0 calories today. You still are 2000 calories away from your daily goal!'
       )
     })
 
     it('lets you know if a food item has been successfully logged', async () => {
-      let res = await caloriesRemaining(user, 'banana')
+      let res = await caloriesRemaining(user, foodLog)
       expect(res).equal(
         'Your 1 cup of banana has been logged as a lunch. You had 0 calories today. You still are 2000 calories away from your daily goal!'
       )
@@ -43,7 +43,7 @@ describe('Bot method -- caloriesRemaining', () => {
 
     it("lets the user know if they've gone over their goals", async () => {
       user.dailyGoals = -2000
-      let res = await caloriesRemaining(user, '')
+      let res = await caloriesRemaining(user)
       expect(res).equal(
         'You had 0 calories today. Uh oh! You went over your daily goals by 2000 calories today! You might want to go to the gym.'
       )

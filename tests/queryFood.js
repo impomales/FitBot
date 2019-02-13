@@ -7,7 +7,7 @@ module.exports = {
       '1 banana has 105.02 calories. Would you like to log this item?'
     ])
     sendMessage(browser, 'yes', ['When did you have banana?'])
-    sendMessage(browser, 'breakfast', ['has been logged.'])
+    sendMessage(browser, 'breakfast', ['has been logged as a'])
   },
   'Querying food, and replying no to confirmation': function(browser) {
     sendMessage(browser, 'how many calories are in  1 cup of rice', [

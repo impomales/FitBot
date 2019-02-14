@@ -35,7 +35,7 @@
     "test": "npm run unit && npm run unit-lex && npm run unit-watson"
   },
   "lint-staged": {
-    "*.{js,jsx}": [
+    "*.{js,jsx,ts}": [
       "prettier --write",
       "npm run lint-fix",
       "git add"

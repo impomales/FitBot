@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core'
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-chat',
@@ -6,10 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit {
+  busy: Boolean = false
 
-  constructor() { }
+  constructor(public authService: AuthService) {}
 
   ngOnInit() {
   }
-
 }

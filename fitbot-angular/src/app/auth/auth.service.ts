@@ -26,7 +26,7 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  auth(email, password, method): Observable<User> {
+  auth(email: string, password: string, method: string): Observable<User> {
     return this.http
       .post<User>(`${serverUrl}/auth/${method}`, {email, password}, httpOptions)
       .pipe(

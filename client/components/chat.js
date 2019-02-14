@@ -139,7 +139,6 @@ export class Chat extends Component {
     const {text, messages, busy} = this.state
     return (
       <div id="chat-main">
-        {/* can add a switch setting later to change bot through UI */}
         <ChatHistory messages={messages} />
         <form onSubmit={this.handleSubmit.bind(this)}>
           <input

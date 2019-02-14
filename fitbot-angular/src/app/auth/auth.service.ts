@@ -4,14 +4,12 @@ import {User} from '../user'
 import {Observable} from 'rxjs'
 import {tap} from 'rxjs/operators'
 import {HttpHeaders} from '@angular/common/http'
-import {Router} from '@angular/router'
 
 const serverUrl = 'https://fitbot-cedrus.herokuapp.com'
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-    Authorization: 'my-auth-token'
+    'Content-Type': 'application/json'
   })
 }
 
@@ -24,7 +22,7 @@ export class AuthService {
   user: User
   error: string
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient) {}
 
   auth(email: string, password: string, method: string): Observable<User> {
     return this.http

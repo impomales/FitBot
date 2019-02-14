@@ -4,10 +4,14 @@
     <a routerLink="/chat"><h1>Fitbot</h1></a>
   </div>
   <nav *ngIf="!authService.isLoggedIn">
-    <a routerLink="/login">Login</a>
-    <a routerLink="/signup">Sign Up</a>
+    <div>
+      <a routerLink="/login" class="navlink">Login</a>
+      <a routerLink="/signup" class="navlink">Sign Up</a>
+    </div>
   </nav>
   <nav *ngIf="authService.isLoggedIn">
-    <a (click)="logout()" style="cursor: pointer;">Logout</a>
+    <div>
+      <a (click)="logout()" class="navlink">Logout</a>
+    </div>
   </nav>
 </div>

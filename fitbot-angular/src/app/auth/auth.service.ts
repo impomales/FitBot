@@ -1,17 +1,12 @@
 import {Injectable} from '@angular/core'
-import {HttpClient} from '@angular/common/http'
+import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http'
 import {User} from '../user'
 import {Observable} from 'rxjs'
 import {tap} from 'rxjs/operators'
-import {HttpHeaders} from '@angular/common/http'
-import {Router} from '@angular/router'
-
-const serverUrl = 'https://fitbot-cedrus.herokuapp.com'
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-    Authorization: 'my-auth-token'
+    'Content-Type': 'application/json'
   })
 }
 
@@ -24,11 +19,22 @@ export class AuthService {
   user: User
   error: string
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient) {}
 
-  auth(email, password, method): Observable<User> {
+  me() {
+    return this.http.get<User>('/auth/me').pipe(
+      tap(user => {
+        if (user) {
+          this.isLoggedIn = true
+          this.user = user
+        }
+      })
+    )
+  }
+
+  auth(email: string, password: string, method: string): Observable<User> {
     return this.http
-      .post<User>(`${serverUrl}/auth/${method}`, {email, password}, httpOptions)
+      .post<User>(`/auth/${method}`, {email, password}, httpOptions)
       .pipe(
         tap(
           user => {
@@ -45,10 +51,9 @@ export class AuthService {
       )
   }
 
-  logout(): void {
+  logout(): Observable<HttpResponse<void>> {
     this.isLoggedIn = false
     this.user = null
-
-    this.http.post<any>(`${serverUrl}/auth/logout`, {}, httpOptions)
+    return this.http.post<void>(`/auth/logout`, {}, {...httpOptions, observe: 'response'})
   }
 }

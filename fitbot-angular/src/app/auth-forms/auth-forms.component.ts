@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core'
 import {ActivatedRoute, Router} from '@angular/router'
 import {AuthService} from '../auth/auth.service'
+import {User} from '../user'
 
 @Component({
   selector: 'app-auth-forms',
@@ -23,15 +24,18 @@ export class AuthFormsComponent implements OnInit {
   }
 
   handleSubmit() {
-    const { email, password } = this
+    const {email, password} = this
     this.email = ''
     this.password = ''
-    return this.authService.auth(email, password, this.title).subscribe(user => {
-      console.log(user)
-      if (this.authService.isLoggedIn) {
-        let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/';
-        this.router.navigate([redirect])
-      }
-    })
+    return this.authService
+      .auth(email, password, this.title)
+      .subscribe((user: User) => {
+        if (this.authService.isLoggedIn) {
+          let redirect = this.authService.redirectUrl
+            ? this.authService.redirectUrl
+            : '/'
+          this.router.navigate([redirect])
+        }
+      })
   }
 }

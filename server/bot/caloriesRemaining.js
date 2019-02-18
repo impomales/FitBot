@@ -1,6 +1,10 @@
 const {FoodLog} = require('../db/models')
 const {Op} = require('sequelize')
 
+const {
+  buildFoodQuery
+} = require('../../fitBotLambda/intentHandlers/handleQueryFood')
+
 /**
  * Creates a response depending on whether a user is over or under their caloric goal
  * @function
@@ -21,12 +25,17 @@ function buildCaloriesStatus(dailyGoals, calories) {
  * Gets user's foodlogs by today's date. Calculates net calories and returns a response message based on the result.
  * @function
  * @param {Object} user current user
- * @param {String} [foodName] food name is included when this function is called immediately after logging an item.
+ * @param {Object} [foodLog] food is included when this function is called immediately after logging an item.
  * @returns {String} resultant response to user
  */
-module.exports = async function caloriesRemaining(user, foodName) {
+module.exports = async function caloriesRemaining(user, foodLog) {
   let message = ''
-  if (foodName) message += `Your ${foodName} has been logged. `
+  if (foodLog)
+    message += `Your ${buildFoodQuery(
+      foodLog.name,
+      foodLog.quantity,
+      foodLog.unit
+    )} has been logged as a ${foodLog.mealTime}. `
 
   // foodLog.createdAt >= today, foodLog.createdAt < tomorrow
   let today = new Date(),

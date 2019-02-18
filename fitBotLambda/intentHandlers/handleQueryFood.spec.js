@@ -87,6 +87,7 @@ describe('Lex -- Handle Query Food', () => {
     // test fulfillment hook
     it('can process a fulfillment hook', async () => {
       request.invocationSource = 'FulfillmentCodeHook'
+      request.currentIntent.slots.FoodQueryQuantity = 1
       const result = await handleQueryFood(request)
       expect(result.dialogAction.type).to.equal('ConfirmIntent')
       expect(result.dialogAction.intentName).to.equal('LogFood')

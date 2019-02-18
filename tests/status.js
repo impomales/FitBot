@@ -9,7 +9,7 @@ module.exports = {
         '1 banana has 105.02 calories. Would you like to log this item?'
       ])
       sendMessage(browser, 'yes', ['When did you have banana?'])
-      sendMessage(browser, 'breakfast', ['Your banana has been logged.'])
+      sendMessage(browser, 'breakfast', ['has been logged as a'])
       sendMessage(browser, 'How much did I eat today?', ['You had'])
       browser.getText('#chat-history li:last-child', elemAfter => {
         const statusBefore = Number(elemBefore.value.split(' ')[3])

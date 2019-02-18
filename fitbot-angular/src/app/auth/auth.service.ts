@@ -1,11 +1,8 @@
 import {Injectable} from '@angular/core'
-import {HttpClient} from '@angular/common/http'
+import {HttpClient, HttpHeaders} from '@angular/common/http'
 import {User} from '../user'
 import {Observable} from 'rxjs'
 import {tap} from 'rxjs/operators'
-import {HttpHeaders} from '@angular/common/http'
-
-const serverUrl = 'https://fitbot-cedrus.herokuapp.com'
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -24,9 +21,20 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
+  me() {
+    return this.http.get<User>('/auth/me').pipe(
+      tap(user => {
+        if (user) {
+          this.isLoggedIn = true
+          this.user = user
+        }
+      })
+    )
+  }
+
   auth(email: string, password: string, method: string): Observable<User> {
     return this.http
-      .post<User>(`${serverUrl}/auth/${method}`, {email, password}, httpOptions)
+      .post<User>(`/auth/${method}`, {email, password}, httpOptions)
       .pipe(
         tap(
           user => {
@@ -46,7 +54,6 @@ export class AuthService {
   logout(): void {
     this.isLoggedIn = false
     this.user = null
-
-    this.http.post<any>(`${serverUrl}/auth/logout`, {}, httpOptions)
+    this.http.post(`/auth/logout`, {}, httpOptions)
   }
 }

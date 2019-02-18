@@ -2,15 +2,16 @@
   <h3>Welcome, {{ authService.user.email }}</h3>
   <div id="chat-main">
     <app-chat-history style="width: 100%"></app-chat-history>
-    <form>
+    <form #chatForm="ngForm" (ngSubmit)="handleSubmit()">
       <input
         name="text"
         type="text"
         value=""
         placeholder="Send message to bot here..."
         class="input-field"
+        [(ngModel)]="text"
       />
-      <input disabled="{{ busy }}" type="submit" style="display: none" />
+      <input (disabled)="busy" type="submit" style="display: none" />
     </form>
     <select name="option" value="">
       <option value="LEX">Amazon Lex</option>

@@ -1,0 +1,42 @@
+<div class="section">
+  <div *ngIf="authService.error" class="error">{{ authService.error }}</div>
+  <form
+    #authForm="ngForm"
+    class="login-form"
+    name="{{ title }}"
+    (ngSubmit)="handleSubmit()"
+  >
+    <div>
+      <label htmlFor="email"><small>Email</small></label>
+      <input
+        class="input-field"
+        type="text"
+        required
+        [(ngModel)]="email"
+        name="email"
+      />
+    </div>
+    <div>
+      <label htmlFor="password"><small>Password</small></label>
+      <input
+        class="input-field"
+        type="password"
+        required
+        [(ngModel)]="password"
+        name="password"
+      />
+    </div>
+    <div>
+      <button
+        type="submit"
+        class="button"
+        [disabled]="!authForm.form.valid"
+      >
+        {{ title | titlecase }}
+      </button>
+    </div>
+  </form>
+  <a href="https://fitbot-cedrus.herokuapp.com/auth/google" class="google">
+    {{ title | titlecase }} with <i class="fab fa-google"></i>oogle
+  </a>
+</div>

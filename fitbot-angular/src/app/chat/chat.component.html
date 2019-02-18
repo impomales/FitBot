@@ -1,0 +1,22 @@
+<div id="main" *ngIf="authService.user">
+  <h3>Welcome, {{ authService.user.email }}</h3>
+  <div id="chat-main">
+    <app-chat-history style="width: 100%"></app-chat-history>
+    <form #chatForm="ngForm" (ngSubmit)="handleSubmit()">
+      <input
+        name="text"
+        type="text"
+        value=""
+        placeholder="Send message to bot here..."
+        class="input-field"
+        [(ngModel)]="text"
+      />
+      <input (disabled)="(busy)" type="submit" style="display: none" />
+    </form>
+    <select name="option" [(ngModel)]="option" (ngModelChange)="handleChange($event)">
+      <option value="LEX">Amazon Lex</option>
+      <option value="DIALOG_FLOW">Google Dialog Flow</option>
+      <option value="WATSON">IBM Watson Assistant</option>
+    </select>
+  </div>
+</div>

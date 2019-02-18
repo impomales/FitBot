@@ -13,7 +13,7 @@
       />
       <input (disabled)="(busy)" type="submit" style="display: none" />
     </form>
-    <select name="option" [(ngModel)]="option">
+    <select name="option" [(ngModel)]="option" (ngModelChange)="handleChange($event)">
       <option value="LEX">Amazon Lex</option>
       <option value="DIALOG_FLOW">Google Dialog Flow</option>
       <option value="WATSON">IBM Watson Assistant</option>

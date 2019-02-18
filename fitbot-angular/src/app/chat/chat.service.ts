@@ -27,18 +27,21 @@ export interface Bot {
   providedIn: 'root'
 })
 export class ChatService {
-  sessionUserId: String
-
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   initializeBot(option: string): Observable<InitBotResponse> {
-    return this.http
-      .post<InitBotResponse>('/api/bot/initiate', {option}, httpOptions)
-      .pipe(tap(response => (this.sessionUserId = response.sessionUserId)))
+    return this.http.post<InitBotResponse>(
+      '/api/bot/initiate',
+      {option},
+      httpOptions
+    )
   }
 
-  messageBot(text: string, option: string): Observable<MessageBotResponse> {
-    const {sessionUserId} = this
+  messageBot(
+    sessionUserId: string,
+    text: string,
+    option: string
+  ): Observable<MessageBotResponse> {
     return this.http.post<MessageBotResponse>(
       '/api/bot/message',
       {text, sessionUserId, option},

@@ -1,11 +1,7 @@
 import {Component, OnInit} from '@angular/core'
 import {AuthService} from '../auth/auth.service'
 import {ChatService} from './chat.service'
-
-export interface Message {
-  type: String
-  content: String
-}
+import {MessagesService} from '../messages.service'
 
 @Component({
   selector: 'app-chat',
@@ -16,11 +12,11 @@ export class ChatComponent implements OnInit {
   busy: Boolean = false
   text: string = ''
   option: string = ''
-  messages: Message[] = []
 
   constructor(
     public authService: AuthService,
-    private chatService: ChatService
+    private chatService: ChatService,
+    private messageService: MessagesService
   ) {}
 
   ngOnInit() {
@@ -30,7 +26,7 @@ export class ChatComponent implements OnInit {
   initializeBot() {
     this.chatService.initializeBot(this.option).subscribe(
       ({bot}) => {
-        this.messages.push(
+        this.messageService.messages.push(
           {
             type: 'status',
             content: `You are now chatting with ${bot.type}`
@@ -58,17 +54,16 @@ export class ChatComponent implements OnInit {
     }
 
     this.busy = true
-    this.messages.push(sent)
+    this.messageService.messages.push(sent)
     this.text = ''
 
     this.chatService.messageBot(text, option).subscribe(
       data => {
-        this.messages.push({
+        this.messageService.messages.push({
           type: 'received',
           content: `${option.toLowerCase()}: ${data.message}`
         })
         this.busy = false
-        console.log(this.messages)
       },
       err => console.error(err)
     )

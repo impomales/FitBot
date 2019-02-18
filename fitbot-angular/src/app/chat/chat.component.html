@@ -1,4 +1,4 @@
-<div id="main">
+<div id="main" *ngIf="authService.user">
   <h3>Welcome, {{ authService.user.email }}</h3>
   <div id="chat-main">
     <app-chat-history style="width: 100%"></app-chat-history>
@@ -13,9 +13,9 @@
       <input disabled="{{ busy }}" type="submit" style="display: none" />
     </form>
     <select name="option" value="">
-        <option value="LEX">Amazon Lex</option>
-        <option value="DIALOG_FLOW">Google Dialog Flow</option>
-        <option value="WATSON">IBM Watson Assistant</option>
+      <option value="LEX">Amazon Lex</option>
+      <option value="DIALOG_FLOW">Google Dialog Flow</option>
+      <option value="WATSON">IBM Watson Assistant</option>
     </select>
   </div>
 </div>

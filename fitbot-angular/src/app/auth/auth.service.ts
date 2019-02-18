@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core'
-import {HttpClient, HttpHeaders} from '@angular/common/http'
+import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http'
 import {User} from '../user'
 import {Observable} from 'rxjs'
 import {tap} from 'rxjs/operators'
@@ -51,9 +51,9 @@ export class AuthService {
       )
   }
 
-  logout(): void {
+  logout(): Observable<HttpResponse<void>> {
     this.isLoggedIn = false
     this.user = null
-    this.http.post(`/auth/logout`, {}, httpOptions)
+    return this.http.post<void>(`/auth/logout`, {}, {...httpOptions, observe: 'response'})
   }
 }

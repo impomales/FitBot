@@ -13,7 +13,14 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {}
 
   logout() {
-    this.authService.logout()
-    this.router.navigate(['/login'])
+    this.authService.logout().subscribe(resp => {
+      this.router.navigate(['/login'])
+    }, err => {
+      if (err.status === 200) {
+        this.router.navigate(['/login'])
+      } else {
+        console.error(`error in loggin user out. ${err.message}`)
+      }
+    })
   }
 }

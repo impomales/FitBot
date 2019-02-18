@@ -11,9 +11,9 @@
         class="input-field"
         [(ngModel)]="text"
       />
-      <input (disabled)="busy" type="submit" style="display: none" />
+      <input (disabled)="(busy)" type="submit" style="display: none" />
     </form>
-    <select name="option" value="">
+    <select name="option" [(ngModel)]="option">
       <option value="LEX">Amazon Lex</option>
       <option value="DIALOG_FLOW">Google Dialog Flow</option>
       <option value="WATSON">IBM Watson Assistant</option>

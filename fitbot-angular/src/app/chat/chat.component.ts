@@ -26,7 +26,7 @@ export class ChatComponent implements OnInit {
   initializeBot() {
     this.chatService.initializeBot(this.option).subscribe(
       ({bot}) => {
-        this.messageService.messages.push(
+        this.messageService.messages = [
           {
             type: 'status',
             content: `You are now chatting with ${bot.type}`
@@ -37,7 +37,7 @@ export class ChatComponent implements OnInit {
               bot.type
             } Fitbot. How can I help you?`
           }
-        )
+        ]
 
         this.option = bot.type
       },

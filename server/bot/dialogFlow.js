@@ -62,7 +62,7 @@ async function handleResponseDialogFlow(user, response) {
     fulfillmentText,
     outputContexts
   } = response
-
+  // intent is undefined for small talk requests.
   if (!intent) return fulfillmentText
 
   if (intent.displayName === 'Status' && allRequiredParamsPresent) {

@@ -62,6 +62,9 @@ async function handleResponseDialogFlow(user, response) {
     fulfillmentText,
     outputContexts
   } = response
+
+  if (!intent) return fulfillmentText
+
   if (intent.displayName === 'Status' && allRequiredParamsPresent) {
     const foodName = parameters.fields.foodName.stringValue
     return caloriesRemaining(user, foodName)

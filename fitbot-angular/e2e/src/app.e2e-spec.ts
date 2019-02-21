@@ -10,8 +10,10 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('Welcome to fitbot-angular!');
+    expect(page.getTitleText()).toEqual('Fitbot');
   });
+
+  it('can log in a user, and user can type \'hi\'')
 
   afterEach(async () => {
     // Assert that there are no errors emitted from the browser

@@ -1,15 +1,30 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ChatComponent } from './chat/chat.component';
+import { ChatHistoryComponent } from './chat-history/chat-history.component';
+import { AuthFormsComponent } from './auth-forms/auth-forms.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        BrowserModule,
+        RouterTestingModule,
+        HttpClientModule,
+        FormsModule
+
       ],
       declarations: [
-        AppComponent
+        AppComponent,
+        NavbarComponent,
+        ChatComponent,
+        ChatHistoryComponent,
+        AuthFormsComponent
       ],
     }).compileComponents();
   }));
@@ -24,12 +39,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app.title).toEqual('fitbot-angular');
-  });
-
-  it('should render title in a h1 tag', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to fitbot-angular!');
   });
 });

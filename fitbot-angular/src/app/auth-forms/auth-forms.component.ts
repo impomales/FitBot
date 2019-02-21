@@ -20,7 +20,9 @@ export class AuthFormsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.title = this.route.snapshot.url[0].path
+    this.title =
+      (this.route.snapshot.url[0] && this.route.snapshot.url[0].path) ||
+      '/login'
   }
 
   handleSubmit() {

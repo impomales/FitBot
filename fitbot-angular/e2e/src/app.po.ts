@@ -24,7 +24,7 @@ export class AppPage {
     return element(by.css('button')).click() as Promise<void>
   }
 
-  async sendMessage(message: string, responses: string[]) {
+  sendMessage(message: string, responses: string[]) {
     element(by.css('.input-field')).sendKeys(message)
     element(by.css('#chat-main form')).submit()
 
@@ -35,5 +35,10 @@ export class AppPage {
           lastMessage.toLowerCase().includes(response.toLowerCase())
         ) as boolean
       })
+  }
+
+  switchBot(value: string) {
+    element(by.name('option')).click()
+    return element(by.css(`option[value=${value}]`)).click() as Promise<void>
   }
 }

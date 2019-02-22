@@ -1,5 +1,5 @@
 import {AppPage, responsesToHi} from './app.po'
-import {browser, logging} from 'protractor'
+import {browser, logging, element, by} from 'protractor'
 
 describe('workspace-project App', () => {
   let page: AppPage
@@ -44,6 +44,43 @@ describe('workspace-project App', () => {
         "OK. I won't log"
       ])
     ).toBeTruthy()
+  })
+
+  it('can get current user status', () => {
+    expect(
+      page.sendMessage('How much did I eat today?', ['You had'])
+    ).toBeTruthy()
+
+    element(by.css('#chat-history li:last-child'))
+      .getText()
+      .then(elemBefore => {
+        expect(
+          page.sendMessage('how many calories are in a banana?', [
+            '1 banana has '
+          ])
+        ).toBeTruthy()
+
+        expect(
+          page.sendMessage('yes', ['When did you have banana?'])
+        ).toBeTruthy()
+
+        expect(
+          page.sendMessage('breakfast', ['has been logged as a'])
+        ).toBeTruthy()
+
+        expect(
+          page.sendMessage('How much did I eat today?', ['You had'])
+        ).toBeTruthy()
+
+        element(by.css('#chat-history li:last-child'))
+          .getText()
+          .then(elemAfter => {
+            const statusBefore = Number(elemBefore.split(' ')[3])
+            const statusAfter = Number(elemAfter.split(' ')[3])
+
+            expect(statusAfter > statusBefore).toBeTruthy()
+          })
+      })
   })
 
   afterEach(async () => {

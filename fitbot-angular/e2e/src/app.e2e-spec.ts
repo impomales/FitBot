@@ -30,6 +30,22 @@ describe('workspace-project App', () => {
     expect(page.sendMessage('breakfast', ['has been logged as a'])).toBeTruthy()
   })
 
+  it('can reply no to confirmation', () => {
+    expect(
+      page.sendMessage('how many calories are in 1 cup of rice', [
+        '1 cup of rice have 205.4 calories. Would you like to log this item?'
+      ])
+    ).toBeTruthy()
+
+    expect(
+      page.sendMessage('no', [
+        'Ok. This item has not been logged.',
+        'Alright, I will not log',
+        "OK. I won't log"
+      ])
+    ).toBeTruthy()
+  })
+
   afterEach(async () => {
     // Assert that there are no errors emitted from the browser
     const logs = await browser

@@ -26,6 +26,16 @@ module.exports = function(config) {
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: ['Chrome'],
-    singleRun: false
+    singleRun: false,
+    proxies: {
+      '/api/*': {
+        target: 'http://localhost:8080',
+        secure: false
+      },
+      '/auth/*': {
+        target: 'http://localhost:8080',
+        secure: false
+      }
+    }
   })
 }

@@ -6,20 +6,28 @@ describe('workspace-project App', () => {
 
   beforeEach(() => {
     page = new AppPage()
+    page.navigateTo()
   })
 
   it('should display welcome message', () => {
-    page.navigateTo()
     expect(page.getTitleText()).toEqual('Fitbot')
   })
 
-  it("can log in a user, and user can type 'hi'", async () => {
-    page.navigateTo()
+  it("can log in a user, and user can type 'hi'", () => {
     page.login()
     expect(browser.getCurrentUrl()).toEqual(`${browser.baseUrl}/chat`)
+    expect(page.sendMessage('hi', responsesToHi)).toBeTruthy()
+  })
 
-    const result = await page.sendMessage('hi', responsesToHi)
-    expect(result).toBeTruthy()
+  it('can query food, and user replies yes to confirmation', () => {
+    expect(
+      page.sendMessage('how many calories are in a banana', [
+        '1 banana has 105.02 calories. Would you like to log this item?'
+      ])
+    ).toBeTruthy()
+
+    expect(page.sendMessage('yes', ['When did you have banana?'])).toBeTruthy()
+    expect(page.sendMessage('breakfast', ['has been logged as a'])).toBeTruthy()
   })
 
   afterEach(async () => {

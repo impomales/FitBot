@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core'
+import {Subject} from 'rxjs'
 
 export interface Message {
   type: String
@@ -9,7 +10,11 @@ export interface Message {
   providedIn: 'root'
 })
 export class MessagesService {
-  messages: Message[] = []
+  subject: Subject<Message[]> = new Subject<Message[]>()
 
   constructor() {}
+
+  push(messages: Message[]) {
+    this.subject.next(messages)
+  }
 }

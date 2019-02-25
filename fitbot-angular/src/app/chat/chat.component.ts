@@ -24,7 +24,6 @@ export class ChatComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.messageService.messages = []
     this.initializeBot()
   }
 
@@ -40,7 +39,7 @@ export class ChatComponent implements OnInit {
         this.sessionUserIdWatson =
           bot.type === 'WATSON' ? sessionUserId : this.sessionUserIdWatson
 
-        this.messageService.messages.push(
+        this.messageService.push([
           {
             type: 'status',
             content: `You are now chatting with ${bot.type}`
@@ -51,7 +50,20 @@ export class ChatComponent implements OnInit {
               bot.type
             } Fitbot. How can I help you?`
           }
-        )
+        ])
+
+        // this.messageService.messages.push(
+        //   {
+        //     type: 'status',
+        //     content: `You are now chatting with ${bot.type}`
+        //   },
+        //   {
+        //     type: 'received',
+        //     content: `${bot.type.toLowerCase()}: Hello, I am the ${
+        //       bot.type
+        //     } Fitbot. How can I help you?`
+        //   }
+        // )
 
         this.option = bot.type
       },
@@ -74,10 +86,14 @@ export class ChatComponent implements OnInit {
 
     if (!bot) this.initializeBot()
     else {
-      this.messageService.messages.push({
+      // this.messageService.messages.push({
+      //   type: 'status',
+      //   content: `You are now chatting with ${option}`
+      // })
+      this.messageService.push([{
         type: 'status',
         content: `You are now chatting with ${option}`
-      })
+      }])
     }
   }
 
@@ -92,20 +108,24 @@ export class ChatComponent implements OnInit {
     }
 
     this.busy = true
-    this.messageService.messages.push(sent)
+    this.messageService.push([sent])
     this.text = ''
 
-    let sessionUserId
+    let sessionUserId: string
     if (option === 'LEX') sessionUserId = this.sessionUserIdLex
     else if (option === 'DIALOG_FLOW') sessionUserId = this.sessionUserIdFlow
     else if (option === 'WATSON') sessionUserId = this.sessionUserIdWatson
 
     this.chatService.messageBot(sessionUserId, text, option).subscribe(
       data => {
-        this.messageService.messages.push({
+        this.messageService.push([{
           type: 'received',
           content: `${option.toLowerCase()}: ${data.message}`
-        })
+        }])
+        // this.messageService.messages.push({
+        //   type: 'received',
+        //   content: `${option.toLowerCase()}: ${data.message}`
+        // })
         this.busy = false
       },
       err => console.error(err)

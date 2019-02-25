@@ -1,8 +1,6 @@
 import {Injectable} from '@angular/core'
 import {HttpClient, HttpHeaders} from '@angular/common/http'
 import {Observable} from 'rxjs'
-import {AuthService} from '../auth/auth.service'
-import {tap} from 'rxjs/operators'
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -27,7 +25,7 @@ export interface Bot {
   providedIn: 'root'
 })
 export class ChatService {
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(private http: HttpClient) {}
 
   initializeBot(option: string): Observable<InitBotResponse> {
     return this.http.post<InitBotResponse>(

@@ -1,0 +1,364 @@
+{
+  "rasa_nlu_data": {
+    "common_examples": [
+      {
+        "intent": "status",
+        "text": "how am i doing"
+      },
+      {
+        "intent": "status",
+        "text": "how many calories have i had"
+      },
+      {
+        "intent": "status",
+        "text": "how much did i eat today"
+      },
+      {
+        "intent": "status",
+        "text": "what are my current calories"
+      },
+      {
+        "intent": "status",
+        "text": "what did i eat"
+      },
+      {
+        "intent": "status",
+        "text": "what's my status"
+      },
+      {
+        "intent": "status",
+        "text": "status"
+      },
+      {
+        "intent": "help",
+        "text": "help"
+      },
+      {
+        "intent": "help",
+        "text": "help me"
+      },
+      {
+        "intent": "help",
+        "text": "i need help"
+      },
+      {
+        "intent": "help",
+        "text": "what can you do"
+      },
+      {
+        "intent": "help",
+        "text": "how do i use this"
+      },
+      {
+        "intent": "greeting",
+        "text": "hello"
+      },
+      {
+        "intent": "greeting",
+        "text": "howdy"
+      },
+      {
+        "intent": "greeting",
+        "text": "heya"
+      },
+      {
+        "intent": "greeting",
+        "text": "hi"
+      },
+      {
+        "intent": "greeting",
+        "text": "hi there"
+      },
+      {
+        "intent": "bye",
+        "text": "bye"
+      },
+      {
+        "intent": "bye",
+        "text": "exit"
+      },
+      {
+        "intent": "bye",
+        "text": "i don't need help"
+      },
+      {
+        "intent": "bye",
+        "text": "later"
+      },
+      {
+        "intent": "bye",
+        "text": "goodbye"
+      },
+      {
+        "intent": "query-food",
+        "text": "enter calories"
+      },
+      {
+        "intent": "query-food",
+        "entities": [
+          {
+            "start": 21,
+            "end": 27,
+            "value": "cheese",
+            "entity": "food"
+          }
+        ],
+        "text": "how many calories in cheese"
+      },
+      {
+        "intent": "query-food",
+        "entities": [
+          {
+            "start": 21,
+            "end": 22,
+            "value": "3",
+            "entity": "quantity"
+          },
+          {
+            "start": 23,
+            "end": 30,
+            "value": "carrots",
+            "entity": "food"
+          }
+        ],
+        "text": "how many calories in 3 carrots"
+      },
+      {
+        "intent": "query-food",
+        "entities": [
+          {
+            "start": 25,
+            "end": 26,
+            "value": "2",
+            "entity": "quantity"
+          },
+          {
+            "start": 27,
+            "end": 31,
+            "value": "cups",
+            "entity": "unit"
+          },
+          {
+            "start": 35,
+            "end": 39,
+            "value": "wine",
+            "entity": "food"
+          }
+        ],
+        "text": "how many calories are in 2 cups of wine"
+      },
+      {
+        "intent": "query-food",
+        "entities": [
+          {
+            "start": 25,
+            "end": 26,
+            "value": "3",
+            "entity": "quantity"
+          },
+          {
+            "start": 27,
+            "end": 29,
+            "value": "oz",
+            "entity": "unit"
+          },
+          {
+            "start": 33,
+            "end": 38,
+            "value": "flour",
+            "entity": "food"
+          }
+        ],
+        "text": "how many calories are in 3 oz of flour"
+      },
+      {
+        "intent": "query-food",
+        "entities": [
+          {
+            "start": 25,
+            "end": 26,
+            "value": "4",
+            "entity": "quantity"
+          },
+          {
+            "start": 27,
+            "end": 32,
+            "value": "fl oz",
+            "entity": "unit"
+          },
+          {
+            "start": 36,
+            "end": 41,
+            "value": "juice",
+            "entity": "food"
+          }
+        ],
+        "text": "how many calories are in 4 fl oz of juice"
+      },
+      {
+        "intent": "query-food",
+        "entities": [
+          {
+            "start": 25,
+            "end": 26,
+            "value": "1",
+            "entity": "quantity"
+          },
+          {
+            "start": 27,
+            "end": 37,
+            "value": "strawberry",
+            "entity": "food"
+          }
+        ],
+        "text": "how many calories are in 1 strawberry"
+      },
+      {
+        "intent": "query-food",
+        "entities": [
+          {
+            "start": 25,
+            "end": 26,
+            "value": "1",
+            "entity": "quantity"
+          },
+          {
+            "start": 27,
+            "end": 33,
+            "value": "banana",
+            "entity": "food"
+          }
+        ],
+        "text": "how many calories are in a banana"
+      },
+      {
+        "intent": "query-food",
+        "entities": [
+          {
+            "start": 25,
+            "end": 26,
+            "value": "1",
+            "entity": "quantity"
+          },
+          {
+            "start": 27,
+            "end": 32,
+            "value": "slice",
+            "entity": "unit"
+          },
+          {
+            "start": 36,
+            "end": 41,
+            "value": "pizza",
+            "entity": "food"
+          }
+        ],
+        "text": "how many calories are in a slice of pizza"
+      },
+      {
+        "intent": "query-food",
+        "entities": [
+          {
+            "start": 25,
+            "end": 26,
+            "value": "5",
+            "entity": "quantity"
+          },
+          {
+            "start": 27,
+            "end": 31,
+            "value": "cups",
+            "entity": "unit"
+          },
+          {
+            "start": 35,
+            "end": 39,
+            "value": "beer",
+            "entity": "food"
+          }
+        ],
+        "text": "how many calories are in 5 cups of beer"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 6,
+            "value": "grapes",
+            "entity": "food"
+          }
+        ],
+        "text": "grapes"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 5,
+            "value": "steak",
+            "entity": "food"
+          }
+        ],
+        "text": "steak"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 1,
+            "value": "1",
+            "entity": "quantity"
+          }
+        ],
+        "text": "1"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 1,
+            "value": "3",
+            "entity": "quantity"
+          }
+        ],
+        "text": "3"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 2,
+            "value": "oz",
+            "entity": "unit"
+          }
+        ],
+        "text": "oz"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 3,
+            "value": "cup",
+            "entity": "unit"
+          }
+        ],
+        "text": "cup"
+      }
+    ],
+    "regex_features": [],
+    "lookup_tables": [],
+    "entity_synonyms": [
+      {
+        "value": "1",
+        "synonyms": ["a"]
+      }
+    ]
+  }
+}

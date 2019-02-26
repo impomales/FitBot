@@ -1,0 +1,40 @@
+{
+  "py/object": "rasa_core.featurizers.MaxHistoryTrackerFeaturizer",
+  "max_history": 5,
+  "remove_duplicates": true,
+  "state_featurizer": {
+    "py/object": "rasa_core.featurizers.BinarySingleStateFeaturizer",
+    "input_state_map": {
+      "active_form_query_food_form": 25,
+      "entity_food": 5,
+      "entity_quantity": 6,
+      "entity_unit": 7,
+      "intent_bye": 0,
+      "intent_greeting": 1,
+      "intent_help": 2,
+      "intent_query-food": 3,
+      "intent_status": 4,
+      "prev_action_deactivate_form": 12,
+      "prev_action_default_fallback": 11,
+      "prev_action_get_nutrition_info": 22,
+      "prev_action_listen": 9,
+      "prev_action_reset_food": 23,
+      "prev_action_restart": 10,
+      "prev_query_food_form": 24,
+      "prev_utter_ask_food": 19,
+      "prev_utter_ask_quantity": 21,
+      "prev_utter_ask_unit": 20,
+      "prev_utter_bye": 15,
+      "prev_utter_calories": 18,
+      "prev_utter_entities": 16,
+      "prev_utter_greet": 13,
+      "prev_utter_help": 14,
+      "prev_utter_status": 17,
+      "slot_calories_0": 8
+    },
+    "num_features": 26,
+    "slot_feature_len": 1,
+    "user_feature_len": 8
+  },
+  "use_intent_probabilities": false
+}

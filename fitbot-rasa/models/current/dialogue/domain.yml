@@ -1,0 +1,80 @@
+%YAML 1.1
+---
+actions:
+- utter_greet
+- utter_help
+- utter_bye
+- utter_entities
+- utter_status
+- utter_calories
+- utter_ask_food
+- utter_ask_unit
+- utter_ask_quantity
+- action_get_nutrition_info
+- action_reset_food
+config:
+  store_entities_as_slots: true
+entities:
+- food
+- quantity
+- unit
+forms:
+- query_food_form
+intents:
+- greeting:
+    use_entities: true
+- help:
+    use_entities: true
+- bye:
+    use_entities: true
+- status:
+    use_entities: true
+- query-food:
+    use_entities: true
+slots:
+  calories:
+    auto_fill: true
+    initial_value: null
+    type: rasa_core.slots.TextSlot
+  food:
+    auto_fill: true
+    initial_value: null
+    type: rasa_core.slots.UnfeaturizedSlot
+  quantity:
+    auto_fill: true
+    initial_value: null
+    type: rasa_core.slots.UnfeaturizedSlot
+  requested_slot:
+    auto_fill: true
+    initial_value: null
+    type: rasa_core.slots.UnfeaturizedSlot
+  unit:
+    auto_fill: true
+    initial_value: null
+    type: rasa_core.slots.UnfeaturizedSlot
+templates:
+  utter_ask_food:
+  - text: Please enter a food item.
+  utter_ask_quantity:
+  - text: Please enter a quantity.
+  utter_ask_unit:
+  - text: Please enter a unit of measure.
+  utter_bye:
+  - text: Ok. Have a good one!
+  - text: Later!
+  - text: Bye Bye.
+  - text: =)
+  utter_calories:
+  - text: '{quantity} {unit} of {food} has {calories} calories'
+  utter_entities:
+  - text: '{food} {quantity} {unit}'
+  utter_greet:
+  - text: Hello I am Fitbot!
+  - text: Greetings, I am Fitbot! How can I assist?
+  - text: Good day! I am Fitbot! How can I assist?
+  utter_help:
+  - text: I can help you achieve your fitness goals by tracking you calories and physical
+      activity. ex. How many calories does 2 glasses of wine have?
+  - text: Ask me 'how many calories did I have today?'
+  utter_status:
+  - text: You ate 0 calories. You are 2000 calories away from the daily goal.

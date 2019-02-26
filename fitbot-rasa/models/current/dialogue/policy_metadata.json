@@ -1,0 +1,39 @@
+{
+  "action_fingerprints": {
+    "action_listen": {
+      "slots": []
+    },
+    "utter_greet": {
+      "slots": []
+    },
+    "query_food_form": {
+      "slots": []
+    },
+    "action_get_nutrition_info": {
+      "slots": ["calories"]
+    },
+    "action_reset_food": {
+      "slots": []
+    },
+    "utter_help": {
+      "slots": []
+    },
+    "utter_status": {
+      "slots": []
+    },
+    "utter_bye": {
+      "slots": []
+    }
+  },
+  "rasa_core": "0.12.4",
+  "python": "3.6.8",
+  "max_histories": [5, null, 5, 2],
+  "ensemble_name": "rasa_core.policies.ensemble.SimplePolicyEnsemble",
+  "policy_names": [
+    "rasa_core.policies.keras_policy.KerasPolicy",
+    "rasa_core.policies.fallback.FallbackPolicy",
+    "rasa_core.policies.memoization.MemoizationPolicy",
+    "rasa_core.policies.form_policy.FormPolicy"
+  ],
+  "trained_at": "20190226-155512"
+}

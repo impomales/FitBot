@@ -1,0 +1,71 @@
+intents:
+  - greeting
+  - help
+  - bye
+  - status
+  - query-food
+
+entities:
+  - food
+  - quantity
+  - unit
+
+slots:
+  food:
+    type: unfeaturized
+  quantity:
+    type: unfeaturized
+  unit:
+    type: unfeaturized
+  calories:
+    type: text
+
+templates:
+  utter_greet:
+    - "Hello I am Fitbot!"
+    - "Greetings, I am Fitbot! How can I assist?"
+    - "Good day! I am Fitbot! How can I assist?"
+
+  utter_help:
+    - "I can help you achieve your fitness goals by tracking you calories and physical activity. ex. How many calories does 2 glasses of wine have?"
+    - "Ask me 'how many calories did I have today?'"
+
+  utter_bye:
+    - "Ok. Have a good one!"
+    - "Later!"
+    - "Bye Bye."
+    - "=)"
+
+  utter_entities:
+    - "{food} {quantity} {unit}"
+
+  utter_status:
+    - "You ate 0 calories. You are 2000 calories away from the daily goal."
+
+  utter_calories:
+    - "{quantity} {unit} of {food} has {calories} calories"
+
+  utter_ask_food:
+    - "Please enter a food item."
+
+  utter_ask_quantity:
+    - "Please enter a quantity."
+
+  utter_ask_unit:
+    - "Please enter a unit of measure."
+
+actions:
+  - utter_greet
+  - utter_help
+  - utter_bye
+  - utter_entities
+  - utter_status
+  - utter_calories
+  - utter_ask_food
+  - utter_ask_unit
+  - utter_ask_quantity
+  - action_get_nutrition_info
+  - action_reset_food
+
+forms:
+  - query_food_form

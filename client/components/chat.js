@@ -168,6 +168,7 @@ export class Chat extends Component {
           <option value="LEX">Amazon Lex</option>
           <option value="DIALOG_FLOW">Google Dialog Flow</option>
           <option value="WATSON">IBM Watson Assistant</option>
+          <option value="RASA">Rasa</option>
         </select>
       </div>
     )

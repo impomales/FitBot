@@ -100,7 +100,7 @@ def buildFoodQueryResult(nutritionInfo, unit):
     serving_qty, food_name, nf_calories = nutritionInfo[
         'serving_qty'], nutritionInfo['food_name'], nutritionInfo['nf_calories']
     if unit:
-        return f"{serving_qty} {p.plural(unit, float(serving_qty))} of {food_name} has {nf_calories}."
+        return f"{serving_qty} {p.plural(unit, float(serving_qty))} of {food_name} has {nf_calories} calories."
     else:
         return f"{serving_qty} {p.plural(food_name, float(serving_qty))} {p.plural_verb('has', float(serving_qty))} {nf_calories} calories."
 

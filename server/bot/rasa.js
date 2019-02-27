@@ -22,9 +22,12 @@ function messageRasa(sessionUserId, text, callback) {
 }
 
 function handleResponseRasa(user, response) {
-  const {text} = response[0]
+  const {text, attachment} = response[0]
 
   if (text) return text
+  else if (attachment) {
+    if (attachment.action === 'status') return caloriesRemaining(user)
+  }
 }
 
 module.exports = {initiateRasa, messageRasa, handleResponseRasa}

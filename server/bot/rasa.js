@@ -12,7 +12,7 @@ function messageRasa(sessionUserId, text, callback) {
   axios
     .post(
       `http://localhost:5005/webhooks/rest/webhook?token=${
-        process.env.RASASECRET
+        process.env.RASA_SECRET
       }`,
       {sender: sessionUserId, message: text}
     )

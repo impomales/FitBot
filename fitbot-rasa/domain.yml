@@ -1,71 +1,78 @@
-intents:
-  - greeting
-  - help
-  - bye
-  - status
-  - query-food
-
+%YAML 1.1
+---
+actions:
+- action_get_nutrition_info
+- utter_bye
+- utter_ask_unit
+- action_reset_food
+- utter_ask_food
+- utter_entities
+- utter_greet
+- utter_deny_message
+- utter_help
+- utter_ask_quantity
+- utter_status
+- utter_ask_mealtime
 entities:
-  - food
-  - quantity
-  - unit
-
+- quantity
+- food
+- unit
+- mealtime
+forms:
+- query_food_form
+intents:
+- query-food
+- inform
+- confirm
+- help
+- greeting
+- deny
+- out_of_scope
+- bye
+- status
 slots:
+  calories:
+    type: text
   food:
     type: unfeaturized
+  mealtime:
+    type: categorical
+    values:
+    - breakfast
+    - lunch
+    - dinner
+    - snack
   quantity:
+    type: unfeaturized
+  requested_slot:
     type: unfeaturized
   unit:
     type: unfeaturized
-  calories:
-    type: text
-
 templates:
-  utter_greet:
-    - "Hello I am Fitbot!"
-    - "Greetings, I am Fitbot! How can I assist?"
-    - "Good day! I am Fitbot! How can I assist?"
-
-  utter_help:
-    - "I can help you achieve your fitness goals by tracking you calories and physical activity. ex. How many calories does 2 glasses of wine have?"
-    - "Ask me 'how many calories did I have today?'"
-
-  utter_bye:
-    - "Ok. Have a good one!"
-    - "Later!"
-    - "Bye Bye."
-    - "=)"
-
-  utter_entities:
-    - "{food} {quantity} {unit}"
-
-  utter_status:
-    - "You ate 0 calories. You are 2000 calories away from the daily goal."
-
-  utter_calories:
-    - "{quantity} {unit} of {food} has {calories} calories"
-
   utter_ask_food:
-    - "Please enter a food item."
-
+  - text: Please enter a food item.
+  utter_ask_mealtime:
+  - text: When did you have {food}?
   utter_ask_quantity:
-    - "Please enter a quantity."
-
+  - text: Please enter a quantity.
   utter_ask_unit:
-    - "Please enter a unit of measure."
-
-actions:
-  - utter_greet
-  - utter_help
-  - utter_bye
-  - utter_entities
-  - utter_status
-  - utter_calories
-  - utter_ask_food
-  - utter_ask_unit
-  - utter_ask_quantity
-  - action_get_nutrition_info
-  - action_reset_food
-
-forms:
-  - query_food_form
+  - text: Please enter a unit of measure.
+  utter_bye:
+  - text: Ok. Have a good one!
+  - text: Later!
+  - text: Bye Bye.
+  - text: =)
+  utter_default:
+  - text: I'm sorry I don't understand what you said. Please try again.
+  utter_deny_message:
+  - text: Ok. I won't log {food}.
+  utter_entities:
+  - text: '{food} {quantity} {unit}'
+  utter_greet:
+  - text: Hello I am Fitbot!
+  - text: Greetings, I am Fitbot! How can I assist?
+  - text: Good day! I am Fitbot! How can I assist?
+  utter_help:
+  - text: I can help you achieve your fitness goals by tracking you calories and physical
+      activity. ex. How many calories does 2 glasses of wine have?
+  - text: Ask me 'how many calories did I have today?'

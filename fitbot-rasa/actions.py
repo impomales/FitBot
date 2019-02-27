@@ -17,6 +17,8 @@ logger = logging.getLogger(__name__)
 p = inflect.engine()
 
 # actions
+
+
 class ActionGetNutritionInfo(Action):
     def name(self):
         return "action_get_nutrition_info"
@@ -27,6 +29,9 @@ class ActionGetNutritionInfo(Action):
         quantity = tracker.get_slot("quantity")
         unit = tracker.get_slot("unit")
 
+        if (quantity == 'a' or  quantity == 'an'):
+             quantity = 1
+
         query = buildFoodQuery(food, quantity, unit)
 
         with open("./credentials.yml", 'r') as ymlfile:
@@ -35,27 +40,34 @@ class ActionGetNutritionInfo(Action):
         id = cfg['NUTRITION_API_ID']
         key = cfg['NUTRITION_API_KEY']
 
-        request = json.loads(requests.post(url, data = { 'query': query }, headers = { 
+        request = json.loads(requests.post(url, data={'query': query}, headers={
             'x-app-id': str(id),
             'x-app-key': str(key),
             'x-remote-user-id': "0"}).text)
 
         info = request['foods'][0]
-        
+
+        dispatcher.utter_message(buildFoodQueryResult(
+            info, unit) + ' Would you like to log this item?')
+
         return [SlotSet("calories", info['nf_calories'])]
+
 
 class ActionResetFood(Action):
     def name(self):
         return "action_reset_food"
-    
+
     def run(self, dispatcher, tracker, domain):
-        return [SlotSet("food", None), SlotSet("unit", None), SlotSet("quantity", None), SlotSet("calories", None)]
+        dispatcher.utter_message(tracker.get_slot("mealtime"))
+        return [SlotSet("food", None), SlotSet("unit", None), SlotSet("quantity", None), SlotSet("calories", None), SlotSet("mealtime", None)]
 
 # forms
+
+
 class QueryFoodForm(FormAction):
     def name(self):
         return "query_food_form"
-    
+
     @staticmethod
     def required_slots(tracker):
         quantity = tracker.get_slot("quantity")
@@ -68,12 +80,22 @@ class QueryFoodForm(FormAction):
         return []
 
 # helpers
-def buildFoodQuery(food, quantity, unit):
-  if unit:
-    return f"{quantity} {unit} of {food}"
-  else:
-    return f"{quantity} {p.plural(food, quantity)}"
 
+
+def buildFoodQuery(food, quantity, unit):
+    if unit:
+        return f"{quantity} {p.plural(unit, float(quantity))} of {food}"
+    else:
+        return f"{quantity} {p.plural(food, float(quantity))}"
+
+
+def buildFoodQueryResult(nutritionInfo, unit):
+    serving_qty, food_name, nf_calories = nutritionInfo[
+        'serving_qty'], nutritionInfo['food_name'], nutritionInfo['nf_calories']
+    if unit:
+        return f"{serving_qty} {p.plural(unit, float(serving_qty))} of {food_name} has {nf_calories}."
+    else:
+        return f"{serving_qty} {p.plural(food_name, float(serving_qty))} {p.plural_verb('has', float(serving_qty))} {nf_calories} calories."
 
 # class ActionJoke(Action):
 #     def name(self):
@@ -98,4 +120,3 @@ def buildFoodQuery(food, quantity, unit):
 #     def submit(self, dispatcher, tracker, domain):
 #         dispatcher.utter_template('utter_submit', tracker)
 #         return []
-

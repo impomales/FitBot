@@ -12,6 +12,15 @@
       "class": "rasa_nlu.tokenizers.spacy_tokenizer.SpacyTokenizer"
     },
     {
+      "name": "intent_featurizer_spacy",
+      "class": "rasa_nlu.featurizers.spacy_featurizer.SpacyFeaturizer"
+    },
+    {
+      "name": "intent_entity_featurizer_regex",
+      "regex_file": "regex_featurizer.json",
+      "class": "rasa_nlu.featurizers.regex_featurizer.RegexFeaturizer"
+    },
+    {
       "BILOU_flag": true,
       "features": [
         ["low", "title", "upper"],
@@ -38,8 +47,9 @@
       "class": "rasa_nlu.extractors.crf_entity_extractor.CRFEntityExtractor"
     },
     {
-      "name": "intent_featurizer_spacy",
-      "class": "rasa_nlu.featurizers.spacy_featurizer.SpacyFeaturizer"
+      "name": "ner_synonyms",
+      "synonyms_file": "entity_synonyms.json",
+      "class": "rasa_nlu.extractors.entity_synonyms.EntitySynonymMapper"
     },
     {
       "C": [1, 2, 5, 10, 20, 100],
@@ -51,14 +61,9 @@
       "classifier_file": "intent_classifier_sklearn.pkl",
       "class":
         "rasa_nlu.classifiers.sklearn_intent_classifier.SklearnIntentClassifier"
-    },
-    {
-      "dimensions": ["number"],
-      "name": "ner_duckling",
-      "class": "rasa_nlu.extractors.duckling_extractor.DucklingExtractor"
     }
   ],
   "training_data": "training_data.json",
-  "trained_at": "20190226-154842",
+  "trained_at": "20190227-140305",
   "rasa_nlu_version": "0.13.8"
 }

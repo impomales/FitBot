@@ -1,35 +1,45 @@
 %YAML 1.1
 ---
 actions:
-- utter_greet
-- utter_help
-- utter_bye
-- utter_entities
-- utter_status
-- utter_calories
-- utter_ask_food
-- utter_ask_unit
-- utter_ask_quantity
 - action_get_nutrition_info
+- utter_bye
+- utter_ask_unit
 - action_reset_food
+- utter_ask_food
+- utter_entities
+- utter_greet
+- utter_deny_message
+- utter_help
+- utter_ask_quantity
+- utter_status
+- utter_ask_mealtime
 config:
   store_entities_as_slots: true
 entities:
-- food
 - quantity
+- food
 - unit
+- mealtime
 forms:
 - query_food_form
 intents:
-- greeting:
+- query-food:
+    use_entities: true
+- inform:
+    use_entities: true
+- confirm:
     use_entities: true
 - help:
+    use_entities: true
+- greeting:
+    use_entities: true
+- deny:
+    use_entities: true
+- out_of_scope:
     use_entities: true
 - bye:
     use_entities: true
 - status:
-    use_entities: true
-- query-food:
     use_entities: true
 slots:
   calories:
@@ -40,6 +50,15 @@ slots:
     auto_fill: true
     initial_value: null
     type: rasa_core.slots.UnfeaturizedSlot
+  mealtime:
+    auto_fill: true
+    initial_value: null
+    type: rasa_core.slots.CategoricalSlot
+    values:
+    - breakfast
+    - lunch
+    - dinner
+    - snack
   quantity:
     auto_fill: true
     initial_value: null
@@ -55,6 +74,8 @@ slots:
 templates:
   utter_ask_food:
   - text: Please enter a food item.
+  utter_ask_mealtime:
+  - text: When did you have {food}?
   utter_ask_quantity:
   - text: Please enter a quantity.
   utter_ask_unit:
@@ -64,8 +85,10 @@ templates:
   - text: Later!
   - text: Bye Bye.
   - text: =)
-  utter_calories:
-  - text: '{quantity} {unit} of {food} has {calories} calories'
+  utter_default:
+  - text: I'm sorry I don't understand what you said. Please try again.
+  utter_deny_message:
+  - text: Ok. I won't log {food}.
   utter_entities:
   - text: '{food} {quantity} {unit}'
   utter_greet:

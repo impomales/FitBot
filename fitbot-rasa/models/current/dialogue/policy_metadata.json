@@ -1,39 +1,39 @@
 {
   "action_fingerprints": {
     "action_listen": {
-      "slots": []
+      "slots": ["food", "mealtime", "unit", "quantity"]
     },
-    "utter_greet": {
-      "slots": []
-    },
-    "query_food_form": {
-      "slots": []
-    },
-    "action_get_nutrition_info": {
-      "slots": ["calories"]
-    },
-    "action_reset_food": {
+    "utter_bye": {
       "slots": []
     },
     "utter_help": {
       "slots": []
     },
+    "query_food_form": {
+      "slots": ["requested_slot", "food", "unit", "quantity"]
+    },
+    "action_get_nutrition_info": {
+      "slots": ["calories"]
+    },
+    "action_reset_food": {
+      "slots": ["calories", "mealtime", "quantity", "food", "unit"]
+    },
     "utter_status": {
       "slots": []
     },
-    "utter_bye": {
+    "utter_greet": {
       "slots": []
     }
   },
   "rasa_core": "0.12.4",
   "python": "3.6.8",
-  "max_histories": [5, null, 5, 2],
+  "max_histories": [5, 5, 2, null],
   "ensemble_name": "rasa_core.policies.ensemble.SimplePolicyEnsemble",
   "policy_names": [
     "rasa_core.policies.keras_policy.KerasPolicy",
-    "rasa_core.policies.fallback.FallbackPolicy",
     "rasa_core.policies.memoization.MemoizationPolicy",
-    "rasa_core.policies.form_policy.FormPolicy"
+    "rasa_core.policies.form_policy.FormPolicy",
+    "rasa_core.policies.fallback.FallbackPolicy"
   ],
-  "trained_at": "20190226-155512"
+  "trained_at": "20190227-140329"
 }

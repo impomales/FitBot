@@ -2,7 +2,6 @@ const randomstring = require('randomstring')
 const axios = require('axios')
 const saveFoodLog = require('./saveFoodLog')
 const caloriesRemaining = require('./caloriesRemaining')
-const {queryFood} = require('../../fitbotWatsonCall')
 
 function initiateRasa(user) {
   return `${user.id}-${randomstring.generate()}`
@@ -21,12 +20,41 @@ function messageRasa(sessionUserId, text, callback) {
     .catch(err => callback(err))
 }
 
-function handleResponseRasa(user, response) {
+async function handleResponseRasa(user, response) {
   const {text, attachment} = response[0]
 
   if (text) return text
   else if (attachment) {
     if (attachment.action === 'status') return caloriesRemaining(user)
+    if (attachment.action === 'logFood') {
+      // handle food log
+      const {
+        calories,
+        mealtime,
+        name,
+        quantity,
+        unit,
+        // eslint-disable-next-line camelcase
+        weight_in_grams
+      } = attachment
+
+      const foodLog = {
+        name,
+        quantity,
+        // eslint-disable-next-line camelcase
+        weightInGrams: weight_in_grams,
+        calories,
+        mealTime: mealtime,
+        unit
+      }
+
+      try {
+        const newLog = await saveFoodLog(user, foodLog)
+        if (newLog.name) return caloriesRemaining(user, newLog)
+      } catch (err) {
+        return err
+      }
+    }
   }
 }
 

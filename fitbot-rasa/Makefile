@@ -1,3 +1,5 @@
+secret = ${RASASECRET}
+
 train-nlu:
 	python3 -m rasa_nlu.train -c config.yml --data data/nlu_data.md -o models --fixed_model_name nlu --project current --verbose
 
@@ -14,7 +16,7 @@ nlu-server:
 	python3 -m rasa_nlu.server --path models/current
 
 core-server:
-	python3 -m rasa_core.run --enable_api -d models/current/dialogue -u models/current/nlu --endpoints endpoints.yml -o rasa_core.log
+	python3 -m rasa_core.run --enable_api --auth_token ${secret} -d models/current/dialogue -u models/current/nlu --endpoints endpoints.yml -o rasa_core.log
 
 cmdline:
 	python3 -m rasa_core.run -d models/current/dialogue -u models/current/nlu --endpoints endpoints.yml

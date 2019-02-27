@@ -12,7 +12,7 @@
 
 ## story_status
 * status
-    - utter_status
+    - action_get_status
 
 ## story_query_food_confirm
 * query-food

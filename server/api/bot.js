@@ -2,7 +2,7 @@ const router = require('express').Router()
 
 const Bot = require('../bot')
 
-let lexBot, flowBot, watsonBot
+let lexBot, flowBot, watsonBot, rasaBot
 
 // expects option in req that sets which bot to use.
 router.post('/initiate', (req, res, next) => {
@@ -16,6 +16,7 @@ router.post('/initiate', (req, res, next) => {
   if (bot.type === 'LEX') lexBot = bot
   else if (bot.type === 'DIALOG_FLOW') flowBot = bot
   else if (bot.type === 'WATSON') watsonBot = bot
+  else if (bot.type === 'RASA') rasaBot = bot
 
   if (!bot.initiate) next(new Error('Invalid bot option'))
 
@@ -47,6 +48,7 @@ router.post('/message', (req, res, next) => {
   if (option === 'LEX') bot = lexBot
   else if (option === 'DIALOG_FLOW') bot = flowBot
   else if (option === 'WATSON') bot = watsonBot
+  else if (option === 'RASA') bot = rasaBot
 
   if (!req.user) {
     res.status(401).send('Please log in.')

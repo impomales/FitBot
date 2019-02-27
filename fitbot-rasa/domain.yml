@@ -1,35 +1,35 @@
 %YAML 1.1
 ---
 actions:
-- action_get_nutrition_info
-- utter_bye
-- utter_ask_unit
-- action_reset_food
-- utter_ask_food
 - utter_entities
-- utter_greet
-- utter_deny_message
-- utter_help
-- utter_ask_quantity
 - utter_status
+- action_reset_food
+- utter_ask_quantity
+- utter_help
+- action_get_nutrition_info
 - utter_ask_mealtime
+- utter_greet
+- utter_ask_unit
+- utter_bye
+- utter_ask_food
+- utter_deny_message
+- action_get_status
 entities:
-- quantity
 - food
-- unit
+- quantity
 - mealtime
+- unit
 forms:
 - query_food_form
 intents:
 - query-food
 - inform
-- confirm
 - help
 - greeting
-- deny
-- out_of_scope
+- confirm
 - bye
 - status
+- deny
 slots:
   calories:
     type: text
@@ -62,8 +62,6 @@ templates:
   - text: Later!
   - text: Bye Bye.
   - text: =)
-  utter_default:
-  - text: I'm sorry I don't understand what you said. Please try again.
   utter_deny_message:
   - text: Ok. I won't log {food}.
   utter_entities:
@@ -76,3 +74,5 @@ templates:
   - text: I can help you achieve your fitness goals by tracking you calories and physical
       activity. ex. How many calories does 2 glasses of wine have?
   - text: Ask me 'how many calories did I have today?'
+  utter_default:
+  - text: I'm sorry I don't understand what you said. Please try again.

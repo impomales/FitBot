@@ -1,27 +1,27 @@
 {
   "action_fingerprints": {
     "action_listen": {
-      "slots": ["food", "mealtime", "unit", "quantity"]
+      "slots": ["mealtime", "quantity", "food", "unit"]
+    },
+    "utter_greet": {
+      "slots": []
+    },
+    "action_get_status": {
+      "slots": []
     },
     "utter_bye": {
       "slots": []
     },
-    "utter_help": {
-      "slots": []
-    },
     "query_food_form": {
-      "slots": ["requested_slot", "food", "unit", "quantity"]
+      "slots": ["food", "requested_slot", "quantity", "unit"]
     },
     "action_get_nutrition_info": {
       "slots": ["calories"]
     },
     "action_reset_food": {
-      "slots": ["calories", "mealtime", "quantity", "food", "unit"]
+      "slots": ["mealtime", "calories", "food", "quantity", "unit"]
     },
-    "utter_status": {
-      "slots": []
-    },
-    "utter_greet": {
+    "utter_help": {
       "slots": []
     }
   },
@@ -35,5 +35,5 @@
     "rasa_core.policies.form_policy.FormPolicy",
     "rasa_core.policies.fallback.FallbackPolicy"
   ],
-  "trained_at": "20190227-140329"
+  "trained_at": "20190227-150636"
 }

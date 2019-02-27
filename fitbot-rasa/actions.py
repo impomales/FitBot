@@ -61,6 +61,14 @@ class ActionResetFood(Action):
         dispatcher.utter_message(tracker.get_slot("mealtime"))
         return [SlotSet("food", None), SlotSet("unit", None), SlotSet("quantity", None), SlotSet("calories", None), SlotSet("mealtime", None)]
 
+class ActionGetStatus(Action):
+    def name(self):
+        return "action_get_status"
+
+    def run(self, dispatcher, tracker, domain):
+        dispatcher.utter_attachment({"action": "status"})
+        return []
+
 # forms
 
 
@@ -76,7 +84,6 @@ class QueryFoodForm(FormAction):
         return ["food", "unit", "quantity"]
 
     def submit(self, dispatcher, tracker, domain):
-        dispatcher.utter_message('Fetching nutrition info from server')
         return []
 
 # helpers

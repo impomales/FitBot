@@ -13,6 +13,7 @@ export class Chat extends Component {
       sessionUserIdLex: '',
       sessionUserIdFlow: '',
       sessionUserIdWatson: '',
+      sessionUserIdRasa: '',
       option: ''
     }
   }
@@ -26,6 +27,7 @@ export class Chat extends Component {
       sessionUserIdFlow,
       sessionUserIdLex,
       sessionUserIdWatson,
+      sessionUserIdRasa,
       messages
     } = this.state
     axios
@@ -38,6 +40,8 @@ export class Chat extends Component {
           bot.type === 'DIALOG_FLOW' ? sessionUserId : sessionUserIdFlow
         sessionUserIdWatson =
           bot.type === 'WATSON' ? sessionUserId : sessionUserIdWatson
+        sessionUserIdRasa =
+          bot.type === 'RASA' ? sessionUserId : sessionUserIdRasa
 
         const initMessages = [
           {
@@ -56,6 +60,7 @@ export class Chat extends Component {
           sessionUserIdLex,
           sessionUserIdFlow,
           sessionUserIdWatson,
+          sessionUserIdRasa,
           messages: [...messages, ...initMessages]
         })
       })
@@ -73,6 +78,7 @@ export class Chat extends Component {
         sessionUserIdLex,
         sessionUserIdFlow,
         sessionUserIdWatson,
+        sessionUserIdRasa,
         messages
       } = this.state
       // only initialize bot first time.
@@ -80,6 +86,7 @@ export class Chat extends Component {
       if (option === 'LEX') bot = sessionUserIdLex
       else if (option === 'DIALOG_FLOW') bot = sessionUserIdFlow
       else if (option === 'WATSON') bot = sessionUserIdWatson
+      else if (option === 'RASA') bot = sessionUserIdRasa
 
       const message = {
         type: 'status',
@@ -103,6 +110,7 @@ export class Chat extends Component {
       sessionUserIdLex,
       sessionUserIdFlow,
       sessionUserIdWatson,
+      sessionUserIdRasa,
       option
     } = this.state
     if (!text) return
@@ -117,6 +125,7 @@ export class Chat extends Component {
       if (option === 'LEX') sessionUserId = sessionUserIdLex
       else if (option === 'DIALOG_FLOW') sessionUserId = sessionUserIdFlow
       else if (option === 'WATSON') sessionUserId = sessionUserIdWatson
+      else if (option === 'RASA') sessionUserId = sessionUserIdRasa
 
       axios
         .post('/api/bot/message', {text, sessionUserId, option})

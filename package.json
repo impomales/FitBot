@@ -26,6 +26,8 @@
     "start-server-watson": "BOT='WATSON' nodemon server -e html,js,scss --ignore public --ignore client",
     "start-dev-lex": "BOT='LEX' NODE_ENV='development' npm run build-client-watch & BOT='LEX' NODE_ENV='development' npm run start-server-lex",
     "start-server-lex": "BOT='LEX' nodemon server -e html,js,scss --ignore public --ignore client",
+    "start-dev-rasa": "BOT='RASA' NODE_ENV='development' npm run build-client-watch & BOT='RASA' NODE_ENV='development' npm run start-server-rasa",
+    "start-server-rasa": "BOT='RASA' nodemon server -e html,js,scss --ignore public --ignore client",
     "unit": "BOT='DIALOG_FLOW' NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" \"./fitbotLambda/**/*.spec.js\" \"./dialogFlowFulfillment/**/*.spec.js\" --require @babel/polyfill --require @babel/register",
     "unit-lex": "BOT='LEX' NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" \"./fitbotLambda/**/*.spec.js\" \"./dialogFlowFulfillment/**/*.spec.js\" --require @babel/polyfill --require @babel/register",
     "unit-watson": "BOT='WATSON' NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" \"./fitbotLambda/**/*.spec.js\" \"./dialogFlowFulfillment/**/*.spec.js\" --require @babel/polyfill --require @babel/register",
@@ -40,7 +42,7 @@
       "npm run lint-fix",
       "git add"
     ],
-    "*.{css,scss,json,md}": [
+    "*.{css,scss,json}": [
       "prettier --write",
       "git add"
     ]

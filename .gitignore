@@ -16,3 +16,4 @@ bin
 tests_output
 
 fitbot-rasa/credentials.yml
+fitbot-rasa/rasa_core.log

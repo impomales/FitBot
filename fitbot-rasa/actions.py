@@ -29,8 +29,8 @@ class ActionGetNutritionInfo(Action):
         quantity = tracker.get_slot("quantity")
         unit = tracker.get_slot("unit")
 
-        if (quantity == 'a' or  quantity == 'an'):
-             quantity = 1
+        if (quantity == 'a' or quantity == 'an'):
+            quantity = 1
 
         query = buildFoodQuery(food, quantity, unit)
 
@@ -50,7 +50,7 @@ class ActionGetNutritionInfo(Action):
         dispatcher.utter_message(buildFoodQueryResult(
             info, unit) + ' Would you like to log this item?')
 
-        return [SlotSet("calories", info['nf_calories'])]
+        return [SlotSet("calories", info['nf_calories']), SlotSet("weight_in_grams", info["serving_weight_grams"])]
 
 
 class ActionResetFood(Action):
@@ -61,12 +61,29 @@ class ActionResetFood(Action):
         dispatcher.utter_message(tracker.get_slot("mealtime"))
         return [SlotSet("food", None), SlotSet("unit", None), SlotSet("quantity", None), SlotSet("calories", None), SlotSet("mealtime", None)]
 
+
 class ActionGetStatus(Action):
     def name(self):
         return "action_get_status"
 
     def run(self, dispatcher, tracker, domain):
         dispatcher.utter_attachment({"action": "status"})
+        return []
+
+
+class ActionLogFood(Action):
+    def name(self):
+        return "action_log_food"
+
+    def run(self, dispatcher, tracker, domain):
+        name = tracker.get_slot('food')
+        quantity = tracker.get_slot('quantity')
+        unit = tracker.get_slot('unit')
+        mealtime = tracker.get_slot('mealtime')
+        calories = tracker.get_slot('calories')
+        weight_in_grams = tracker.get_slot('weight_in_grams')
+        dispatcher.utter_attachment({"action": "logFood", "name": name, "quantity": quantity, "unit": unit,
+                                     "mealtime": mealtime, "calories": calories, "weight_in_grams": weight_in_grams})
         return []
 
 # forms

@@ -24,6 +24,7 @@
 * confirm
     - utter_ask_mealtime
 * inform{"mealtime": "lunch"}
+    - action_log_food
     - action_reset_food
 
 ## story_query_food_deny
@@ -64,6 +65,7 @@
     - utter_ask_mealtime
 * inform{"mealtime": "Dinner"}
     - slot{"mealtime": "Dinner"}
+    - action_log_food
     - action_reset_food
     - slot{"food": null}
     - slot{"unit": null}
@@ -121,6 +123,7 @@
     - utter_ask_mealtime
 * inform{"mealtime": "Lunch"}
     - slot{"mealtime": "Lunch"}
+    - action_log_food
     - action_reset_food
     - slot{"food": null}
     - slot{"unit": null}

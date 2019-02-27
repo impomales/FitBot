@@ -14,6 +14,7 @@ actions:
 - utter_ask_food
 - utter_deny_message
 - action_get_status
+- action_log_food
 entities:
 - food
 - quantity
@@ -32,6 +33,8 @@ intents:
 - deny
 slots:
   calories:
+    type: text
+  weight_in_grams:
     type: text
   food:
     type: unfeaturized

@@ -14,6 +14,7 @@ actions:
 - utter_ask_food
 - utter_deny_message
 - action_get_status
+- action_log_food
 config:
   store_entities_as_slots: true
 entities:
@@ -70,6 +71,10 @@ slots:
     auto_fill: true
     initial_value: null
     type: rasa_core.slots.UnfeaturizedSlot
+  weight_in_grams:
+    auto_fill: true
+    initial_value: null
+    type: rasa_core.slots.TextSlot
 templates:
   utter_ask_food:
   - text: Please enter a food item.

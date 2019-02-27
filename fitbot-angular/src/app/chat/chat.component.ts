@@ -16,6 +16,7 @@ export class ChatComponent implements OnInit {
   sessionUserIdLex: string
   sessionUserIdFlow: string
   sessionUserIdWatson: string
+  sessionUserIdRasa: string
 
   constructor(
     public authService: AuthService,
@@ -38,6 +39,8 @@ export class ChatComponent implements OnInit {
           bot.type === 'DIALOG_FLOW' ? sessionUserId : this.sessionUserIdFlow
         this.sessionUserIdWatson =
           bot.type === 'WATSON' ? sessionUserId : this.sessionUserIdWatson
+        this.sessionUserIdRasa = 
+          bot.type === 'RASA' ? sessionUserId : this.sessionUserIdRasa
 
         this.messageService.push([
           {
@@ -76,13 +79,15 @@ export class ChatComponent implements OnInit {
       option,
       sessionUserIdFlow,
       sessionUserIdLex,
-      sessionUserIdWatson
+      sessionUserIdWatson,
+      sessionUserIdRasa
     } = this
 
     let bot
     if (option === 'LEX') bot = sessionUserIdLex
     else if (option === 'DIALOG_FLOW') bot = sessionUserIdFlow
     else if (option === 'WATSON') bot = sessionUserIdWatson
+    else if (option === 'RASA') bot = sessionUserIdRasa
 
     if (!bot) this.initializeBot()
     else {
@@ -115,6 +120,7 @@ export class ChatComponent implements OnInit {
     if (option === 'LEX') sessionUserId = this.sessionUserIdLex
     else if (option === 'DIALOG_FLOW') sessionUserId = this.sessionUserIdFlow
     else if (option === 'WATSON') sessionUserId = this.sessionUserIdWatson
+    else if (option === 'RASA') sessionUserId = this.sessionUserIdRasa
 
     this.chatService.messageBot(sessionUserId, text, option).subscribe(
       data => {

@@ -5,6 +5,7 @@ const Bot = require('../bot')
 let lexBot, flowBot, watsonBot, rasaBot
 
 // expects option in req that sets which bot to use.
+// eslint-disable-next-line complexity
 router.post('/initiate', (req, res, next) => {
   if (!req.user) {
     res.status(401).send('Please log in.')

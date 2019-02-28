@@ -15,6 +15,12 @@ actions:
 - utter_deny_message
 - action_get_status
 - action_log_food
+- utter_annoying
+- utter_answer_question
+- utter_unhelpful
+- utter_thanks
+- utter_laugh
+- utter_no
 entities:
 - food
 - quantity
@@ -31,6 +37,14 @@ intents:
 - bye
 - status
 - deny
+- annoying
+- answer_question
+- unhelpful
+- smart
+- beautiful
+- crazy
+- marry
+- love
 slots:
   calories:
     type: text
@@ -77,5 +91,22 @@ templates:
   - text: I can help you achieve your fitness goals by tracking you calories and physical
       activity. ex. How many calories does 2 glasses of wine have?
   - text: Ask me 'how many calories did I have today?'
+  utter_annoying:
+  - text: Honestly, I think you are the more annoying one.
+  utter_answer_question:
+  - text: Maybe if you asked a little more nicely
+  utter_unhelpful:
+  - text: I'm trying to do better!
+  utter_thanks:
+  - text: Thanks, likewise.
+  - text: You're making me blush.
+  - text: =)
+  utter_laugh:
+  - text: haha.
+  - text: You're funny.
+  utter_no:
+  - text: Sorry, but no.
+  utter_love:
+  - text: I love you too...
   utter_default:
   - text: I'm sorry I don't understand what you said. Please try again.

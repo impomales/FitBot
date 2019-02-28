@@ -21,6 +21,10 @@ function messageRasa(sessionUserId, text, callback) {
 }
 
 async function handleResponseRasa(user, response) {
+  if (!response.length) {
+    return "Sorry, I don't understand. Please try again."
+  }
+
   const {text, attachment} = response[0]
 
   if (text) return text

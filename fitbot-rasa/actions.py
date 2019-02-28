@@ -45,6 +45,10 @@ class ActionGetNutritionInfo(Action):
             'x-app-key': str(key),
             'x-remote-user-id': "0"}).text)
 
+        if 'message' in request:
+            dispatcher.utter_message(request['message'])
+            return []
+
         info = request['foods'][0]
 
         dispatcher.utter_message(buildFoodQueryResult(

@@ -14,6 +14,34 @@
 * status
     - action_get_status
 
+## story_annoying
+* annoying
+    - utter_annoying
+
+## story_answer_question
+* answer_question
+    - utter_answer_question
+
+## story_unhelpful
+* unhelpful
+    - utter_unhelpful
+
+## story_smart
+* smart
+    - utter_thanks
+
+## story_beautiful
+    - utter_thanks
+
+## story_love
+    - utter_love
+
+## story_marry
+    - utter_no
+
+## story_crazy
+    - utter_laugh
+
 ## story_query_food_confirm
 * query-food
     - query_food_form
@@ -25,6 +53,15 @@
     - utter_ask_mealtime
 * inform{"mealtime": "lunch"}
     - action_log_food
+    - action_reset_food
+
+## story_query_food_no_match
+* query-food
+    - query_food_form
+    - form{"name": "query_food_form"}
+    - form{"name": null}
+    - action_get_nutrition_info
+    - slot{"calories": null}
     - action_reset_food
 
 ## story_query_food_deny

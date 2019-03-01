@@ -1,0 +1,62 @@
+{
+  "action_fingerprints": {
+    "action_listen": {
+      "slots": ["quantity", "food", "unit", "mealtime"]
+    },
+    "utter_thanks": {
+      "slots": []
+    },
+    "utter_love": {
+      "slots": []
+    },
+    "utter_answer_question": {
+      "slots": []
+    },
+    "utter_no": {
+      "slots": []
+    },
+    "action_get_status": {
+      "slots": []
+    },
+    "query_food_form": {
+      "slots": ["quantity", "food", "unit", "requested_slot"]
+    },
+    "action_get_nutrition_info": {
+      "slots": ["calories"]
+    },
+    "action_reset_food": {
+      "slots": ["food", "mealtime", "quantity", "unit", "calories"]
+    },
+    "utter_unhelpful": {
+      "slots": []
+    },
+    "utter_laugh": {
+      "slots": []
+    },
+    "utter_help": {
+      "slots": []
+    },
+    "utter_bye": {
+      "slots": []
+    },
+    "utter_greet": {
+      "slots": []
+    },
+    "utter_annoying": {
+      "slots": []
+    }
+  },
+  "python": "3.6.8",
+  "max_histories": [5, null, 5, 2],
+  "ensemble_name": "rasa_core.policies.ensemble.SimplePolicyEnsemble",
+  "policy_names": [
+    "rasa_core.policies.keras_policy.KerasPolicy",
+    "rasa_core.policies.fallback.FallbackPolicy",
+    "rasa_core.policies.memoization.MemoizationPolicy",
+    "rasa_core.policies.form_policy.FormPolicy"
+  ],
+  "trained_at": "20190228-164330",
+  "rasa_core": "0.14.0a1",
+  "tensorflow": "1.12.0",
+  "sklearn": "0.20.2"
+}

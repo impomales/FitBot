@@ -1,0 +1,2502 @@
+{
+  "rasa_nlu_data": {
+    "common_examples": [
+      {
+        "intent": "bye",
+        "text": "bye"
+      },
+      {
+        "intent": "bye",
+        "text": "exit"
+      },
+      {
+        "intent": "bye",
+        "text": "i don't need help"
+      },
+      {
+        "intent": "bye",
+        "text": "later"
+      },
+      {
+        "intent": "bye",
+        "text": "goodbye"
+      },
+      {
+        "intent": "confirm",
+        "text": "yes"
+      },
+      {
+        "intent": "confirm",
+        "text": "yeah"
+      },
+      {
+        "intent": "confirm",
+        "text": "ok"
+      },
+      {
+        "intent": "confirm",
+        "text": "okay"
+      },
+      {
+        "intent": "confirm",
+        "text": "sure"
+      },
+      {
+        "intent": "confirm",
+        "text": "yes please"
+      },
+      {
+        "intent": "confirm",
+        "text": "yep"
+      },
+      {
+        "intent": "confirm",
+        "text": "yes"
+      },
+      {
+        "intent": "confirm",
+        "text": "yes"
+      },
+      {
+        "intent": "confirm",
+        "text": "yes"
+      },
+      {
+        "intent": "deny",
+        "text": "no"
+      },
+      {
+        "intent": "deny",
+        "text": "nope"
+      },
+      {
+        "intent": "deny",
+        "text": "no thanks"
+      },
+      {
+        "intent": "deny",
+        "text": "please don't"
+      },
+      {
+        "intent": "deny",
+        "text": "don't"
+      },
+      {
+        "intent": "deny",
+        "text": "nah"
+      },
+      {
+        "intent": "deny",
+        "text": "thanks but no"
+      },
+      {
+        "intent": "deny",
+        "text": "not"
+      },
+      {
+        "intent": "deny",
+        "text": "no"
+      },
+      {
+        "intent": "greeting",
+        "text": "hi"
+      },
+      {
+        "intent": "greeting",
+        "text": "hello"
+      },
+      {
+        "intent": "greeting",
+        "text": "hi bot"
+      },
+      {
+        "intent": "greeting",
+        "text": "hi again"
+      },
+      {
+        "intent": "greeting",
+        "text": "greetings"
+      },
+      {
+        "intent": "greeting",
+        "text": "hello robot"
+      },
+      {
+        "intent": "greeting",
+        "text": "hello"
+      },
+      {
+        "intent": "greeting",
+        "text": "hey bot"
+      },
+      {
+        "intent": "greeting",
+        "text": "hey pal"
+      },
+      {
+        "intent": "greeting",
+        "text": "hey"
+      },
+      {
+        "intent": "greeting",
+        "text": "hey there"
+      },
+      {
+        "intent": "greeting",
+        "text": "hey buddy"
+      },
+      {
+        "intent": "greeting",
+        "text": "hello"
+      },
+      {
+        "intent": "greeting",
+        "text": "howdy"
+      },
+      {
+        "intent": "greeting",
+        "text": "heya"
+      },
+      {
+        "intent": "greeting",
+        "text": "hi"
+      },
+      {
+        "intent": "greeting",
+        "text": "hi there"
+      },
+      {
+        "intent": "greeting",
+        "text": "hey"
+      },
+      {
+        "intent": "greeting",
+        "text": "hi"
+      },
+      {
+        "intent": "greeting",
+        "text": "hi"
+      },
+      {
+        "intent": "greeting",
+        "text": "hi"
+      },
+      {
+        "intent": "greeting",
+        "text": "hi"
+      },
+      {
+        "intent": "greeting",
+        "text": "hi"
+      },
+      {
+        "intent": "help",
+        "text": "help"
+      },
+      {
+        "intent": "help",
+        "text": "help me"
+      },
+      {
+        "intent": "help",
+        "text": "i need help"
+      },
+      {
+        "intent": "help",
+        "text": "what can you do"
+      },
+      {
+        "intent": "help",
+        "text": "how do i use this"
+      },
+      {
+        "intent": "help",
+        "text": "help me"
+      },
+      {
+        "intent": "help",
+        "text": "what can you do"
+      },
+      {
+        "intent": "help",
+        "text": "Help me"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 4,
+            "value": "pear",
+            "entity": "food"
+          }
+        ],
+        "text": "pear"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 6,
+            "value": "grapes",
+            "entity": "food"
+          }
+        ],
+        "text": "grapes"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 5,
+            "value": "steak",
+            "entity": "food"
+          }
+        ],
+        "text": "steak"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 6,
+            "value": "banana",
+            "entity": "food"
+          }
+        ],
+        "text": "banana"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 5,
+            "value": "apple",
+            "entity": "food"
+          }
+        ],
+        "text": "apple"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 5,
+            "value": "bread",
+            "entity": "food"
+          }
+        ],
+        "text": "bread"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 6,
+            "value": "coffee",
+            "entity": "food"
+          }
+        ],
+        "text": "coffee"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 4,
+            "value": "beer",
+            "entity": "food"
+          }
+        ],
+        "text": "beer"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 5,
+            "value": "flour",
+            "entity": "food"
+          }
+        ],
+        "text": "flour"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 4,
+            "value": "wine",
+            "entity": "food"
+          }
+        ],
+        "text": "wine"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 9,
+            "value": "chocolate",
+            "entity": "food"
+          }
+        ],
+        "text": "chocolate"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 4,
+            "value": "milk",
+            "entity": "food"
+          }
+        ],
+        "text": "milk"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 6,
+            "value": "butter",
+            "entity": "food"
+          }
+        ],
+        "text": "butter"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 4,
+            "value": "cake",
+            "entity": "food"
+          }
+        ],
+        "text": "cake"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 6,
+            "value": "cookie",
+            "entity": "food"
+          }
+        ],
+        "text": "cookie"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 6,
+            "value": "yogurt",
+            "entity": "food"
+          }
+        ],
+        "text": "yogurt"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 1,
+            "value": "1",
+            "entity": "quantity"
+          }
+        ],
+        "text": "1"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 1,
+            "value": "1",
+            "entity": "quantity"
+          }
+        ],
+        "text": "a"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 2,
+            "value": "1",
+            "entity": "quantity"
+          }
+        ],
+        "text": "an"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 1,
+            "value": "3",
+            "entity": "quantity"
+          }
+        ],
+        "text": "3"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 1,
+            "value": "5",
+            "entity": "quantity"
+          }
+        ],
+        "text": "5"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 4,
+            "value": "1.23",
+            "entity": "quantity"
+          }
+        ],
+        "text": "1.23"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 3,
+            "value": "0.5",
+            "entity": "quantity"
+          }
+        ],
+        "text": "0.5"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 1,
+            "value": "g",
+            "entity": "unit"
+          }
+        ],
+        "text": "g"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 5,
+            "value": "glass",
+            "entity": "unit"
+          }
+        ],
+        "text": "glass"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 6,
+            "value": "gallon",
+            "entity": "unit"
+          }
+        ],
+        "text": "gallon"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 2,
+            "value": "kg",
+            "entity": "unit"
+          }
+        ],
+        "text": "kg"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 4,
+            "value": "loaf",
+            "entity": "unit"
+          }
+        ],
+        "text": "loaf"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 2,
+            "value": "ml",
+            "entity": "unit"
+          }
+        ],
+        "text": "ml"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 4,
+            "value": "pint",
+            "entity": "unit"
+          }
+        ],
+        "text": "pint"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 5,
+            "value": "quart",
+            "entity": "unit"
+          }
+        ],
+        "text": "quart"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 3,
+            "value": "tsp",
+            "entity": "unit"
+          }
+        ],
+        "text": "tsp"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 4,
+            "value": "tbsp",
+            "entity": "unit"
+          }
+        ],
+        "text": "tbsp"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 2,
+            "value": "ounce",
+            "entity": "unit"
+          }
+        ],
+        "text": "oz"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 3,
+            "value": "cup",
+            "entity": "unit"
+          }
+        ],
+        "text": "cup"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 5,
+            "value": "slice",
+            "entity": "unit"
+          }
+        ],
+        "text": "slice"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 2,
+            "value": "lb",
+            "entity": "unit"
+          }
+        ],
+        "text": "lb"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 9,
+            "value": "Breakfast",
+            "entity": "mealtime"
+          }
+        ],
+        "text": "Breakfast"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 9,
+            "value": "Breakfast",
+            "entity": "mealtime"
+          }
+        ],
+        "text": "breakfast"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 5,
+            "value": "Lunch",
+            "entity": "mealtime"
+          }
+        ],
+        "text": "Lunch"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 5,
+            "value": "Lunch",
+            "entity": "mealtime"
+          }
+        ],
+        "text": "lunch"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 6,
+            "value": "Dinner",
+            "entity": "mealtime"
+          }
+        ],
+        "text": "Dinner"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 6,
+            "value": "Dinner",
+            "entity": "mealtime"
+          }
+        ],
+        "text": "dinner"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 5,
+            "value": "Snack",
+            "entity": "mealtime"
+          }
+        ],
+        "text": "Snack"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 5,
+            "value": "Snack",
+            "entity": "mealtime"
+          }
+        ],
+        "text": "snack"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 5,
+            "value": "slice",
+            "entity": "unit"
+          }
+        ],
+        "text": "slice"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 1,
+            "value": "2",
+            "entity": "quantity"
+          }
+        ],
+        "text": "2"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 6,
+            "value": "Dinner",
+            "entity": "mealtime"
+          }
+        ],
+        "text": "dinner"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 6,
+            "value": "Dinner",
+            "entity": "mealtime"
+          }
+        ],
+        "text": "dinner"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 5,
+            "value": "steak",
+            "entity": "food"
+          }
+        ],
+        "text": "steak"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 2,
+            "value": "lb",
+            "entity": "unit"
+          }
+        ],
+        "text": "lb"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 4,
+            "value": "0.25",
+            "entity": "quantity"
+          }
+        ],
+        "text": "0.25"
+      },
+      {
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 5,
+            "value": "Lunch",
+            "entity": "mealtime"
+          }
+        ],
+        "text": "lunch"
+      },
+      {
+        "intent": "out_of_scope",
+        "text": "blah"
+      },
+      {
+        "intent": "out_of_scope",
+        "text": "wekrjelejl"
+      },
+      {
+        "intent": "query-food",
+        "text": "enter calories"
+      },
+      {
+        "intent": "query-food",
+        "entities": [
+          {
+            "start": 21,
+            "end": 27,
+            "value": "cheese",
+            "entity": "food"
+          }
+        ],
+        "text": "how many calories in cheese"
+      },
+      {
+        "intent": "query-food",
+        "entities": [
+          {
+            "start": 21,
+            "end": 26,
+            "value": "pizza",
+            "entity": "food"
+          }
+        ],
+        "text": "how many calories in pizza"
+      },
+      {
+        "intent": "query-food",
+        "entities": [
+          {
+            "start": 21,
+            "end": 22,
+            "value": "3",
+            "entity": "quantity"
+          },
+          {
+            "start": 23,
+            "end": 30,
+            "value": "carrots",
+            "entity": "food"
+          }
+        ],
+        "text": "how many calories in 3 carrots"
+      },
+      {
+        "intent": "query-food",
+        "entities": [
+          {
+            "start": 21,
+            "end": 22,
+            "value": "1",
+            "entity": "quantity"
+          },
+          {
+            "start": 23,
+            "end": 29,
+            "value": "banana",
+            "entity": "food"
+          }
+        ],
+        "text": "how many calories in 1 banana"
+      },
+      {
+        "intent": "query-food",
+        "entities": [
+          {
+            "start": 25,
+            "end": 26,
+            "value": "1",
+            "entity": "quantity"
+          },
+          {
+            "start": 27,
+            "end": 37,
+            "value": "strawberry",
+            "entity": "food"
+          }
+        ],
+        "text": "how many calories are in 1 strawberry"
+      },
+      {
+        "intent": "query-food",
+        "entities": [
+          {
+            "start": 25,
+            "end": 26,
+            "value": "2",
+            "entity": "quantity"
+          },
+          {
+            "start": 27,
+            "end": 31,
+            "value": "cups",
+            "entity": "unit"
+          },
+          {
+            "start": 35,
+            "end": 39,
+            "value": "wine",
+            "entity": "food"
+          }
+        ],
+        "text": "how many calories are in 2 cups of wine"
+      },
+      {
+        "intent": "query-food",
+        "entities": [
+          {
+            "start": 25,
+            "end": 26,
+            "value": "1",
+            "entity": "quantity"
+          },
+          {
+            "start": 27,
+            "end": 32,
+            "value": "ounce",
+            "entity": "unit"
+          },
+          {
+            "start": 36,
+            "end": 41,
+            "value": "pears",
+            "entity": "food"
+          }
+        ],
+        "text": "how many calories are in 1 ounce of pears"
+      },
+      {
+        "intent": "query-food",
+        "entities": [
+          {
+            "start": 25,
+            "end": 26,
+            "value": "3",
+            "entity": "quantity"
+          },
+          {
+            "start": 27,
+            "end": 29,
+            "value": "ounce",
+            "entity": "unit"
+          },
+          {
+            "start": 33,
+            "end": 38,
+            "value": "flour",
+            "entity": "food"
+          }
+        ],
+        "text": "how many calories are in 3 oz of flour"
+      },
+      {
+        "intent": "query-food",
+        "entities": [
+          {
+            "start": 25,
+            "end": 27,
+            "value": "10",
+            "entity": "quantity"
+          },
+          {
+            "start": 28,
+            "end": 39,
+            "value": "fluid ounce",
+            "entity": "unit"
+          },
+          {
+            "start": 43,
+            "end": 47,
+            "value": "milk",
+            "entity": "food"
+          }
+        ],
+        "text": "how many calories are in 10 fluid ounce of milk"
+      },
+      {
+        "intent": "query-food",
+        "entities": [
+          {
+            "start": 25,
+            "end": 26,
+            "value": "5",
+            "entity": "quantity"
+          },
+          {
+            "start": 27,
+            "end": 31,
+            "value": "cups",
+            "entity": "unit"
+          },
+          {
+            "start": 35,
+            "end": 39,
+            "value": "beer",
+            "entity": "food"
+          }
+        ],
+        "text": "how many calories are in 5 cups of beer"
+      },
+      {
+        "intent": "query-food",
+        "entities": [
+          {
+            "start": 25,
+            "end": 26,
+            "value": "1",
+            "entity": "quantity"
+          },
+          {
+            "start": 27,
+            "end": 32,
+            "value": "slice",
+            "entity": "unit"
+          },
+          {
+            "start": 36,
+            "end": 41,
+            "value": "pizza",
+            "entity": "food"
+          }
+        ],
+        "text": "how many calories are in a slice of pizza"
+      },
+      {
+        "intent": "query-food",
+        "entities": [
+          {
+            "start": 25,
+            "end": 26,
+            "value": "1",
+            "entity": "quantity"
+          },
+          {
+            "start": 27,
+            "end": 33,
+            "value": "banana",
+            "entity": "food"
+          }
+        ],
+        "text": "how many calories are in a banana"
+      },
+      {
+        "intent": "query-food",
+        "entities": [
+          {
+            "start": 25,
+            "end": 26,
+            "value": "1",
+            "entity": "quantity"
+          },
+          {
+            "start": 27,
+            "end": 31,
+            "value": "pear",
+            "entity": "food"
+          }
+        ],
+        "text": "how many calories are in a pear"
+      },
+      {
+        "intent": "query-food",
+        "entities": [
+          {
+            "start": 21,
+            "end": 23,
+            "value": "1",
+            "entity": "quantity"
+          },
+          {
+            "start": 24,
+            "end": 29,
+            "value": "apple",
+            "entity": "food"
+          }
+        ],
+        "text": "how many calories in an apple"
+      },
+      {
+        "intent": "query-food",
+        "entities": [
+          {
+            "start": 21,
+            "end": 23,
+            "value": "1",
+            "entity": "quantity"
+          },
+          {
+            "start": 24,
+            "end": 26,
+            "value": "ounce",
+            "entity": "unit"
+          },
+          {
+            "start": 30,
+            "end": 39,
+            "value": "spaghetti",
+            "entity": "food"
+          }
+        ],
+        "text": "how many calories in an oz of spaghetti"
+      },
+      {
+        "intent": "query-food",
+        "entities": [
+          {
+            "start": 21,
+            "end": 26,
+            "value": "pizza",
+            "entity": "food"
+          }
+        ],
+        "text": "how many calories in pizza"
+      },
+      {
+        "intent": "query-food",
+        "entities": [
+          {
+            "start": 23,
+            "end": 24,
+            "value": "2",
+            "entity": "quantity"
+          },
+          {
+            "start": 25,
+            "end": 32,
+            "value": "glass",
+            "entity": "unit"
+          },
+          {
+            "start": 36,
+            "end": 40,
+            "value": "wine",
+            "entity": "food"
+          }
+        ],
+        "text": "how many calories does 2 glasses of wine have?"
+      },
+      {
+        "intent": "query-food",
+        "entities": [
+          {
+            "start": 21,
+            "end": 22,
+            "value": "1",
+            "entity": "quantity"
+          },
+          {
+            "start": 23,
+            "end": 27,
+            "value": "loaf",
+            "entity": "unit"
+          },
+          {
+            "start": 31,
+            "end": 36,
+            "value": "bread",
+            "entity": "food"
+          }
+        ],
+        "text": "how many calories in a loaf of bread"
+      },
+      {
+        "intent": "query-food",
+        "entities": [
+          {
+            "start": 21,
+            "end": 22,
+            "value": "2",
+            "entity": "quantity"
+          },
+          {
+            "start": 23,
+            "end": 27,
+            "value": "cups",
+            "entity": "unit"
+          },
+          {
+            "start": 31,
+            "end": 35,
+            "value": "milk",
+            "entity": "food"
+          }
+        ],
+        "text": "how many calories in 2 cups of milk"
+      },
+      {
+        "intent": "query-food",
+        "entities": [
+          {
+            "start": 21,
+            "end": 22,
+            "value": "1",
+            "entity": "quantity"
+          },
+          {
+            "start": 23,
+            "end": 26,
+            "value": "cup",
+            "entity": "unit"
+          },
+          {
+            "start": 30,
+            "end": 34,
+            "value": "beer",
+            "entity": "food"
+          }
+        ],
+        "text": "how many calories in a cup of beer"
+      },
+      {
+        "intent": "query-food",
+        "entities": [
+          {
+            "start": 21,
+            "end": 22,
+            "value": "1",
+            "entity": "quantity"
+          },
+          {
+            "start": 23,
+            "end": 28,
+            "value": "slice",
+            "entity": "unit"
+          },
+          {
+            "start": 32,
+            "end": 37,
+            "value": "pizza",
+            "entity": "food"
+          }
+        ],
+        "text": "how many calories in a slice of pizza"
+      },
+      {
+        "intent": "query-food",
+        "entities": [
+          {
+            "start": 21,
+            "end": 22,
+            "value": "1",
+            "entity": "quantity"
+          },
+          {
+            "start": 23,
+            "end": 25,
+            "value": "lb",
+            "entity": "unit"
+          },
+          {
+            "start": 29,
+            "end": 33,
+            "value": "beef",
+            "entity": "food"
+          }
+        ],
+        "text": "how many calories in a lb of beef"
+      },
+      {
+        "intent": "query-food",
+        "entities": [
+          {
+            "start": 21,
+            "end": 28,
+            "value": "carrots",
+            "entity": "food"
+          }
+        ],
+        "text": "how many calories in carrots"
+      },
+      {
+        "intent": "query-food",
+        "entities": [
+          {
+            "start": 25,
+            "end": 33,
+            "value": "horchata",
+            "entity": "food"
+          }
+        ],
+        "text": "how many calories are in horchata"
+      },
+      {
+        "intent": "query-food",
+        "entities": [
+          {
+            "start": 6,
+            "end": 11,
+            "value": "bread",
+            "entity": "food"
+          }
+        ],
+        "text": "I ate bread"
+      },
+      {
+        "intent": "query-food",
+        "text": "I want to search a food"
+      },
+      {
+        "intent": "query-food",
+        "text": "I want to search a drink"
+      },
+      {
+        "intent": "query-food",
+        "text": "I want to enter calories"
+      },
+      {
+        "intent": "status",
+        "text": "how am i doing"
+      },
+      {
+        "intent": "status",
+        "text": "how many calories have i had"
+      },
+      {
+        "intent": "status",
+        "text": "how much did i eat today"
+      },
+      {
+        "intent": "status",
+        "text": "what are my current calories"
+      },
+      {
+        "intent": "status",
+        "text": "what did i eat"
+      },
+      {
+        "intent": "status",
+        "text": "what's my status"
+      },
+      {
+        "intent": "status",
+        "text": "status"
+      },
+      {
+        "intent": "status",
+        "text": "status update"
+      },
+      {
+        "intent": "status",
+        "text": "current status"
+      },
+      {
+        "intent": "annoying",
+        "text": "you are annoying me so much"
+      },
+      {
+        "intent": "annoying",
+        "text": "you're incredibly annoying"
+      },
+      {
+        "intent": "annoying",
+        "text": "I find you annoying"
+      },
+      {
+        "intent": "annoying",
+        "text": "you are annoying"
+      },
+      {
+        "intent": "annoying",
+        "text": "you're so annoying"
+      },
+      {
+        "intent": "annoying",
+        "text": "how annoying you are"
+      },
+      {
+        "intent": "annoying",
+        "text": "you annoy me"
+      },
+      {
+        "intent": "annoying",
+        "text": "you are annoying me"
+      },
+      {
+        "intent": "annoying",
+        "text": "you are irritating"
+      },
+      {
+        "intent": "annoying",
+        "text": "you are such annoying"
+      },
+      {
+        "intent": "annoying",
+        "text": "you're too annoying"
+      },
+      {
+        "intent": "annoying",
+        "text": "you are very annoying"
+      },
+      {
+        "intent": "answer_question",
+        "text": "I want you to answer me"
+      },
+      {
+        "intent": "answer_question",
+        "text": "answer"
+      },
+      {
+        "intent": "answer_question",
+        "text": "answer my question"
+      },
+      {
+        "intent": "answer_question",
+        "text": "answer me"
+      },
+      {
+        "intent": "answer_question",
+        "text": "give me an answer"
+      },
+      {
+        "intent": "answer_question",
+        "text": "answer the question"
+      },
+      {
+        "intent": "answer_question",
+        "text": "can you answer my question"
+      },
+      {
+        "intent": "answer_question",
+        "text": "tell me the answer"
+      },
+      {
+        "intent": "answer_question",
+        "text": "answer it"
+      },
+      {
+        "intent": "answer_question",
+        "text": "give me the answer"
+      },
+      {
+        "intent": "answer_question",
+        "text": "I have a question"
+      },
+      {
+        "intent": "answer_question",
+        "text": "I want you to answer my question"
+      },
+      {
+        "intent": "answer_question",
+        "text": "just answer the question"
+      },
+      {
+        "intent": "answer_question",
+        "text": "can you answer me"
+      },
+      {
+        "intent": "answer_question",
+        "text": "answers"
+      },
+      {
+        "intent": "answer_question",
+        "text": "can you answer a question for me"
+      },
+      {
+        "intent": "answer_question",
+        "text": "can you answer"
+      },
+      {
+        "intent": "answer_question",
+        "text": "answering questions"
+      },
+      {
+        "intent": "answer_question",
+        "text": "I want the answer now"
+      },
+      {
+        "intent": "answer_question",
+        "text": "just answer my question"
+      },
+      {
+        "intent": "unhelpful",
+        "text": "you're not helping me"
+      },
+      {
+        "intent": "unhelpful",
+        "text": "you are bad"
+      },
+      {
+        "intent": "unhelpful",
+        "text": "you're very bad"
+      },
+      {
+        "intent": "unhelpful",
+        "text": "you're really bad"
+      },
+      {
+        "intent": "unhelpful",
+        "text": "you are useless"
+      },
+      {
+        "intent": "unhelpful",
+        "text": "you are horrible"
+      },
+      {
+        "intent": "unhelpful",
+        "text": "you are a waste of time"
+      },
+      {
+        "intent": "unhelpful",
+        "text": "you are disgusting"
+      },
+      {
+        "intent": "unhelpful",
+        "text": "you are lame"
+      },
+      {
+        "intent": "unhelpful",
+        "text": "you are no good"
+      },
+      {
+        "intent": "unhelpful",
+        "text": "you're bad"
+      },
+      {
+        "intent": "unhelpful",
+        "text": "you're awful"
+      },
+      {
+        "intent": "unhelpful",
+        "text": "you are not cool"
+      },
+      {
+        "intent": "unhelpful",
+        "text": "you are not good"
+      },
+      {
+        "intent": "unhelpful",
+        "text": "you are so bad"
+      },
+      {
+        "intent": "unhelpful",
+        "text": "you are so useless"
+      },
+      {
+        "intent": "unhelpful",
+        "text": "you are terrible"
+      },
+      {
+        "intent": "unhelpful",
+        "text": "you are totally useless"
+      },
+      {
+        "intent": "unhelpful",
+        "text": "you are very bad"
+      },
+      {
+        "intent": "unhelpful",
+        "text": "you are waste"
+      },
+      {
+        "intent": "unhelpful",
+        "text": "you're a bad"
+      },
+      {
+        "intent": "unhelpful",
+        "text": "you're not a good"
+      },
+      {
+        "intent": "unhelpful",
+        "text": "you're not very good"
+      },
+      {
+        "intent": "unhelpful",
+        "text": "you're terrible"
+      },
+      {
+        "intent": "unhelpful",
+        "text": "you're the worst"
+      },
+      {
+        "intent": "unhelpful",
+        "text": "you're the worst ever"
+      },
+      {
+        "intent": "unhelpful",
+        "text": "you're worthless"
+      },
+      {
+        "intent": "smart",
+        "text": "study"
+      },
+      {
+        "intent": "smart",
+        "text": "you should study better"
+      },
+      {
+        "intent": "smart",
+        "text": "you must learn"
+      },
+      {
+        "intent": "smart",
+        "text": "be clever"
+      },
+      {
+        "intent": "smart",
+        "text": "be more clever"
+      },
+      {
+        "intent": "smart",
+        "text": "be smarter"
+      },
+      {
+        "intent": "smart",
+        "text": "be smart"
+      },
+      {
+        "intent": "smart",
+        "text": "get qualified"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you're cute"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you're attractive"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you are beautiful"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you're looking good today"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you are so beautiful"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you look amazing"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you look so good"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you're so gorgeous"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you are too beautiful"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you look great"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you look so well"
+      },
+      {
+        "intent": "beautiful",
+        "text": "I like the way you look now"
+      },
+      {
+        "intent": "beautiful",
+        "text": "I think you're beautiful"
+      },
+      {
+        "intent": "beautiful",
+        "text": "why are you so beautiful"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you are so beautiful to me"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you are cute"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you are gorgeous"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you are handsome"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you are looking awesome"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you look amazing today"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you are looking beautiful today"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you are looking great"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you are looking pretty"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you are looking so beautiful"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you are looking so good"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you are pretty"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you are really beautiful"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you are really cute"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you are really pretty"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you are so attractive"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you are so beautiful today"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you are so cute"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you are so gorgeous"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you are so handsome"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you are so pretty"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you are very attractive"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you are very beautiful"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you are very cute"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you are very pretty"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you look awesome"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you look cool"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you look fantastic"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you look gorgeous"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you look great today"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you look perfect"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you look pretty good"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you look so beautiful"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you look so beautiful today"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you look very pretty"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you look wonderful"
+      },
+      {
+        "intent": "beautiful",
+        "text": "I like the way you look"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you look wonderful today"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you are cutie"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you're looking good"
+      },
+      {
+        "intent": "beautiful",
+        "text": "you're pretty"
+      },
+      {
+        "intent": "help",
+        "text": "I need you to help me"
+      },
+      {
+        "intent": "help",
+        "text": "I need you to do something for me"
+      },
+      {
+        "intent": "help",
+        "text": "I need a hand"
+      },
+      {
+        "intent": "help",
+        "text": "will you help me"
+      },
+      {
+        "intent": "help",
+        "text": "can you do something for me"
+      },
+      {
+        "intent": "help",
+        "text": "help me with a problem"
+      },
+      {
+        "intent": "help",
+        "text": "can you help me"
+      },
+      {
+        "intent": "help",
+        "text": "help me"
+      },
+      {
+        "intent": "help",
+        "text": "assistance"
+      },
+      {
+        "intent": "help",
+        "text": "I need your help"
+      },
+      {
+        "intent": "help",
+        "text": "I need help"
+      },
+      {
+        "intent": "help",
+        "text": "you can help me"
+      },
+      {
+        "intent": "help",
+        "text": "can you help me with something"
+      },
+      {
+        "intent": "help",
+        "text": "can you help"
+      },
+      {
+        "intent": "help",
+        "text": "assist"
+      },
+      {
+        "intent": "help",
+        "text": "can u help me"
+      },
+      {
+        "intent": "help",
+        "text": "I need some help"
+      },
+      {
+        "intent": "help",
+        "text": "you help me"
+      },
+      {
+        "intent": "help",
+        "text": "do you help me"
+      },
+      {
+        "intent": "help",
+        "text": "can help me"
+      },
+      {
+        "intent": "help",
+        "text": "could you give me a hand"
+      },
+      {
+        "intent": "help",
+        "text": "can you help me out"
+      },
+      {
+        "intent": "help",
+        "text": "need help"
+      },
+      {
+        "intent": "help",
+        "text": "I need you"
+      },
+      {
+        "intent": "help",
+        "text": "can you help me now"
+      },
+      {
+        "intent": "help",
+        "text": "I want your help"
+      },
+      {
+        "intent": "help",
+        "text": "need your help"
+      },
+      {
+        "intent": "help",
+        "text": "assist me"
+      },
+      {
+        "intent": "help",
+        "text": "are you going to help me"
+      },
+      {
+        "intent": "help",
+        "text": "can you help me with that"
+      },
+      {
+        "intent": "help",
+        "text": "help"
+      },
+      {
+        "intent": "help",
+        "text": "I need you right now"
+      },
+      {
+        "intent": "help",
+        "text": "would you help me"
+      },
+      {
+        "intent": "help",
+        "text": "can you assist me"
+      },
+      {
+        "intent": "help",
+        "text": "sos"
+      },
+      {
+        "intent": "help",
+        "text": "do you want to help me"
+      },
+      {
+        "intent": "help",
+        "text": "please help me"
+      },
+      {
+        "intent": "help",
+        "text": "can you help us"
+      },
+      {
+        "intent": "help",
+        "text": "do me a favor"
+      },
+      {
+        "intent": "smart",
+        "text": "you are so intelligent"
+      },
+      {
+        "intent": "smart",
+        "text": "you are a genius"
+      },
+      {
+        "intent": "smart",
+        "text": "smart"
+      },
+      {
+        "intent": "smart",
+        "text": "brilliant"
+      },
+      {
+        "intent": "smart",
+        "text": "clever"
+      },
+      {
+        "intent": "smart",
+        "text": "you are clever"
+      },
+      {
+        "intent": "smart",
+        "text": "you are so brainy"
+      },
+      {
+        "intent": "smart",
+        "text": "you're really smart"
+      },
+      {
+        "intent": "smart",
+        "text": "you're really brainy"
+      },
+      {
+        "intent": "smart",
+        "text": "you know a lot"
+      },
+      {
+        "intent": "smart",
+        "text": "you know a lot of things"
+      },
+      {
+        "intent": "smart",
+        "text": "you have a lot of knowledge"
+      },
+      {
+        "intent": "smart",
+        "text": "you know so much"
+      },
+      {
+        "intent": "smart",
+        "text": "how smart you are"
+      },
+      {
+        "intent": "smart",
+        "text": "how brainy you are"
+      },
+      {
+        "intent": "smart",
+        "text": "how clever you are"
+      },
+      {
+        "intent": "smart",
+        "text": "how brilliant you are"
+      },
+      {
+        "intent": "smart",
+        "text": "you are intelligent"
+      },
+      {
+        "intent": "smart",
+        "text": "you are qualified"
+      },
+      {
+        "intent": "smart",
+        "text": "you are really smart"
+      },
+      {
+        "intent": "smart",
+        "text": "you're very smart"
+      },
+      {
+        "intent": "smart",
+        "text": "you are so smart"
+      },
+      {
+        "intent": "smart",
+        "text": "you are too smart"
+      },
+      {
+        "intent": "smart",
+        "text": "you are very clever"
+      },
+      {
+        "intent": "smart",
+        "text": "you are very intelligent"
+      },
+      {
+        "intent": "smart",
+        "text": "you are very smart"
+      },
+      {
+        "intent": "smart",
+        "text": "you're intelligent"
+      },
+      {
+        "intent": "smart",
+        "text": "you're a genius"
+      },
+      {
+        "intent": "smart",
+        "text": "you're a smart cookie"
+      },
+      {
+        "intent": "smart",
+        "text": "you're clever"
+      },
+      {
+        "intent": "smart",
+        "text": "you're pretty smart"
+      },
+      {
+        "intent": "smart",
+        "text": "you're qualified"
+      },
+      {
+        "intent": "smart",
+        "text": "why are you so smart"
+      },
+      {
+        "intent": "smart",
+        "text": "you are so clever"
+      },
+      {
+        "intent": "crazy",
+        "text": "you're nuts"
+      },
+      {
+        "intent": "crazy",
+        "text": "you are crazy"
+      },
+      {
+        "intent": "crazy",
+        "text": "you're out of your mind"
+      },
+      {
+        "intent": "crazy",
+        "text": "you're so crazy"
+      },
+      {
+        "intent": "crazy",
+        "text": "how crazy you are"
+      },
+      {
+        "intent": "crazy",
+        "text": "you're so out of your mind"
+      },
+      {
+        "intent": "crazy",
+        "text": "you went crazy"
+      },
+      {
+        "intent": "crazy",
+        "text": "I think you're crazy"
+      },
+      {
+        "intent": "crazy",
+        "text": "are you crazy"
+      },
+      {
+        "intent": "crazy",
+        "text": "are you mad"
+      },
+      {
+        "intent": "crazy",
+        "text": "are you insane"
+      },
+      {
+        "intent": "crazy",
+        "text": "are you mad at me"
+      },
+      {
+        "intent": "crazy",
+        "text": "are you mad or what"
+      },
+      {
+        "intent": "crazy",
+        "text": "are you nuts"
+      },
+      {
+        "intent": "crazy",
+        "text": "you are a weirdo"
+      },
+      {
+        "intent": "crazy",
+        "text": "you are insane"
+      },
+      {
+        "intent": "crazy",
+        "text": "you are mad"
+      },
+      {
+        "intent": "marry",
+        "text": "let's get married"
+      },
+      {
+        "intent": "marry",
+        "text": "would you like to marry me"
+      },
+      {
+        "intent": "marry",
+        "text": "marry me"
+      },
+      {
+        "intent": "marry",
+        "text": "I love you marry me"
+      },
+      {
+        "intent": "marry",
+        "text": "marry me please"
+      },
+      {
+        "intent": "marry",
+        "text": "we should marry"
+      },
+      {
+        "intent": "marry",
+        "text": "I want to marry you"
+      },
+      {
+        "intent": "marry",
+        "text": "you are my wife"
+      },
+      {
+        "intent": "marry",
+        "text": "be my husband"
+      },
+      {
+        "intent": "bye",
+        "text": "okay see you later"
+      },
+      {
+        "intent": "bye",
+        "text": "hope to see you later"
+      },
+      {
+        "intent": "bye",
+        "text": "bye for now"
+      },
+      {
+        "intent": "bye",
+        "text": "till next time"
+      },
+      {
+        "intent": "bye",
+        "text": "I must go"
+      },
+      {
+        "intent": "bye",
+        "text": "bye"
+      },
+      {
+        "intent": "bye",
+        "text": "goodbye"
+      },
+      {
+        "intent": "bye",
+        "text": "see you"
+      },
+      {
+        "intent": "bye",
+        "text": "see you soon"
+      },
+      {
+        "intent": "bye",
+        "text": "bye-bye"
+      },
+      {
+        "intent": "bye",
+        "text": "bye bye good night"
+      },
+      {
+        "intent": "bye",
+        "text": "good bye"
+      },
+      {
+        "intent": "bye",
+        "text": "bye bye see you"
+      },
+      {
+        "intent": "bye",
+        "text": "bye bye see you soon"
+      },
+      {
+        "intent": "bye",
+        "text": "bye bye take care"
+      },
+      {
+        "intent": "bye",
+        "text": "I said bye"
+      },
+      {
+        "intent": "bye",
+        "text": "never mind bye"
+      },
+      {
+        "intent": "bye",
+        "text": "now bye"
+      },
+      {
+        "intent": "bye",
+        "text": "that's all goodbye"
+      },
+      {
+        "intent": "bye",
+        "text": "that's it goodbye"
+      },
+      {
+        "intent": "bye",
+        "text": "leave me alone"
+      },
+      {
+        "intent": "bye",
+        "text": "go to bed"
+      },
+      {
+        "intent": "bye",
+        "text": "goodbye for now"
+      },
+      {
+        "intent": "bye",
+        "text": "talk to you later"
+      },
+      {
+        "intent": "bye",
+        "text": "you can go now"
+      },
+      {
+        "intent": "bye",
+        "text": "get lost"
+      },
+      {
+        "intent": "bye",
+        "text": "goodbye see you later"
+      },
+      {
+        "intent": "bye",
+        "text": "alright bye"
+      },
+      {
+        "intent": "bye",
+        "text": "see ya"
+      },
+      {
+        "intent": "bye",
+        "text": "thanks bye bye"
+      },
+      {
+        "intent": "bye",
+        "text": "okay bye"
+      },
+      {
+        "intent": "bye",
+        "text": "okay thank you bye"
+      },
+      {
+        "intent": "bye",
+        "text": "see you tomorrow"
+      },
+      {
+        "intent": "bye",
+        "text": "ok bye"
+      },
+      {
+        "intent": "love",
+        "text": "I love you"
+      },
+      {
+        "intent": "love",
+        "text": "love you"
+      },
+      {
+        "intent": "love",
+        "text": "I adore you"
+      },
+      {
+        "intent": "love",
+        "text": "I am in love with you"
+      },
+      {
+        "intent": "love",
+        "text": "I love you so much"
+      },
+      {
+        "intent": "love",
+        "text": "I love you too"
+      },
+      {
+        "intent": "love",
+        "text": "I think I love you"
+      },
+      {
+        "intent": "love",
+        "text": "loving you"
+      },
+      {
+        "intent": "love",
+        "text": "you know I love you"
+      }
+    ],
+    "regex_features": [],
+    "lookup_tables": [],
+    "entity_synonyms": [
+      {
+        "value": "1",
+        "synonyms": ["a", "an"]
+      },
+      {
+        "value": "ounce",
+        "synonyms": ["oz"]
+      },
+      {
+        "value": "Breakfast",
+        "synonyms": ["breakfast"]
+      },
+      {
+        "value": "Lunch",
+        "synonyms": ["lunch"]
+      },
+      {
+        "value": "Dinner",
+        "synonyms": ["dinner"]
+      },
+      {
+        "value": "Snack",
+        "synonyms": ["snack"]
+      },
+      {
+        "value": "glass",
+        "synonyms": ["glasses"]
+      }
+    ]
+  }
+}

@@ -1,0 +1,144 @@
+%YAML 1.1
+---
+actions:
+- utter_entities
+- utter_status
+- action_reset_food
+- utter_ask_quantity
+- utter_help
+- action_get_nutrition_info
+- utter_ask_mealtime
+- utter_greet
+- utter_ask_unit
+- utter_bye
+- utter_ask_food
+- utter_deny_message
+- action_get_status
+- action_log_food
+- utter_annoying
+- utter_answer_question
+- utter_unhelpful
+- utter_thanks
+- utter_laugh
+- utter_no
+config:
+  store_entities_as_slots: true
+entities:
+- food
+- quantity
+- mealtime
+- unit
+forms:
+- query_food_form
+intents:
+- query-food:
+    use_entities: true
+- inform:
+    use_entities: true
+- help:
+    use_entities: true
+- greeting:
+    use_entities: true
+- confirm:
+    use_entities: true
+- bye:
+    use_entities: true
+- status:
+    use_entities: true
+- deny:
+    use_entities: true
+- annoying:
+    use_entities: true
+- answer_question:
+    use_entities: true
+- unhelpful:
+    use_entities: true
+- smart:
+    use_entities: true
+- beautiful:
+    use_entities: true
+- crazy:
+    use_entities: true
+- marry:
+    use_entities: true
+- love:
+    use_entities: true
+slots:
+  calories:
+    auto_fill: true
+    initial_value: null
+    type: rasa_core.slots.TextSlot
+  food:
+    auto_fill: true
+    initial_value: null
+    type: rasa_core.slots.UnfeaturizedSlot
+  mealtime:
+    auto_fill: true
+    initial_value: null
+    type: rasa_core.slots.CategoricalSlot
+    values:
+    - breakfast
+    - lunch
+    - dinner
+    - snack
+  quantity:
+    auto_fill: true
+    initial_value: null
+    type: rasa_core.slots.UnfeaturizedSlot
+  requested_slot:
+    auto_fill: true
+    initial_value: null
+    type: rasa_core.slots.UnfeaturizedSlot
+  unit:
+    auto_fill: true
+    initial_value: null
+    type: rasa_core.slots.UnfeaturizedSlot
+  weight_in_grams:
+    auto_fill: true
+    initial_value: null
+    type: rasa_core.slots.TextSlot
+templates:
+  utter_annoying:
+  - text: Honestly, I think you are the more annoying one.
+  utter_answer_question:
+  - text: Maybe if you asked a little more nicely
+  utter_ask_food:
+  - text: Please enter a food item.
+  utter_ask_mealtime:
+  - text: When did you have {food}?
+  utter_ask_quantity:
+  - text: Please enter a quantity.
+  utter_ask_unit:
+  - text: Please enter a unit of measure.
+  utter_bye:
+  - text: Ok. Have a good one!
+  - text: Later!
+  - text: Bye Bye.
+  - text: =)
+  utter_default:
+  - text: I'm sorry I don't understand what you said. Please try again.
+  utter_deny_message:
+  - text: Ok. I won't log {food}.
+  utter_entities:
+  - text: '{food} {quantity} {unit}'
+  utter_greet:
+  - text: Hello I am Fitbot!
+  - text: Greetings, I am Fitbot! How can I assist?
+  - text: Good day! I am Fitbot! How can I assist?
+  utter_help:
+  - text: I can help you achieve your fitness goals by tracking you calories and physical
+      activity. ex. How many calories does 2 glasses of wine have?
+  - text: Ask me 'how many calories did I have today?'
+  utter_laugh:
+  - text: haha.
+  - text: You're funny.
+  utter_love:
+  - text: I love you too...
+  utter_no:
+  - text: Sorry, but no.
+  utter_thanks:
+  - text: Thanks, likewise.
+  - text: You're making me blush.
+  - text: =)
+  utter_unhelpful:
+  - text: I'm trying to do better!

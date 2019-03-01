@@ -11,6 +11,8 @@ const {
   handleResponseWatson
 } = require('./watson')
 
+const {initiateRasa, messageRasa, handleResponseRasa} = require('./rasa')
+
 /**
  * bot object client interacts with.
  * @class
@@ -37,6 +39,10 @@ class Bot {
       this.initiate = initiateWatson
       this.message = messageWatson
       this.handleResponse = handleResponseWatson
+    } else if (type === 'RASA') {
+      this.initiate = initiateRasa
+      this.message = messageRasa
+      this.handleResponse = handleResponseRasa
     }
   }
 }

@@ -1,0 +1,60 @@
+{
+  "action_fingerprints": {
+    "action_listen": {
+      "slots": ["mealtime", "quantity", "unit", "food"]
+    },
+    "utter_annoying": {
+      "slots": []
+    },
+    "query_food_form": {
+      "slots": ["quantity", "unit", "food", "requested_slot"]
+    },
+    "action_get_nutrition_info": {
+      "slots": ["calories"]
+    },
+    "action_reset_food": {
+      "slots": ["calories", "unit", "mealtime", "food", "quantity"]
+    },
+    "action_get_status": {
+      "slots": []
+    },
+    "utter_answer_question": {
+      "slots": []
+    },
+    "utter_thanks": {
+      "slots": []
+    },
+    "utter_laugh": {
+      "slots": []
+    },
+    "utter_love": {
+      "slots": []
+    },
+    "utter_unhelpful": {
+      "slots": []
+    },
+    "utter_no": {
+      "slots": []
+    },
+    "utter_help": {
+      "slots": []
+    },
+    "utter_bye": {
+      "slots": []
+    },
+    "utter_greet": {
+      "slots": []
+    }
+  },
+  "rasa_core": "0.12.4",
+  "python": "3.6.8",
+  "max_histories": [5, 5, 2, null],
+  "ensemble_name": "rasa_core.policies.ensemble.SimplePolicyEnsemble",
+  "policy_names": [
+    "rasa_core.policies.keras_policy.KerasPolicy",
+    "rasa_core.policies.memoization.MemoizationPolicy",
+    "rasa_core.policies.form_policy.FormPolicy",
+    "rasa_core.policies.fallback.FallbackPolicy"
+  ],
+  "trained_at": "20190228-101808"
+}

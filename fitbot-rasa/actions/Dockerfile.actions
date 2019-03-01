@@ -1,0 +1,9 @@
+FROM python:3.6.8-slim
+
+RUN pip install rasa_core_sdk
+RUN pip install inflect
+RUN pip install pyyaml
+
+EXPOSE 5055
+
+CMD python -m rasa_core_sdk.endpoint --actions . 

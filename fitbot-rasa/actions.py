@@ -35,7 +35,7 @@ class ActionGetNutritionInfo(Action):
         query = buildFoodQuery(food, quantity, unit)
 
         with open("./credentials.yml", 'r') as ymlfile:
-            cfg = yaml.load(ymlfile)
+            cfg = yaml.safe_load(ymlfile)
 
         id = cfg['NUTRITION_API_ID']
         key = cfg['NUTRITION_API_KEY']

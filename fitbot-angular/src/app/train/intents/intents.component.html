@@ -1,7 +1,8 @@
 <ul>
-  <li *ngFor="let intent of intents">
-    <a>
+  <li *ngFor="let intent of intents; index as i">
+    <a routerLink="/train/intents/{{i}}">
       {{ intent }}
     </a>
   </li>
+  <router-outlet></router-outlet>
 </ul>

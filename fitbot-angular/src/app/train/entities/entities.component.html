@@ -1,5 +1,6 @@
 <ul>
-  <li *ngFor="let entity of entities">
-    <a>{{ entity }}</a>
+  <li *ngFor="let entity of entities; index as i">
+    <a routerLink="/train/entities/{{i}}">{{ entity }}</a>
   </li>
+  <router-outlet></router-outlet>
 </ul>

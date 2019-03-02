@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./entities.component.css']
 })
 export class EntitiesComponent implements OnInit {
+  entities: string[] = ['food', 'unit', 'quantity']
 
   constructor() { }
 

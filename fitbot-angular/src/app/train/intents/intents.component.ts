@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./intents.component.css']
 })
 export class IntentsComponent implements OnInit {
+  intents: string[] = ['greeting', 'status', 'help', 'query-food', 'bye']
 
   constructor() { }
 

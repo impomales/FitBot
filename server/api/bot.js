@@ -1,4 +1,6 @@
 const router = require('express').Router()
+const fs = require('fs')
+const {exec} = require('child_process')
 
 const Bot = require('../bot')
 
@@ -74,6 +76,37 @@ router.post('/message', (req, res, next) => {
         next(error)
       }
     }
+  })
+})
+
+router.post('/train', (req, res, next) => {
+  const {trainingData} = req.body
+
+  fs.writeFile(
+    './fitbot-rasa/data/training_data.json',
+    JSON.stringify(trainingData, null, 2),
+    err => {
+      if (err) next(err)
+
+      exec(
+        'cd fitbot-rasa && make train-nlu-json',
+        (execErr, stdout, stderr) => {
+          if (execErr) next(execErr)
+
+          console.log(stdout)
+          console.log(stderr)
+          res.send('bot was successfully updated')
+        }
+      )
+    }
+  )
+})
+
+router.get('/load_nlu', (req, res, next) => {
+  fs.readFile('./fitbot-rasa/data/training_data.json', 'utf-8', (err, file) => {
+    if (err) next(err)
+    console.log(file)
+    res.json(JSON.parse(file))
   })
 })
 

@@ -1,2 +1,8 @@
-<h1>{{food}}</h1>
-<textarea></textarea>
+<ul>
+  <li *ngFor="let value of entity.values">
+    {{ value.name }}
+    <ul>
+      <li *ngFor="let synonym of value.synonyms">{{ synonym }}</li>
+    </ul>
+  </li>
+</ul>

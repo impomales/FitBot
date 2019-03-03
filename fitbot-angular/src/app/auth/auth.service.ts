@@ -15,7 +15,7 @@ const httpOptions = {
 })
 export class AuthService {
   isLoggedIn: boolean = false
-  redirectUrl: string
+  redirectUrl: string = '/'
   user: User
   error: string
 

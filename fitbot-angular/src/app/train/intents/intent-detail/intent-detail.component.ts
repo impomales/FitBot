@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from '@angular/core'
+import {Component, OnInit, Input, OnDestroy} from '@angular/core'
 import {Intent} from '../intent.model'
 import {ActivatedRoute} from '@angular/router'
 import {IntentService} from '../intent.service'
@@ -8,8 +8,8 @@ import {IntentService} from '../intent.service'
   templateUrl: './intent-detail.component.html',
   styleUrls: ['./intent-detail.component.css']
 })
-export class IntentDetailComponent implements OnInit {
-  @Input() intent: Intent
+export class IntentDetailComponent implements OnInit, OnDestroy {
+  intent: Intent
   private subscribe: any
 
   constructor(

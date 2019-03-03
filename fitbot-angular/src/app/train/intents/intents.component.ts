@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core'
+import {Intent, TrainingPhrase, Annotation} from './intent.model'
+import {IntentService} from './intent.service'
 
 @Component({
   selector: 'app-intents',
@@ -6,11 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./intents.component.css']
 })
 export class IntentsComponent implements OnInit {
-  intents: string[] = ['greeting', 'status', 'help', 'query-food', 'bye']
+  intents: Intent[]
 
-  constructor() { }
+  constructor(public intentService: IntentService) {}
 
   ngOnInit() {
+    this.getIntents()
   }
 
+  getIntents() {
+    this.intents = this.intentService.getIntents()
+  }
 }

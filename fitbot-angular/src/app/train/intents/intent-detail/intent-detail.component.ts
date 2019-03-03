@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core'
+import {Intent} from '../intent.model'
+import {ActivatedRoute} from '@angular/router'
+import {IntentService} from '../intent.service'
 
 @Component({
   selector: 'app-intent-detail',
@@ -6,11 +9,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./intent-detail.component.css']
 })
 export class IntentDetailComponent implements OnInit {
-  trainingPhrases: string[] = ['how many calories in a cup of wine?', 'how many calories in 3 slices of pizza?']
+  @Input() intent: Intent
+  private subscribe: any
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private intentService: IntentService
+  ) {
+    this.subscribe = this.activatedRoute.params.subscribe(params => {
+      this.intent = this.intentService.getIntentByIndex(params['id'])
+    })
   }
 
+  ngOnInit() {}
+
+  ngOnDestroy() {
+    this.subscribe.unsubscribe()
+  }
 }

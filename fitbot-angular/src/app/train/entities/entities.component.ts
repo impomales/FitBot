@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core'
+import {Entity, Value} from './entity.model'
 
 @Component({
   selector: 'app-entities',
@@ -6,11 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./entities.component.css']
 })
 export class EntitiesComponent implements OnInit {
-  entities: string[] = ['food', 'unit', 'quantity']
+  entities: Entity[] = [
+    new Entity('food', [new Value('pear', [])]),
+    new Entity('quantity', [new Value('1', ['a', 'an'])]),
+    new Entity('unit', [new Value('oz', ['ounce']), new Value('cup', []), new Value('lb', ['pound'])])
+  ]
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

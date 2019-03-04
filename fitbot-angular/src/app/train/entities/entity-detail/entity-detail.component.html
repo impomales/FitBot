@@ -1,8 +1,13 @@
 <ul>
+  <input type="text" placeholder="enter a new value" />
   <li *ngFor="let value of entity.values">
     {{ value.name }}
-    <ul>
-      <li *ngFor="let synonym of value.synonyms">{{ synonym }}</li>
-    </ul>
+    <hr />
+    <div *ngIf="value.synonyms.length > 0">
+      synonyms
+      <ul>
+        <li *ngFor="let synonym of value.synonyms">{{ synonym }}</li>
+      </ul>
+    </div>
   </li>
 </ul>

@@ -33,6 +33,16 @@ export class TrainService {
     )
   }
 
+  updateTrainingData(): Observable<any> {
+    return this.http
+      .post<{message: string}>(
+        this.updateUrl,
+        {trainingData: this.trainingData},
+        httpOptions
+      )
+      .pipe(catchError(this.handleError(null)))
+  }
+
   generateIntents() {
     this.intents = []
     const {common_examples} = this.trainingData.rasa_nlu_data
@@ -93,16 +103,6 @@ export class TrainService {
       })
       this.entities.push(entity)
     })
-  }
-
-  updateTrainingData(): Observable<any> {
-    return this.http
-      .post<{message: string}>(
-        this.updateUrl,
-        {trainingData: this.trainingData},
-        httpOptions
-      )
-      .pipe(catchError(this.handleError(null)))
   }
 
   private handleError<T>(result?: T) {

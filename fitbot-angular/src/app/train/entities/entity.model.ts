@@ -1,5 +1,6 @@
-import { Value } from '../train.model';
+import {Value} from '../train.model'
 
-export class Entity {
-  constructor(public name: string, public values: Value[]) {}
+export interface Entity {
+  name: string
+  values: Value[]
 }

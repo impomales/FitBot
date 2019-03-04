@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core'
-import {Intent, TrainingPhrase} from './intent.model'
+import {Intent} from './intent.model'
 
 @Injectable({
   providedIn: 'root'
 })
 export class IntentService {
   intents: Intent[]
-  
+
   constructor() {}
 
   getIntents(): Intent[] {

@@ -17,7 +17,7 @@ export class TrainService {
   private loadUrl: string = 'api/bot/load_nlu'
   private updateUrl: string = 'api/bot/train'
   trainingData: Train
-  entities: Entity[] = []
+  entities: Entity[]
   intents: Intent[]
 
   constructor(private http: HttpClient) {}
@@ -27,16 +27,39 @@ export class TrainService {
       tap(data => {
         this.trainingData = data
         this.generateEntities()
+        this.generateIntents()
       }),
-      catchError(this.handleError('getTrainingData', null))
+      catchError(this.handleError(null))
     )
   }
 
+  generateIntents() {
+    this.intents = []
+    const {common_examples} = this.trainingData.rasa_nlu_data
+    const intentSet = new Set()
+
+    common_examples.forEach(example => {
+      intentSet.add(example.intent)
+    })
+
+    intentSet.forEach(setIntent => {
+      const intent = {name: setIntent, trainingPhrases: []}
+      this.intents.push(intent)
+      common_examples.forEach(example => {
+        if (intent.name === example.intent) {
+          intent.trainingPhrases.push({
+            text: example.text,
+            entities: example.entities
+          })
+        }
+      })
+    })
+  }
+
   generateEntities() {
+    this.entities = []
     const {common_examples, entity_synonyms} = this.trainingData.rasa_nlu_data
     const entitySet = new Set()
-
-    const result = []
 
     common_examples.forEach(example => {
       if (example.entities) {
@@ -70,8 +93,6 @@ export class TrainService {
       })
       this.entities.push(entity)
     })
-
-    console.log(this.entities)
   }
 
   updateTrainingData(): Observable<any> {
@@ -81,10 +102,10 @@ export class TrainService {
         {trainingData: this.trainingData},
         httpOptions
       )
-      .pipe(catchError(this.handleError('updateTrainingData')))
+      .pipe(catchError(this.handleError(null)))
   }
 
-  private handleError<T>(operation = 'operation', result?: T) {
+  private handleError<T>(result?: T) {
     return (error: any): Observable<T> => {
       console.error(error)
 

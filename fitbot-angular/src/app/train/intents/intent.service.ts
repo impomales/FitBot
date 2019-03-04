@@ -1,19 +1,18 @@
 import {Injectable} from '@angular/core'
 import {Intent} from './intent.model'
+import {TrainService} from '../train.service'
 
 @Injectable({
   providedIn: 'root'
 })
 export class IntentService {
-  intents: Intent[]
-
-  constructor() {}
+  constructor(private trainService: TrainService) {}
 
   getIntents(): Intent[] {
-    return this.intents
+    return this.trainService.intents
   }
 
   getIntentByIndex(index: number): Intent {
-    return this.intents[index]
+    return this.trainService.intents[index]
   }
 }

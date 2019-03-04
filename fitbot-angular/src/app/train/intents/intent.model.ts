@@ -1,9 +1,11 @@
-import { Annotation } from '../train.model';
+import {Annotation} from '../train.model'
 
-export class TrainingPhrase {
-    constructor(public text: string, public annotations: Annotation[]) {}
+export interface TrainingPhrase {
+  text: string
+  annotations: Annotation[]
 }
 
-export class Intent {
-    constructor(public name: string, public trainingPhrases: TrainingPhrase[]) {}
+export interface Intent {
+  name: string
+  trainingPhrases: TrainingPhrase[]
 }

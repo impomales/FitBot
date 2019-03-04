@@ -1,6 +1,4 @@
-export class Annotation {
-    constructor(public start: string, public end: string, public value: string, public entity: string) {}
-}
+import { Annotation } from '../train.model';
 
 export class TrainingPhrase {
     constructor(public text: string, public annotations: Annotation[]) {}

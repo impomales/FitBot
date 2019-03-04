@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core'
+import {Component, OnInit, DoCheck} from '@angular/core'
 import {Entity} from './entity.model'
 import {EntityService} from './entity.service'
 

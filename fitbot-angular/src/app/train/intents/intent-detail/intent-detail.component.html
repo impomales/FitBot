@@ -1,4 +1,6 @@
-<input type="text" placeholder="enter a new training phrase">
-<ul>
-  <li *ngFor="let phrase of intent.trainingPhrases">{{phrase.text}}</li>
-</ul>
+<div style="margin-top: 1em">
+  <input type="text" placeholder="enter a new training phrase" />
+  <ul>
+    <li *ngFor="let phrase of intent.trainingPhrases">{{ phrase.text }}</li>
+  </ul>
+</div>

@@ -19,8 +19,7 @@ const routes: Routes = [
     ]},
     {path: 'intents', component: IntentsComponent, children: [
       {path: ':id', component: IntentDetailComponent}
-    ]},
-    {path: '', redirectTo: '/train/entities', pathMatch: 'full'}
+    ]}
   ]},
   {path: 'login', component: AuthFormsComponent},
   {path: 'signup', component: AuthFormsComponent}

@@ -1,0 +1,6 @@
+<ul>
+  <li *ngFor="let entity of entities; index as i">
+    <a [routerLink]="['/train/entities', i]">{{ entity.name }}</a>
+  </li>
+  <router-outlet></router-outlet>
+</ul>

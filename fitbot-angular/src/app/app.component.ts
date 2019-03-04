@@ -15,7 +15,7 @@ export class AppComponent {
   ngOnInit() {
     this.authService.me().subscribe(user => {
       if (user) {
-        this.router.navigate(['/chat'])
+        this.router.navigate([this.authService.redirectUrl])
       }
     })
   }

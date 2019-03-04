@@ -1,0 +1,8 @@
+<ul>
+  <li *ngFor="let intent of intents; index as i">
+    <a [routerLink]="['/train/intents/', i]">
+      {{ intent.name }}
+    </a>
+  </li>
+  <router-outlet></router-outlet>
+</ul>

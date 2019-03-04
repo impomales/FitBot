@@ -1,6 +1,4 @@
-export class Value {
-  constructor(public name: string, public synonyms: string[]) {}
-}
+import { Value } from '../train.model';
 
 export class Entity {
   constructor(public name: string, public values: Value[]) {}

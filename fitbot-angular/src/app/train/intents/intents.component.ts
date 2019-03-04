@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core'
-import {Intent, TrainingPhrase, Annotation} from './intent.model'
+import {Intent} from './intent.model'
 import {IntentService} from './intent.service'
 
 @Component({

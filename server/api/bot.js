@@ -86,16 +86,22 @@ router.post('/train', (req, res, next) => {
     './fitbot-rasa/data/training_data.json',
     JSON.stringify(trainingData, null, 2),
     err => {
-      if (err) next(err)
+      if (err) {
+        next(err)
+        return
+      }
 
       exec(
-        'cd fitbot-rasa && make train-nlu-json',
+        'cd fitbot-rasa && make train-nlu-json && cd ..',
         (execErr, stdout, stderr) => {
-          if (execErr) next(execErr)
+          if (execErr) {
+            next(execErr)
+            return
+          }
 
           console.log(stdout)
           console.log(stderr)
-          res.send('bot was successfully updated')
+          res.json({message: 'bot was successfully updated'})
         }
       )
     }
@@ -104,8 +110,10 @@ router.post('/train', (req, res, next) => {
 
 router.get('/load_nlu', (req, res, next) => {
   fs.readFile('./fitbot-rasa/data/training_data.json', 'utf-8', (err, file) => {
-    if (err) next(err)
-    console.log(file)
+    if (err) {
+      next(err)
+      return
+    }
     res.json(JSON.parse(file))
   })
 })

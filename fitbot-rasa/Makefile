@@ -3,6 +3,9 @@ secret = ${RASASECRET}
 train-nlu:
 	python3 -m rasa_nlu.train -c config.yml --data data/nlu_data.md -o models --fixed_model_name nlu --project current --verbose
 
+train-nlu-json:
+	python3 -m rasa_nlu.train -c config.yml --data data/training_data.json -o models --fixed_model_name nlu --project current --verbose
+
 train-core:
 	python3 -m rasa_core.train -d domain.yml -s data/stories.md -o models/current/dialogue -c policies.yml
 

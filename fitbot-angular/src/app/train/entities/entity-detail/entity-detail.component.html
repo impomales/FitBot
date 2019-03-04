@@ -1,7 +1,7 @@
 <ul>
   <input type="text" placeholder="enter a new value" />
   <li *ngFor="let value of entity.values">
-    {{ value.name }}
+    {{ value.value }}
     <hr />
     <div *ngIf="value.synonyms.length > 0">
       synonyms

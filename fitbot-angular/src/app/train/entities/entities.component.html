@@ -10,7 +10,7 @@
         <a [routerLink]="['/train/entities', i]">{{ entity.name }}</a>
         <span style="float: right">
           <button>Edit</button>
-          <button>Delete</button>
+          <button (click)="deleteEntity(i)">Delete</button>
         </span>
       </li>
     </ul>

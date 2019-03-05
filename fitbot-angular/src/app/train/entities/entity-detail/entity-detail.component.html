@@ -1,13 +1,25 @@
 <div>
-  <input class="input-field" type="text" placeholder="enter a value" />
+  <form [formGroup]="addValueForm" (ngSubmit)="onSubmitValue()">
+    <input
+      class="input-field"
+      type="text"
+      placeholder="enter a value"
+      formControlName="value"
+    />
+    <input [disabled]="addValueForm.invalid" type="submit" style="display: none" />
+  </form>
   <ul class="training-data-list">
-    <li *ngFor="let value of entity.values">
+    <li *ngFor="let value of entity.values; let i = index">
       {{ value.value }}
-      <input
-        class="input-field small"
-        type="text"
-        placeholder="enter a synonym"
-      />
+      <form [formGroup]="addSynonymForm" (ngSubmit)="onSubmitSynonym(i)" style="display: inline">
+        <input
+          class="input-field small"
+          type="text"
+          placeholder="enter a synonym"
+          formControlName="synonym"
+        />
+        <input [disabled]="addSynonymForm.invalid" type="submit" style="display: none" />
+      </form>
       <span style="float: right; padding-right: 1em">
         <button>Edit</button>
         <button>Delete</button>

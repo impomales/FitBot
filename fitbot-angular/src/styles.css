@@ -35,6 +35,10 @@ select {
   background-color: #e88b3d;
   color: white;
 }
+/* 
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+} */
 
 #main {
   background-color: #f3f3f3;
@@ -288,6 +292,7 @@ select {
   height: 250px;
 }
 
+.training-data-list a:visited,
 .training-data-list a:visited {
   color: #0070bc;
 }

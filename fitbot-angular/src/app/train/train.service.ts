@@ -105,6 +105,18 @@ export class TrainService {
     })
   }
 
+  addSynonym(value: string, synonyms: string[]) {
+    const {entity_synonyms} = this.trainingData.rasa_nlu_data
+    entity_synonyms.forEach(entityValue => {
+      if (entityValue.value === value) {
+        entityValue.synonyms = synonyms
+        return
+      }
+    })
+
+    entity_synonyms.push({value, synonyms})
+  }
+
   private handleError<T>(result?: T) {
     return (error: any): Observable<T> => {
       console.error(error)

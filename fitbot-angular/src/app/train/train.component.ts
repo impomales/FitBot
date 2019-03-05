@@ -8,8 +8,6 @@ import {TrainService} from './train.service'
   styleUrls: ['./train.component.css']
 })
 export class TrainComponent implements OnInit {
-  trainingData: Train
-
   constructor(private trainService: TrainService) {}
 
   ngOnInit() {
@@ -17,15 +15,14 @@ export class TrainComponent implements OnInit {
   }
 
   loadTrainingData() {
-    this.trainService.getTrainingData().subscribe((data: Train) => {
-      this.trainingData = data
-      console.log(this.trainingData)
+    this.trainService.getTrainingData().subscribe(() => {
+      console.log('fetched training data.')
     })
   }
 
   trainRasa() {
     this.trainService
-      .updateTrainingData(this.trainingData)
+      .updateTrainingData()
       .subscribe((data: {message: string}) => {
         console.log(data.message)
       })

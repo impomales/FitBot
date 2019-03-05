@@ -1,13 +1,15 @@
-<ul>
+<div style="margin-top: 1em">
   <input type="text" placeholder="enter a new value" />
-  <li *ngFor="let value of entity.values">
-    {{ value.value }}
-    <hr />
-    <div *ngIf="value.synonyms.length > 0">
-      synonyms
-      <ul>
-        <li *ngFor="let synonym of value.synonyms">{{ synonym }}</li>
-      </ul>
-    </div>
-  </li>
-</ul>
+  <ul>
+    <li *ngFor="let value of entity.values">
+      {{ value.value }}
+      <hr />
+      <div *ngIf="value.synonyms.length > 0">
+        synonyms
+        <ul>
+          <li *ngFor="let synonym of value.synonyms">{{ synonym }}</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+</div>

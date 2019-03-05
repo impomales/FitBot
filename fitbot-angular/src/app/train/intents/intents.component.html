@@ -1,8 +1,14 @@
-<ul>
-  <li *ngFor="let intent of intents; index as i">
-    <a [routerLink]="['/train/intents/', i]">
-      {{ intent.name }}
-    </a>
-  </li>
-  <router-outlet></router-outlet>
-</ul>
+<div style="display: flex; justify-content: space-evenly;">
+  <div>
+    <ul>
+      <li *ngFor="let intent of intents; index as i">
+        <a [routerLink]="['/train/intents/', i]">
+          {{ intent.name }}
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div style="width: 50%">
+    <router-outlet></router-outlet>
+  </div>
+</div>

@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core'
-import {Train} from './train.model'
 import {TrainService} from './train.service'
 
 @Component({
@@ -15,9 +14,10 @@ export class TrainComponent implements OnInit {
   }
 
   loadTrainingData() {
-    this.trainService.getTrainingData().subscribe(() => {
-      console.log('fetched training data.')
-    })
+    if (!this.trainService.trainingData)
+      this.trainService.getTrainingData().subscribe(() => {
+        console.log('fetched training data.')
+      })
   }
 
   trainRasa() {

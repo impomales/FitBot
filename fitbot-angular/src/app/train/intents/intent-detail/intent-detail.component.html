@@ -1,6 +1,18 @@
-<div style="margin-top: 1em">
-  <input type="text" placeholder="enter a new training phrase" />
-  <ul>
-    <li *ngFor="let phrase of intent.trainingPhrases">{{ phrase.text }}</li>
+<div>
+  <input
+    class="input-field"
+    type="text"
+    placeholder="enter a training phrase"
+  />
+  <ul class="training-data-list">
+    <li *ngFor="let phrase of intent.trainingPhrases">
+      {{ phrase.text }}
+
+      <span style="float: right; padding-right: 1em">
+        <button>Edit</button>
+        <button>Delete</button>
+      </span>
+      <hr />
+    </li>
   </ul>
 </div>

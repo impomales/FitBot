@@ -1,12 +1,18 @@
+<h3>Entities</h3>
 <div style="display: flex; justify-content: space-evenly;">
-    <div>
-      <ul>
-        <li *ngFor="let entity of entities; index as i">
-          <a [routerLink]="['/train/entities', i]">{{ entity.name }}</a>
-        </li>
-      </ul>
-    </div>
-    <div style="width: 50%">
-      <router-outlet></router-outlet>
-    </div>
+  <div>
+    <input class="input-field" type="text" placeholder="Create an entity" />
+    <ul class="training-data-list">
+      <li *ngFor="let entity of entities; index as i">
+        <a [routerLink]="['/train/entities', i]">{{ entity.name }}</a>
+        <span style="float: right">
+          <button>Edit</button>
+          <button>Delete</button>
+        </span>
+      </li>
+    </ul>
+  </div>
+  <div style="width: 50%">
+    <router-outlet></router-outlet>
+  </div>
 </div>

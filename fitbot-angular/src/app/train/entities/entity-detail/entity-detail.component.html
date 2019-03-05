@@ -1,15 +1,30 @@
-<div style="margin-top: 1em">
-  <input type="text" placeholder="enter a new value" />
-  <ul>
+<div>
+  <input class="input-field" type="text" placeholder="enter a value" />
+  <ul class="training-data-list">
     <li *ngFor="let value of entity.values">
       {{ value.value }}
-      <hr />
-      <div *ngIf="value.synonyms.length > 0">
+      <input
+        class="input-field small"
+        type="text"
+        placeholder="enter a synonym"
+      />
+      <span style="float: right; padding-right: 1em">
+        <button>Edit</button>
+        <button>Delete</button>
+      </span>
+      <div *ngIf="value.synonyms.length > 0" style="font-size: 0.75em">
         synonyms
         <ul>
-          <li *ngFor="let synonym of value.synonyms">{{ synonym }}</li>
+          <li *ngFor="let synonym of value.synonyms">
+            {{ synonym }}
+            <span style="float: right;clear: both;padding-right:1.4em">
+              <button>Edit</button>
+              <button>Delete</button>
+            </span>
+          </li>
         </ul>
       </div>
+      <hr />
     </li>
   </ul>
 </div>

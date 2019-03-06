@@ -19,6 +19,20 @@ export class TrainService {
   trainingData: Train
   entities: Entity[]
   intents: Intent[]
+  colors = [
+    'red',
+    'blue',
+    'green',
+    'orange',
+    'purple',
+    'coral',
+    'cyan',
+    'maroon',
+    'olive',
+    'orchid',
+    'plum'
+  ]
+  colorIndex: number = 0
 
   constructor(private http: HttpClient) {}
 
@@ -43,6 +57,12 @@ export class TrainService {
       .pipe(catchError(this.handleError(null)))
   }
 
+  getNextColor() {
+    const color = this.colors[this.colorIndex]
+    this.colorIndex = (this.colorIndex + 1) % this.colors.length
+    return color
+  }
+
   generateIntents() {
     this.intents = []
     const {common_examples} = this.trainingData.rasa_nlu_data
@@ -59,7 +79,7 @@ export class TrainService {
         if (intent.name === example.intent) {
           intent.trainingPhrases.push({
             text: example.text,
-            entities: example.entities
+            annotations: example.entities
           })
         }
       })
@@ -80,7 +100,12 @@ export class TrainService {
     })
 
     entitySet.forEach(setEntity => {
-      const entity = {name: setEntity, values: []}
+      const entity = {
+        name: setEntity,
+        values: [],
+        color: this.getNextColor()
+      }
+
       const valueSet = new Set()
       common_examples.forEach(example => {
         if (example.entities) {
@@ -101,6 +126,7 @@ export class TrainService {
         })
         entity.values.push(value)
       })
+
       this.entities.push(entity)
     })
   }

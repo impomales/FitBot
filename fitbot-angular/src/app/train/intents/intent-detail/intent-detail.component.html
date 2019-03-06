@@ -6,7 +6,15 @@
   />
   <ul class="training-data-list">
     <li *ngFor="let phrase of intent.trainingPhrases">
-      {{ phrase.text }}
+      <button
+        (dblclick)="setEntity()"
+        [ngStyle]="setColor(phrase, word)"
+        href="#"
+        class="annotation"
+        *ngFor="let word of phrase.text.split(' ')"
+      >
+        {{ word }}
+      </button>
 
       <span style="float: right; padding-right: 1em">
         <button>Edit</button>

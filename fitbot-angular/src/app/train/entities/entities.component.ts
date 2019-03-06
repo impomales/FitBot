@@ -32,7 +32,8 @@ export class EntitiesComponent implements OnInit {
     // TODO don't allow duplicates
     this.entities.push({
       name: this.createEntityForm.get('name').value,
-      values: []
+      values: [],
+      color: this.trainService.getNextColor()
     })
     this.createEntityForm.reset()
   }

@@ -1,10 +1,16 @@
+<h3>Intents</h3>
 <div style="display: flex; justify-content: space-evenly;">
   <div>
-    <ul>
+    <input class="input-field" type="text" placeholder="Create an intent" />
+    <ul class="training-data-list">
       <li *ngFor="let intent of intents; index as i">
         <a [routerLink]="['/train/intents/', i]">
           {{ intent.name }}
         </a>
+        <span style="float: right">
+          <button>Edit</button>
+          <button>Delete</button>
+        </span>
       </li>
     </ul>
   </div>

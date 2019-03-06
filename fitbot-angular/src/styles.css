@@ -35,6 +35,10 @@ select {
   background-color: #e88b3d;
   color: white;
 }
+/* 
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+} */
 
 #main {
   background-color: #f3f3f3;
@@ -238,6 +242,10 @@ select {
   font-size: 1.5em;
 }
 
+.small {
+  font-size: 0.5em;
+}
+
 @media (max-width: 400px) {
   #navbar {
     flex-direction: column;
@@ -274,6 +282,24 @@ select {
   #main {
     margin: 2em 0;
   }
+}
+
+.training-data-list {
+  list-style-type: none;
+  font-size: 1.5em;
+  color: #0070bc;
+  overflow: scroll;
+  height: 250px;
+}
+
+.training-data-list a:visited,
+.training-data-list a:visited {
+  color: #0070bc;
+}
+
+.training-data-list a:focus {
+  color: #32ab42;
+  font-weight: bolder;
 }
 
 @media (max-width: 700px) {

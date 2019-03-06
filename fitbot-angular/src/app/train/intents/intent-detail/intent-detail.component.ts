@@ -4,6 +4,7 @@ import {ActivatedRoute} from '@angular/router'
 import {IntentService} from '../intent.service'
 import {TrainService} from '../../train.service'
 import {isWhiteSpaceLike} from 'typescript'
+import { Entity } from '../../entities/entity.model';
 
 @Component({
   selector: 'app-intent-detail',
@@ -12,6 +13,7 @@ import {isWhiteSpaceLike} from 'typescript'
 })
 export class IntentDetailComponent implements OnInit, OnDestroy {
   intent: Intent
+  entities: Entity[]
   private subscribe: any
 
   constructor(
@@ -24,7 +26,9 @@ export class IntentDetailComponent implements OnInit, OnDestroy {
     })
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.entities = this.trainService.entities
+  }
 
   setEntity() {
     console.log('set entity')

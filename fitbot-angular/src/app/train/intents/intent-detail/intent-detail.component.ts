@@ -4,7 +4,7 @@ import {ActivatedRoute} from '@angular/router'
 import {IntentService} from '../intent.service'
 import {TrainService} from '../../train.service'
 import {isWhiteSpaceLike} from 'typescript'
-import { Entity } from '../../entities/entity.model';
+import {Entity} from '../../entities/entity.model'
 
 @Component({
   selector: 'app-intent-detail',
@@ -29,6 +29,20 @@ export class IntentDetailComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.entities = this.trainService.entities
   }
+
+  addAnnotation(phrase: TrainingPhrase, entity: Entity, value: string) {
+    let start = phrase.text.indexOf(value),
+      end = start + value.length - 1
+    const annotation = {start, end, entity: entity.name, value}
+
+    if (!phrase.annotations) {
+      phrase.annotations = [annotation]
+    } 
+
+    this.trainService.addAnnotation(annotation)
+  }
+
+  deleteAnnotation(phrase: TrainingPhrase, value: string) {}
 
   setEntity() {
     console.log('set entity')

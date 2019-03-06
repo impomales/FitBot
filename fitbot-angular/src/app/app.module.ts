@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core'
 import {FormsModule, ReactiveFormsModule} from '@angular/forms'
 import {HttpClientModule} from '@angular/common/http'
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
-import {MatMenuModule, MatButtonModule} from '@angular/material'
+import {MatMenuModule, MatButtonModule, MatIconModule} from '@angular/material'
 
 import {AppRoutingModule} from './app-routing.module'
 import {AppComponent} from './app.component'
@@ -38,7 +38,8 @@ import {EntityDetailComponent} from './train/entities/entity-detail/entity-detai
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatMenuModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

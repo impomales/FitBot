@@ -14,27 +14,35 @@
             *ngFor="let word of phrase.text.split(' ')"
             mat-button
             [matMenuTriggerFor]="menu"
+            [matMenuTriggerData]="{word: word}"
           >
             {{ word }}
           </button>
           <mat-menu #menu="matMenu">
-            <button mat-menu-item *ngFor="let entity of entities">
-              <div style="display: flex; align-items: center">
-                <span
-                  [ngStyle]="{
-                    display: inline - block,
-                    backgroundColor: entity.color,
-                    width: '10px',
-                    height: '10px',
-                    borderRadius: '50%',
-                    marginRight: '1em'
-                  }"
-                ></span>
-                <span>
-                  {{ entity.name }}
-                </span>
-              </div>
-            </button>
+            <ng-template matMenuContent let-word="word">
+              <button mat-icon-button (click)="deleteAnnotation(phrase, word)"><mat-icon style="font-size: 1em">close</mat-icon></button>
+              <button
+                mat-menu-item
+                *ngFor="let entity of entities"
+                (click)="addAnnotation(phrase, entity, word)"
+              >
+                <div style="display: flex; align-items: center">
+                  <span
+                    [ngStyle]="{
+                      display: inline - block,
+                      backgroundColor: entity.color,
+                      width: '10px',
+                      height: '10px',
+                      borderRadius: '50%',
+                      marginRight: '1em'
+                    }"
+                  ></span>
+                  <span>
+                    {{ entity.name }}
+                  </span>
+                </div>
+              </button>
+            </ng-template>
           </mat-menu>
         </span>
         <span>

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core'
 import {HttpClient, HttpHeaders} from '@angular/common/http'
 import {Observable, of} from 'rxjs'
-import {Train} from './train.model'
+import {Train, Annotation} from './train.model'
 import {catchError, tap} from 'rxjs/operators'
 import {Entity} from './entities/entity.model'
 import {Intent} from './intents/intent.model'
@@ -141,6 +141,9 @@ export class TrainService {
     })
 
     entity_synonyms.push({value, synonyms})
+  }
+
+  addAnnotation(annotations: Annotation) {
   }
 
   deleteEntity(index: number) {

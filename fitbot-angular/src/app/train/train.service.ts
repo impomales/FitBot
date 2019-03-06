@@ -117,6 +117,47 @@ export class TrainService {
     entity_synonyms.push({value, synonyms})
   }
 
+  deleteEntity(index: number) {
+    const entityName = this.entities[index].name
+    const entityValues = this.entities[index].values
+    this.entities[index] = null
+    this.entities.splice(index, 1)
+
+    // remove entities from intents
+    this.intents.forEach(intent => {
+      intent.trainingPhrases.forEach(phrase => {
+        if (phrase.annotations) {
+          phrase.annotations = phrase.annotations.filter(
+            anotation => anotation.entity === entityName
+          )
+        }
+      })
+    })
+
+    // remove entities from training data
+    const {common_examples} = this.trainingData.rasa_nlu_data
+
+    common_examples.forEach(example => {
+      if (example.entities) {
+        example.entities = example.entities.filter(
+          anotation => anotation.entity !== entityName
+        )
+
+        if (example.entities.length === 0) {
+          delete example.entities
+        }
+      }
+    })
+
+    const {rasa_nlu_data} = this.trainingData
+
+    entityValues.forEach(entityValue => {
+      rasa_nlu_data.entity_synonyms = rasa_nlu_data.entity_synonyms.filter(
+        elem => elem.value !== entityValue.value
+      )
+    })
+  }
+
   private handleError<T>(result?: T) {
     return (error: any): Observable<T> => {
       console.error(error)

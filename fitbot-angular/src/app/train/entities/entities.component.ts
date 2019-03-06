@@ -2,7 +2,8 @@ import {Component, OnInit, DoCheck} from '@angular/core'
 import {Entity} from './entity.model'
 import {EntityService} from './entity.service'
 import {FormGroup, FormControl, Validators} from '@angular/forms'
-import {Router, ActivatedRoute} from '@angular/router'
+import {Router} from '@angular/router'
+import { TrainService } from '../train.service';
 
 @Component({
   selector: 'app-entities',
@@ -16,6 +17,7 @@ export class EntitiesComponent implements OnInit {
 
   constructor(
     private entityService: EntityService,
+    private trainService: TrainService,
     private router: Router
   ) {}
 
@@ -36,9 +38,7 @@ export class EntitiesComponent implements OnInit {
   }
 
   deleteEntity(index: number) {
-    // TODO delete annotations in intents.
-    this.entities[index] = null
-    this.entities.splice(index, 1)
+    this.trainService.deleteEntity(index)
     this.paramId = this.router.url.split('/')[3]
     if (+this.paramId === index) this.router.navigate(['/train/entities'])
   }

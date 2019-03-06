@@ -223,194 +223,66 @@
       },
       {
         "intent": "inform",
-        "entities": [
-          {
-            "start": 0,
-            "end": 4,
-            "value": "pear",
-            "entity": "food"
-          }
-        ],
         "text": "pear"
       },
       {
         "intent": "inform",
-        "entities": [
-          {
-            "start": 0,
-            "end": 6,
-            "value": "grapes",
-            "entity": "food"
-          }
-        ],
         "text": "grapes"
       },
       {
         "intent": "inform",
-        "entities": [
-          {
-            "start": 0,
-            "end": 5,
-            "value": "steak",
-            "entity": "food"
-          }
-        ],
         "text": "steak"
       },
       {
         "intent": "inform",
-        "entities": [
-          {
-            "start": 0,
-            "end": 6,
-            "value": "banana",
-            "entity": "food"
-          }
-        ],
         "text": "banana"
       },
       {
         "intent": "inform",
-        "entities": [
-          {
-            "start": 0,
-            "end": 5,
-            "value": "apple",
-            "entity": "food"
-          }
-        ],
         "text": "apple"
       },
       {
         "intent": "inform",
-        "entities": [
-          {
-            "start": 0,
-            "end": 5,
-            "value": "bread",
-            "entity": "food"
-          }
-        ],
         "text": "bread"
       },
       {
         "intent": "inform",
-        "entities": [
-          {
-            "start": 0,
-            "end": 6,
-            "value": "coffee",
-            "entity": "food"
-          }
-        ],
         "text": "coffee"
       },
       {
         "intent": "inform",
-        "entities": [
-          {
-            "start": 0,
-            "end": 4,
-            "value": "beer",
-            "entity": "food"
-          }
-        ],
         "text": "beer"
       },
       {
         "intent": "inform",
-        "entities": [
-          {
-            "start": 0,
-            "end": 5,
-            "value": "flour",
-            "entity": "food"
-          }
-        ],
         "text": "flour"
       },
       {
         "intent": "inform",
-        "entities": [
-          {
-            "start": 0,
-            "end": 4,
-            "value": "wine",
-            "entity": "food"
-          }
-        ],
         "text": "wine"
       },
       {
         "intent": "inform",
-        "entities": [
-          {
-            "start": 0,
-            "end": 9,
-            "value": "chocolate",
-            "entity": "food"
-          }
-        ],
         "text": "chocolate"
       },
       {
         "intent": "inform",
-        "entities": [
-          {
-            "start": 0,
-            "end": 4,
-            "value": "milk",
-            "entity": "food"
-          }
-        ],
         "text": "milk"
       },
       {
         "intent": "inform",
-        "entities": [
-          {
-            "start": 0,
-            "end": 6,
-            "value": "butter",
-            "entity": "food"
-          }
-        ],
         "text": "butter"
       },
       {
         "intent": "inform",
-        "entities": [
-          {
-            "start": 0,
-            "end": 4,
-            "value": "cake",
-            "entity": "food"
-          }
-        ],
         "text": "cake"
       },
       {
         "intent": "inform",
-        "entities": [
-          {
-            "start": 0,
-            "end": 6,
-            "value": "cookie",
-            "entity": "food"
-          }
-        ],
         "text": "cookie"
       },
       {
         "intent": "inform",
-        "entities": [
-          {
-            "start": 0,
-            "end": 6,
-            "value": "yogurt",
-            "entity": "food"
-          }
-        ],
         "text": "yogurt"
       },
       {
@@ -667,98 +539,34 @@
       },
       {
         "intent": "inform",
-        "entities": [
-          {
-            "start": 0,
-            "end": 9,
-            "value": "Breakfast",
-            "entity": "mealtime"
-          }
-        ],
         "text": "Breakfast"
       },
       {
         "intent": "inform",
-        "entities": [
-          {
-            "start": 0,
-            "end": 9,
-            "value": "Breakfast",
-            "entity": "mealtime"
-          }
-        ],
         "text": "breakfast"
       },
       {
         "intent": "inform",
-        "entities": [
-          {
-            "start": 0,
-            "end": 5,
-            "value": "Lunch",
-            "entity": "mealtime"
-          }
-        ],
         "text": "Lunch"
       },
       {
         "intent": "inform",
-        "entities": [
-          {
-            "start": 0,
-            "end": 5,
-            "value": "Lunch",
-            "entity": "mealtime"
-          }
-        ],
         "text": "lunch"
       },
       {
         "intent": "inform",
-        "entities": [
-          {
-            "start": 0,
-            "end": 6,
-            "value": "Dinner",
-            "entity": "mealtime"
-          }
-        ],
         "text": "Dinner"
       },
       {
         "intent": "inform",
-        "entities": [
-          {
-            "start": 0,
-            "end": 6,
-            "value": "Dinner",
-            "entity": "mealtime"
-          }
-        ],
         "text": "dinner"
       },
       {
         "intent": "inform",
-        "entities": [
-          {
-            "start": 0,
-            "end": 5,
-            "value": "Snack",
-            "entity": "mealtime"
-          }
-        ],
         "text": "Snack"
       },
       {
         "intent": "inform",
-        "entities": [
-          {
-            "start": 0,
-            "end": 5,
-            "value": "Snack",
-            "entity": "mealtime"
-          }
-        ],
         "text": "snack"
       },
       {
@@ -787,38 +595,14 @@
       },
       {
         "intent": "inform",
-        "entities": [
-          {
-            "start": 0,
-            "end": 6,
-            "value": "Dinner",
-            "entity": "mealtime"
-          }
-        ],
         "text": "dinner"
       },
       {
         "intent": "inform",
-        "entities": [
-          {
-            "start": 0,
-            "end": 6,
-            "value": "Dinner",
-            "entity": "mealtime"
-          }
-        ],
         "text": "dinner"
       },
       {
         "intent": "inform",
-        "entities": [
-          {
-            "start": 0,
-            "end": 5,
-            "value": "steak",
-            "entity": "food"
-          }
-        ],
         "text": "steak"
       },
       {
@@ -847,14 +631,6 @@
       },
       {
         "intent": "inform",
-        "entities": [
-          {
-            "start": 0,
-            "end": 5,
-            "value": "Lunch",
-            "entity": "mealtime"
-          }
-        ],
         "text": "lunch"
       },
       {
@@ -871,26 +647,10 @@
       },
       {
         "intent": "query-food",
-        "entities": [
-          {
-            "start": 21,
-            "end": 27,
-            "value": "cheese",
-            "entity": "food"
-          }
-        ],
         "text": "how many calories in cheese"
       },
       {
         "intent": "query-food",
-        "entities": [
-          {
-            "start": 21,
-            "end": 26,
-            "value": "pizza",
-            "entity": "food"
-          }
-        ],
         "text": "how many calories in pizza"
       },
       {
@@ -901,12 +661,6 @@
             "end": 22,
             "value": "3",
             "entity": "quantity"
-          },
-          {
-            "start": 23,
-            "end": 30,
-            "value": "carrots",
-            "entity": "food"
           }
         ],
         "text": "how many calories in 3 carrots"
@@ -919,12 +673,6 @@
             "end": 22,
             "value": "1",
             "entity": "quantity"
-          },
-          {
-            "start": 23,
-            "end": 29,
-            "value": "banana",
-            "entity": "food"
           }
         ],
         "text": "how many calories in 1 banana"
@@ -937,12 +685,6 @@
             "end": 26,
             "value": "1",
             "entity": "quantity"
-          },
-          {
-            "start": 27,
-            "end": 37,
-            "value": "strawberry",
-            "entity": "food"
           }
         ],
         "text": "how many calories are in 1 strawberry"
@@ -961,12 +703,6 @@
             "end": 31,
             "value": "cups",
             "entity": "unit"
-          },
-          {
-            "start": 35,
-            "end": 39,
-            "value": "wine",
-            "entity": "food"
           }
         ],
         "text": "how many calories are in 2 cups of wine"
@@ -985,12 +721,6 @@
             "end": 32,
             "value": "ounce",
             "entity": "unit"
-          },
-          {
-            "start": 36,
-            "end": 41,
-            "value": "pears",
-            "entity": "food"
           }
         ],
         "text": "how many calories are in 1 ounce of pears"
@@ -1009,12 +739,6 @@
             "end": 29,
             "value": "ounce",
             "entity": "unit"
-          },
-          {
-            "start": 33,
-            "end": 38,
-            "value": "flour",
-            "entity": "food"
           }
         ],
         "text": "how many calories are in 3 oz of flour"
@@ -1033,12 +757,6 @@
             "end": 39,
             "value": "fluid ounce",
             "entity": "unit"
-          },
-          {
-            "start": 43,
-            "end": 47,
-            "value": "milk",
-            "entity": "food"
           }
         ],
         "text": "how many calories are in 10 fluid ounce of milk"
@@ -1057,12 +775,6 @@
             "end": 31,
             "value": "cups",
             "entity": "unit"
-          },
-          {
-            "start": 35,
-            "end": 39,
-            "value": "beer",
-            "entity": "food"
           }
         ],
         "text": "how many calories are in 5 cups of beer"
@@ -1081,12 +793,6 @@
             "end": 32,
             "value": "slice",
             "entity": "unit"
-          },
-          {
-            "start": 36,
-            "end": 41,
-            "value": "pizza",
-            "entity": "food"
           }
         ],
         "text": "how many calories are in a slice of pizza"
@@ -1099,12 +805,6 @@
             "end": 26,
             "value": "1",
             "entity": "quantity"
-          },
-          {
-            "start": 27,
-            "end": 33,
-            "value": "banana",
-            "entity": "food"
           }
         ],
         "text": "how many calories are in a banana"
@@ -1117,12 +817,6 @@
             "end": 26,
             "value": "1",
             "entity": "quantity"
-          },
-          {
-            "start": 27,
-            "end": 31,
-            "value": "pear",
-            "entity": "food"
           }
         ],
         "text": "how many calories are in a pear"
@@ -1135,12 +829,6 @@
             "end": 23,
             "value": "1",
             "entity": "quantity"
-          },
-          {
-            "start": 24,
-            "end": 29,
-            "value": "apple",
-            "entity": "food"
           }
         ],
         "text": "how many calories in an apple"
@@ -1159,26 +847,12 @@
             "end": 26,
             "value": "ounce",
             "entity": "unit"
-          },
-          {
-            "start": 30,
-            "end": 39,
-            "value": "spaghetti",
-            "entity": "food"
           }
         ],
         "text": "how many calories in an oz of spaghetti"
       },
       {
         "intent": "query-food",
-        "entities": [
-          {
-            "start": 21,
-            "end": 26,
-            "value": "pizza",
-            "entity": "food"
-          }
-        ],
         "text": "how many calories in pizza"
       },
       {
@@ -1195,12 +869,6 @@
             "end": 32,
             "value": "glass",
             "entity": "unit"
-          },
-          {
-            "start": 36,
-            "end": 40,
-            "value": "wine",
-            "entity": "food"
           }
         ],
         "text": "how many calories does 2 glasses of wine have?"
@@ -1219,12 +887,6 @@
             "end": 27,
             "value": "loaf",
             "entity": "unit"
-          },
-          {
-            "start": 31,
-            "end": 36,
-            "value": "bread",
-            "entity": "food"
           }
         ],
         "text": "how many calories in a loaf of bread"
@@ -1243,12 +905,6 @@
             "end": 27,
             "value": "cups",
             "entity": "unit"
-          },
-          {
-            "start": 31,
-            "end": 35,
-            "value": "milk",
-            "entity": "food"
           }
         ],
         "text": "how many calories in 2 cups of milk"
@@ -1267,12 +923,6 @@
             "end": 26,
             "value": "cup",
             "entity": "unit"
-          },
-          {
-            "start": 30,
-            "end": 34,
-            "value": "beer",
-            "entity": "food"
           }
         ],
         "text": "how many calories in a cup of beer"
@@ -1291,12 +941,6 @@
             "end": 28,
             "value": "slice",
             "entity": "unit"
-          },
-          {
-            "start": 32,
-            "end": 37,
-            "value": "pizza",
-            "entity": "food"
           }
         ],
         "text": "how many calories in a slice of pizza"
@@ -1315,50 +959,20 @@
             "end": 25,
             "value": "lb",
             "entity": "unit"
-          },
-          {
-            "start": 29,
-            "end": 33,
-            "value": "beef",
-            "entity": "food"
           }
         ],
         "text": "how many calories in a lb of beef"
       },
       {
         "intent": "query-food",
-        "entities": [
-          {
-            "start": 21,
-            "end": 28,
-            "value": "carrots",
-            "entity": "food"
-          }
-        ],
         "text": "how many calories in carrots"
       },
       {
         "intent": "query-food",
-        "entities": [
-          {
-            "start": 25,
-            "end": 33,
-            "value": "horchata",
-            "entity": "food"
-          }
-        ],
         "text": "how many calories are in horchata"
       },
       {
         "intent": "query-food",
-        "entities": [
-          {
-            "start": 6,
-            "end": 11,
-            "value": "bread",
-            "entity": "food"
-          }
-        ],
         "text": "I ate bread"
       },
       {
@@ -2476,22 +2090,6 @@
       {
         "value": "ounce",
         "synonyms": ["oz"]
-      },
-      {
-        "value": "Breakfast",
-        "synonyms": ["breakfast"]
-      },
-      {
-        "value": "Lunch",
-        "synonyms": ["lunch"]
-      },
-      {
-        "value": "Dinner",
-        "synonyms": ["dinner"]
-      },
-      {
-        "value": "Snack",
-        "synonyms": ["snack"]
       },
       {
         "value": "glass",

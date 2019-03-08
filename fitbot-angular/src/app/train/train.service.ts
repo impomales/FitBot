@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core'
 import {HttpClient, HttpHeaders} from '@angular/common/http'
 import {Observable, of} from 'rxjs'
-import {Train} from './train.model'
+import {Train, Annotation} from './train.model'
 import {catchError, tap} from 'rxjs/operators'
 import {Entity} from './entities/entity.model'
-import {Intent} from './intents/intent.model'
+import {Intent, TrainingPhrase} from './intents/intent.model'
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -19,6 +19,20 @@ export class TrainService {
   trainingData: Train
   entities: Entity[]
   intents: Intent[]
+  colors = [
+    'red',
+    'blue',
+    'green',
+    'orange',
+    'purple',
+    'coral',
+    'cyan',
+    'maroon',
+    'olive',
+    'orchid',
+    'plum'
+  ]
+  colorIndex: number = 0
 
   constructor(private http: HttpClient) {}
 
@@ -43,6 +57,12 @@ export class TrainService {
       .pipe(catchError(this.handleError(null)))
   }
 
+  getNextColor() {
+    const color = this.colors[this.colorIndex]
+    this.colorIndex = (this.colorIndex + 1) % this.colors.length
+    return color
+  }
+
   generateIntents() {
     this.intents = []
     const {common_examples} = this.trainingData.rasa_nlu_data
@@ -59,7 +79,7 @@ export class TrainService {
         if (intent.name === example.intent) {
           intent.trainingPhrases.push({
             text: example.text,
-            entities: example.entities
+            annotations: example.entities
           })
         }
       })
@@ -80,7 +100,12 @@ export class TrainService {
     })
 
     entitySet.forEach(setEntity => {
-      const entity = {name: setEntity, values: []}
+      const entity = {
+        name: setEntity,
+        values: [],
+        color: this.getNextColor()
+      }
+
       const valueSet = new Set()
       common_examples.forEach(example => {
         if (example.entities) {
@@ -101,6 +126,7 @@ export class TrainService {
         })
         entity.values.push(value)
       })
+
       this.entities.push(entity)
     })
   }
@@ -115,6 +141,49 @@ export class TrainService {
     })
 
     entity_synonyms.push({value, synonyms})
+  }
+
+  addCommonExample(intentName: string, text: string) {
+    const {common_examples} = this.trainingData.rasa_nlu_data
+    common_examples.push({intent: intentName, text})
+  }
+
+  deleteCommonExample(text: string) {
+    this.trainingData.rasa_nlu_data.common_examples = this.trainingData.rasa_nlu_data.common_examples.filter(
+      example => example.text !== text
+    )
+  }
+
+  deleteIntent(intentName: string) {
+    this.trainingData.rasa_nlu_data.common_examples = this.trainingData.rasa_nlu_data.common_examples.filter(
+      example => example.intent !== intentName
+    )
+  }
+
+  addAnnotation(phrase: TrainingPhrase, annotation: Annotation) {
+    const {common_examples} = this.trainingData.rasa_nlu_data
+    common_examples.forEach(example => {
+      if (example.text === phrase.text) {
+        if (!example.entities) {
+          example.entities = [annotation]
+        } else {
+          example.entities = example.entities.filter(
+            elem => elem.value !== annotation.value
+          )
+          example.entities.push(annotation)
+        }
+      }
+    })
+  }
+
+  deleteAnnotation(phrase: TrainingPhrase, value: string) {
+    const {common_examples} = this.trainingData.rasa_nlu_data
+    common_examples.forEach(example => {
+      if (example.text === phrase.text) {
+        example.entities = example.entities.filter(elem => elem.value !== value)
+        if (example.entities.length === 0) delete example.entities
+      }
+    })
   }
 
   deleteEntity(index: number) {

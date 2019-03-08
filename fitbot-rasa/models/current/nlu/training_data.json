@@ -539,34 +539,98 @@
       },
       {
         "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 9,
+            "value": "Breakfast",
+            "entity": "mealtime"
+          }
+        ],
         "text": "Breakfast"
       },
       {
         "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 9,
+            "value": "Breakfast",
+            "entity": "mealtime"
+          }
+        ],
         "text": "breakfast"
       },
       {
         "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 5,
+            "value": "Lunch",
+            "entity": "mealtime"
+          }
+        ],
         "text": "Lunch"
       },
       {
         "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 5,
+            "value": "Lunch",
+            "entity": "mealtime"
+          }
+        ],
         "text": "lunch"
       },
       {
         "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 6,
+            "value": "Dinner",
+            "entity": "mealtime"
+          }
+        ],
         "text": "Dinner"
       },
       {
         "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 6,
+            "value": "Dinner",
+            "entity": "mealtime"
+          }
+        ],
         "text": "dinner"
       },
       {
         "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 5,
+            "value": "Snack",
+            "entity": "mealtime"
+          }
+        ],
         "text": "Snack"
       },
       {
         "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 5,
+            "value": "Snack",
+            "entity": "mealtime"
+          }
+        ],
         "text": "snack"
       },
       {
@@ -595,10 +659,26 @@
       },
       {
         "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 6,
+            "value": "Dinner",
+            "entity": "mealtime"
+          }
+        ],
         "text": "dinner"
       },
       {
         "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 6,
+            "value": "Dinner",
+            "entity": "mealtime"
+          }
+        ],
         "text": "dinner"
       },
       {
@@ -631,6 +711,14 @@
       },
       {
         "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 5,
+            "value": "Lunch",
+            "entity": "mealtime"
+          }
+        ],
         "text": "lunch"
       },
       {
@@ -2090,6 +2178,22 @@
       {
         "value": "ounce",
         "synonyms": ["oz"]
+      },
+      {
+        "value": "Breakfast",
+        "synonyms": ["breakfast"]
+      },
+      {
+        "value": "Lunch",
+        "synonyms": ["lunch"]
+      },
+      {
+        "value": "Dinner",
+        "synonyms": ["dinner"]
+      },
+      {
+        "value": "Snack",
+        "synonyms": ["snack"]
       },
       {
         "value": "glass",

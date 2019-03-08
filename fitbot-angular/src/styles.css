@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
 body {
   font-family: sans-serif;
   margin: 0;
@@ -100,7 +102,7 @@ input.ng-invalid.ng-touched {
 
 #chat-history {
   background-color: white;
-  height: 350px;
+  height: 400px;
   width: 100%;
   overflow-y: auto;
 }
@@ -289,7 +291,9 @@ input.ng-invalid.ng-touched {
   font-size: 1.5em;
   color: #0070bc;
   overflow: scroll;
-  height: 250px;
+  height: 375px;
+  margin: 0;
+  padding: 0;
 }
 
 .training-data-list a:visited,

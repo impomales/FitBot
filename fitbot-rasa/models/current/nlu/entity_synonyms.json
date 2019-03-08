@@ -2,5 +2,9 @@
   "a": "1",
   "an": "1",
   "oz": "ounce",
+  "breakfast": "Breakfast",
+  "lunch": "Lunch",
+  "dinner": "Dinner",
+  "snack": "Snack",
   "glasses": "glass"
 }

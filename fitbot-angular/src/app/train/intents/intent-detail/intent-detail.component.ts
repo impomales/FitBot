@@ -42,12 +42,17 @@ export class IntentDetailComponent implements OnInit, OnDestroy {
       )
       phrase.annotations.push(annotation)
     }
-
+    // ** should also add to entity **
     this.trainService.addAnnotation(phrase, annotation)
   }
 
   deleteAnnotation(phrase: TrainingPhrase, value: string) {
-    // TODO
+    phrase.annotations = phrase.annotations.filter(
+      annotation => annotation.value !== value
+    )
+    if (phrase.annotations.length === 0) phrase.annotations = null
+    // ** might need to handle synonyms differently **
+    this.trainService.deleteAnnotation(phrase, value)
   }
 
   setEntity() {

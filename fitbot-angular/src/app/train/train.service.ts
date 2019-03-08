@@ -157,6 +157,17 @@ export class TrainService {
         }
       }
     })
+  }
+
+  deleteAnnotation(phrase: TrainingPhrase, value: string) {
+    const {common_examples} = this.trainingData.rasa_nlu_data
+    common_examples.forEach(example => {
+      if (example.text === phrase.text) {
+        example.entities = example.entities.filter(elem => elem.value !== value)
+        if (example.entities.length === 0) delete example.entities
+      }
+    })
+
     console.log(this.trainingData)
   }
 

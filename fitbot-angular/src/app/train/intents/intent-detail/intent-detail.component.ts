@@ -3,7 +3,6 @@ import {Intent, TrainingPhrase} from '../intent.model'
 import {ActivatedRoute} from '@angular/router'
 import {IntentService} from '../intent.service'
 import {TrainService} from '../../train.service'
-import {isWhiteSpaceLike} from 'typescript'
 import {Entity} from '../../entities/entity.model'
 
 @Component({
@@ -37,12 +36,19 @@ export class IntentDetailComponent implements OnInit, OnDestroy {
 
     if (!phrase.annotations) {
       phrase.annotations = [annotation]
-    } 
+    } else {
+      phrase.annotations = phrase.annotations.filter(
+        annotation => annotation.value !== value
+      )
+      phrase.annotations.push(annotation)
+    }
 
-    this.trainService.addAnnotation(annotation)
+    this.trainService.addAnnotation(phrase, annotation)
   }
 
-  deleteAnnotation(phrase: TrainingPhrase, value: string) {}
+  deleteAnnotation(phrase: TrainingPhrase, value: string) {
+    // TODO
+  }
 
   setEntity() {
     console.log('set entity')

@@ -4,7 +4,7 @@ import {Observable, of} from 'rxjs'
 import {Train, Annotation} from './train.model'
 import {catchError, tap} from 'rxjs/operators'
 import {Entity} from './entities/entity.model'
-import {Intent} from './intents/intent.model'
+import {Intent, TrainingPhrase} from './intents/intent.model'
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -143,7 +143,21 @@ export class TrainService {
     entity_synonyms.push({value, synonyms})
   }
 
-  addAnnotation(annotations: Annotation) {
+  addAnnotation(phrase: TrainingPhrase, annotation: Annotation) {
+    const {common_examples} = this.trainingData.rasa_nlu_data
+    common_examples.forEach(example => {
+      if (example.text === phrase.text) {
+        if (!example.entities) {
+          example.entities = [annotation]
+        } else {
+          example.entities = example.entities.filter(
+            elem => elem.value !== annotation.value
+          )
+          example.entities.push(annotation)
+        }
+      }
+    })
+    console.log(this.trainingData)
   }
 
   deleteEntity(index: number) {

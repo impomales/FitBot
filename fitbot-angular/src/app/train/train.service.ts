@@ -146,7 +146,12 @@ export class TrainService {
   addCommonExample(intentName: string, text: string) {
     const {common_examples} = this.trainingData.rasa_nlu_data
     common_examples.push({intent: intentName, text})
-    console.log(this.trainingData)
+  }
+
+  deleteCommonExample(text: string) {
+    this.trainingData.rasa_nlu_data.common_examples = this.trainingData.rasa_nlu_data.common_examples.filter(
+      example => example.text !== text
+    )
   }
 
   addAnnotation(phrase: TrainingPhrase, annotation: Annotation) {

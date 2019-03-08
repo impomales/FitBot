@@ -4,7 +4,7 @@ import {ActivatedRoute} from '@angular/router'
 import {IntentService} from '../intent.service'
 import {TrainService} from '../../train.service'
 import {Entity} from '../../entities/entity.model'
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import {FormGroup, FormControl, Validators} from '@angular/forms'
 
 @Component({
   selector: 'app-intent-detail',
@@ -41,6 +41,13 @@ export class IntentDetailComponent implements OnInit, OnDestroy {
     this.addPhraseForm.reset()
   }
 
+  deletePhrase(phrase: TrainingPhrase) {
+    this.intent.trainingPhrases = this.intent.trainingPhrases.filter(
+      elem => elem.text !== phrase.text
+    )
+    this.trainService.deleteCommonExample(phrase.text)
+  }
+
   addAnnotation(phrase: TrainingPhrase, entity: Entity, value: string) {
     let start = phrase.text.indexOf(value),
       end = start + value.length - 1
@@ -54,9 +61,9 @@ export class IntentDetailComponent implements OnInit, OnDestroy {
       )
       phrase.annotations.push(annotation)
     }
-    
+
     if (!entity.values.find(elem => elem.value === value))
-     entity.values.push({value, synonyms: []})
+      entity.values.push({value, synonyms: []})
     this.trainService.addAnnotation(phrase, annotation)
   }
 

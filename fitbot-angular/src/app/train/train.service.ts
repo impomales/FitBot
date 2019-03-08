@@ -154,6 +154,12 @@ export class TrainService {
     )
   }
 
+  deleteIntent(intentName: string) {
+    this.trainingData.rasa_nlu_data.common_examples = this.trainingData.rasa_nlu_data.common_examples.filter(
+      example => example.intent !== intentName
+    )
+  }
+
   addAnnotation(phrase: TrainingPhrase, annotation: Annotation) {
     const {common_examples} = this.trainingData.rasa_nlu_data
     common_examples.forEach(example => {

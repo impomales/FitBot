@@ -54,7 +54,9 @@ export class IntentDetailComponent implements OnInit, OnDestroy {
       )
       phrase.annotations.push(annotation)
     }
-    // ** should also add to entity **
+    
+    if (!entity.values.find(elem => elem.value === value))
+     entity.values.push({value, synonyms: []})
     this.trainService.addAnnotation(phrase, annotation)
   }
 

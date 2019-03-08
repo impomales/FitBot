@@ -1,9 +1,17 @@
 <div>
-  <input
-    class="input-field"
-    type="text"
-    placeholder="enter a training phrase"
-  />
+  <form [formGroup]="addPhraseForm" (ngSubmit)="onSubmit()">
+    <input
+      class="input-field"
+      type="text"
+      placeholder="enter a training phrase"
+      formControlName="text"
+    />
+    <input
+      [disabled]="addPhraseForm.invalid"
+      type="submit"
+      style="display: none"
+    />
+  </form>
   <ul class="training-data-list">
     <li *ngFor="let phrase of intent.trainingPhrases">
       <div style="display: flex; justify-content: space-between;">
@@ -20,7 +28,9 @@
           </button>
           <mat-menu #menu="matMenu">
             <ng-template matMenuContent let-word="word">
-              <button mat-icon-button (click)="deleteAnnotation(phrase, word)"><mat-icon style="font-size: 1em">close</mat-icon></button>
+              <button mat-icon-button (click)="deleteAnnotation(phrase, word)">
+                <mat-icon style="font-size: 1em">close</mat-icon>
+              </button>
               <button
                 mat-menu-item
                 *ngFor="let entity of entities"

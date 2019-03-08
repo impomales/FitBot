@@ -4,6 +4,7 @@ import {ActivatedRoute} from '@angular/router'
 import {IntentService} from '../intent.service'
 import {TrainService} from '../../train.service'
 import {Entity} from '../../entities/entity.model'
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-intent-detail',
@@ -13,6 +14,7 @@ import {Entity} from '../../entities/entity.model'
 export class IntentDetailComponent implements OnInit, OnDestroy {
   intent: Intent
   entities: Entity[]
+  addPhraseForm: FormGroup
   private subscribe: any
 
   constructor(
@@ -27,6 +29,14 @@ export class IntentDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.entities = this.trainService.entities
+    this.addPhraseForm = new FormGroup({
+      text: new FormControl(null, Validators.required)
+    })
+  }
+
+  onSubmit() {
+    this.intent.trainingPhrases.push({text: this.addPhraseForm.get('text').value, annotations: []})
+    this.addPhraseForm.reset()
   }
 
   addAnnotation(phrase: TrainingPhrase, entity: Entity, value: string) {
@@ -50,13 +60,8 @@ export class IntentDetailComponent implements OnInit, OnDestroy {
     phrase.annotations = phrase.annotations.filter(
       annotation => annotation.value !== value
     )
-    if (phrase.annotations.length === 0) phrase.annotations = null
     // ** might need to handle synonyms differently **
     this.trainService.deleteAnnotation(phrase, value)
-  }
-
-  setEntity() {
-    console.log('set entity')
   }
 
   setColor(phrase: TrainingPhrase, word: string): {[s: string]: string} {

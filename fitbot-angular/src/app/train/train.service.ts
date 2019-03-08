@@ -167,8 +167,6 @@ export class TrainService {
         if (example.entities.length === 0) delete example.entities
       }
     })
-
-    console.log(this.trainingData)
   }
 
   deleteEntity(index: number) {

@@ -2,8 +2,17 @@
 <div style="display: flex; justify-content: space-evenly;">
   <div>
     <form [formGroup]="createEntityForm" (ngSubmit)="onSubmit()">
-      <input class="input-field" type="text" placeholder="Create an entity" formControlName="name"/>
-      <input [disabled]="createEntityForm.invalid" type="submit" style="display: none"/>
+      <input
+        class="input-field"
+        type="text"
+        placeholder="Create an entity"
+        formControlName="name"
+      />
+      <input
+        [disabled]="createEntityForm.invalid"
+        type="submit"
+        style="display: none"
+      />
     </form>
     <ul class="training-data-list">
       <li *ngFor="let entity of entities; index as i">

@@ -143,6 +143,12 @@ export class TrainService {
     entity_synonyms.push({value, synonyms})
   }
 
+  addCommonExample(intentName: string, text: string) {
+    const {common_examples} = this.trainingData.rasa_nlu_data
+    common_examples.push({intent: intentName, text})
+    console.log(this.trainingData)
+  }
+
   addAnnotation(phrase: TrainingPhrase, annotation: Annotation) {
     const {common_examples} = this.trainingData.rasa_nlu_data
     common_examples.forEach(example => {

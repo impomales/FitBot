@@ -35,7 +35,9 @@ export class IntentDetailComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this.intent.trainingPhrases.push({text: this.addPhraseForm.get('text').value, annotations: []})
+    const text = this.addPhraseForm.get('text').value
+    this.intent.trainingPhrases.push({text, annotations: []})
+    this.trainService.addCommonExample(this.intent.name, text)
     this.addPhraseForm.reset()
   }
 

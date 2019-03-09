@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
 body {
   font-family: sans-serif;
   margin: 0;
@@ -35,6 +37,10 @@ select {
   background-color: #e88b3d;
   color: white;
 }
+/* 
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+} */
 
 #main {
   background-color: #f3f3f3;
@@ -96,7 +102,7 @@ select {
 
 #chat-history {
   background-color: white;
-  height: 350px;
+  height: 400px;
   width: 100%;
   overflow-y: auto;
 }
@@ -238,6 +244,10 @@ select {
   font-size: 1.5em;
 }
 
+.small {
+  font-size: 0.5em;
+}
+
 @media (max-width: 400px) {
   #navbar {
     flex-direction: column;
@@ -274,6 +284,30 @@ select {
   #main {
     margin: 2em 0;
   }
+}
+
+.small {
+  font-size: 0.75em;
+}
+
+.training-data-list {
+  list-style-type: none;
+  font-size: 1.5em;
+  color: #0070bc;
+  overflow: scroll;
+  height: 375px;
+  margin: 0;
+  padding: 0;
+}
+
+.training-data-list a:visited,
+.training-data-list a:visited {
+  color: #0070bc;
+}
+
+.training-data-list a:focus {
+  color: #32ab42;
+  font-weight: bolder;
 }
 
 @media (max-width: 700px) {

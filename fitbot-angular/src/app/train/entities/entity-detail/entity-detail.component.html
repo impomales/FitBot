@@ -1,0 +1,42 @@
+<div>
+  <form [formGroup]="addValueForm" (ngSubmit)="onSubmitValue()">
+    <input
+      class="input-field"
+      type="text"
+      placeholder="enter a value"
+      formControlName="value"
+    />
+    <input [disabled]="addValueForm.invalid" type="submit" style="display: none" />
+  </form>
+  <ul class="training-data-list">
+    <li *ngFor="let value of entity.values; let i = index">
+      {{ value.value }}
+      <form [formGroup]="addSynonymForm" (ngSubmit)="onSubmitSynonym(i)" style="display: inline">
+        <input
+          class="input-field small"
+          type="text"
+          placeholder="enter a synonym"
+          formControlName="synonym"
+        />
+        <input [disabled]="addSynonymForm.invalid" type="submit" style="display: none" />
+      </form>
+      <span style="float: right; padding-right: 1em">
+        <button>Edit</button>
+        <button>Delete</button>
+      </span>
+      <div *ngIf="value.synonyms.length > 0" style="font-size: 0.75em">
+        synonyms
+        <ul>
+          <li *ngFor="let synonym of value.synonyms">
+            {{ synonym }}
+            <span style="float: right;clear: both;padding-right:1.4em">
+              <button>Edit</button>
+              <button>Delete</button>
+            </span>
+          </li>
+        </ul>
+      </div>
+      <hr />
+    </li>
+  </ul>
+</div>

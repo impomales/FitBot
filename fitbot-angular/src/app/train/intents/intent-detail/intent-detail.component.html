@@ -1,0 +1,66 @@
+<div>
+  <form [formGroup]="addPhraseForm" (ngSubmit)="onSubmit()">
+    <input
+      class="input-field"
+      type="text"
+      placeholder="enter a training phrase"
+      formControlName="text"
+    />
+    <input
+      [disabled]="addPhraseForm.invalid"
+      type="submit"
+      style="display: none"
+    />
+  </form>
+  <ul class="training-data-list">
+    <li *ngFor="let phrase of intent.trainingPhrases">
+      <div style="display: flex; justify-content: space-between;">
+        <span>
+          <button
+            class="annotation"
+            [ngStyle]="setColor(phrase, word)"
+            *ngFor="let word of phrase.text.split(' ')"
+            mat-button
+            [matMenuTriggerFor]="menu"
+            [matMenuTriggerData]="{word: word}"
+          >
+            {{ word }}
+          </button>
+          <mat-menu #menu="matMenu">
+            <ng-template matMenuContent let-word="word">
+              <button mat-icon-button (click)="deleteAnnotation(phrase, word)">
+                <mat-icon style="font-size: 1em">close</mat-icon>
+              </button>
+              <button
+                mat-menu-item
+                *ngFor="let entity of entities"
+                (click)="addAnnotation(phrase, entity, word)"
+              >
+                <div style="display: flex; align-items: center">
+                  <span
+                    [ngStyle]="{
+                      display: inline - block,
+                      backgroundColor: entity.color,
+                      width: '10px',
+                      height: '10px',
+                      borderRadius: '50%',
+                      marginRight: '1em'
+                    }"
+                  ></span>
+                  <span>
+                    {{ entity.name }}
+                  </span>
+                </div>
+              </button>
+            </ng-template>
+          </mat-menu>
+        </span>
+        <span>
+          <button>Edit</button>
+          <button (click)="deletePhrase(phrase)">Delete</button>
+        </span>
+      </div>
+      <hr />
+    </li>
+  </ul>
+</div>

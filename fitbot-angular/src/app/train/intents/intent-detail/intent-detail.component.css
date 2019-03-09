@@ -1,0 +1,22 @@
+.annotation {
+  font-size: 0.75em;
+  background-color: #f3f3f3;
+  color: #0070bc;
+  border-radius: 5px;
+  padding: 0 0.2em;
+  min-width: 0;
+}
+
+.mat-menu-item span {
+  color: #0070bc;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.annotation:focus {
+  outline: none;
+}
+
+.selected {
+  background-attachment: #333;
+}

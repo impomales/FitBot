@@ -1,0 +1,32 @@
+<h3>Intents</h3>
+<div style="display: flex; justify-content: space-evenly;">
+  <div>
+    <form [formGroup]="createIntentForm" (ngSubmit)="onSubmit()">
+      <input
+        class="input-field"
+        type="text"
+        placeholder="Create an intent"
+        formControlName="name"
+      />
+      <input
+        [disabled]="createIntentForm.invalid"
+        type="submit"
+        style="display: none"
+      />
+    </form>
+    <ul class="training-data-list">
+      <li *ngFor="let intent of intents; index as i">
+        <a [routerLink]="['/train/intents/', i]">
+          {{ intent.name }}
+        </a>
+        <span style="float: right">
+          <button>Edit</button>
+          <button (click)="deleteIntent(intent, i)">Delete</button>
+        </span>
+      </li>
+    </ul>
+  </div>
+  <div style="width: 50%">
+    <router-outlet></router-outlet>
+  </div>
+</div>

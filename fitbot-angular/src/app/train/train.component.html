@@ -1,0 +1,8 @@
+<div id="main" style="height: 600px">
+  <div style="display: flex; justify-content: space-evenly;padding: 1em">
+    <a routerLink="/train/entities" class="navlink">Entities</a>
+    <a routerLink="/train/intents" class="navlink">Intents</a>
+    <a (click)="trainRasa()" class="navlink">Train Nlu</a>
+  </div>
+  <router-outlet></router-outlet>
+</div>

@@ -1,6 +1,28 @@
 <h3>Entities</h3>
 <div style="display: flex; justify-content: space-evenly;">
   <div>
+    <div
+      *ngIf="
+        createEntityForm.get('name').invalid && createEntityForm.get('name').dirty
+      "
+    >
+      <div
+        class="error small"
+        *ngIf="
+          createEntityForm.get('name').errors['required']
+        "
+      >
+        This field cannot be empty.
+      </div>
+      <div
+        class="error small"
+        *ngIf="
+          createEntityForm.get('name').errors['duplicate']
+        "
+      >
+        Duplicates are not allowed.
+      </div>
+    </div>
     <form [formGroup]="createEntityForm" (ngSubmit)="onSubmit()">
       <input
         class="input-field"

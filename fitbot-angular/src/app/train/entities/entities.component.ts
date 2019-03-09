@@ -3,7 +3,7 @@ import {Entity} from './entity.model'
 import {EntityService} from './entity.service'
 import {FormGroup, FormControl, Validators} from '@angular/forms'
 import {Router} from '@angular/router'
-import { TrainService } from '../train.service';
+import {TrainService} from '../train.service'
 
 @Component({
   selector: 'app-entities',
@@ -24,7 +24,10 @@ export class EntitiesComponent implements OnInit {
   ngOnInit() {
     this.getEntities()
     this.createEntityForm = new FormGroup({
-      name: new FormControl(null, Validators.required)
+      name: new FormControl(null, [
+        Validators.required,
+        this.duplicateValidator.bind(this)
+      ])
     })
   }
 
@@ -42,6 +45,17 @@ export class EntitiesComponent implements OnInit {
     this.trainService.deleteEntity(index)
     this.paramId = this.router.url.split('/')[3]
     if (+this.paramId === index) this.router.navigate(['/train/entities'])
+  }
+
+  duplicateValidator(control: FormControl): {[key: string]: boolean} {
+    if (
+      this.entities.findIndex(entity => entity.name === control.value) !== -1
+    ) {
+      return {
+        duplicate: true
+      }
+    }
+    return null
   }
 
   getEntities() {

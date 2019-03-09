@@ -286,6 +286,10 @@ input.ng-invalid.ng-touched {
   }
 }
 
+.small {
+  font-size: 0.75em;
+}
+
 .training-data-list {
   list-style-type: none;
   font-size: 1.5em;

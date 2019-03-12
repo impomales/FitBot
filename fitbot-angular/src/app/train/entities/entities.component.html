@@ -3,24 +3,27 @@
   <div>
     <div
       *ngIf="
-        createEntityForm.get('name').invalid && createEntityForm.get('name').dirty
+        createEntityForm.get('name').invalid &&
+        createEntityForm.get('name').dirty
       "
     >
       <div
         class="error small"
-        *ngIf="
-          createEntityForm.get('name').errors['required']
-        "
+        *ngIf="createEntityForm.get('name').errors['required']"
       >
         This field cannot be empty.
       </div>
       <div
         class="error small"
-        *ngIf="
-          createEntityForm.get('name').errors['duplicate']
-        "
+        *ngIf="createEntityForm.get('name').errors['duplicate']"
       >
         Duplicates are not allowed.
+      </div>
+      <div
+        class="error small"
+        *ngIf="createEntityForm.get('name').errors['forbidden']"
+      >
+        Cannot begin with these characters '#', '-', '*'
       </div>
     </div>
     <form [formGroup]="createEntityForm" (ngSubmit)="onSubmit()">

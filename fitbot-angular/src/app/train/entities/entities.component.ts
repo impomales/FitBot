@@ -26,7 +26,8 @@ export class EntitiesComponent implements OnInit {
     this.createEntityForm = new FormGroup({
       name: new FormControl(null, [
         Validators.required,
-        this.duplicateValidator.bind(this)
+        this.duplicateValidator.bind(this),
+        this.forbiddenCharacters.bind(this)
       ])
     })
   }
@@ -55,6 +56,11 @@ export class EntitiesComponent implements OnInit {
         duplicate: true
       }
     }
+    return null
+  }
+
+  forbiddenCharacters(control: FormControl): {[key: string]: boolean} {
+    if (control.value && control.value.match(/^(#|-|\*).*$/)) return { forbidden: true }
     return null
   }
 

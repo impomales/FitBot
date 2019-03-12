@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core'
 import {Intent} from './intent.model'
 import {IntentService} from './intent.service'
 import {FormGroup, FormControl, Validators} from '@angular/forms'
-import { TrainService } from '../train.service';
-import { Router } from '@angular/router';
+import {TrainService} from '../train.service'
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-intents',
@@ -15,12 +15,19 @@ export class IntentsComponent implements OnInit {
   createIntentForm: FormGroup
   paramId: string
 
-  constructor(public intentService: IntentService, private trainService: TrainService, private router: Router) {}
+  constructor(
+    public intentService: IntentService,
+    private trainService: TrainService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.getIntents()
     this.createIntentForm = new FormGroup({
-      name: new FormControl(null, Validators.required)
+      name: new FormControl(null, [
+        Validators.required,
+        this.duplicateValidator.bind(this)
+      ])
     })
   }
 
@@ -42,5 +49,14 @@ export class IntentsComponent implements OnInit {
     this.paramId = this.router.url.split('/')[3]
     console.log(this.paramId)
     if (+this.paramId === index) this.router.navigate(['/train/intents'])
+  }
+
+  duplicateValidator(control: FormControl): {[key: string]: boolean} {
+    if (
+      this.intents.findIndex(intent => intent.name === control.value) !== -1
+    ) {
+      return {duplicate: true}
+    }
+    return null
   }
 }

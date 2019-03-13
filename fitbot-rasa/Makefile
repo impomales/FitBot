@@ -1,4 +1,4 @@
-secret = ${RASASECRET}
+secret=${RASASECRET}
 
 train-nlu:
 	python3 -m rasa_nlu.train -c config.yml --data data/nlu_data.md -o models --fixed_model_name nlu --project current --verbose

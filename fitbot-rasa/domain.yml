@@ -21,6 +21,7 @@ actions:
 - utter_thanks
 - utter_laugh
 - utter_no
+- utter_love
 entities:
 - food
 - quantity

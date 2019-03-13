@@ -1,18 +1,33 @@
 {
   "action_fingerprints": {
     "action_listen": {
-      "slots": ["quantity", "mealtime", "unit", "food"]
+      "slots": ["mealtime", "food", "quantity", "unit"]
     },
-    "utter_help": {
+    "utter_greet": {
       "slots": []
     },
-    "utter_no": {
+    "utter_annoying": {
+      "slots": []
+    },
+    "utter_laugh": {
       "slots": []
     },
     "utter_love": {
       "slots": []
     },
-    "utter_annoying": {
+    "query_food_form": {
+      "slots": ["requested_slot", "food", "quantity", "unit"]
+    },
+    "action_get_nutrition_info": {
+      "slots": ["calories"]
+    },
+    "action_reset_food": {
+      "slots": ["mealtime", "food", "calories", "quantity", "unit"]
+    },
+    "action_get_status": {
+      "slots": []
+    },
+    "utter_no": {
       "slots": []
     },
     "utter_thanks": {
@@ -21,28 +36,13 @@
     "utter_bye": {
       "slots": []
     },
-    "utter_greet": {
-      "slots": []
-    },
-    "utter_answer_question": {
-      "slots": []
-    },
-    "query_food_form": {
-      "slots": ["quantity", "unit", "food", "requested_slot"]
-    },
-    "action_get_nutrition_info": {
-      "slots": ["calories"]
-    },
-    "action_reset_food": {
-      "slots": ["mealtime", "quantity", "calories", "unit", "food"]
-    },
-    "utter_laugh": {
+    "utter_help": {
       "slots": []
     },
     "utter_unhelpful": {
       "slots": []
     },
-    "action_get_status": {
+    "utter_answer_question": {
       "slots": []
     }
   },
@@ -56,5 +56,5 @@
     "rasa_core.policies.form_policy.FormPolicy",
     "rasa_core.policies.fallback.FallbackPolicy"
   ],
-  "trained_at": "20190302-114851"
+  "trained_at": "20190313-123319"
 }

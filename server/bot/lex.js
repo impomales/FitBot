@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 const aws = require('aws-sdk')
 const randomstring = require('randomstring')
 const caloriesRemaining = require('./caloriesRemaining')
@@ -92,6 +93,18 @@ async function handleResponseLex(user, response) {
       } catch (err) {
         return err
       }
+    }
+  } else if (
+    intentName === 'SetCalorieGoals' &&
+    dialogState === 'ReadyForFulfillment'
+  ) {
+    const dailyGoals = slots.CaloriesPerDay
+    try {
+      const updateStr = await user.updateDailyGoals(dailyGoals)
+      const statusStr = await caloriesRemaining(user)
+      return `${updateStr} ${statusStr}`
+    } catch (err) {
+      return err
     }
   }
 

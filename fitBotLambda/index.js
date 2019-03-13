@@ -1,5 +1,9 @@
-const {QueryFood, LogFood} = require('./intentTypes')
-const {handleQueryFood, handleLogFood} = require('./intentHandlers')
+const {QueryFood, QueryExercise, LogFood} = require('./intentTypes')
+const {
+  handleQueryFood,
+  handleLogFood,
+  handleQueryExercise
+} = require('./intentHandlers')
 
 function dispatch(request) {
   const intentName = request.currentIntent.name
@@ -7,6 +11,8 @@ function dispatch(request) {
   switch (intentName) {
     case QueryFood:
       return handleQueryFood(request)
+    case QueryExercise:
+      return handleQueryExercise(request)
     case LogFood:
       return handleLogFood(request)
     default:

@@ -23,6 +23,10 @@ const User = db.define('user', {
     type: Sequelize.STRING,
     unique: true
   },
+  gender: {
+    type: Sequelize.ENUM('male', 'female'),
+    defaultValue: 'male'
+  },
   salt: {
     type: Sequelize.STRING,
     // Making `.salt` act like a function hides it when serializing to JSON.
@@ -33,14 +37,37 @@ const User = db.define('user', {
   },
   weight: {
     // weight is in lbs.
-    type: Sequelize.INTEGER
+    type: Sequelize.INTEGER,
+    defaultValue: 150
+  },
+  weightInKg: {
+    type: Sequelize.VIRTUAL,
+    get() {
+      return +this.getDataValue('weight') * 0.453592
+    }
   },
   height: {
     // height is in inches.
-    type: Sequelize.INTEGER
+    type: Sequelize.INTEGER,
+    defaultValue: 67
+  },
+  heightInCm: {
+    type: Sequelize.VIRTUAL,
+    get() {
+      return +this.getDataValue('height') * 2.54
+    }
   },
   dateOfBirth: {
-    type: Sequelize.DATE
+    type: Sequelize.DATE,
+    defaultValue: new Date('12-31-1988')
+  },
+  age: {
+    type: Sequelize.VIRTUAL,
+    get() {
+      return new Date(
+        Math.abs(Date.now() - this.getDataValue('dateOfBirth'))
+      ).getYear()
+    }
   },
   dailyGoals: {
     // daily caloric goal

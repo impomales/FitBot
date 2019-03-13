@@ -52,7 +52,7 @@ router.post('/message', (req, res, next) => {
   if (option === 'LEX') bot = lexBot
   else if (option === 'DIALOG_FLOW') bot = flowBot
   else if (option === 'WATSON') bot = watsonBot
-  else if (option === 'RASA') bot = rasaBot
+  // else if (option === 'RASA') bot = rasaBot
 
   if (!req.user) {
     res.status(401).send('Please log in.')

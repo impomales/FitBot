@@ -1,10 +1,11 @@
 const router = require('express').Router()
-const fs = require('fs')
-const {exec} = require('child_process')
+// const fs = require('fs')
+// const {exec} = require('child_process')
 
 const Bot = require('../bot')
 
-let lexBot, flowBot, watsonBot, rasaBot
+let lexBot, flowBot, watsonBot
+// , rasaBot
 
 // expects option in req that sets which bot to use.
 // eslint-disable-next-line complexity
@@ -19,7 +20,7 @@ router.post('/initiate', (req, res, next) => {
   if (bot.type === 'LEX') lexBot = bot
   else if (bot.type === 'DIALOG_FLOW') flowBot = bot
   else if (bot.type === 'WATSON') watsonBot = bot
-  else if (bot.type === 'RASA') rasaBot = bot
+  // else if (bot.type === 'RASA') rasaBot = bot
 
   if (!bot.initiate) next(new Error('Invalid bot option'))
 
@@ -79,43 +80,45 @@ router.post('/message', (req, res, next) => {
   })
 })
 
-router.post('/train', (req, res, next) => {
-  const {trainingData} = req.body
+// comment out for production, only works if rasa is installed and running locally.
 
-  fs.writeFile(
-    './fitbot-rasa/data/training_data.json',
-    JSON.stringify(trainingData, null, 2),
-    err => {
-      if (err) {
-        next(err)
-        return
-      }
+// router.post('/train', (req, res, next) => {
+//   const {trainingData} = req.body
 
-      exec(
-        'cd fitbot-rasa && make train-nlu-json && cd ..',
-        (execErr, stdout, stderr) => {
-          if (execErr) {
-            next(execErr)
-            return
-          }
+//   fs.writeFile(
+//     './fitbot-rasa/data/training_data.json',
+//     JSON.stringify(trainingData, null, 2),
+//     err => {
+//       if (err) {
+//         next(err)
+//         return
+//       }
 
-          console.log(stdout)
-          console.log(stderr)
-          res.json({message: 'bot was successfully updated'})
-        }
-      )
-    }
-  )
-})
+//       exec(
+//         'cd fitbot-rasa && make train-nlu-json && cd ..',
+//         (execErr, stdout, stderr) => {
+//           if (execErr) {
+//             next(execErr)
+//             return
+//           }
 
-router.get('/load_nlu', (req, res, next) => {
-  fs.readFile('./fitbot-rasa/data/training_data.json', 'utf-8', (err, file) => {
-    if (err) {
-      next(err)
-      return
-    }
-    res.json(JSON.parse(file))
-  })
-})
+//           console.log(stdout)
+//           console.log(stderr)
+//           res.json({message: 'bot was successfully updated'})
+//         }
+//       )
+//     }
+//   )
+// })
+
+// router.get('/load_nlu', (req, res, next) => {
+//   fs.readFile('./fitbot-rasa/data/training_data.json', 'utf-8', (err, file) => {
+//     if (err) {
+//       next(err)
+//       return
+//     }
+//     res.json(JSON.parse(file))
+//   })
+// })
 
 module.exports = router

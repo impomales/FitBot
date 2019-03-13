@@ -47,7 +47,6 @@ export class IntentsComponent implements OnInit {
     this.intents = this.intents.filter(elem => elem.name !== intent.name)
     this.trainService.deleteIntent(intent.name)
     this.paramId = this.router.url.split('/')[3]
-    console.log(this.paramId)
     if (+this.paramId === index) this.router.navigate(['/train/intents'])
   }
 

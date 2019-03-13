@@ -66,18 +66,23 @@ router.post('/message', (req, res, next) => {
 
   if (!bot.message) next(new Error('Invalid bot option'))
 
-  bot.message(sessionUserId, text, async (err, response) => {
-    if (err) next(err)
-    else {
-      try {
-        // handle fulfillment here before sending response back to user.
-        const message = await bot.handleResponse(req.user, response)
-        res.json({message})
-      } catch (error) {
-        next(error)
+  bot.message(
+    sessionUserId,
+    text,
+    async (err, response) => {
+      if (err) next(err)
+      else {
+        try {
+          // handle fulfillment here before sending response back to user.
+          const message = await bot.handleResponse(req.user, response)
+          res.json({message})
+        } catch (error) {
+          next(error)
+        }
       }
-    }
-  })
+    },
+    req.user
+  )
 })
 
 // comment out for production, only works if rasa is installed and running locally.

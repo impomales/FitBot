@@ -58,6 +58,15 @@ User.prototype.correctPassword = function(candidatePwd) {
   return User.encryptPassword(candidatePwd, this.salt()) === this.password()
 }
 
+User.prototype.updateDailyGoals = async function(dailyGoals) {
+  try {
+    await this.update({dailyGoals})
+    return 'Daily goals successfully updated.'
+  } catch (err) {
+    return `Error in updating daily goals ${err}`
+  }
+}
+
 User.generateSalt = function() {
   return crypto.randomBytes(16).toString('base64')
 }

@@ -20,4 +20,14 @@ const ExerciseLog = db.define('exerciseLog', {
   }
 })
 
+ExerciseLog.saveExerciseLog = async function(user, exerciseLog) {
+  try {
+    const newLog = await ExerciseLog.create(exerciseLog)
+    await newLog.setUser(user)
+    return newLog
+  } catch (err) {
+    return `Error in saving food log ${err}`
+  }
+}
+
 module.exports = ExerciseLog

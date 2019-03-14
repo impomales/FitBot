@@ -1,11 +1,12 @@
 const axios = require('axios')
+const {isIndefinite} = require('./handleLogFood')
 const {close, delegate, confirmIntent} = require('../responseHandlers')
 
 function handleQueryExercise(request) {
-  const {sessionAttributes, currentIntent} = request
+  const {sessionAttributes, currentIntent, inputTranscript} = request
   const {slots, confirmationStatus} = currentIntent
 
-  const {
+  let {
     ExerciseQueryName,
     ExerciseQueryUnit,
     ExerciseQueryQuantity,
@@ -19,6 +20,15 @@ function handleQueryExercise(request) {
       'Fulfilled',
       `OK. I won't log ${ExerciseQueryName}`
     )
+  }
+
+  if (isIndefinite(ExerciseQueryName, ExerciseQueryQuantity, inputTranscript)) {
+    ExerciseQueryQuantity = '1'
+  }
+
+  if (inputTranscript.includes('half hour')) {
+    ExerciseQueryQuantity = '30'
+    ExerciseQueryUnit = 'min'
   }
 
   if (
@@ -73,7 +83,12 @@ function handleQueryExercise(request) {
       })
   }
 
-  return delegate(sessionAttributes, slots)
+  return delegate(sessionAttributes, {
+    ExerciseQueryName,
+    ExerciseQueryQuantity,
+    ExerciseQueryUnit,
+    Calories
+  })
 }
 
 module.exports = {

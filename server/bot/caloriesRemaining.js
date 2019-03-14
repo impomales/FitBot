@@ -1,4 +1,4 @@
-const {FoodLog} = require('../db/models')
+const {FoodLog, ExerciseLog} = require('../db/models')
 const {Op} = require('sequelize')
 
 const {
@@ -28,15 +28,19 @@ function buildCaloriesStatus(dailyGoals, calories) {
  * @param {Object} [foodLog] food is included when this function is called immediately after logging an item.
  * @returns {String} resultant response to user
  */
-module.exports = async function caloriesRemaining(user, foodLog) {
+module.exports = async function caloriesRemaining(user, foodLog, exerciseLog) {
   let message = ''
-  if (foodLog)
+  if (foodLog) {
     message += `Your ${buildFoodQuery(
       foodLog.name,
       foodLog.quantity,
       foodLog.unit
     )} has been logged as a ${foodLog.mealTime}. `
-
+  } else if (exerciseLog) {
+    message += `Your ${exerciseLog.quantity} ${exerciseLog.unit} of ${
+      exerciseLog.name
+    } has been logged. `
+  }
   // foodLog.createdAt >= today, foodLog.createdAt < tomorrow
   let today = new Date(),
     tomorrow
@@ -54,15 +58,23 @@ module.exports = async function caloriesRemaining(user, foodLog) {
       where: {createdAt, userId: user.id}
     })
 
-    let calories = 0
-    foodLogs.forEach(food => {
-      calories += food.calories
+    const exerciseLogs = await ExerciseLog.findAll({
+      where: {createdAt, userId: user.id}
     })
 
-    calories = Math.round(calories * 100) / 100
+    let foodCalories = 0,
+      exerciseCalories = 0
+    foodLogs.forEach(food => {
+      foodCalories += food.calories
+    })
+    exerciseLogs.forEach(exercise => {
+      exerciseCalories += exercise.calories
+    })
+
+    const calories = Math.round((foodCalories - exerciseCalories) * 100) / 100
     return (
       message +
-      `You had ${calories} calories today.` +
+      `You have a net ${calories} calories today.` +
       buildCaloriesStatus(user.dailyGoals, calories)
     )
   } catch (err) {

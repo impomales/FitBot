@@ -30,14 +30,14 @@ describe('Bot method -- caloriesRemaining', () => {
     it('can get the calories remaining from current user', async () => {
       let res = await caloriesRemaining(user)
       expect(res).equal(
-        'You had 0 calories today. You still are 2000 calories away from your daily goal!'
+        'You have a net 0 calories today. You still are 2000 calories away from your daily goal!'
       )
     })
 
     it('lets you know if a food item has been successfully logged', async () => {
       let res = await caloriesRemaining(user, foodLog)
       expect(res).equal(
-        'Your 1 cup of banana has been logged as a lunch. You had 0 calories today. You still are 2000 calories away from your daily goal!'
+        'Your 1 cup of banana has been logged as a lunch. You have a net 0 calories today. You still are 2000 calories away from your daily goal!'
       )
     })
 
@@ -45,7 +45,7 @@ describe('Bot method -- caloriesRemaining', () => {
       user.dailyGoals = -2000
       let res = await caloriesRemaining(user)
       expect(res).equal(
-        'You had 0 calories today. Uh oh! You went over your daily goals by 2000 calories today! You might want to go to the gym.'
+        'You have a net 0 calories today. Uh oh! You went over your daily goals by 2000 calories today! You might want to go to the gym.'
       )
     })
   })

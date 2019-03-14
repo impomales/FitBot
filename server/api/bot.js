@@ -74,8 +74,16 @@ router.post('/message', (req, res, next) => {
       else {
         try {
           // handle fulfillment here before sending response back to user.
-          const message = await bot.handleResponse(req.user, response)
-          res.json({message})
+          const result = await bot.handleResponse(req.user, response)
+
+          if (result.responseCard) {
+            res.json({
+              message: result.message,
+              responseCard: result.responseCard
+            })
+            return
+          }
+          res.json({message: result})
         } catch (error) {
           next(error)
         }

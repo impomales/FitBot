@@ -131,13 +131,23 @@ export class Chat extends Component {
         .post('/api/bot/message', {text, sessionUserId, option})
         .then(res => res.data)
         .then(data => {
+          let options
+          if (data.responseCard) {
+            console.log(data.responseCard)
+            options = {
+              type: 'options',
+              content: <button type="button">Breakfast</button>
+            }
+          }
           const received = {
             type: 'received',
             content: `${option.toLowerCase()}: ${data.message}`
           }
           this.setState({
             busy: false,
-            messages: [...messages, sent, received]
+            messages: options
+              ? [...messages, sent, received, options]
+              : [...messages, sent, received]
           })
         })
         .catch(err => console.error(err))

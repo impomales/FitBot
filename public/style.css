@@ -211,7 +211,8 @@ select {
 }
 
 .message.sent,
-.message.received {
+.message.received,
+.message.options {
   padding: 1em 0.5em;
   color: white;
   background-color: #333;
@@ -230,6 +231,11 @@ select {
 .message.received {
   float: left;
   background-color: #32ab42;
+}
+
+.message.options {
+  float: left;
+  background-color: transparent;
 }
 
 .message i {

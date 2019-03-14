@@ -77,7 +77,15 @@ function caloriesRemainingFulfilled(intentName, dialogState) {
  * @returns {String} response message to user
  */
 async function handleResponseLex(user, response) {
-  const {intentName, slots, sessionAttributes, dialogState, message} = response
+  const {
+    intentName,
+    slots,
+    sessionAttributes,
+    dialogState,
+    message,
+    responseCard
+  } = response
+
   if (caloriesRemainingFulfilled(intentName, dialogState)) {
     const foodName = sessionAttributes.foodName
     return caloriesRemaining(user, foodName)
@@ -131,6 +139,9 @@ async function handleResponseLex(user, response) {
     }
   }
 
+  // adding support for response card for specific case in lex.
+  // would need to restructure how responses are returned to integrate response cards for other cases.
+  if (responseCard) return {message, responseCard}
   return message
 }
 

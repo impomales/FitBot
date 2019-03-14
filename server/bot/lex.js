@@ -3,6 +3,7 @@ const aws = require('aws-sdk')
 const randomstring = require('randomstring')
 const caloriesRemaining = require('./caloriesRemaining')
 const saveFoodLog = require('./saveFoodLog')
+const {ExerciseLog} = require('../db/models')
 
 /**
  * initiates the lex service
@@ -111,6 +112,20 @@ async function handleResponseLex(user, response) {
     } catch (err) {
       return err
     }
+  } else if (
+    intentName === 'QueryExercise' &&
+    dialogState === 'ReadyForFulfillment'
+  ) {
+    const exerciseLog = {
+      name: slots.ExerciseQueryName,
+      quantity: slots.ExerciseQueryQuantity,
+      unit: slots.ExerciseQueryUnit,
+      calories: slots.Calories
+    }
+
+    const newLog = await ExerciseLog.saveExerciseLog(user, exerciseLog)
+
+    return newLog
   }
 
   return message

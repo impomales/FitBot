@@ -88,4 +88,4 @@ function handleLogFood(request) {
   // fulfillment is handled in node server.
 }
 
-module.exports = {handleLogFood}
+module.exports = {handleLogFood, isIndefinite}

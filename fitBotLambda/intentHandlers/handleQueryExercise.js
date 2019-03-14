@@ -1,52 +1,94 @@
 const axios = require('axios')
-const {close} = require('../responseHandlers')
+const {isIndefinite} = require('./handleLogFood')
+const {close, delegate, confirmIntent} = require('../responseHandlers')
 
 function handleQueryExercise(request) {
-  const {sessionAttributes, currentIntent} = request
-  const slots = currentIntent.slots
+  const {sessionAttributes, currentIntent, inputTranscript} = request
+  const {slots, confirmationStatus} = currentIntent
 
-  const {ExerciseQueryName, ExerciseQueryUnit, ExerciseQueryQuantity} = slots
+  let {
+    ExerciseQueryName,
+    ExerciseQueryUnit,
+    ExerciseQueryQuantity,
+    Calories
+  } = slots
   const {weightInKg, heightInCm, gender, age} = sessionAttributes
 
-  const query = `${ExerciseQueryQuantity} ${ExerciseQueryUnit} of ${ExerciseQueryName}`
-
-  return axios
-    .post(
-      'https://trackapi.nutritionix.com/v2/natural/exercise',
-      {
-        query,
-        // eslint-disable-next-line camelcase
-        weight_kg: weightInKg,
-        // eslint-disable-next-line camelcase
-        height_cm: heightInCm,
-        gender,
-        age
-      },
-      {
-        headers: {
-          'x-app-id': process.env.NUTRITION_API_ID,
-          'x-app-key': process.env.NUTRITION_API_KEY,
-          'x-remote-user-id': 0
-        }
-      }
+  if (confirmationStatus === 'Denied') {
+    return close(
+      sessionAttributes,
+      'Fulfilled',
+      `OK. I won't log ${ExerciseQueryName}`
     )
-    .then(res => res.data)
-    .then(exerciseInfo => {
-      const calories = exerciseInfo.exercises[0].nf_calories
-      return close(
-        sessionAttributes,
-        'Fulfilled',
-        `${ExerciseQueryName} for ${ExerciseQueryQuantity} ${ExerciseQueryUnit} burns ${calories} calories. Would you like to log this exercise?`
+  }
+
+  if (isIndefinite(ExerciseQueryName, ExerciseQueryQuantity, inputTranscript)) {
+    ExerciseQueryQuantity = '1'
+  }
+
+  if (inputTranscript.includes('half hour')) {
+    ExerciseQueryQuantity = '30'
+    ExerciseQueryUnit = 'min'
+  }
+
+  if (
+    !Calories &&
+    ExerciseQueryName &&
+    ExerciseQueryQuantity &&
+    ExerciseQueryUnit
+  ) {
+    const query = `${ExerciseQueryQuantity} ${ExerciseQueryUnit} of ${ExerciseQueryName}`
+    return axios
+      .post(
+        'https://trackapi.nutritionix.com/v2/natural/exercise',
+        {
+          query,
+          // eslint-disable-next-line camelcase
+          weight_kg: weightInKg,
+          // eslint-disable-next-line camelcase
+          height_cm: heightInCm,
+          gender,
+          age
+        },
+        {
+          headers: {
+            'x-app-id': process.env.NUTRITION_API_ID,
+            'x-app-key': process.env.NUTRITION_API_KEY,
+            'x-remote-user-id': 0
+          }
+        }
       )
-    })
-    .catch(err => {
-      console.error('here', err.message)
-      return close(
-        sessionAttributes,
-        'Failed',
-        `Something went wrong. Please try again.`
-      )
-    })
+      .then(res => res.data)
+      .then(exerciseInfo => {
+        const calories = exerciseInfo.exercises[0].nf_calories
+        return confirmIntent(
+          sessionAttributes,
+          'QueryExercise',
+          {
+            ExerciseQueryName,
+            ExerciseQueryQuantity,
+            ExerciseQueryUnit,
+            Calories: calories
+          },
+          `${ExerciseQueryName} for ${ExerciseQueryQuantity} ${ExerciseQueryUnit} burns ${calories} calories. Would you like to log this exercise?`
+        )
+      })
+      .catch(err => {
+        console.error('here', err.message)
+        return close(
+          sessionAttributes,
+          'Failed',
+          `Something went wrong. Please try again.`
+        )
+      })
+  }
+
+  return delegate(sessionAttributes, {
+    ExerciseQueryName,
+    ExerciseQueryQuantity,
+    ExerciseQueryUnit,
+    Calories
+  })
 }
 
 module.exports = {

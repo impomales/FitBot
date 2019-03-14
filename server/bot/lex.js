@@ -123,9 +123,12 @@ async function handleResponseLex(user, response) {
       calories: slots.Calories
     }
 
-    const newLog = await ExerciseLog.saveExerciseLog(user, exerciseLog)
-
-    return newLog
+    try {
+      const newLog = await ExerciseLog.saveExerciseLog(user, exerciseLog)
+      if (newLog.name) return caloriesRemaining(user, null, exerciseLog)
+    } catch (err) {
+      return err
+    }
   }
 
   return message

@@ -64,9 +64,11 @@ const User = db.define('user', {
   age: {
     type: Sequelize.VIRTUAL,
     get() {
-      return new Date(
-        Math.abs(Date.now() - this.getDataValue('dateOfBirth'))
-      ).getYear()
+      return (
+        new Date(
+          Date.now() - this.getDataValue('dateOfBirth')
+        ).getUTCFullYear() - 1970
+      )
     }
   },
   dailyGoals: {

@@ -28,7 +28,11 @@ class ChatHistory extends Component {
                 <i className="fas fa-robot" />
               )
 
-            if (message.type === 'status' || message.type === 'options')
+            if (
+              message.type === 'status' ||
+              message.type === 'card' ||
+              message.type === 'image'
+            )
               avatar = ''
             return (
               <li className={`${message.type} message`} key={idx}>

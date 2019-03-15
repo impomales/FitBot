@@ -141,13 +141,12 @@ export class Chat extends Component {
         .post('/api/bot/message', {text, sessionUserId, option})
         .then(res => res.data)
         .then(data => {
-          let cards
+          let cards, image
           if (data.responseCard) {
-            console.log(data.responseCard)
             const cardElems = data.responseCard.genericAttachments
 
             cards = cardElems.map(elem => {
-              let buttons, image
+              let buttons
               if (elem.buttons.length > 0) {
                 buttons = elem.buttons.map((button, idx) => (
                   <button
@@ -163,24 +162,30 @@ export class Chat extends Component {
 
               return {
                 type: 'card',
-                content: (
-                  <div>
-                    {image}
-                    {buttons}
-                  </div>
-                )
+                content: <div>{buttons}</div>
               }
             })
           }
+
+          if (data.imageUrl)
+            image = {
+              type: 'image',
+              content: <img src={data.imageUrl} alt="food-image" />
+            }
+
           const received = {
             type: 'received',
             content: `${option.toLowerCase()}: ${data.message}`
           }
+
+          const newMessages = [...messages, sent]
+          if (image) newMessages.push(image)
+          newMessages.push(received)
+          if (cards) newMessages.push(...cards)
+
           this.setState({
             busy: false,
-            messages: cards
-              ? [...messages, sent, received, ...cards]
-              : [...messages, sent, received]
+            messages: newMessages
           })
         })
         .catch(err => console.error(err))

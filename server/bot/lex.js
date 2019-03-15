@@ -141,6 +141,8 @@ async function handleResponseLex(user, response) {
 
   // adding support for response card for specific case in lex.
   // would need to restructure how responses are returned to integrate response cards for other cases.
+  if (sessionAttributes.imageLink)
+    return {message, imageUrl: sessionAttributes.imageLink}
   if (responseCard) return {message, responseCard}
   return message
 }

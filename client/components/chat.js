@@ -103,7 +103,17 @@ export class Chat extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault()
+    this.messageBot()
+  }
 
+  handleCardButton(evt) {
+    console.log(evt.target.value)
+    this.setState({text: evt.target.value}, () => {
+      this.messageBot()
+    })
+  }
+
+  messageBot() {
     const {
       text,
       messages,
@@ -131,13 +141,36 @@ export class Chat extends Component {
         .post('/api/bot/message', {text, sessionUserId, option})
         .then(res => res.data)
         .then(data => {
-          let options
+          let cards
           if (data.responseCard) {
             console.log(data.responseCard)
-            options = {
-              type: 'options',
-              content: <button type="button">Breakfast</button>
-            }
+            const cardElems = data.responseCard.genericAttachments
+
+            cards = cardElems.map(elem => {
+              let buttons, image
+              if (elem.buttons.length > 0) {
+                buttons = elem.buttons.map((button, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={this.handleCardButton.bind(this)}
+                    value={button.value}
+                  >
+                    {button.text}
+                  </button>
+                ))
+              }
+
+              return {
+                type: 'card',
+                content: (
+                  <div>
+                    {image}
+                    {buttons}
+                  </div>
+                )
+              }
+            })
           }
           const received = {
             type: 'received',
@@ -145,8 +178,8 @@ export class Chat extends Component {
           }
           this.setState({
             busy: false,
-            messages: options
-              ? [...messages, sent, received, options]
+            messages: cards
+              ? [...messages, sent, received, ...cards]
               : [...messages, sent, received]
           })
         })

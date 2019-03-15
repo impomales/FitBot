@@ -212,7 +212,7 @@ select {
 
 .message.sent,
 .message.received,
-.message.options {
+.message.card {
   padding: 1em 0.5em;
   color: white;
   background-color: #333;
@@ -233,9 +233,26 @@ select {
   background-color: #32ab42;
 }
 
-.message.options {
+.message.card {
   float: left;
   background-color: transparent;
+  padding: 0em 0.5em;
+}
+
+.message.card button {
+  background-color: #32ab42;
+  color: white;
+  padding: 1em;
+  border: none;
+  border-radius: 10px;
+  margin-right: 1em;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.25s;
+}
+
+.message.card button:hover {
+  transform: scale(1.2);
 }
 
 .message i {

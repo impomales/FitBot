@@ -205,7 +205,7 @@ input.ng-invalid.ng-touched {
   list-style-type: none;
   padding: 0;
   overflow-y: scroll;
-  height: 350px;
+  height: 400px;
   margin: 0;
 }
 
@@ -218,7 +218,8 @@ input.ng-invalid.ng-touched {
 }
 
 .message.sent,
-.message.received {
+.message.received,
+.message.card .message.image {
   padding: 1em 0.5em;
   color: white;
   background-color: #333;
@@ -237,6 +238,39 @@ input.ng-invalid.ng-touched {
 .message.received {
   float: left;
   background-color: #32ab42;
+  clear: left;
+}
+
+.message.card {
+  float: left;
+  background-color: transparent;
+  padding: 0.5em;
+  margin-left: 3em;
+}
+
+.message.image {
+  float: left;
+  margin-left: 5em;
+}
+
+.message.image img {
+  height: 100px;
+}
+
+.message.card button {
+  background-color: #32ab42;
+  color: white;
+  padding: 1em;
+  border: none;
+  border-radius: 10px;
+  margin-right: 1em;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.25s;
+}
+
+.message.card button:hover {
+  transform: scale(1.2);
 }
 
 .message i {

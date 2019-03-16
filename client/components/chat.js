@@ -103,7 +103,16 @@ export class Chat extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault()
+    this.messageBot()
+  }
 
+  handleCardButton(evt) {
+    this.setState({text: evt.target.value}, () => {
+      this.messageBot()
+    })
+  }
+
+  messageBot() {
     const {
       text,
       messages,
@@ -131,13 +140,51 @@ export class Chat extends Component {
         .post('/api/bot/message', {text, sessionUserId, option})
         .then(res => res.data)
         .then(data => {
+          let cards, image
+          if (data.responseCard) {
+            const cardElems = data.responseCard.genericAttachments
+
+            cards = cardElems.map(elem => {
+              let buttons
+              if (elem.buttons.length > 0) {
+                buttons = elem.buttons.map((button, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={this.handleCardButton.bind(this)}
+                    value={button.value}
+                  >
+                    {button.text}
+                  </button>
+                ))
+              }
+
+              return {
+                type: 'card',
+                content: <div>{buttons}</div>
+              }
+            })
+          }
+
+          if (data.imageUrl)
+            image = {
+              type: 'image',
+              content: <img src={data.imageUrl} alt="food-image" />
+            }
+
           const received = {
             type: 'received',
             content: `${option.toLowerCase()}: ${data.message}`
           }
+
+          const newMessages = [...messages, sent]
+          if (image) newMessages.push(image)
+          newMessages.push(received)
+          if (cards) newMessages.push(...cards)
+
           this.setState({
             busy: false,
-            messages: [...messages, sent, received]
+            messages: newMessages
           })
         })
         .catch(err => console.error(err))

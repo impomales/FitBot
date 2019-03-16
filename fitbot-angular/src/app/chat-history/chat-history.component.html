@@ -1,9 +1,30 @@
 <div id="chat-history">
-  <ul>
-    <li *ngFor="let message of messages" class="{{message.type}} message">
+  <ul #messageList>
+    <li *ngFor="let message of messages" class="{{ message.type }} message">
       <i *ngIf="message.type === 'sent'" class="fas fa-user"></i>
       <i *ngIf="message.type === 'received'" class="fas fa-robot"></i>
-      {{ message.content }}
+      <ng-template #content>
+        {{ message.content }}
+      </ng-template>
+
+      <ng-template #card>
+        <div *ngIf="message.type === 'card'; else content">
+          <button
+            *ngFor="let button of message.content.buttons"
+            type="button"
+            (click)="onButtonClick(button.value)"
+            [value]="button.value"
+          >
+            {{ button.text }}
+          </button>
+        </div>
+      </ng-template>
+
+      <img
+        *ngIf="message.type === 'image'; else card"
+        [src]="message.content"
+        alt="food-image"
+      />
     </li>
   </ul>
 </div>

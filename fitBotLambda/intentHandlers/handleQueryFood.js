@@ -135,7 +135,9 @@ function handleFulfillmentCodeHook(request) {
     buildFoodQuery(FoodQueryName, Number(FoodQueryQuantity), FoodQueryUnit),
     nutritionInfo => {
       return confirmIntent(
-        sessionAttributes,
+        Object.assign({}, sessionAttributes, {
+          imageLink: nutritionInfo.foods[0].photo.highres
+        }),
         'LogFood',
         {
           FoodLogName: FoodQueryName,

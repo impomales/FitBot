@@ -39,8 +39,8 @@ export class ChatComponent implements OnInit {
           bot.type === 'DIALOG_FLOW' ? sessionUserId : this.sessionUserIdFlow
         this.sessionUserIdWatson =
           bot.type === 'WATSON' ? sessionUserId : this.sessionUserIdWatson
-        // this.sessionUserIdRasa = 
-          // bot.type === 'RASA' ? sessionUserId : this.sessionUserIdRasa
+        // this.sessionUserIdRasa =
+        // bot.type === 'RASA' ? sessionUserId : this.sessionUserIdRasa
 
         this.messageService.push([
           {
@@ -79,7 +79,7 @@ export class ChatComponent implements OnInit {
       option,
       sessionUserIdFlow,
       sessionUserIdLex,
-      sessionUserIdWatson,
+      sessionUserIdWatson
       // sessionUserIdRasa
     } = this
 
@@ -95,11 +95,18 @@ export class ChatComponent implements OnInit {
       //   type: 'status',
       //   content: `You are now chatting with ${option}`
       // })
-      this.messageService.push([{
-        type: 'status',
-        content: `You are now chatting with ${option}`
-      }])
+      this.messageService.push([
+        {
+          type: 'status',
+          content: `You are now chatting with ${option}`
+        }
+      ])
     }
+  }
+
+  handleCardButton(value: string) {
+    this.text = value
+    this.handleSubmit()
   }
 
   handleSubmit() {
@@ -124,10 +131,32 @@ export class ChatComponent implements OnInit {
 
     this.chatService.messageBot(sessionUserId, text, option).subscribe(
       data => {
-        this.messageService.push([{
-          type: 'received',
-          content: `${option.toLowerCase()}: ${data.message}`
-        }])
+        if (data.imageUrl) {
+          this.messageService.push([
+            {
+              type: 'image',
+              content: data.imageUrl
+            }
+          ])
+        }
+
+        this.messageService.push([
+          {
+            type: 'received',
+            content: `${option.toLowerCase()}: ${data.message}`
+          }
+        ])
+
+        if (data.responseCard) {
+          data.responseCard.genericAttachments.forEach(attachment => {
+            this.messageService.push([
+              {
+                type: 'card',
+                content: attachment
+              }
+            ])
+          })
+        }
         // this.messageService.messages.push({
         //   type: 'received',
         //   content: `${option.toLowerCase()}: ${data.message}`

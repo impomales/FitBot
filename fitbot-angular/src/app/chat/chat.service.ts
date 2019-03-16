@@ -15,6 +15,15 @@ export interface InitBotResponse {
 
 export interface MessageBotResponse {
   message: string
+  responseCard?: {
+    genericAttachments: {
+      buttons: {
+        text: string
+        value: string
+      }[]
+    }[]
+  }
+  imageUrl?: string
 }
 
 export interface Bot {

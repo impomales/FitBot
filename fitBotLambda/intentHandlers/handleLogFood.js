@@ -43,7 +43,9 @@ function handleDialogCodeHook(request) {
       buildFoodQuery(FoodLogName, Number(FoodLogQuantity), FoodLogUnit),
       nutritionInfo => {
         return confirmIntent(
-          sessionAttributes,
+          Object.assign({}, sessionAttributes, {
+            imageLink: nutritionInfo.foods[0].photo.highres
+          }),
           'LogFood',
           Object.assign({}, slots, {
             FoodLogQuantity: FoodLogQuantity,

@@ -2,9 +2,11 @@ import React, {Component} from 'react'
 
 class ChatHistory extends Component {
   componentDidUpdate() {
-    const messages = document.querySelector('#chat-history ul')
-    if (messages.scrollTop + messages.clientHeight !== messages.scrollHeight) {
-      messages.scrollTop = messages.scrollHeight
+    if (
+      this.messagesRef.scrollTop + this.messagesRef.clientHeight !==
+      this.messagesRef.scrollHeight
+    ) {
+      this.messagesRef.scrollTop = this.messagesRef.scrollHeight
     }
   }
 
@@ -13,7 +15,11 @@ class ChatHistory extends Component {
     let avatar
     return (
       <div id="chat-history">
-        <ul>
+        <ul
+          ref={el => {
+            this.messagesRef = el
+          }}
+        >
           {messages.map((message, idx) => {
             avatar =
               message.type === 'sent' ? (
@@ -22,7 +28,12 @@ class ChatHistory extends Component {
                 <i className="fas fa-robot" />
               )
 
-            if (message.type === 'status') avatar = ''
+            if (
+              message.type === 'status' ||
+              message.type === 'card' ||
+              message.type === 'image'
+            )
+              avatar = ''
             return (
               <li className={`${message.type} message`} key={idx}>
                 {avatar}

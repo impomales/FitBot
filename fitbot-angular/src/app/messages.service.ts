@@ -3,7 +3,14 @@ import {Subject} from 'rxjs'
 
 export interface Message {
   type: String
-  content: String
+  content:
+    | String
+    | {
+        buttons: {
+          text: string
+          value: string
+        }[]
+      }
 }
 
 @Injectable({

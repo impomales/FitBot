@@ -3,7 +3,9 @@ import {
   OnInit,
   AfterViewChecked,
   ViewChild,
-  ElementRef
+  ElementRef,
+  EventEmitter,
+  Output
 } from '@angular/core'
 import {MessagesService, Message} from '../messages.service'
 
@@ -15,6 +17,7 @@ import {MessagesService, Message} from '../messages.service'
 export class ChatHistoryComponent implements OnInit, AfterViewChecked {
   messages: Message[] = []
   @ViewChild('messageList') private messageList: ElementRef
+  @Output() selectCard = new EventEmitter<string>()
 
   constructor(public messagesService: MessagesService) {}
 
@@ -32,5 +35,9 @@ export class ChatHistoryComponent implements OnInit, AfterViewChecked {
     ) {
       this.messageList.nativeElement.scrollTop = this.messageList.nativeElement.scrollHeight
     }
+  }
+
+  onButtonClick(value: string) {
+    this.selectCard.emit(value)
   }
 }

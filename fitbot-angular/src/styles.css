@@ -205,7 +205,7 @@ input.ng-invalid.ng-touched {
   list-style-type: none;
   padding: 0;
   overflow-y: scroll;
-  height: 350px;
+  height: 400px;
   margin: 0;
 }
 

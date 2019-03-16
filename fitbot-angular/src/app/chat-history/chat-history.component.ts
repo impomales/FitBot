@@ -1,4 +1,10 @@
-import {Component, OnInit, AfterViewChecked} from '@angular/core'
+import {
+  Component,
+  OnInit,
+  AfterViewChecked,
+  ViewChild,
+  ElementRef
+} from '@angular/core'
 import {MessagesService, Message} from '../messages.service'
 
 @Component({
@@ -8,6 +14,7 @@ import {MessagesService, Message} from '../messages.service'
 })
 export class ChatHistoryComponent implements OnInit, AfterViewChecked {
   messages: Message[] = []
+  @ViewChild('messageList') private messageList: ElementRef
 
   constructor(public messagesService: MessagesService) {}
 
@@ -18,9 +25,12 @@ export class ChatHistoryComponent implements OnInit, AfterViewChecked {
   }
 
   ngAfterViewChecked() {
-    const messages = document.querySelector('#chat-history ul')
-    if (messages.scrollTop + messages.clientHeight !== messages.scrollHeight) {
-      messages.scrollTop = messages.scrollHeight
+    if (
+      this.messageList.nativeElement.scrollTop +
+        this.messageList.nativeElement.clientHeight !==
+      this.messageList.nativeElement.scrollHeight
+    ) {
+      this.messageList.nativeElement.scrollTop = this.messageList.nativeElement.scrollHeight
     }
   }
 }

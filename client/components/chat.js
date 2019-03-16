@@ -107,7 +107,6 @@ export class Chat extends Component {
   }
 
   handleCardButton(evt) {
-    console.log(evt.target.value)
     this.setState({text: evt.target.value}, () => {
       this.messageBot()
     })

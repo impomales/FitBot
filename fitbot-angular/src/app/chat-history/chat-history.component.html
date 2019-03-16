@@ -1,5 +1,5 @@
 <div id="chat-history">
-  <ul>
+  <ul #messageList>
     <li *ngFor="let message of messages" class="{{message.type}} message">
       <i *ngIf="message.type === 'sent'" class="fas fa-user"></i>
       <i *ngIf="message.type === 'received'" class="fas fa-robot"></i>

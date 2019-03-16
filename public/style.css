@@ -247,7 +247,7 @@ select {
 }
 
 .message.image img {
-  max-height: 100px;
+  height: 100px;
 }
 
 .message.card button {

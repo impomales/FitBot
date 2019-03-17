@@ -219,7 +219,8 @@ input.ng-invalid.ng-touched {
 
 .message.sent,
 .message.received,
-.message.card .message.image {
+.message.card,
+.message.image {
   padding: 1em 0.5em;
   color: white;
   background-color: #333;
@@ -250,7 +251,8 @@ input.ng-invalid.ng-touched {
 
 .message.image {
   float: left;
-  margin-left: 5em;
+  padding-left: 5em;
+  background-color: transparent;
 }
 
 .message.image img {

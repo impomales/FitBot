@@ -12,6 +12,7 @@ export class ChatComponent implements OnInit {
   busy: Boolean = false
   text: string = ''
   option: string = ''
+  sessionAttributes: any
 
   sessionUserIdLex: string
   sessionUserIdFlow: string
@@ -110,7 +111,7 @@ export class ChatComponent implements OnInit {
   }
 
   handleSubmit() {
-    const {text, option} = this
+    const {text, option, sessionAttributes} = this
 
     if (!text) return
 
@@ -129,7 +130,7 @@ export class ChatComponent implements OnInit {
     else if (option === 'WATSON') sessionUserId = this.sessionUserIdWatson
     // else if (option === 'RASA') sessionUserId = this.sessionUserIdRasa
 
-    this.chatService.messageBot(sessionUserId, text, option).subscribe(
+    this.chatService.messageBot(sessionUserId, text, option, sessionAttributes).subscribe(
       data => {
         if (data.imageUrl) {
           this.messageService.push([
@@ -162,6 +163,7 @@ export class ChatComponent implements OnInit {
         //   content: `${option.toLowerCase()}: ${data.message}`
         // })
         this.busy = false
+        this.sessionAttributes = data.sessionAttributes
       },
       err => console.error(err)
     )

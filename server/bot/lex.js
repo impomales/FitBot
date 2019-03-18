@@ -29,7 +29,7 @@ function initiateLex(user) {
  * @param {String} text input text user is sending
  * @param {Function} callback function that handles error, or sends response back to user
  */
-function messageLex(sessionUserId, text, callback, user) {
+function messageLex(sessionUserId, text, callback, user, sessionAttributes) {
   const {weightInKg, heightInCm, age, gender} = user
   this.service.postText(
     {
@@ -38,11 +38,14 @@ function messageLex(sessionUserId, text, callback, user) {
       userId: sessionUserId,
       inputText: text,
       sessionAttributes: {
-        // can enter user data here, calorie goals, currentCalories, weight, etc.
-        weightInKg: weightInKg + '',
-        heightInCm: heightInCm + '',
-        age: age + '',
-        gender
+        ...sessionAttributes,
+        ...{
+          // can enter user data here, calorie goals, currentCalories, weight, etc.
+          weightInKg: weightInKg + '',
+          heightInCm: heightInCm + '',
+          age: age + '',
+          gender
+        }
       }
     },
     callback
@@ -85,6 +88,8 @@ async function handleResponseLex(user, response) {
     message,
     responseCard
   } = response
+
+  console.log(response)
 
   if (caloriesRemainingFulfilled(intentName, dialogState)) {
     const foodName = sessionAttributes.foodName

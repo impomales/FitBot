@@ -80,6 +80,7 @@ function handleDialogCodeHook(request) {
     sessionAttributes.workout = null
   }
 
+  // prepare for fulfillment when user denies.
   if (confirmationStatus === 'Denied') {
     sessionAttributes.workoutToSave = sessionAttributes.workout
     sessionAttributes.workout = null
@@ -107,6 +108,9 @@ function handleDialogCodeHook(request) {
   if (!Calories && ExerciseName && ExerciseQuantity && ExerciseUnit) {
     const query = `${ExerciseQuantity} ${ExerciseUnit} of ${ExerciseName}`
 
+    // get exercise info
+    // on success add exercise to workout array
+    // array must be in JSON string format for lex.
     return getExerciseInfo(
       query,
       {weightInKg, heightInCm, gender, age},
@@ -129,6 +133,7 @@ function handleDialogCodeHook(request) {
           2
         )
 
+        // continue to add more exercises until user denies.
         return confirmIntent(
           sessionAttributes,
           'CreateWorkout',

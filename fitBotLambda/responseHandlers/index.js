@@ -19,9 +19,10 @@ function elicitSlot(
   intentName,
   slots,
   slotToElicit,
-  message
+  message,
+  responseCard
 ) {
-  return {
+  const result = {
     sessionAttributes,
     dialogAction: {
       type: 'ElicitSlot',
@@ -34,6 +35,19 @@ function elicitSlot(
       }
     }
   }
+
+  if (responseCard) {
+    result.dialogAction.responseCard = {
+      contentType: 'application/vnd.amazonaws.card.generic',
+      genericAttachments: [
+        {
+          buttons: responseCard.buttons
+        }
+      ]
+    }
+  }
+
+  return result
 }
 
 // expects next input to be an intent utterance

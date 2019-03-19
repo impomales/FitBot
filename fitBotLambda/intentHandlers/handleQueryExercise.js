@@ -28,20 +28,17 @@ function getExerciseInfo(query, userInfo, success, failure) {
     .catch(err => failure(err))
 }
 
-function wordToQuantity(slots, inputTranscript) {
+function wordToQuantity(slots, inputTranscript, key) {
+  // key is used to reuse in different intent that has slightly different key names.
   if (
-    isIndefinite(
-      slots.ExerciseQueryName,
-      slots.ExerciseQueryQuantity,
-      inputTranscript
-    )
+    isIndefinite(slots[key + 'Name'], slots[key + 'Quantity'], inputTranscript)
   ) {
-    slots.ExerciseQueryQuantity = '1'
+    slots[key + 'Quantity'] = '1'
   }
 
   if (inputTranscript.includes('half') && inputTranscript.includes('hour')) {
-    slots.ExerciseQueryQuantity = '30'
-    slots.ExerciseQueryUnit = 'min'
+    slots[key + 'Quantity'] = '30'
+    slots[key + 'Unit'] = 'min'
   }
 }
 
@@ -49,7 +46,7 @@ function handleQueryExercise(request) {
   const {sessionAttributes, currentIntent, inputTranscript} = request
   const {slots, confirmationStatus} = currentIntent
 
-  wordToQuantity(slots, inputTranscript)
+  wordToQuantity(slots, inputTranscript, 'ExerciseQuery')
 
   let {
     ExerciseQueryName,

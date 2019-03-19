@@ -152,31 +152,9 @@ function handleDialogCodeHook(request) {
   return handleSlotFilling(request)
 }
 
-function handleFulfillmentCodeHook(request) {
-  const {sessionAttributes, currentIntent} = request
-  const {slots} = currentIntent
-
-  const {WorkoutTitle} = slots
-
-  return confirmIntent(
-    sessionAttributes,
-    'CreateWorkout',
-    {
-      ExerciseName: null,
-      ExerciseQuantity: null,
-      ExerciseUnit: null,
-      Calories: null,
-      WorkoutTitle
-    },
-    `Would you like to add another exercise?`
-  )
-}
-
 function handleCreateWorkout(request) {
   if (request.invocationSource === 'DialogCodeHook') {
     return handleDialogCodeHook(request)
-  } else {
-    return handleFulfillmentCodeHook(request)
   }
 }
 

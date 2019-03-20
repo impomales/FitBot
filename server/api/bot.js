@@ -80,7 +80,8 @@ router.post('/message', (req, res, next) => {
             res.json({
               message: result.message,
               responseCard: result.responseCard,
-              imageUrl: result.imageUrl
+              imageUrl: result.imageUrl,
+              sessionAttributes: response.sessionAttributes
             })
             return
           }

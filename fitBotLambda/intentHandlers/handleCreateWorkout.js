@@ -90,7 +90,7 @@ function handleDialogCodeHook(request) {
 
     result.forEach(exercise => {
       resultStr +=
-        '\r\n' +
+        '\n\n' +
         exercise.ExerciseName +
         exercise.ExerciseQuantity +
         exercise.ExerciseUnit
@@ -140,7 +140,7 @@ function handleDialogCodeHook(request) {
           {
             WorkoutTitle
           },
-          `Would you like to add another exercise?`
+          `${ExerciseName} has been added to the workout. Would you like to add another exercise?`
         )
       },
       err => {

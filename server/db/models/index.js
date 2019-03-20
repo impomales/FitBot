@@ -16,5 +16,6 @@ Workout.hasMany(ExerciseLog)
 module.exports = {
   User,
   FoodLog,
-  ExerciseLog
+  ExerciseLog,
+  Workout
 }

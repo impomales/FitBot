@@ -3,7 +3,7 @@ const aws = require('aws-sdk')
 const randomstring = require('randomstring')
 const caloriesRemaining = require('./caloriesRemaining')
 const saveFoodLog = require('./saveFoodLog')
-const {ExerciseLog} = require('../db/models')
+const {ExerciseLog, Workout} = require('../db/models')
 
 /**
  * initiates the lex service
@@ -89,8 +89,6 @@ async function handleResponseLex(user, response) {
     responseCard
   } = response
 
-  console.log(response)
-
   if (caloriesRemainingFulfilled(intentName, dialogState)) {
     const foodName = sessionAttributes.foodName
     return caloriesRemaining(user, foodName)
@@ -141,6 +139,23 @@ async function handleResponseLex(user, response) {
       if (newLog.name) return caloriesRemaining(user, null, exerciseLog)
     } catch (err) {
       return err
+    }
+  } else if (intentName === 'CreateWorkout' && dialogState === 'Fulfilled') {
+    const exercises = JSON.parse(sessionAttributes.workoutToSave)
+    const name = slots.WorkoutTitle
+
+    try {
+      const newWorkout = await Workout.saveWorkout(
+        user,
+        name,
+        exercises,
+        ExerciseLog
+      )
+      return `Your workout, ${
+        newWorkout.name
+      }, has been successfully saved. You can now easily log it.`
+    } catch (err) {
+      return `Error in saving workout ${err}`
     }
   }
 

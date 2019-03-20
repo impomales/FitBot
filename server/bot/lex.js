@@ -1,3 +1,4 @@
+/* eslint-disable max-statements */
 /* eslint-disable complexity */
 const aws = require('aws-sdk')
 const randomstring = require('randomstring')
@@ -79,6 +80,8 @@ function caloriesRemainingFulfilled(intentName, dialogState) {
  * @param {Object} response.slots contains parameters needed to fulfill intent
  * @returns {String} response message to user
  */
+
+// TODO this needs to be broken up per intent.
 async function handleResponseLex(user, response) {
   const {
     intentName,
@@ -108,7 +111,7 @@ async function handleResponseLex(user, response) {
         if (newLog.name) return caloriesRemaining(user, newLog)
         else return newLog
       } catch (err) {
-        return err
+        return err.message
       }
     }
   } else if (
@@ -121,7 +124,7 @@ async function handleResponseLex(user, response) {
       const statusStr = await caloriesRemaining(user)
       return `${updateStr} ${statusStr}`
     } catch (err) {
-      return err
+      return err.message
     }
   } else if (
     intentName === 'QueryExercise' &&
@@ -138,7 +141,24 @@ async function handleResponseLex(user, response) {
       const newLog = await ExerciseLog.saveExerciseLog(user, exerciseLog)
       if (newLog.name) return caloriesRemaining(user, null, exerciseLog)
     } catch (err) {
-      return err
+      return err.message
+    }
+  } else if (
+    intentName === 'LogWorkout' &&
+    dialogState === 'ReadyForFulfillment'
+  ) {
+    try {
+      const workoutStr = await Workout.logWorkout(
+        user,
+        slots.Workout,
+        ExerciseLog
+      )
+      if (!workoutStr)
+        return 'Workout does not exist. You can create a new workout.'
+      const statusStr = await caloriesRemaining(user)
+      return `${workoutStr} ${statusStr}`
+    } catch (err) {
+      return err.message
     }
   } else if (intentName === 'CreateWorkout' && dialogState === 'Fulfilled') {
     const exercises = JSON.parse(sessionAttributes.workoutToSave)

@@ -24,6 +24,7 @@ export interface MessageBotResponse {
     }[]
   }
   imageUrl?: string
+  sessionAttributes?: any
 }
 
 export interface Bot {
@@ -47,11 +48,12 @@ export class ChatService {
   messageBot(
     sessionUserId: string,
     text: string,
-    option: string
+    option: string,
+    sessionAttributes: any
   ): Observable<MessageBotResponse> {
     return this.http.post<MessageBotResponse>(
       '/api/bot/message',
-      {text, sessionUserId, option},
+      {text, sessionUserId, option, sessionAttributes},
       httpOptions
     )
   }

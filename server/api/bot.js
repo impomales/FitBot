@@ -47,7 +47,7 @@ router.post('/initiate', (req, res, next) => {
 })
 
 router.post('/message', (req, res, next) => {
-  const {text, sessionUserId, option} = req.body
+  const {text, sessionUserId, option, sessionAttributes} = req.body
   let bot
   if (option === 'LEX') bot = lexBot
   else if (option === 'DIALOG_FLOW') bot = flowBot
@@ -80,17 +80,22 @@ router.post('/message', (req, res, next) => {
             res.json({
               message: result.message,
               responseCard: result.responseCard,
-              imageUrl: result.imageUrl
+              imageUrl: result.imageUrl,
+              sessionAttributes: response.sessionAttributes
             })
             return
           }
-          res.json({message: result})
+          res.json({
+            message: result,
+            sessionAttributes: response.sessionAttributes
+          })
         } catch (error) {
           next(error)
         }
       }
     },
-    req.user
+    req.user,
+    sessionAttributes
   )
 })
 

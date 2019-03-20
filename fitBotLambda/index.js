@@ -1,8 +1,15 @@
-const {QueryFood, QueryExercise, LogFood} = require('./intentTypes')
+const {
+  QueryFood,
+  QueryExercise,
+  LogFood,
+  CreateWorkout
+} = require('./intentTypes')
+
 const {
   handleQueryFood,
   handleLogFood,
-  handleQueryExercise
+  handleQueryExercise,
+  handleCreateWorkout
 } = require('./intentHandlers')
 
 function dispatch(request) {
@@ -15,6 +22,8 @@ function dispatch(request) {
       return handleQueryExercise(request)
     case LogFood:
       return handleLogFood(request)
+    case CreateWorkout:
+      return handleCreateWorkout(request)
     default:
       throw Error(`Intent with name ${intentName} not supported.`)
   }

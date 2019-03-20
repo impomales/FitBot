@@ -14,7 +14,8 @@ export class Chat extends Component {
       sessionUserIdFlow: '',
       sessionUserIdWatson: '',
       // sessionUserIdRasa: '',
-      option: ''
+      option: '',
+      sessionAttributes: {}
     }
   }
   componentDidMount() {
@@ -137,7 +138,12 @@ export class Chat extends Component {
       // else if (option === 'RASA') sessionUserId = sessionUserIdRasa
 
       axios
-        .post('/api/bot/message', {text, sessionUserId, option})
+        .post('/api/bot/message', {
+          text,
+          sessionUserId,
+          option,
+          sessionAttributes: this.state.sessionAttributes
+        })
         .then(res => res.data)
         .then(data => {
           let cards, image
@@ -184,7 +190,8 @@ export class Chat extends Component {
 
           this.setState({
             busy: false,
-            messages: newMessages
+            messages: newMessages,
+            sessionAttributes: data.sessionAttributes
           })
         })
         .catch(err => console.error(err))

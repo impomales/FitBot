@@ -167,7 +167,7 @@ export class Chat extends Component {
 
               return {
                 type: 'card',
-                content: <div>{buttons}</div>
+                content: <div className="response-card-btn">{buttons}</div>
               }
             })
           }

@@ -245,8 +245,8 @@ input.ng-invalid.ng-touched {
 .message.card {
   float: left;
   background-color: transparent;
-  padding: 0.5em;
-  margin-left: 3em;
+  padding: 0 0.5em 0.5em 0;
+  margin: 0 0 0 3em;
 }
 
 .message.image {
@@ -272,7 +272,7 @@ input.ng-invalid.ng-touched {
 }
 
 .message.card button:hover {
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
 .message i {

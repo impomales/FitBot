@@ -40,6 +40,7 @@ function messageLex(sessionUserId, text, callback, user, sessionAttributes) {
       inputText: text,
       sessionAttributes: {
         ...sessionAttributes,
+        imageLink: null,
         ...{
           // can enter user data here, calorie goals, currentCalories, weight, etc.
           weightInKg: weightInKg + '',

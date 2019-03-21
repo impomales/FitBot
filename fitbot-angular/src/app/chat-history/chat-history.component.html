@@ -8,7 +8,7 @@
       </ng-template>
 
       <ng-template #card>
-        <div *ngIf="message.type === 'card'; else content" class="response-card-btn">
+        <div *ngIf="message.type === 'card'; else content">
           <button
             *ngFor="let button of message.content.buttons"
             type="button"

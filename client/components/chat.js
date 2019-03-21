@@ -147,6 +147,8 @@ export class Chat extends Component {
         .then(res => res.data)
         .then(data => {
           let cards, image
+          console.log(data.responseCard)
+
           if (data.responseCard) {
             const cardElems = data.responseCard.genericAttachments
 
@@ -164,10 +166,9 @@ export class Chat extends Component {
                   </button>
                 ))
               }
-
               return {
                 type: 'card',
-                content: <div className="response-card-btn">{buttons}</div>
+                content: <div>{buttons}</div>
               }
             })
           }

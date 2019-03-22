@@ -2,9 +2,10 @@ const {Op} = require('sequelize')
 const {ExerciseLog, FoodLog} = require('../db/models')
 
 module.exports = async function weekOverview(user) {
-  const days = []
+  const dateRanges = []
   const foodCaloriesPerDay = []
   const exerciseCaloriesPerDay = []
+  const net = []
 
   for (let i = 6; i >= 0; i--) {
     let begin = new Date(),
@@ -13,20 +14,20 @@ module.exports = async function weekOverview(user) {
     begin.setDate(begin.getDate() - i)
     end = new Date()
     end.setDate(begin.getDate() + 1)
-    days.push({
+    dateRanges.push({
       [Op.gte]: begin,
       [Op.lt]: end
     })
   }
 
-  for (let i = 0; i < days.length; i++) {
+  for (let i = 0; i < dateRanges.length; i++) {
     try {
       const foodLogs = await FoodLog.findAll({
-        where: {createdAt: days[i], userId: user.id}
+        where: {createdAt: dateRanges[i], userId: user.id}
       })
 
       const exerciseLogs = await ExerciseLog.findAll({
-        where: {createdAt: days[i], userId: user.id}
+        where: {createdAt: dateRanges[i], userId: user.id}
       })
 
       let foodCalories = 0,
@@ -38,15 +39,21 @@ module.exports = async function weekOverview(user) {
         exerciseCalories += exercise.calories
       })
 
-      foodCaloriesPerDay.push(foodCalories)
-      exerciseCaloriesPerDay.push(exerciseCalories)
+      foodCaloriesPerDay.push(Math.round(foodCalories * 100) / 100)
+      exerciseCaloriesPerDay.push(Math.round(-1 * exerciseCalories * 100) / 100)
+
+      net.push(Math.round((foodCalories - exerciseCalories) * 100) / 100)
     } catch (err) {
       return `Error in getting progress. ${err}`
     }
   }
 
+  const days = dateRanges.map(range => {
+    return range[Op.gte]
+  })
+
   return {
-    message: 'Below are your net calories in the last seven days.',
-    chartData: {days, foodCaloriesPerDay, exerciseCaloriesPerDay}
+    message: 'Below are your calories in the last seven days.',
+    chartData: {days, foodCaloriesPerDay, exerciseCaloriesPerDay, net}
   }
 }

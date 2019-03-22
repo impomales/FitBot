@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, {Component} from 'react'
 import ChatHistory from './chat-history'
+import {Bar} from 'react-chartjs-2'
 
 export class Chat extends Component {
   constructor(props) {
@@ -146,8 +147,7 @@ export class Chat extends Component {
         })
         .then(res => res.data)
         .then(data => {
-          let cards, image
-          console.log(data)
+          let cards, image, chart
 
           if (data.responseCard) {
             const cardElems = data.responseCard.genericAttachments
@@ -173,11 +173,19 @@ export class Chat extends Component {
             })
           }
 
-          if (data.imageUrl)
+          if (data.imageUrl) {
             image = {
               type: 'image',
               content: <img src={data.imageUrl} alt="food-image" />
             }
+          }
+
+          if (data.chartData) {
+            chart = {
+              type: 'chart',
+              content: this.createChart(data.chartData)
+            }
+          }
 
           const received = {
             type: 'received',
@@ -188,6 +196,7 @@ export class Chat extends Component {
           if (image) newMessages.push(image)
           newMessages.push(received)
           if (cards) newMessages.push(...cards)
+          if (chart) newMessages.push(chart)
 
           this.setState({
             busy: false,
@@ -197,6 +206,54 @@ export class Chat extends Component {
         })
         .catch(err => console.error(err))
     })
+  }
+
+  createChart(rawData) {
+    const data = {
+      labels: rawData.days.map(dayStr => {
+        const date = new Date(dayStr).toDateString().split(' ')
+        date.pop() // remove year
+        return date.join(' ')
+      }),
+      datasets: [
+        {
+          label: 'Net Calories',
+          data: rawData.net,
+          backgroundColor: '#0070bc',
+          borderColor: '#0070bc',
+          borderWidth: 1,
+          type: 'line',
+          fill: false
+        },
+        {
+          label: 'Calories gained',
+          data: rawData.foodCaloriesPerDay,
+          backgroundColor: '#32ab42',
+          borderColor: '#32ab42',
+          borderWidth: 1
+        },
+        {
+          label: 'Calories lost',
+          data: rawData.exerciseCaloriesPerDay,
+          backgroundColor: 'red',
+          borderColor: 'red',
+          borderWidth: 1
+        }
+      ]
+    }
+    const options = {
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: true
+            }
+          }
+        ]
+      }
+    }
+
+    return <Bar data={data} options={options} width={100} height={43} />
   }
 
   render() {

@@ -147,7 +147,7 @@ export class Chat extends Component {
         .then(res => res.data)
         .then(data => {
           let cards, image
-          console.log(data.responseCard)
+          console.log(data)
 
           if (data.responseCard) {
             const cardElems = data.responseCard.genericAttachments

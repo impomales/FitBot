@@ -14,6 +14,7 @@ module.exports = async function weekOverview(user) {
     begin.setDate(begin.getDate() - i)
     end = new Date()
     end.setDate(begin.getDate() + 1)
+    end = new Date(end.getFullYear(), end.getMonth(), end.getDate())
     dateRanges.push({
       [Op.gte]: begin,
       [Op.lt]: end
@@ -54,6 +55,12 @@ module.exports = async function weekOverview(user) {
 
   return {
     message: 'Below are your calories in the last seven days.',
-    chartData: {days, foodCaloriesPerDay, exerciseCaloriesPerDay, net}
+    chartData: {
+      days,
+      foodCaloriesPerDay,
+      exerciseCaloriesPerDay,
+      net,
+      dailyGoal: user.dailyGoals
+    }
   }
 }

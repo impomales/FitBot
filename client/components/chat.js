@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, {Component} from 'react'
 import ChatHistory from './chat-history'
 import {Bar} from 'react-chartjs-2'
+import {userInfo} from 'os'
 
 export class Chat extends Component {
   constructor(props) {
@@ -209,6 +210,7 @@ export class Chat extends Component {
   }
 
   createChart(rawData) {
+    console.log(rawData.dailyGoal)
     const data = {
       labels: rawData.days.map(dayStr => {
         const date = new Date(dayStr).toDateString().split(' ')
@@ -216,6 +218,15 @@ export class Chat extends Component {
         return date.join(' ')
       }),
       datasets: [
+        {
+          label: 'Goal',
+          data: rawData.days.map(() => rawData.dailyGoal),
+          backgroundColor: '#e88b3d',
+          borderColor: '#e88b3d',
+          borderWidth: 1,
+          type: 'line',
+          fill: false
+        },
         {
           label: 'Net Calories',
           data: rawData.net,

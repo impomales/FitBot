@@ -31,7 +31,8 @@ class ChatHistory extends Component {
             if (
               message.type === 'status' ||
               message.type === 'card' ||
-              message.type === 'image'
+              message.type === 'image' ||
+              message.type === 'chart'
             )
               avatar = ''
             return (

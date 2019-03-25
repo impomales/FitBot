@@ -3,6 +3,7 @@
 const aws = require('aws-sdk')
 const randomstring = require('randomstring')
 const caloriesRemaining = require('./caloriesRemaining')
+const weekOverview = require('./weekOverview')
 const saveFoodLog = require('./saveFoodLog')
 const {ExerciseLog, Workout} = require('../db/models')
 
@@ -178,6 +179,11 @@ async function handleResponseLex(user, response) {
     } catch (err) {
       return `Error in saving workout ${err}`
     }
+  } else if (
+    intentName === 'WeekOverview' &&
+    dialogState === 'ReadyForFulfillment'
+  ) {
+    return weekOverview(user)
   }
 
   // adding support for response card for specific case in lex.

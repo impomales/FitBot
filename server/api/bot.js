@@ -75,11 +75,12 @@ router.post('/message', (req, res, next) => {
         try {
           // handle fulfillment here before sending response back to user.
           const result = await bot.handleResponse(req.user, response)
-          if (result.responseCard || result.imageUrl) {
+          if (result.responseCard || result.imageUrl || result.chartData) {
             res.json({
               message: result.message,
               responseCard: result.responseCard,
               imageUrl: result.imageUrl,
+              chartData: result.chartData,
               sessionAttributes: response.sessionAttributes
             })
             return

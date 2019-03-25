@@ -47,6 +47,11 @@ module.exports = async function caloriesRemaining(user, foodLog, exerciseLog) {
   today = new Date(today.getFullYear(), today.getMonth(), today.getDate())
   tomorrow = new Date()
   tomorrow.setDate(today.getDate() + 1)
+  tomorrow = new Date(
+    tomorrow.getFullYear(),
+    tomorrow.getMonth(),
+    tomorrow.getDate()
+  )
 
   const createdAt = {
     [Op.gte]: today,

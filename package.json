@@ -19,7 +19,7 @@
     "prettify": "prettier --write \"**/*.{js,jsx,json,css,scss,md}\"",
     "postinstall": "touch secrets.js",
     "seed": "node script/seed.js",
-    "start": "BOT='DIALOG_FLOW' node server",
+    "start": "BOT='LEX' node server",
     "start-dev-dialog-flow": "BOT='DIALOG_FLOW' NODE_ENV='development' npm run build-client-watch & NODE_ENV='development' npm run start-server-dialog-flow",
     "start-server-dialog-flow": "BOT='DIALOG_FLOW' nodemon server -e html,js,scss --ignore public --ignore client",
     "start-dev-watson": "BOT='WATSON' NODE_ENV='development' npm run build-client-watch & NODE_ENV='development' npm run start-server-watson",

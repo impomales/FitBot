@@ -45,6 +45,18 @@
 * npm run start-dev-dialog-flow
 * npm run end2end
 
+# Angular front end on port 4200
+* cd fitbot-angular 
+* ng serve
+
+# Rasa
+
+* checkout train-rasa
+* cd fitbot-rasa
+* make nlu-json
+* make core-server
+* make action-server
+
 ## test lex
 
 * npm run start-dev-lex

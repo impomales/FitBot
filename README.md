@@ -50,7 +50,7 @@
 * ng serve
 
 # Rasa
-
+* load env for RASA_SECRET
 * checkout train-rasa
 * cd fitbot-rasa
 * make nlu-json

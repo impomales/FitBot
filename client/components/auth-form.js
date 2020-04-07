@@ -30,9 +30,6 @@ const AuthForm = props => {
           </button>
         </div>
       </form>
-      <a href="/auth/google" className="google">
-        {displayName} with <i className="fab fa-google" />oogle
-      </a>
     </div>
   )
 }

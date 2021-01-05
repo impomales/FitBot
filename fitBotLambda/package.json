@@ -1,7 +1,7 @@
 {
     "name": "fit-bot-lambda",
     "dependencies": {
-        "axios": "^0.18.0",
+        "axios": "^0.21.1",
         "pluralize": "^7.0.0"
     }
 }

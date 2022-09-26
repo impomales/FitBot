@@ -111,7 +111,7 @@
     "husky": "^0.14.3",
     "lint-staged": "^7.2.0",
     "mocha": "^5.2.0",
-    "nightwatch": "^1.0.18",
+    "nightwatch": "^1.7.13",
     "nodemon": "^1.18.3",
     "npm-merge-driver": "^2.3.5",
     "prettier": "1.11.1",
